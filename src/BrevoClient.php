@@ -233,8 +233,8 @@ class BrevoClient
             'api-key' => $apiKey,
             'X-Fern-Language' => 'PHP',
             'X-Fern-SDK-Name' => 'Brevo',
-            'X-Fern-SDK-Version' => '0.0.96',
-            'User-Agent' => 'brevo/brevo/0.0.96',
+            'X-Fern-SDK-Version' => '0.0.97',
+            'User-Agent' => 'brevo/brevo/0.0.97',
         ];
 
         $this->options = $options ?? [];
