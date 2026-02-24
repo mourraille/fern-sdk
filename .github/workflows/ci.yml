@@ -1,42 +1,36 @@
 name: ci
-
 on: [push]
-
 jobs:
   compile:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v6
-
-      - name: Set up node
-        uses: actions/setup-node@v6
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-
+        uses: actions/checkout@v4
+      - name: Set up python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+      - name: Bootstrap poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python - -y --version 1.5.1
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
+        run: poetry install
       - name: Compile
-        run: pnpm build
-
+        run: poetry run mypy .
   test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v6
-
-      - name: Set up node
-        uses: actions/setup-node@v6
-                
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-
+        uses: actions/checkout@v4
+      - name: Set up python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+      - name: Bootstrap poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python - -y --version 1.5.1
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: poetry install
 
       - name: Test
-        run: pnpm test
+        run: poetry run pytest -rP -n auto .

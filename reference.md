@@ -1,6 +1,6 @@
 # Reference
 ## Account
-<details><summary><code>client.account.<a href="/src/api/resources/account/client/Client.ts">getAccount</a>() -> BrevoApi.GetAccountResponse</code></summary>
+<details><summary><code>client.account.<a href="src/brevo/account/client.py">get_account</a>() -&gt; AsyncHttpResponse[GetAccountResponse]</code></summary>
 <dl>
 <dd>
 
@@ -52,8 +52,13 @@ Retrieves details of your Brevo account.
 <dl>
 <dd>
 
-```typescript
-await client.account.getAccount();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.account.get_account()
 
 ```
 </dd>
@@ -69,7 +74,7 @@ await client.account.getAccount();
 <dl>
 <dd>
 
-**requestOptions:** `AccountClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -81,7 +86,7 @@ await client.account.getAccount();
 </dl>
 </details>
 
-<details><summary><code>client.account.<a href="/src/api/resources/account/client/Client.ts">getAccountActivity</a>({ ...params }) -> BrevoApi.GetAccountActivityResponse</code></summary>
+<details><summary><code>client.account.<a href="src/brevo/account/client.py">get_account_activity</a>(...) -&gt; AsyncHttpResponse[GetAccountActivityResponse]</code></summary>
 <dl>
 <dd>
 
@@ -123,8 +128,13 @@ Note: Requires Enterprise plan for access to organization activity logs.
 <dl>
 <dd>
 
-```typescript
-await client.account.getAccountActivity();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.account.get_account_activity()
 
 ```
 </dd>
@@ -140,7 +150,12 @@ await client.account.getAccountActivity();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetAccountActivityRequest` 
+**start_date:** `typing.Optional[str]` 
+
+Mandatory if endDate is used. Enter start date in UTC date (YYYY-MM-DD)
+format to filter the activity in your account. Maximum time period that
+can be selected is one month. Additionally, you can retrieve activity
+logs from the past 12 months from the date of your search.
     
 </dd>
 </dl>
@@ -148,7 +163,43 @@ await client.account.getAccountActivity();
 <dl>
 <dd>
 
-**requestOptions:** `AccountClient.RequestOptions` 
+**end_date:** `typing.Optional[str]` 
+
+Mandatory if startDate is used. Enter end date in UTC date (YYYY-MM-DD)
+format to filter the activity in your account. Maximum time period that
+can be selected is one month.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**email:** `typing.Optional[str]` — Enter the user's email address to filter their activity in the account.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` — Number of documents per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**offset:** `typing.Optional[int]` — Index of the first document in the page.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -161,7 +212,7 @@ await client.account.getAccountActivity();
 </details>
 
 ## MasterAccount
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">createANewGroupOfSubAccounts</a>({ ...params }) -> BrevoApi.PostCorporateGroupResponse</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">create_a_new_group_of_sub_accounts</a>(...) -&gt; AsyncHttpResponse[PostCorporateGroupResponse]</code></summary>
 <dl>
 <dd>
 
@@ -187,10 +238,15 @@ This endpoint allows to create a group of sub-accounts
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.createANewGroupOfSubAccounts({
-    groupName: "My group"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.master_account.create_a_new_group_of_sub_accounts(
+    group_name="My group",
+)
 
 ```
 </dd>
@@ -206,7 +262,7 @@ await client.masterAccount.createANewGroupOfSubAccounts({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostCorporateGroupRequest` 
+**group_name:** `str` — The name of the group of sub-accounts
     
 </dd>
 </dl>
@@ -214,7 +270,15 @@ await client.masterAccount.createANewGroupOfSubAccounts({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**sub_account_ids:** `typing.Optional[typing.Sequence[int]]` — Pass the list of sub-account Ids to be included in the group
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -226,7 +290,7 @@ await client.masterAccount.createANewGroupOfSubAccounts({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">deleteSubAccountFromGroup</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">delete_sub_account_from_group</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -252,11 +316,16 @@ This endpoint allows you to remove a sub-organization from a group.
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.deleteSubAccountFromGroup({
-    groupId: "groupId",
-    subAccountIds: [423432, 234323, 87678]
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.master_account.delete_sub_account_from_group(
+    group_id="groupId",
+    sub_account_ids=[423432, 234323, 87678],
+)
 
 ```
 </dd>
@@ -272,7 +341,7 @@ await client.masterAccount.deleteSubAccountFromGroup({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PutCorporateGroupUnlinkGroupIdSubAccountsRequest` 
+**group_id:** `str` — Group id
     
 </dd>
 </dl>
@@ -280,7 +349,15 @@ await client.masterAccount.deleteSubAccountFromGroup({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**sub_account_ids:** `typing.Sequence[int]` — List of sub-account ids
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -292,7 +369,7 @@ await client.masterAccount.deleteSubAccountFromGroup({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">getAGroupDetails</a>({ ...params }) -> BrevoApi.GetCorporateGroupIdResponse</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">get_a_group_details</a>(...) -&gt; AsyncHttpResponse[GetCorporateGroupIdResponse]</code></summary>
 <dl>
 <dd>
 
@@ -319,10 +396,15 @@ the list of sub-organizations and the user associated with the group.
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.getAGroupDetails({
-    id: "id"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.master_account.get_a_group_details(
+    id="id",
+)
 
 ```
 </dd>
@@ -338,7 +420,7 @@ await client.masterAccount.getAGroupDetails({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCorporateGroupIdRequest` 
+**id:** `str` — Id of the group of sub-organization
     
 </dd>
 </dl>
@@ -346,7 +428,7 @@ await client.masterAccount.getAGroupDetails({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -358,7 +440,7 @@ await client.masterAccount.getAGroupDetails({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">updateAGroupOfSubAccounts</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">update_a_group_of_sub_accounts</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -384,10 +466,15 @@ This endpoint allows to update a group of sub-accounts
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.updateAGroupOfSubAccounts({
-    id: "id"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.master_account.update_a_group_of_sub_accounts(
+    id="id",
+)
 
 ```
 </dd>
@@ -403,7 +490,7 @@ await client.masterAccount.updateAGroupOfSubAccounts({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PutCorporateGroupIdRequest` 
+**id:** `str` — Id of the group
     
 </dd>
 </dl>
@@ -411,7 +498,23 @@ await client.masterAccount.updateAGroupOfSubAccounts({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**group_name:** `typing.Optional[str]` — The name of the group of sub-accounts
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sub_account_ids:** `typing.Optional[typing.Sequence[int]]` — Pass the list of sub-account Ids to be included in the group
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -423,7 +526,7 @@ await client.masterAccount.updateAGroupOfSubAccounts({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">deleteAGroup</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">delete_a_group</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -452,10 +555,15 @@ once deleted.
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.deleteAGroup({
-    id: "id"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.master_account.delete_a_group(
+    id="id",
+)
 
 ```
 </dd>
@@ -471,7 +579,7 @@ await client.masterAccount.deleteAGroup({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteCorporateGroupIdRequest` 
+**id:** `str` — Id of the group
     
 </dd>
 </dl>
@@ -479,7 +587,7 @@ await client.masterAccount.deleteAGroup({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -491,7 +599,7 @@ await client.masterAccount.deleteAGroup({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">getSubAccountGroups</a>() -> BrevoApi.GetSubAccountGroupsResponseItem[]</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">get_sub_account_groups</a>() -&gt; AsyncHttpResponse[typing.List[GetSubAccountGroupsResponseItem]]</code></summary>
 <dl>
 <dd>
 
@@ -517,8 +625,13 @@ This endpoint allows you to list all groups created on your Admin account.
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.getSubAccountGroups();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.master_account.get_sub_account_groups()
 
 ```
 </dd>
@@ -534,7 +647,7 @@ await client.masterAccount.getSubAccountGroups();
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -546,7 +659,7 @@ await client.masterAccount.getSubAccountGroups();
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">getCorporateInvitedUsersList</a>({ ...params }) -> BrevoApi.GetCorporateInvitedUsersListResponse</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">get_corporate_invited_users_list</a>(...) -&gt; AsyncHttpResponse[GetCorporateInvitedUsersListResponse]</code></summary>
 <dl>
 <dd>
 
@@ -574,8 +687,13 @@ offset and limit.
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.getCorporateInvitedUsersList();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.master_account.get_corporate_invited_users_list()
 
 ```
 </dd>
@@ -591,7 +709,10 @@ await client.masterAccount.getCorporateInvitedUsersList();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCorporateInvitedUsersListRequest` 
+**type:** `typing.Optional[str]` 
+
+User type (active | pending). This is required if offset is provided for
+limited result.
     
 </dd>
 </dl>
@@ -599,7 +720,29 @@ await client.masterAccount.getCorporateInvitedUsersList();
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**offset:** `typing.Optional[int]` 
+
+Page number for the result set. This is optional, default value will be
+the 1st page.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` 
+
+Number of users to be displayed on each page. This is optional, the
+default limit is 20, but max allowed limit is 100.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -611,7 +754,7 @@ await client.masterAccount.getCorporateInvitedUsersList();
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">listOfAllIPs</a>() -> BrevoApi.GetCorporateIpResponseItem[]</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">list_of_all_i_ps</a>() -&gt; AsyncHttpResponse[typing.List[GetCorporateIpResponseItem]]</code></summary>
 <dl>
 <dd>
 
@@ -638,8 +781,13 @@ account
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.listOfAllIPs();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.master_account.list_of_all_i_ps()
 
 ```
 </dd>
@@ -655,7 +803,7 @@ await client.masterAccount.listOfAllIPs();
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -667,7 +815,7 @@ await client.masterAccount.listOfAllIPs();
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">getTheDetailsOfRequestedMasterAccount</a>() -> BrevoApi.GetCorporateMasterAccountResponse</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">get_the_details_of_requested_master_account</a>() -&gt; AsyncHttpResponse[GetCorporateMasterAccountResponse]</code></summary>
 <dl>
 <dd>
 
@@ -693,8 +841,13 @@ This endpoint will provide the details of the master account.
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.getTheDetailsOfRequestedMasterAccount();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.master_account.get_the_details_of_requested_master_account()
 
 ```
 </dd>
@@ -710,7 +863,7 @@ await client.masterAccount.getTheDetailsOfRequestedMasterAccount();
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -722,7 +875,7 @@ await client.masterAccount.getTheDetailsOfRequestedMasterAccount();
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">generateSsoTokenToAccessAdminAccount</a>({ ...params }) -> BrevoApi.GetSsoToken</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">generate_sso_token_to_access_admin_account</a>(...) -&gt; AsyncHttpResponse[GetSsoToken]</code></summary>
 <dl>
 <dd>
 
@@ -751,10 +904,15 @@ https://account-app.brevo.com/account/login/corporate/sso/[token], where
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.generateSsoTokenToAccessAdminAccount({
-    email: "vipin+ent-user@brevo.com"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.master_account.generate_sso_token_to_access_admin_account(
+    email="vipin+ent-user@brevo.com",
+)
 
 ```
 </dd>
@@ -770,7 +928,7 @@ await client.masterAccount.generateSsoTokenToAccessAdminAccount({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostCorporateSsoTokenRequest` 
+**email:** `str` — User email of admin account
     
 </dd>
 </dl>
@@ -778,7 +936,7 @@ await client.masterAccount.generateSsoTokenToAccessAdminAccount({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -790,7 +948,7 @@ await client.masterAccount.generateSsoTokenToAccessAdminAccount({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">getTheListOfAllTheSubAccountsOfTheMasterAccount</a>({ ...params }) -> BrevoApi.GetCorporateSubAccountResponse</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">get_the_list_of_all_the_sub_accounts_of_the_master_account</a>(...) -&gt; AsyncHttpResponse[GetCorporateSubAccountResponse]</code></summary>
 <dl>
 <dd>
 
@@ -817,11 +975,16 @@ account.
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.getTheListOfAllTheSubAccountsOfTheMasterAccount({
-    offset: 1,
-    limit: 1
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.master_account.get_the_list_of_all_the_sub_accounts_of_the_master_account(
+    offset=1,
+    limit=1,
+)
 
 ```
 </dd>
@@ -837,7 +1000,7 @@ await client.masterAccount.getTheListOfAllTheSubAccountsOfTheMasterAccount({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCorporateSubAccountRequest` 
+**offset:** `int` — Index of the first sub-account in the page
     
 </dd>
 </dl>
@@ -845,7 +1008,15 @@ await client.masterAccount.getTheListOfAllTheSubAccountsOfTheMasterAccount({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**limit:** `int` — Number of sub-accounts to be displayed on each page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -857,7 +1028,7 @@ await client.masterAccount.getTheListOfAllTheSubAccountsOfTheMasterAccount({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">createANewSubAccountUnderAMasterAccount</a>({ ...params }) -> BrevoApi.PostCorporateSubAccountResponse</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">create_a_new_sub_account_under_a_master_account</a>(...) -&gt; AsyncHttpResponse[PostCorporateSubAccountResponse]</code></summary>
 <dl>
 <dd>
 
@@ -883,14 +1054,19 @@ This endpoint will create a new sub-account under a master account
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.createANewSubAccountUnderAMasterAccount({
-    companyName: "Test Sub-account",
-    email: "test-sub@example.com",
-    groupIds: ["5f8f8c3b5f56a02d4433b3a7", "5f8f8c3b5f56a02d4433b3a8"],
-    language: "fr",
-    timezone: "Europe/Paris"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.master_account.create_a_new_sub_account_under_a_master_account(
+    company_name="Test Sub-account",
+    email="test-sub@example.com",
+    group_ids=["5f8f8c3b5f56a02d4433b3a7", "5f8f8c3b5f56a02d4433b3a8"],
+    language="fr",
+    timezone="Europe/Paris",
+)
 
 ```
 </dd>
@@ -906,7 +1082,7 @@ await client.masterAccount.createANewSubAccountUnderAMasterAccount({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostCorporateSubAccountRequest` 
+**company_name:** `str` — Set the name of the sub-account company
     
 </dd>
 </dl>
@@ -914,7 +1090,39 @@ await client.masterAccount.createANewSubAccountUnderAMasterAccount({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**email:** `str` — Email address for the organization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**group_ids:** `typing.Optional[typing.Sequence[str]]` — Set the group(s) for the sub-account
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**language:** `typing.Optional[PostCorporateSubAccountRequestLanguage]` — Set the language of the sub-account
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**timezone:** `typing.Optional[str]` — Set the timezone of the sub-account
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -926,7 +1134,7 @@ await client.masterAccount.createANewSubAccountUnderAMasterAccount({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">associateAnIpToSubAccounts</a>({ ...params }) -> Record&lt;string, unknown&gt;</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">associate_an_ip_to_sub_accounts</a>(...) -&gt; AsyncHttpResponse[typing.Dict[str, typing.Any]]</code></summary>
 <dl>
 <dd>
 
@@ -952,11 +1160,16 @@ This endpoint allows to associate an IP to sub-accounts
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.associateAnIpToSubAccounts({
-    ids: [234322, 325553, 893432],
-    ip: "103.11.32.88"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.master_account.associate_an_ip_to_sub_accounts(
+    ids=[234322, 325553, 893432],
+    ip="103.11.32.88",
+)
 
 ```
 </dd>
@@ -972,7 +1185,10 @@ await client.masterAccount.associateAnIpToSubAccounts({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostCorporateSubAccountIpAssociateRequest` 
+**ids:** `typing.Sequence[int]` 
+
+Pass the list of sub-account Ids to be associated with the IP
+address
     
 </dd>
 </dl>
@@ -980,7 +1196,15 @@ await client.masterAccount.associateAnIpToSubAccounts({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**ip:** `str` — IP address
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -992,7 +1216,7 @@ await client.masterAccount.associateAnIpToSubAccounts({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">dissociateAnIpToSubAccounts</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">dissociate_an_ip_to_sub_accounts</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -1018,11 +1242,16 @@ This endpoint allows to dissociate an IP from sub-accounts
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.dissociateAnIpToSubAccounts({
-    ids: [234322, 325553, 893432],
-    ip: "103.11.32.88"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.master_account.dissociate_an_ip_to_sub_accounts(
+    ids=[234322, 325553, 893432],
+    ip="103.11.32.88",
+)
 
 ```
 </dd>
@@ -1038,7 +1267,10 @@ await client.masterAccount.dissociateAnIpToSubAccounts({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PutCorporateSubAccountIpDissociateRequest` 
+**ids:** `typing.Sequence[int]` 
+
+Pass the list of sub-account Ids to be dissociated from the IP
+address
     
 </dd>
 </dl>
@@ -1046,7 +1278,15 @@ await client.masterAccount.dissociateAnIpToSubAccounts({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**ip:** `str` — IP address
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -1058,7 +1298,7 @@ await client.masterAccount.dissociateAnIpToSubAccounts({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">createAnApiKeyForASubAccount</a>({ ...params }) -> BrevoApi.PostCorporateSubAccountKeyResponse</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">create_an_api_key_for_a_sub_account</a>(...) -&gt; AsyncHttpResponse[PostCorporateSubAccountKeyResponse]</code></summary>
 <dl>
 <dd>
 
@@ -1084,11 +1324,16 @@ This endpoint will generate an API v3 key for a sub-account
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.createAnApiKeyForASubAccount({
-    id: 3232323,
-    name: "My Api Key"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.master_account.create_an_api_key_for_a_sub_account(
+    id=3232323,
+    name="My Api Key",
+)
 
 ```
 </dd>
@@ -1104,7 +1349,7 @@ await client.masterAccount.createAnApiKeyForASubAccount({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostCorporateSubAccountKeyRequest` 
+**id:** `int` — Id of the sub-account organization
     
 </dd>
 </dl>
@@ -1112,7 +1357,15 @@ await client.masterAccount.createAnApiKeyForASubAccount({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**name:** `str` — Name of the API key
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -1124,7 +1377,7 @@ await client.masterAccount.createAnApiKeyForASubAccount({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">generateSsoTokenToAccessSubAccount</a>({ ...params }) -> BrevoApi.GetSsoToken</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">generate_sso_token_to_access_sub_account</a>(...) -&gt; AsyncHttpResponse[GetSsoToken]</code></summary>
 <dl>
 <dd>
 
@@ -1153,10 +1406,15 @@ https://account-app.brevo.com/account/login/sub-account/sso/[token], where
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.generateSsoTokenToAccessSubAccount({
-    id: 3232323
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.master_account.generate_sso_token_to_access_sub_account(
+    id=3232323,
+)
 
 ```
 </dd>
@@ -1172,7 +1430,7 @@ await client.masterAccount.generateSsoTokenToAccessSubAccount({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostCorporateSubAccountSsoTokenRequest` 
+**id:** `int` — Id of the sub-account organization
     
 </dd>
 </dl>
@@ -1180,7 +1438,44 @@ await client.masterAccount.generateSsoTokenToAccessSubAccount({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**email:** `typing.Optional[str]` — User email of sub-account organization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**target:** `typing.Optional[PostCorporateSubAccountSsoTokenRequestTarget]` 
+
+**Set target after login success** * **automation** - Redirect
+to Automation after login * **email_campaign** - Redirect to
+Email Campaign after login * **contacts** - Redirect to Contacts
+after login * **landing_pages** - Redirect to Landing Pages
+after login * **email_transactional** - Redirect to Email
+Transactional after login * **senders** - Redirect to Senders
+after login * **sms_campaign** - Redirect to Sms Campaign after
+login * **sms_transactional** - Redirect to Sms Transactional
+after login
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**url:** `typing.Optional[str]` 
+
+Set the full target URL after login success. The user will land
+directly on this target URL after login
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -1192,7 +1487,7 @@ await client.masterAccount.generateSsoTokenToAccessSubAccount({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">getSubAccountDetails</a>({ ...params }) -> BrevoApi.GetCorporateSubAccountIdResponse</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">get_sub_account_details</a>(...) -&gt; AsyncHttpResponse[GetCorporateSubAccountIdResponse]</code></summary>
 <dl>
 <dd>
 
@@ -1218,10 +1513,15 @@ This endpoint will provide the details for the specified sub-account company
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.getSubAccountDetails({
-    id: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.master_account.get_sub_account_details(
+    id=1000000,
+)
 
 ```
 </dd>
@@ -1237,7 +1537,7 @@ await client.masterAccount.getSubAccountDetails({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCorporateSubAccountIdRequest` 
+**id:** `int` — Id of the sub-account organization
     
 </dd>
 </dl>
@@ -1245,7 +1545,7 @@ await client.masterAccount.getSubAccountDetails({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -1257,7 +1557,7 @@ await client.masterAccount.getSubAccountDetails({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">deleteASubAccount</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">delete_a_sub_account</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -1269,10 +1569,15 @@ await client.masterAccount.getSubAccountDetails({
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.deleteASubAccount({
-    id: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.master_account.delete_a_sub_account(
+    id=1000000,
+)
 
 ```
 </dd>
@@ -1288,7 +1593,7 @@ await client.masterAccount.deleteASubAccount({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteCorporateSubAccountIdRequest` 
+**id:** `int` — Id of the sub-account organization to be deleted
     
 </dd>
 </dl>
@@ -1296,7 +1601,7 @@ await client.masterAccount.deleteASubAccount({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -1308,7 +1613,7 @@ await client.masterAccount.deleteASubAccount({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">enableDisableSubAccountApplicationS</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">enable_disable_sub_account_application_s</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -1335,15 +1640,20 @@ sub-account
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.enableDisableSubAccountApplicationS({
-    id: 1000000,
-    "landing-pages": true,
-    meetings: true,
-    "sms-campaigns": false,
-    "web-push": false,
-    whatsapp: true
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.master_account.enable_disable_sub_account_application_s(
+    id=1000000,
+    landing_pages=True,
+    meetings=True,
+    sms_campaigns=False,
+    web_push=False,
+    whatsapp=True,
+)
 
 ```
 </dd>
@@ -1359,7 +1669,7 @@ await client.masterAccount.enableDisableSubAccountApplicationS({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PutCorporateSubAccountIdApplicationsToggleRequest` 
+**id:** `int` — Id of the sub-account organization (mandatory)
     
 </dd>
 </dl>
@@ -1367,7 +1677,141 @@ await client.masterAccount.enableDisableSubAccountApplicationS({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**automation:** `typing.Optional[bool]` 
+
+Set this field to enable or disable Automation on the
+sub-account
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**conversations:** `typing.Optional[bool]` 
+
+Set this field to enable or disable Conversations on the
+sub-account
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**crm:** `typing.Optional[bool]` — Set this field to enable or disable Sales CRM on the sub-account
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**email_campaigns:** `typing.Optional[bool]` 
+
+Set this field to enable or disable Email Campaigns on the
+sub-account
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**facebook_ads:** `typing.Optional[bool]` 
+
+Set this field to enable or disable Facebook ads on the
+sub-account
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**inbox:** `typing.Optional[bool]` 
+
+Set this field to enable or disable Inbox on the sub-account /
+Not applicable on ENTv2
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**landing_pages:** `typing.Optional[bool]` 
+
+Set this field to enable or disable Landing pages on the
+sub-account
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**meetings:** `typing.Optional[bool]` — Set this field to enable or disable Meetings on the sub-account
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sms_campaigns:** `typing.Optional[bool]` 
+
+Set this field to enable or disable SMS Marketing on the
+sub-account
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**transactional_emails:** `typing.Optional[bool]` 
+
+Set this field to enable or disable Transactional Email on the
+sub-account
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**transactional_sms:** `typing.Optional[bool]` 
+
+Set this field to enable or disable Transactional SMS on the
+sub-account
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**web_push:** `typing.Optional[bool]` — Set this field to enable or disable Web Push on the sub-account
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**whatsapp:** `typing.Optional[bool]` 
+
+Set this field to enable or disable Whatsapp campaigns on the
+sub-account
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -1379,7 +1823,7 @@ await client.masterAccount.enableDisableSubAccountApplicationS({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">updateSubAccountPlan</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">update_sub_account_plan</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -1408,23 +1852,32 @@ unlimited mode.
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.updateSubAccountPlan({
-    id: 1000000,
-    credits: {
-        email: 5000,
-        externalFeeds: 1,
-        sms: 2000,
-        whatsapp: 100,
-        wpSubscribers: -1
-    },
-    features: {
-        inbox: 10,
-        landingPage: 20,
-        salesUsers: 6,
-        users: 15
-    }
-});
+```python
+from brevo import BrevoApi
+from brevo.master_account import (
+    PutCorporateSubAccountIdPlanRequestCredits,
+    PutCorporateSubAccountIdPlanRequestFeatures,
+)
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.master_account.update_sub_account_plan(
+    id=1000000,
+    credits=PutCorporateSubAccountIdPlanRequestCredits(
+        email=5000,
+        external_feeds=1,
+        sms=2000.0,
+        whatsapp=100.0,
+        wp_subscribers=-1,
+    ),
+    features=PutCorporateSubAccountIdPlanRequestFeatures(
+        inbox=10,
+        landing_page=20,
+        sales_users=6,
+        users=15,
+    ),
+)
 
 ```
 </dd>
@@ -1440,7 +1893,7 @@ await client.masterAccount.updateSubAccountPlan({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PutCorporateSubAccountIdPlanRequest` 
+**id:** `int` — Id of the sub-account organization
     
 </dd>
 </dl>
@@ -1448,7 +1901,23 @@ await client.masterAccount.updateSubAccountPlan({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**credits:** `typing.Optional[PutCorporateSubAccountIdPlanRequestCredits]` — Credit details to update
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**features:** `typing.Optional[PutCorporateSubAccountIdPlanRequestFeatures]` — Features details to update
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -1460,7 +1929,7 @@ await client.masterAccount.updateSubAccountPlan({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">updateSubAccountsPlan</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">update_sub_accounts_plan</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -1489,22 +1958,31 @@ unlimited mode.
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.updateSubAccountsPlan({
-    credits: {
-        email: 5000,
-        externalFeeds: 1,
-        sms: 2000,
-        whatsapp: 100,
-        wpSubscribers: -1
-    },
-    features: {
-        landingPage: 20,
-        salesUsers: 6,
-        users: 15
-    },
-    subAccountIds: [4534345, 987893, 876785]
-});
+```python
+from brevo import BrevoApi
+from brevo.master_account import (
+    PutCorporateSubAccountsPlanRequestCredits,
+    PutCorporateSubAccountsPlanRequestFeatures,
+)
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.master_account.update_sub_accounts_plan(
+    credits=PutCorporateSubAccountsPlanRequestCredits(
+        email=5000,
+        external_feeds=1,
+        sms=2000.0,
+        whatsapp=100.0,
+        wp_subscribers=-1,
+    ),
+    features=PutCorporateSubAccountsPlanRequestFeatures(
+        landing_page=20,
+        sales_users=6,
+        users=15,
+    ),
+    sub_account_ids=[4534345, 987893, 876785],
+)
 
 ```
 </dd>
@@ -1520,7 +1998,7 @@ await client.masterAccount.updateSubAccountsPlan({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PutCorporateSubAccountsPlanRequest` 
+**credits:** `typing.Optional[PutCorporateSubAccountsPlanRequestCredits]` — Credit details to update
     
 </dd>
 </dl>
@@ -1528,7 +2006,23 @@ await client.masterAccount.updateSubAccountsPlan({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**features:** `typing.Optional[PutCorporateSubAccountsPlanRequestFeatures]` — Features details to update
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sub_account_ids:** `typing.Optional[typing.Sequence[int]]` — List of sub-account ids
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -1540,7 +2034,7 @@ await client.masterAccount.updateSubAccountsPlan({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">inviteAdminUser</a>({ ...params }) -> BrevoApi.InviteAdminUserResponse</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">invite_admin_user</a>(...) -&gt; AsyncHttpResponse[InviteAdminUserResponse]</code></summary>
 <dl>
 <dd>
 
@@ -1591,12 +2085,18 @@ there for the invited admin user.
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.inviteAdminUser({
-    all_features_access: true,
-    email: "inviteuser@example.com",
-    privileges: [{}]
-});
+```python
+from brevo import BrevoApi
+from brevo.master_account import InviteAdminUserRequestPrivilegesItem
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.master_account.invite_admin_user(
+    all_features_access=True,
+    email="inviteuser@example.com",
+    privileges=[InviteAdminUserRequestPrivilegesItem()],
+)
 
 ```
 </dd>
@@ -1612,7 +2112,7 @@ await client.masterAccount.inviteAdminUser({
 <dl>
 <dd>
 
-**request:** `BrevoApi.InviteAdminUserRequest` 
+**all_features_access:** `bool` — All access to the features
     
 </dd>
 </dl>
@@ -1620,7 +2120,31 @@ await client.masterAccount.inviteAdminUser({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**email:** `str` — Email address for the organization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**privileges:** `typing.Sequence[InviteAdminUserRequestPrivilegesItem]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**group_ids:** `typing.Optional[typing.Sequence[str]]` — Ids of Group
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -1632,7 +2156,7 @@ await client.masterAccount.inviteAdminUser({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">resendCancelAdminUserInvitation</a>({ ...params }) -> BrevoApi.PutCorporateUserInvitationActionEmailResponse</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">resend_cancel_admin_user_invitation</a>(...) -&gt; AsyncHttpResponse[PutCorporateUserInvitationActionEmailResponse]</code></summary>
 <dl>
 <dd>
 
@@ -1660,11 +2184,16 @@ This endpoint will allow the user to:
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.resendCancelAdminUserInvitation({
-    action: "resend",
-    email: "email"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.master_account.resend_cancel_admin_user_invitation(
+    action="resend",
+    email="email",
+)
 
 ```
 </dd>
@@ -1680,7 +2209,7 @@ await client.masterAccount.resendCancelAdminUserInvitation({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PutCorporateUserInvitationActionEmailRequest` 
+**action:** `PutCorporateUserInvitationActionEmailRequestAction` — Action to be performed (cancel / resend)
     
 </dd>
 </dl>
@@ -1688,7 +2217,15 @@ await client.masterAccount.resendCancelAdminUserInvitation({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**email:** `str` — Email address of the recipient
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -1700,7 +2237,7 @@ await client.masterAccount.resendCancelAdminUserInvitation({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">revokeAnAdminUser</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">revoke_an_admin_user</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -1727,10 +2264,15 @@ account
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.revokeAnAdminUser({
-    email: "email"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.master_account.revoke_an_admin_user(
+    email="email",
+)
 
 ```
 </dd>
@@ -1746,7 +2288,7 @@ await client.masterAccount.revokeAnAdminUser({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteCorporateUserRevokeEmailRequest` 
+**email:** `str` — Email of the invited user
     
 </dd>
 </dl>
@@ -1754,7 +2296,7 @@ await client.masterAccount.revokeAnAdminUser({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -1766,7 +2308,7 @@ await client.masterAccount.revokeAnAdminUser({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">getCorporateUserPermission</a>({ ...params }) -> BrevoApi.GetCorporateUserPermissionResponse</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">get_corporate_user_permission</a>(...) -&gt; AsyncHttpResponse[GetCorporateUserPermissionResponse]</code></summary>
 <dl>
 <dd>
 
@@ -1792,10 +2334,15 @@ This endpoint will provide the list of admin user permissions
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.getCorporateUserPermission({
-    email: "email"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.master_account.get_corporate_user_permission(
+    email="email",
+)
 
 ```
 </dd>
@@ -1811,7 +2358,7 @@ await client.masterAccount.getCorporateUserPermission({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCorporateUserPermissionRequest` 
+**email:** `str` — Email of the invited user.
     
 </dd>
 </dl>
@@ -1819,7 +2366,7 @@ await client.masterAccount.getCorporateUserPermission({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -1831,7 +2378,7 @@ await client.masterAccount.getCorporateUserPermission({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">changeAdminUserPermissions</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">change_admin_user_permissions</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -1858,39 +2405,62 @@ your Admin account
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.changeAdminUserPermissions({
-    email: "email",
-    all_features_access: false,
-    privileges: [{
-            feature: "user_management",
-            permissions: ["all"]
-        }, {
-            feature: "api",
-            permissions: ["all"]
-        }, {
-            feature: "my_plan",
-            permissions: ["none"]
-        }, {
-            feature: "apps_management",
-            permissions: ["all"]
-        }, {
-            feature: "create_sub_organizations",
-            permissions: ["all"]
-        }, {
-            feature: "sub_organization_groups",
-            permissions: ["create", "edit_delete"]
-        }, {
-            feature: "manage_sub_organizations",
-            permissions: ["all"]
-        }, {
-            feature: "security",
-            permissions: ["none"]
-        }, {
-            feature: "analytics",
-            permissions: ["create_alerts", "download_data", "my_looks", "explore_create"]
-        }]
-});
+```python
+from brevo import BrevoApi
+from brevo.master_account import (
+    PutCorporateUserEmailPermissionsRequestPrivilegesItem,
+)
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.master_account.change_admin_user_permissions(
+    email="email",
+    all_features_access=False,
+    privileges=[
+        PutCorporateUserEmailPermissionsRequestPrivilegesItem(
+            feature="user_management",
+            permissions=["all"],
+        ),
+        PutCorporateUserEmailPermissionsRequestPrivilegesItem(
+            feature="api",
+            permissions=["all"],
+        ),
+        PutCorporateUserEmailPermissionsRequestPrivilegesItem(
+            feature="my_plan",
+            permissions=["none"],
+        ),
+        PutCorporateUserEmailPermissionsRequestPrivilegesItem(
+            feature="apps_management",
+            permissions=["all"],
+        ),
+        PutCorporateUserEmailPermissionsRequestPrivilegesItem(
+            feature="create_sub_organizations",
+            permissions=["all"],
+        ),
+        PutCorporateUserEmailPermissionsRequestPrivilegesItem(
+            feature="sub_organization_groups",
+            permissions=["create", "edit_delete"],
+        ),
+        PutCorporateUserEmailPermissionsRequestPrivilegesItem(
+            feature="manage_sub_organizations",
+            permissions=["all"],
+        ),
+        PutCorporateUserEmailPermissionsRequestPrivilegesItem(
+            feature="security",
+            permissions=["none"],
+        ),
+        PutCorporateUserEmailPermissionsRequestPrivilegesItem(
+            feature="analytics",
+            permissions=[
+                "create_alerts",
+                "download_data",
+                "my_looks",
+                "explore_create",
+            ],
+        ),
+    ],
+)
 
 ```
 </dd>
@@ -1906,7 +2476,7 @@ await client.masterAccount.changeAdminUserPermissions({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PutCorporateUserEmailPermissionsRequest` 
+**email:** `str` — Email address of Admin user
     
 </dd>
 </dl>
@@ -1914,7 +2484,23 @@ await client.masterAccount.changeAdminUserPermissions({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**all_features_access:** `bool` — All access to the features
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**privileges:** `typing.Sequence[PutCorporateUserEmailPermissionsRequestPrivilegesItem]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -1927,7 +2513,7 @@ await client.masterAccount.changeAdminUserPermissions({
 </details>
 
 ## User
-<details><summary><code>client.user.<a href="/src/api/resources/user/client/Client.ts">getInvitedUsersList</a>() -> BrevoApi.GetInvitedUsersListResponse</code></summary>
+<details><summary><code>client.user.<a href="src/brevo/user/client.py">get_invited_users_list</a>() -&gt; AsyncHttpResponse[GetInvitedUsersListResponse]</code></summary>
 <dl>
 <dd>
 
@@ -1939,8 +2525,13 @@ await client.masterAccount.changeAdminUserPermissions({
 <dl>
 <dd>
 
-```typescript
-await client.user.getInvitedUsersList();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.user.get_invited_users_list()
 
 ```
 </dd>
@@ -1956,7 +2547,7 @@ await client.user.getInvitedUsersList();
 <dl>
 <dd>
 
-**requestOptions:** `UserClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -1968,7 +2559,7 @@ await client.user.getInvitedUsersList();
 </dl>
 </details>
 
-<details><summary><code>client.user.<a href="/src/api/resources/user/client/Client.ts">putRevokeUserPermission</a>({ ...params }) -> BrevoApi.PutRevokeUserPermissionResponse</code></summary>
+<details><summary><code>client.user.<a href="src/brevo/user/client.py">put_revoke_user_permission</a>(...) -&gt; AsyncHttpResponse[PutRevokeUserPermissionResponse]</code></summary>
 <dl>
 <dd>
 
@@ -1980,10 +2571,15 @@ await client.user.getInvitedUsersList();
 <dl>
 <dd>
 
-```typescript
-await client.user.putRevokeUserPermission({
-    email: "email"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.user.put_revoke_user_permission(
+    email="email",
+)
 
 ```
 </dd>
@@ -1999,7 +2595,7 @@ await client.user.putRevokeUserPermission({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PutRevokeUserPermissionRequest` 
+**email:** `str` — Email of the invited user.
     
 </dd>
 </dl>
@@ -2007,7 +2603,7 @@ await client.user.putRevokeUserPermission({
 <dl>
 <dd>
 
-**requestOptions:** `UserClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -2019,7 +2615,7 @@ await client.user.putRevokeUserPermission({
 </dl>
 </details>
 
-<details><summary><code>client.user.<a href="/src/api/resources/user/client/Client.ts">inviteuser</a>({ ...params }) -> BrevoApi.InviteuserResponse</code></summary>
+<details><summary><code>client.user.<a href="src/brevo/user/client.py">inviteuser</a>(...) -&gt; AsyncHttpResponse[InviteuserResponse]</code></summary>
 <dl>
 <dd>
 
@@ -2112,12 +2708,17 @@ accordingly.
 <dl>
 <dd>
 
-```typescript
-await client.user.inviteuser({
-    all_features_access: true,
-    email: "inviteuser@example.com",
-    privileges: [{}]
-});
+```python
+from brevo import BrevoApi, InviteuserPrivilegesItem
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.user.inviteuser(
+    all_features_access=True,
+    email="inviteuser@example.com",
+    privileges=[InviteuserPrivilegesItem()],
+)
 
 ```
 </dd>
@@ -2133,7 +2734,7 @@ await client.user.inviteuser({
 <dl>
 <dd>
 
-**request:** `BrevoApi.Inviteuser` 
+**all_features_access:** `bool` — All access to the features
     
 </dd>
 </dl>
@@ -2141,7 +2742,23 @@ await client.user.inviteuser({
 <dl>
 <dd>
 
-**requestOptions:** `UserClient.RequestOptions` 
+**email:** `str` — Email address for the organization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**privileges:** `typing.Sequence[InviteuserPrivilegesItem]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -2153,7 +2770,7 @@ await client.user.inviteuser({
 </dl>
 </details>
 
-<details><summary><code>client.user.<a href="/src/api/resources/user/client/Client.ts">putresendcancelinvitation</a>({ ...params }) -> BrevoApi.PutresendcancelinvitationResponse</code></summary>
+<details><summary><code>client.user.<a href="src/brevo/user/client.py">putresendcancelinvitation</a>(...) -&gt; AsyncHttpResponse[PutresendcancelinvitationResponse]</code></summary>
 <dl>
 <dd>
 
@@ -2165,11 +2782,16 @@ await client.user.inviteuser({
 <dl>
 <dd>
 
-```typescript
-await client.user.putresendcancelinvitation({
-    action: "resend",
-    email: "email"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.user.putresendcancelinvitation(
+    action="resend",
+    email="email",
+)
 
 ```
 </dd>
@@ -2185,7 +2807,7 @@ await client.user.putresendcancelinvitation({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PutresendcancelinvitationRequest` 
+**action:** `PutresendcancelinvitationRequestAction` — action
     
 </dd>
 </dl>
@@ -2193,7 +2815,15 @@ await client.user.putresendcancelinvitation({
 <dl>
 <dd>
 
-**requestOptions:** `UserClient.RequestOptions` 
+**email:** `str` — Email of the invited user.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -2205,7 +2835,7 @@ await client.user.putresendcancelinvitation({
 </dl>
 </details>
 
-<details><summary><code>client.user.<a href="/src/api/resources/user/client/Client.ts">editUserPermission</a>({ ...params }) -> BrevoApi.EditUserPermissionResponse</code></summary>
+<details><summary><code>client.user.<a href="src/brevo/user/client.py">edit_user_permission</a>(...) -&gt; AsyncHttpResponse[EditUserPermissionResponse]</code></summary>
 <dl>
 <dd>
 
@@ -2297,12 +2927,17 @@ Please select the features and permissions accordingly.
 <dl>
 <dd>
 
-```typescript
-await client.user.editUserPermission({
-    all_features_access: true,
-    email: "inviteuser@example.com",
-    privileges: [{}]
-});
+```python
+from brevo import BrevoApi, InviteuserPrivilegesItem
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.user.edit_user_permission(
+    all_features_access=True,
+    email="inviteuser@example.com",
+    privileges=[InviteuserPrivilegesItem()],
+)
 
 ```
 </dd>
@@ -2318,7 +2953,7 @@ await client.user.editUserPermission({
 <dl>
 <dd>
 
-**request:** `BrevoApi.Inviteuser` 
+**all_features_access:** `bool` — All access to the features
     
 </dd>
 </dl>
@@ -2326,7 +2961,23 @@ await client.user.editUserPermission({
 <dl>
 <dd>
 
-**requestOptions:** `UserClient.RequestOptions` 
+**email:** `str` — Email address for the organization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**privileges:** `typing.Sequence[InviteuserPrivilegesItem]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -2338,7 +2989,7 @@ await client.user.editUserPermission({
 </dl>
 </details>
 
-<details><summary><code>client.user.<a href="/src/api/resources/user/client/Client.ts">getUserPermission</a>({ ...params }) -> BrevoApi.GetUserPermissionResponse</code></summary>
+<details><summary><code>client.user.<a href="src/brevo/user/client.py">get_user_permission</a>(...) -&gt; AsyncHttpResponse[GetUserPermissionResponse]</code></summary>
 <dl>
 <dd>
 
@@ -2350,10 +3001,15 @@ await client.user.editUserPermission({
 <dl>
 <dd>
 
-```typescript
-await client.user.getUserPermission({
-    email: "email"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.user.get_user_permission(
+    email="email",
+)
 
 ```
 </dd>
@@ -2369,7 +3025,7 @@ await client.user.getUserPermission({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetUserPermissionRequest` 
+**email:** `str` — Email of the invited user.
     
 </dd>
 </dl>
@@ -2377,7 +3033,7 @@ await client.user.getUserPermission({
 <dl>
 <dd>
 
-**requestOptions:** `UserClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -2390,7 +3046,7 @@ await client.user.getUserPermission({
 </details>
 
 ## Process
-<details><summary><code>client.process.<a href="/src/api/resources/process/client/Client.ts">getProcesses</a>({ ...params }) -> BrevoApi.GetProcessesResponse</code></summary>
+<details><summary><code>client.process.<a href="src/brevo/process/client.py">get_processes</a>(...) -&gt; AsyncHttpResponse[GetProcessesResponse]</code></summary>
 <dl>
 <dd>
 
@@ -2439,8 +3095,13 @@ Retrieves a list of background processes from your Brevo account with filtering 
 <dl>
 <dd>
 
-```typescript
-await client.process.getProcesses();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.process.get_processes()
 
 ```
 </dd>
@@ -2456,7 +3117,7 @@ await client.process.getProcesses();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetProcessesRequest` 
+**limit:** `typing.Optional[int]` — Number limitation for the result returned
     
 </dd>
 </dl>
@@ -2464,7 +3125,26 @@ await client.process.getProcesses();
 <dl>
 <dd>
 
-**requestOptions:** `ProcessClient.RequestOptions` 
+**offset:** `typing.Optional[int]` — Beginning point in the list to retrieve from.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetProcessesRequestSort]` 
+
+Sort the results in the ascending/descending order of record creation.
+Default order is **descending** if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -2476,7 +3156,7 @@ await client.process.getProcesses();
 </dl>
 </details>
 
-<details><summary><code>client.process.<a href="/src/api/resources/process/client/Client.ts">getProcess</a>({ ...params }) -> BrevoApi.GetProcessResponse</code></summary>
+<details><summary><code>client.process.<a href="src/brevo/process/client.py">get_process</a>(...) -&gt; AsyncHttpResponse[GetProcessResponse]</code></summary>
 <dl>
 <dd>
 
@@ -2524,10 +3204,15 @@ Retrieves detailed information about a specific background process.
 <dl>
 <dd>
 
-```typescript
-await client.process.getProcess({
-    processId: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.process.get_process(
+    process_id=1000000,
+)
 
 ```
 </dd>
@@ -2543,7 +3228,7 @@ await client.process.getProcess({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetProcessRequest` 
+**process_id:** `int` — Id of the process
     
 </dd>
 </dl>
@@ -2551,7 +3236,7 @@ await client.process.getProcess({
 <dl>
 <dd>
 
-**requestOptions:** `ProcessClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -2564,7 +3249,7 @@ await client.process.getProcess({
 </details>
 
 ## Senders
-<details><summary><code>client.senders.<a href="/src/api/resources/senders/client/Client.ts">getSenders</a>({ ...params }) -> BrevoApi.GetSendersResponse</code></summary>
+<details><summary><code>client.senders.<a href="src/brevo/senders/client.py">get_senders</a>(...) -&gt; AsyncHttpResponse[GetSendersResponse]</code></summary>
 <dl>
 <dd>
 
@@ -2610,8 +3295,13 @@ Retrieves a list of all email senders from your Brevo account with optional filt
 <dl>
 <dd>
 
-```typescript
-await client.senders.getSenders();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.senders.get_senders()
 
 ```
 </dd>
@@ -2627,7 +3317,7 @@ await client.senders.getSenders();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetSendersRequest` 
+**ip:** `typing.Optional[str]` — Filter your senders for a specific ip. **Available for dedicated IP usage only**
     
 </dd>
 </dl>
@@ -2635,7 +3325,15 @@ await client.senders.getSenders();
 <dl>
 <dd>
 
-**requestOptions:** `SendersClient.RequestOptions` 
+**domain:** `typing.Optional[str]` — Filter your senders for a specific domain
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -2647,7 +3345,7 @@ await client.senders.getSenders();
 </dl>
 </details>
 
-<details><summary><code>client.senders.<a href="/src/api/resources/senders/client/Client.ts">createSender</a>({ ...params }) -> BrevoApi.CreateSenderResponse</code></summary>
+<details><summary><code>client.senders.<a href="src/brevo/senders/client.py">create_sender</a>(...) -&gt; AsyncHttpResponse[CreateSenderResponse]</code></summary>
 <dl>
 <dd>
 
@@ -2691,11 +3389,16 @@ Creates a new email sender in your Brevo account.
 <dl>
 <dd>
 
-```typescript
-await client.senders.createSender({
-    email: "support@example.com",
-    name: "Support Team"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.senders.create_sender(
+    email="support@example.com",
+    name="Support Team",
+)
 
 ```
 </dd>
@@ -2711,7 +3414,10 @@ await client.senders.createSender({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateSenderRequest` 
+**email:** `str` 
+
+From email to use for the sender. A verification email will be
+sent to this address.
     
 </dd>
 </dl>
@@ -2719,7 +3425,26 @@ await client.senders.createSender({
 <dl>
 <dd>
 
-**requestOptions:** `SendersClient.RequestOptions` 
+**name:** `str` — From Name to use for the sender
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ips:** `typing.Optional[typing.Sequence[CreateSenderRequestIpsItem]]` 
+
+**Mandatory in case of dedicated IP**. IPs to associate to the
+sender. Not required for standard accounts.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -2731,7 +3456,7 @@ await client.senders.createSender({
 </dl>
 </details>
 
-<details><summary><code>client.senders.<a href="/src/api/resources/senders/client/Client.ts">getIps</a>() -> BrevoApi.GetIpsResponse</code></summary>
+<details><summary><code>client.senders.<a href="src/brevo/senders/client.py">get_ips</a>() -&gt; AsyncHttpResponse[GetIpsResponse]</code></summary>
 <dl>
 <dd>
 
@@ -2770,8 +3495,13 @@ Key information returned:
 <dl>
 <dd>
 
-```typescript
-await client.senders.getIps();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.senders.get_ips()
 
 ```
 </dd>
@@ -2787,7 +3517,7 @@ await client.senders.getIps();
 <dl>
 <dd>
 
-**requestOptions:** `SendersClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -2799,7 +3529,7 @@ await client.senders.getIps();
 </dl>
 </details>
 
-<details><summary><code>client.senders.<a href="/src/api/resources/senders/client/Client.ts">updateSender</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.senders.<a href="src/brevo/senders/client.py">update_sender</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -2835,11 +3565,30 @@ Key information returned:
 <dl>
 <dd>
 
-```typescript
-await client.senders.updateSender({
-    senderId: 1000000,
-    name: "New Support Team"
-});
+```python
+from brevo import BrevoApi
+from brevo.senders import UpdateSenderRequestIpsItem
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.senders.update_sender(
+    sender_id=1000000,
+    email="campaigns@enterprise.com",
+    ips=[
+        UpdateSenderRequestIpsItem(
+            domain="enterprise.com",
+            ip="192.168.1.100",
+            weight=70,
+        ),
+        UpdateSenderRequestIpsItem(
+            domain="mail.enterprise.com",
+            ip="192.168.1.101",
+            weight=30,
+        ),
+    ],
+    name="Multi-IP Sender",
+)
 
 ```
 </dd>
@@ -2855,7 +3604,7 @@ await client.senders.updateSender({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateSenderRequest` 
+**sender_id:** `int` — Id of the sender
     
 </dd>
 </dl>
@@ -2863,7 +3612,34 @@ await client.senders.updateSender({
 <dl>
 <dd>
 
-**requestOptions:** `SendersClient.RequestOptions` 
+**email:** `typing.Optional[str]` — From Email to update the sender
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ips:** `typing.Optional[typing.Sequence[UpdateSenderRequestIpsItem]]` 
+
+**Only in case of dedicated IP**. IPs to associate to the
+sender. If passed, will replace all the existing IPs. Not required for standard accounts.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `typing.Optional[str]` — From Name to update the sender
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -2875,7 +3651,7 @@ await client.senders.updateSender({
 </dl>
 </details>
 
-<details><summary><code>client.senders.<a href="/src/api/resources/senders/client/Client.ts">deleteSender</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.senders.<a href="src/brevo/senders/client.py">delete_sender</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -2909,10 +3685,15 @@ Key information returned:
 <dl>
 <dd>
 
-```typescript
-await client.senders.deleteSender({
-    senderId: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.senders.delete_sender(
+    sender_id=1000000,
+)
 
 ```
 </dd>
@@ -2928,7 +3709,7 @@ await client.senders.deleteSender({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteSenderRequest` 
+**sender_id:** `int` — Id of the sender
     
 </dd>
 </dl>
@@ -2936,7 +3717,7 @@ await client.senders.deleteSender({
 <dl>
 <dd>
 
-**requestOptions:** `SendersClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -2948,7 +3729,7 @@ await client.senders.deleteSender({
 </dl>
 </details>
 
-<details><summary><code>client.senders.<a href="/src/api/resources/senders/client/Client.ts">getIpsFromSender</a>({ ...params }) -> BrevoApi.GetIpsFromSenderResponse</code></summary>
+<details><summary><code>client.senders.<a href="src/brevo/senders/client.py">get_ips_from_sender</a>(...) -&gt; AsyncHttpResponse[GetIpsFromSenderResponse]</code></summary>
 <dl>
 <dd>
 
@@ -2985,10 +3766,15 @@ Key information returned:
 <dl>
 <dd>
 
-```typescript
-await client.senders.getIpsFromSender({
-    senderId: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.senders.get_ips_from_sender(
+    sender_id=1000000,
+)
 
 ```
 </dd>
@@ -3004,7 +3790,7 @@ await client.senders.getIpsFromSender({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetIpsFromSenderRequest` 
+**sender_id:** `int` — Id of the sender
     
 </dd>
 </dl>
@@ -3012,7 +3798,7 @@ await client.senders.getIpsFromSender({
 <dl>
 <dd>
 
-**requestOptions:** `SendersClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -3024,7 +3810,7 @@ await client.senders.getIpsFromSender({
 </dl>
 </details>
 
-<details><summary><code>client.senders.<a href="/src/api/resources/senders/client/Client.ts">validateSenderByOtp</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.senders.<a href="src/brevo/senders/client.py">validate_sender_by_otp</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -3060,11 +3846,16 @@ Key information returned:
 <dl>
 <dd>
 
-```typescript
-await client.senders.validateSenderByOtp({
-    senderId: 1000000,
-    otp: 123456
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.senders.validate_sender_by_otp(
+    sender_id=1000000,
+    otp=789012,
+)
 
 ```
 </dd>
@@ -3080,7 +3871,7 @@ await client.senders.validateSenderByOtp({
 <dl>
 <dd>
 
-**request:** `BrevoApi.ValidateSenderByOtpRequest` 
+**sender_id:** `int` — Id of the sender
     
 </dd>
 </dl>
@@ -3088,7 +3879,15 @@ await client.senders.validateSenderByOtp({
 <dl>
 <dd>
 
-**requestOptions:** `SendersClient.RequestOptions` 
+**otp:** `int` — 6 digit OTP received on email
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -3101,7 +3900,7 @@ await client.senders.validateSenderByOtp({
 </details>
 
 ## Domains
-<details><summary><code>client.domains.<a href="/src/api/resources/domains/client/Client.ts">getDomains</a>() -> BrevoApi.GetDomainsResponse</code></summary>
+<details><summary><code>client.domains.<a href="src/brevo/domains/client.py">get_domains</a>() -&gt; AsyncHttpResponse[GetDomainsResponse]</code></summary>
 <dl>
 <dd>
 
@@ -3141,8 +3940,13 @@ Key information returned:
 <dl>
 <dd>
 
-```typescript
-await client.domains.getDomains();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.domains.get_domains()
 
 ```
 </dd>
@@ -3158,7 +3962,7 @@ await client.domains.getDomains();
 <dl>
 <dd>
 
-**requestOptions:** `DomainsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -3170,7 +3974,7 @@ await client.domains.getDomains();
 </dl>
 </details>
 
-<details><summary><code>client.domains.<a href="/src/api/resources/domains/client/Client.ts">createDomain</a>({ ...params }) -> BrevoApi.CreateDomainResponse</code></summary>
+<details><summary><code>client.domains.<a href="src/brevo/domains/client.py">create_domain</a>(...) -&gt; AsyncHttpResponse[CreateDomainResponse]</code></summary>
 <dl>
 <dd>
 
@@ -3208,10 +4012,15 @@ Key information returned:
 <dl>
 <dd>
 
-```typescript
-await client.domains.createDomain({
-    name: "mycompany.com"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.domains.create_domain(
+    name="mycompany.com",
+)
 
 ```
 </dd>
@@ -3227,7 +4036,7 @@ await client.domains.createDomain({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateDomainRequest` 
+**name:** `str` — Domain name to be added
     
 </dd>
 </dl>
@@ -3235,7 +4044,7 @@ await client.domains.createDomain({
 <dl>
 <dd>
 
-**requestOptions:** `DomainsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -3247,7 +4056,7 @@ await client.domains.createDomain({
 </dl>
 </details>
 
-<details><summary><code>client.domains.<a href="/src/api/resources/domains/client/Client.ts">getDomainConfiguration</a>({ ...params }) -> BrevoApi.GetDomainConfigurationResponse</code></summary>
+<details><summary><code>client.domains.<a href="src/brevo/domains/client.py">get_domain_configuration</a>(...) -&gt; AsyncHttpResponse[GetDomainConfigurationResponse]</code></summary>
 <dl>
 <dd>
 
@@ -3284,10 +4093,15 @@ Key information returned:
 <dl>
 <dd>
 
-```typescript
-await client.domains.getDomainConfiguration({
-    domainName: "domainName"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.domains.get_domain_configuration(
+    domain_name="domainName",
+)
 
 ```
 </dd>
@@ -3303,7 +4117,7 @@ await client.domains.getDomainConfiguration({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetDomainConfigurationRequest` 
+**domain_name:** `str` — Domain name
     
 </dd>
 </dl>
@@ -3311,7 +4125,7 @@ await client.domains.getDomainConfiguration({
 <dl>
 <dd>
 
-**requestOptions:** `DomainsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -3323,7 +4137,7 @@ await client.domains.getDomainConfiguration({
 </dl>
 </details>
 
-<details><summary><code>client.domains.<a href="/src/api/resources/domains/client/Client.ts">deleteDomain</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.domains.<a href="src/brevo/domains/client.py">delete_domain</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -3357,10 +4171,15 @@ Key information returned:
 <dl>
 <dd>
 
-```typescript
-await client.domains.deleteDomain({
-    domainName: "domainName"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.domains.delete_domain(
+    domain_name="domainName",
+)
 
 ```
 </dd>
@@ -3376,7 +4195,7 @@ await client.domains.deleteDomain({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteDomainRequest` 
+**domain_name:** `str` — Domain name
     
 </dd>
 </dl>
@@ -3384,7 +4203,7 @@ await client.domains.deleteDomain({
 <dl>
 <dd>
 
-**requestOptions:** `DomainsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -3396,7 +4215,7 @@ await client.domains.deleteDomain({
 </dl>
 </details>
 
-<details><summary><code>client.domains.<a href="/src/api/resources/domains/client/Client.ts">authenticateDomain</a>({ ...params }) -> BrevoApi.AuthenticateDomainResponse</code></summary>
+<details><summary><code>client.domains.<a href="src/brevo/domains/client.py">authenticate_domain</a>(...) -&gt; AsyncHttpResponse[AuthenticateDomainResponse]</code></summary>
 <dl>
 <dd>
 
@@ -3432,10 +4251,15 @@ Key information returned:
 <dl>
 <dd>
 
-```typescript
-await client.domains.authenticateDomain({
-    domainName: "domainName"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.domains.authenticate_domain(
+    domain_name="domainName",
+)
 
 ```
 </dd>
@@ -3451,7 +4275,7 @@ await client.domains.authenticateDomain({
 <dl>
 <dd>
 
-**request:** `BrevoApi.AuthenticateDomainRequest` 
+**domain_name:** `str` — Domain name
     
 </dd>
 </dl>
@@ -3459,7 +4283,7 @@ await client.domains.authenticateDomain({
 <dl>
 <dd>
 
-**requestOptions:** `DomainsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -3472,7 +4296,7 @@ await client.domains.authenticateDomain({
 </details>
 
 ## Webhooks
-<details><summary><code>client.webhooks.<a href="/src/api/resources/webhooks/client/Client.ts">getWebhooks</a>({ ...params }) -> BrevoApi.GetWebhooksResponse</code></summary>
+<details><summary><code>client.webhooks.<a href="src/brevo/webhooks/client.py">get_webhooks</a>(...) -&gt; AsyncHttpResponse[GetWebhooksResponse]</code></summary>
 <dl>
 <dd>
 
@@ -3512,8 +4336,13 @@ Key information returned:
 <dl>
 <dd>
 
-```typescript
-await client.webhooks.getWebhooks();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.webhooks.get_webhooks()
 
 ```
 </dd>
@@ -3529,7 +4358,7 @@ await client.webhooks.getWebhooks();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetWebhooksRequest` 
+**type:** `typing.Optional[GetWebhooksRequestType]` — Filter on webhook type
     
 </dd>
 </dl>
@@ -3537,7 +4366,15 @@ await client.webhooks.getWebhooks();
 <dl>
 <dd>
 
-**requestOptions:** `WebhooksClient.RequestOptions` 
+**sort:** `typing.Optional[GetWebhooksRequestSort]` — Sort the results in the ascending/descending order of webhook creation
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -3549,7 +4386,7 @@ await client.webhooks.getWebhooks();
 </dl>
 </details>
 
-<details><summary><code>client.webhooks.<a href="/src/api/resources/webhooks/client/Client.ts">createWebhook</a>({ ...params }) -> BrevoApi.CreateWebhookResponse</code></summary>
+<details><summary><code>client.webhooks.<a href="src/brevo/webhooks/client.py">create_webhook</a>(...) -&gt; AsyncHttpResponse[CreateWebhookResponse]</code></summary>
 <dl>
 <dd>
 
@@ -3586,11 +4423,16 @@ Key information returned:
 <dl>
 <dd>
 
-```typescript
-await client.webhooks.createWebhook({
-    events: ["sent"],
-    url: "http://requestb.in/173lyyx1"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.webhooks.create_webhook(
+    events=["sent"],
+    url="http://requestb.in/173lyyx1",
+)
 
 ```
 </dd>
@@ -3606,7 +4448,23 @@ await client.webhooks.createWebhook({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateWebhookRequest` 
+**events:** `typing.Sequence[CreateWebhookRequestEventsItem]` 
+
+- Events triggering the webhook. Possible values for
+**Transactional** type webhook: #### `sent` OR `request`,
+`delivered`, `hardBounce`, `softBounce`, `blocked`, `spam`,
+`invalid`, `deferred`, `click`, `opened`, `uniqueOpened` and
+`unsubscribed` - Possible values for **Marketing** type webhook:
+#### `spam`, `opened`, `click`, `hardBounce`, `softBounce`,
+`unsubscribed`, `listAddition` & `delivered` - Possible values
+for **Inbound** type webhook: #### `inboundEmailProcessed` -
+Possible values for type **Transactional** and channel **SMS**
+####
+`accepted`,`delivered`,`softBounce`,`hardBounce`,`unsubscribe`,`reply`,
+`subscribe`,`sent`,`blacklisted`,`skip` - Possible values for
+type **Marketing**  channel **SMS** ####
+`sent`,`delivered`,`softBounce`,`hardBounce`,`unsubscribe`,`reply`,
+`subscribe`,`skip`
     
 </dd>
 </dl>
@@ -3614,7 +4472,74 @@ await client.webhooks.createWebhook({
 <dl>
 <dd>
 
-**requestOptions:** `WebhooksClient.RequestOptions` 
+**url:** `str` — URL of the webhook
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**auth:** `typing.Optional[CreateWebhookRequestAuth]` — Add authentication on webhook url
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**batched:** `typing.Optional[bool]` — To send batched webhooks
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**channel:** `typing.Optional[CreateWebhookRequestChannel]` — channel of webhook
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `typing.Optional[str]` — Description of the webhook
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**domain:** `typing.Optional[str]` 
+
+Inbound domain of webhook, required in case of event type
+`inbound`
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**headers:** `typing.Optional[typing.Sequence[CreateWebhookRequestHeadersItem]]` — Custom headers to be send with webhooks
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**type:** `typing.Optional[CreateWebhookRequestType]` — Type of the webhook
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -3626,7 +4551,7 @@ await client.webhooks.createWebhook({
 </dl>
 </details>
 
-<details><summary><code>client.webhooks.<a href="/src/api/resources/webhooks/client/Client.ts">exportWebhooksHistory</a>({ ...params }) -> BrevoApi.ExportWebhooksHistoryResponse</code></summary>
+<details><summary><code>client.webhooks.<a href="src/brevo/webhooks/client.py">export_webhooks_history</a>(...) -&gt; AsyncHttpResponse[ExportWebhooksHistoryResponse]</code></summary>
 <dl>
 <dd>
 
@@ -3667,12 +4592,17 @@ Key information returned:
 <dl>
 <dd>
 
-```typescript
-await client.webhooks.exportWebhooksHistory({
-    event: "invalid_parameter",
-    notifyURL: "https://brevo.com",
-    type: "transactional"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.webhooks.export_webhooks_history(
+    event="invalid_parameter",
+    notify_url="https://brevo.com",
+    type="transactional",
+)
 
 ```
 </dd>
@@ -3688,7 +4618,7 @@ await client.webhooks.exportWebhooksHistory({
 <dl>
 <dd>
 
-**request:** `BrevoApi.ExportWebhooksHistoryRequest` 
+**event:** `ExportWebhooksHistoryRequestEvent` — Filter the history for a specific event type
     
 </dd>
 </dl>
@@ -3696,7 +4626,91 @@ await client.webhooks.exportWebhooksHistory({
 <dl>
 <dd>
 
-**requestOptions:** `WebhooksClient.RequestOptions` 
+**notify_url:** `str` — Webhook URL to receive CSV file link
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**type:** `ExportWebhooksHistoryRequestType` — Filter the history based on webhook type
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**days:** `typing.Optional[int]` 
+
+Number of days in the past including today (positive
+integer). _Not compatible with 'startDate' and 'endDate'_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**email:** `typing.Optional[str]` — Filter the history for a specific email
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**end_date:** `typing.Optional[str]` 
+
+Mandatory if startDate is used. Ending date of the report
+(YYYY-MM-DD). Must be greater than equal to startDate
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**message_id:** `typing.Optional[int]` 
+
+Filter the history for a specific message id. Applicable
+only for transactional webhooks.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[str]` — Sorting order of records (asc or desc)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**start_date:** `typing.Optional[str]` 
+
+Mandatory if endDate is used. Starting date of the history
+(YYYY-MM-DD). Must be lower than equal to endDate
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**webhook_id:** `typing.Optional[int]` — Filter the history for a specific webhook id
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -3708,7 +4722,7 @@ await client.webhooks.exportWebhooksHistory({
 </dl>
 </details>
 
-<details><summary><code>client.webhooks.<a href="/src/api/resources/webhooks/client/Client.ts">getWebhook</a>({ ...params }) -> BrevoApi.GetWebhook</code></summary>
+<details><summary><code>client.webhooks.<a href="src/brevo/webhooks/client.py">get_webhook</a>(...) -&gt; AsyncHttpResponse[GetWebhook]</code></summary>
 <dl>
 <dd>
 
@@ -3748,10 +4762,15 @@ Key information returned:
 <dl>
 <dd>
 
-```typescript
-await client.webhooks.getWebhook({
-    webhookId: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.webhooks.get_webhook(
+    webhook_id=1000000,
+)
 
 ```
 </dd>
@@ -3767,7 +4786,7 @@ await client.webhooks.getWebhook({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetWebhookRequest` 
+**webhook_id:** `int` — Id of the webhook
     
 </dd>
 </dl>
@@ -3775,7 +4794,7 @@ await client.webhooks.getWebhook({
 <dl>
 <dd>
 
-**requestOptions:** `WebhooksClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -3787,7 +4806,7 @@ await client.webhooks.getWebhook({
 </dl>
 </details>
 
-<details><summary><code>client.webhooks.<a href="/src/api/resources/webhooks/client/Client.ts">updateWebhook</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.webhooks.<a href="src/brevo/webhooks/client.py">update_webhook</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -3823,10 +4842,15 @@ Key information returned:
 <dl>
 <dd>
 
-```typescript
-await client.webhooks.updateWebhook({
-    webhookId: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.webhooks.update_webhook(
+    webhook_id=1000000,
+)
 
 ```
 </dd>
@@ -3842,7 +4866,7 @@ await client.webhooks.updateWebhook({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateWebhookRequest` 
+**webhook_id:** `int` — Id of the webhook
     
 </dd>
 </dl>
@@ -3850,7 +4874,72 @@ await client.webhooks.updateWebhook({
 <dl>
 <dd>
 
-**requestOptions:** `WebhooksClient.RequestOptions` 
+**auth:** `typing.Optional[UpdateWebhookRequestAuth]` — Add authentication on webhook url
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**batched:** `typing.Optional[bool]` — To send batched webhooks
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `typing.Optional[str]` — Description of the webhook
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**domain:** `typing.Optional[str]` — Inbound domain of webhook, used in case of event type `inbound`
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**events:** `typing.Optional[typing.Sequence[UpdateWebhookRequestEventsItem]]` 
+
+- Events triggering the webhook. Possible values for
+**Transactional** type webhook: #### `sent` OR `request`,
+`delivered`, `hardBounce`, `softBounce`, `blocked`, `spam`,
+`invalid`, `deferred`, `click`, `opened`, `uniqueOpened` and
+`unsubscribed` - Possible values for **Marketing** type webhook:
+#### `spam`, `opened`, `click`, `hardBounce`, `softBounce`,
+`unsubscribed`, `listAddition` & `delivered` - Possible values
+for **Inbound** type webhook: #### `inboundEmailProcessed`
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**headers:** `typing.Optional[typing.Sequence[UpdateWebhookRequestHeadersItem]]` — Custom headers to be send with webhooks
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**url:** `typing.Optional[str]` — URL of the webhook
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -3862,7 +4951,7 @@ await client.webhooks.updateWebhook({
 </dl>
 </details>
 
-<details><summary><code>client.webhooks.<a href="/src/api/resources/webhooks/client/Client.ts">deleteWebhook</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.webhooks.<a href="src/brevo/webhooks/client.py">delete_webhook</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -3897,10 +4986,15 @@ Key information returned:
 <dl>
 <dd>
 
-```typescript
-await client.webhooks.deleteWebhook({
-    webhookId: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.webhooks.delete_webhook(
+    webhook_id=1000000,
+)
 
 ```
 </dd>
@@ -3916,7 +5010,7 @@ await client.webhooks.deleteWebhook({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteWebhookRequest` 
+**webhook_id:** `int` — Id of the webhook
     
 </dd>
 </dl>
@@ -3924,7 +5018,7 @@ await client.webhooks.deleteWebhook({
 <dl>
 <dd>
 
-**requestOptions:** `WebhooksClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -3937,7 +5031,7 @@ await client.webhooks.deleteWebhook({
 </details>
 
 ## ExternalFeeds
-<details><summary><code>client.externalFeeds.<a href="/src/api/resources/externalFeeds/client/Client.ts">getAllExternalFeeds</a>({ ...params }) -> BrevoApi.GetAllExternalFeedsResponse</code></summary>
+<details><summary><code>client.external_feeds.<a href="src/brevo/external_feeds/client.py">get_all_external_feeds</a>(...) -&gt; AsyncHttpResponse[GetAllExternalFeedsResponse]</code></summary>
 <dl>
 <dd>
 
@@ -3987,12 +5081,23 @@ Retrieves all external feeds from your Brevo account with filtering and paginati
 <dl>
 <dd>
 
-```typescript
-await client.externalFeeds.getAllExternalFeeds({
-    search: "product",
-    startDate: "2024-01-01",
-    endDate: "2024-01-31"
-});
+```python
+import datetime
+
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.external_feeds.get_all_external_feeds(
+    search="product",
+    start_date=datetime.date.fromisoformat(
+        "2024-01-01",
+    ),
+    end_date=datetime.date.fromisoformat(
+        "2024-01-31",
+    ),
+)
 
 ```
 </dd>
@@ -4008,7 +5113,7 @@ await client.externalFeeds.getAllExternalFeeds({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetAllExternalFeedsRequest` 
+**search:** `typing.Optional[str]` — Can be used to filter records by search keyword on feed name
     
 </dd>
 </dl>
@@ -4016,7 +5121,66 @@ await client.externalFeeds.getAllExternalFeeds({
 <dl>
 <dd>
 
-**requestOptions:** `ExternalFeedsClient.RequestOptions` 
+**start_date:** `typing.Optional[dt.date]` 
+
+Mandatory if `endDate` is used. Starting date (YYYY-MM-DD) from which
+you want to fetch the list. Can be maximum 30 days older than current
+date.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**end_date:** `typing.Optional[dt.date]` 
+
+Mandatory if `startDate` is used. Ending date (YYYY-MM-DD) till which
+you want to fetch the list. Maximum time period that can be selected is
+one month.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetAllExternalFeedsRequestSort]` 
+
+Sort the results in the ascending/descending order of record creation.
+Default order is **descending** if `sort` is not passed.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**auth_type:** `typing.Optional[GetAllExternalFeedsRequestAuthType]` — Filter the records by `authType` of the feed.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` — Number of documents returned per page.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**offset:** `typing.Optional[int]` — Index of the first document on the page.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -4028,7 +5192,7 @@ await client.externalFeeds.getAllExternalFeeds({
 </dl>
 </details>
 
-<details><summary><code>client.externalFeeds.<a href="/src/api/resources/externalFeeds/client/Client.ts">createExternalFeed</a>({ ...params }) -> BrevoApi.CreateExternalFeedResponse</code></summary>
+<details><summary><code>client.external_feeds.<a href="src/brevo/external_feeds/client.py">create_external_feed</a>(...) -&gt; AsyncHttpResponse[CreateExternalFeedResponse]</code></summary>
 <dl>
 <dd>
 
@@ -4074,14 +5238,19 @@ Creates a new external feed for dynamic content in email campaigns.
 <dl>
 <dd>
 
-```typescript
-await client.externalFeeds.createExternalFeed({
-    name: "Public API Feed",
-    url: "https://jsonplaceholder.typicode.com/posts",
-    authType: "noAuth",
-    maxRetries: 3,
-    cache: true
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.external_feeds.create_external_feed(
+    name="Internal Blog Feed",
+    url="https://blog.example.com/api/posts",
+    auth_type="noAuth",
+    max_retries=3,
+    cache=True,
+)
 
 ```
 </dd>
@@ -4097,7 +5266,7 @@ await client.externalFeeds.createExternalFeed({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateExternalFeedRequest` 
+**name:** `str` — Name of the feed
     
 </dd>
 </dl>
@@ -4105,7 +5274,71 @@ await client.externalFeeds.createExternalFeed({
 <dl>
 <dd>
 
-**requestOptions:** `ExternalFeedsClient.RequestOptions` 
+**url:** `str` — URL of the external data source
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**auth_type:** `typing.Optional[CreateExternalFeedRequestAuthType]` — Authentication type for accessing the feed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**username:** `typing.Optional[str]` — Username for basic authentication (required if authType is 'basic')
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**password:** `typing.Optional[str]` — Password for basic authentication (required if authType is 'basic')
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**token:** `typing.Optional[str]` — Token for token-based authentication (required if authType is 'token')
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**max_retries:** `typing.Optional[int]` — Maximum number of retry attempts for failed requests
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**cache:** `typing.Optional[bool]` — Whether to cache the feed response
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**headers:** `typing.Optional[typing.Sequence[CreateExternalFeedRequestHeadersItem]]` — Custom HTTP headers for the feed request
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -4117,7 +5350,7 @@ await client.externalFeeds.createExternalFeed({
 </dl>
 </details>
 
-<details><summary><code>client.externalFeeds.<a href="/src/api/resources/externalFeeds/client/Client.ts">getExternalFeedByUuid</a>({ ...params }) -> BrevoApi.GetExternalFeedByUuidResponse</code></summary>
+<details><summary><code>client.external_feeds.<a href="src/brevo/external_feeds/client.py">get_external_feed_by_uuid</a>(...) -&gt; AsyncHttpResponse[GetExternalFeedByUuidResponse]</code></summary>
 <dl>
 <dd>
 
@@ -4164,10 +5397,15 @@ Retrieves details of a specific external feed by its UUID.
 <dl>
 <dd>
 
-```typescript
-await client.externalFeeds.getExternalFeedByUuid({
-    uuid: "b1c2d3e4-f5a6-47b8-89c0-d1e2f3a4b5c6"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.external_feeds.get_external_feed_by_uuid(
+    uuid_="b1c2d3e4-f5a6-47b8-89c0-d1e2f3a4b5c6",
+)
 
 ```
 </dd>
@@ -4183,7 +5421,7 @@ await client.externalFeeds.getExternalFeedByUuid({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetExternalFeedByUuidRequest` 
+**uuid_:** `str` — UUID of the feed to fetch
     
 </dd>
 </dl>
@@ -4191,7 +5429,7 @@ await client.externalFeeds.getExternalFeedByUuid({
 <dl>
 <dd>
 
-**requestOptions:** `ExternalFeedsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -4203,7 +5441,7 @@ await client.externalFeeds.getExternalFeedByUuid({
 </dl>
 </details>
 
-<details><summary><code>client.externalFeeds.<a href="/src/api/resources/externalFeeds/client/Client.ts">updateExternalFeed</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.external_feeds.<a href="src/brevo/external_feeds/client.py">update_external_feed</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -4246,12 +5484,32 @@ Updates configuration of an existing external feed.
 <dl>
 <dd>
 
-```typescript
-await client.externalFeeds.updateExternalFeed({
-    uuid: "b1c2d3e4-f5a6-47b8-89c0-d1e2f3a4b5c6",
-    name: "Updated Product Catalog",
-    url: "https://api.newstore.com/products/v2"
-});
+```python
+from brevo import BrevoApi
+from brevo.external_feeds import UpdateExternalFeedRequestHeadersItem
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.external_feeds.update_external_feed(
+    uuid_="b1c2d3e4-f5a6-47b8-89c0-d1e2f3a4b5c6",
+    name="Enterprise Product Feed",
+    url="https://enterprise-api.company.com/catalog",
+    auth_type="token",
+    token="enterprise789token123",
+    headers=[
+        UpdateExternalFeedRequestHeadersItem(
+            name="Authorization",
+            value="Bearer enterprise789token123",
+        ),
+        UpdateExternalFeedRequestHeadersItem(
+            name="Accept",
+            value="application/json",
+        ),
+    ],
+    max_retries=3,
+    cache=True,
+)
 
 ```
 </dd>
@@ -4267,7 +5525,7 @@ await client.externalFeeds.updateExternalFeed({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateExternalFeedRequest` 
+**uuid_:** `str` — UUID of the feed to update
     
 </dd>
 </dl>
@@ -4275,7 +5533,79 @@ await client.externalFeeds.updateExternalFeed({
 <dl>
 <dd>
 
-**requestOptions:** `ExternalFeedsClient.RequestOptions` 
+**name:** `typing.Optional[str]` — Name of the feed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**url:** `typing.Optional[str]` — URL of the external data source
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**auth_type:** `typing.Optional[UpdateExternalFeedRequestAuthType]` — Authentication type for accessing the feed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**username:** `typing.Optional[str]` — Username for basic authentication
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**password:** `typing.Optional[str]` — Password for basic authentication
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**token:** `typing.Optional[str]` — Token for token-based authentication
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**headers:** `typing.Optional[typing.Sequence[UpdateExternalFeedRequestHeadersItem]]` — Custom HTTP headers for the feed request
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**max_retries:** `typing.Optional[int]` — Maximum number of retry attempts for failed requests
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**cache:** `typing.Optional[bool]` — Whether to cache the feed response
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -4287,7 +5617,7 @@ await client.externalFeeds.updateExternalFeed({
 </dl>
 </details>
 
-<details><summary><code>client.externalFeeds.<a href="/src/api/resources/externalFeeds/client/Client.ts">deleteExternalFeed</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.external_feeds.<a href="src/brevo/external_feeds/client.py">delete_external_feed</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -4329,10 +5659,15 @@ Deletes an external feed from your Brevo account.
 <dl>
 <dd>
 
-```typescript
-await client.externalFeeds.deleteExternalFeed({
-    uuid: "b1c2d3e4-f5a6-47b8-89c0-d1e2f3a4b5c6"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.external_feeds.delete_external_feed(
+    uuid_="b1c2d3e4-f5a6-47b8-89c0-d1e2f3a4b5c6",
+)
 
 ```
 </dd>
@@ -4348,7 +5683,7 @@ await client.externalFeeds.deleteExternalFeed({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteExternalFeedRequest` 
+**uuid_:** `str` — UUID of the feed to delete
     
 </dd>
 </dl>
@@ -4356,7 +5691,7 @@ await client.externalFeeds.deleteExternalFeed({
 <dl>
 <dd>
 
-**requestOptions:** `ExternalFeedsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -4369,7 +5704,7 @@ await client.externalFeeds.deleteExternalFeed({
 </details>
 
 ## CustomObjects
-<details><summary><code>client.customObjects.<a href="/src/api/resources/customObjects/client/Client.ts">upsertrecords</a>({ ...params }) -> BrevoApi.UpsertrecordsResponse</code></summary>
+<details><summary><code>client.custom_objects.<a href="src/brevo/custom_objects/client.py">upsertrecords</a>(...) -&gt; AsyncHttpResponse[UpsertrecordsResponse]</code></summary>
 <dl>
 <dd>
 
@@ -4418,11 +5753,17 @@ This API allows bulk upsert of object records in a single request. Each object r
 <dl>
 <dd>
 
-```typescript
-await client.customObjects.upsertrecords({
-    object_type: "vehicle",
-    records: [{}]
-});
+```python
+from brevo import BrevoApi
+from brevo.custom_objects import UpsertrecordsRequestRecordsItem
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.custom_objects.upsertrecords(
+    object_type="vehicle",
+    records=[UpsertrecordsRequestRecordsItem()],
+)
 
 ```
 </dd>
@@ -4438,7 +5779,7 @@ await client.customObjects.upsertrecords({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpsertrecordsRequest` 
+**object_type:** `str` — object type for the attribute
     
 </dd>
 </dl>
@@ -4446,7 +5787,15 @@ await client.customObjects.upsertrecords({
 <dl>
 <dd>
 
-**requestOptions:** `CustomObjectsClient.RequestOptions` 
+**records:** `typing.Sequence[UpsertrecordsRequestRecordsItem]` — List of object records to be upsert. Each record can have attributes, identifiers, and associations.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -4458,7 +5807,7 @@ await client.customObjects.upsertrecords({
 </dl>
 </details>
 
-<details><summary><code>client.customObjects.<a href="/src/api/resources/customObjects/client/Client.ts">getrecords</a>({ ...params }) -> BrevoApi.GetrecordsResponse</code></summary>
+<details><summary><code>client.custom_objects.<a href="src/brevo/custom_objects/client.py">getrecords</a>(...) -&gt; AsyncHttpResponse[GetrecordsResponse]</code></summary>
 <dl>
 <dd>
 
@@ -4490,12 +5839,17 @@ This API retrieves a list of object records along with their associated records 
 <dl>
 <dd>
 
-```typescript
-await client.customObjects.getrecords({
-    object_type: "vehicle",
-    limit: 1000000,
-    page_num: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.custom_objects.getrecords(
+    object_type="vehicle",
+    limit=1000000,
+    page_num=1000000,
+)
 
 ```
 </dd>
@@ -4511,7 +5865,7 @@ await client.customObjects.getrecords({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetrecordsRequest` 
+**object_type:** `str` — object type for the attribute
     
 </dd>
 </dl>
@@ -4519,7 +5873,39 @@ await client.customObjects.getrecords({
 <dl>
 <dd>
 
-**requestOptions:** `CustomObjectsClient.RequestOptions` 
+**limit:** `int` — Number of records returned per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page_num:** `int` — Page number for pagination. It's used to fetch the object records on a provided page number. Must be a valid positive integer.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetrecordsRequestSort]` — Sort order, must be 'asc' or 'desc'. Default to 'desc' if not provided.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**association:** `typing.Optional[GetrecordsRequestAssociation]` — Whether to include associations, must be 'true' or 'false'. Default to 'false' if not provided.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -4531,7 +5917,7 @@ await client.customObjects.getrecords({
 </dl>
 </details>
 
-<details><summary><code>client.customObjects.<a href="/src/api/resources/customObjects/client/Client.ts">batchDeleteObjectRecords</a>({ ...params }) -> BrevoApi.BatchDeleteObjectRecordsResponse</code></summary>
+<details><summary><code>client.custom_objects.<a href="src/brevo/custom_objects/client.py">batch_delete_object_records</a>(...) -&gt; AsyncHttpResponse[BatchDeleteObjectRecordsResponse]</code></summary>
 <dl>
 <dd>
 
@@ -4559,13 +5945,21 @@ The request is accepted and processed asynchronously.   You can track the status
 <dl>
 <dd>
 
-```typescript
-await client.customObjects.batchDeleteObjectRecords({
-    object_type: "vehicle",
-    identifiers: {
-        ext_ids: ["ext-001", "ext-002"]
-    }
-});
+```python
+from brevo import BrevoApi
+from brevo.custom_objects import (
+    BatchDeleteObjectRecordsRequestIdentifiersExtIds,
+)
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.custom_objects.batch_delete_object_records(
+    object_type="vehicle",
+    identifiers=BatchDeleteObjectRecordsRequestIdentifiersExtIds(
+        ext_ids=["ext-001", "ext-002"],
+    ),
+)
 
 ```
 </dd>
@@ -4581,7 +5975,7 @@ await client.customObjects.batchDeleteObjectRecords({
 <dl>
 <dd>
 
-**request:** `BrevoApi.BatchDeleteObjectRecordsRequest` 
+**object_type:** `str` — Object type for the records to delete
     
 </dd>
 </dl>
@@ -4589,7 +5983,15 @@ await client.customObjects.batchDeleteObjectRecords({
 <dl>
 <dd>
 
-**requestOptions:** `CustomObjectsClient.RequestOptions` 
+**identifiers:** `typing.Optional[BatchDeleteObjectRecordsRequestIdentifiers]` — One of the below must be provided
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -4602,7 +6004,7 @@ await client.customObjects.batchDeleteObjectRecords({
 </details>
 
 ## Contacts
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">getContacts</a>({ ...params }) -> BrevoApi.GetContacts</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_contacts</a>(...) -&gt; AsyncHttpResponse[GetContacts]</code></summary>
 <dl>
 <dd>
 
@@ -4634,8 +6036,13 @@ Accepted Number Formats
 <dl>
 <dd>
 
-```typescript
-await client.contacts.getContacts();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.contacts.get_contacts()
 
 ```
 </dd>
@@ -4651,7 +6058,7 @@ await client.contacts.getContacts();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetContactsRequest` 
+**limit:** `typing.Optional[int]` — Number of documents per page
     
 </dd>
 </dl>
@@ -4659,7 +6066,63 @@ await client.contacts.getContacts();
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**offset:** `typing.Optional[int]` — Index of the first document of the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**modified_since:** `typing.Optional[str]` — Filter (urlencoded) the contacts modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**created_since:** `typing.Optional[str]` — Filter (urlencoded) the contacts created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetContactsRequestSort]` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**segment_id:** `typing.Optional[int]` — Id of the segment. **Either listIds or segmentId can be passed.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**list_ids:** `typing.Optional[typing.Union[int, typing.Sequence[int]]]` — Ids of the list. **Either listIds or segmentId can be passed.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `typing.Optional[str]` — Filter the contacts on the basis of attributes. **Allowed operator: equals. For multiple-choice options, the filter will apply an AND condition between the options. For category attributes, the filter will work with both id and value. (e.g. filter=equals(FIRSTNAME,"Antoine"), filter=equals(B1, true), filter=equals(DOB, "1989-11-23"), filter=equals(GENDER, "1"), filter=equals(GENDER, "MALE"), filter=equals(COUNTRY,"USA, INDIA")**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -4671,7 +6134,7 @@ await client.contacts.getContacts();
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">createContact</a>({ ...params }) -> BrevoApi.CreateContactResponse</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">create_contact</a>(...) -&gt; AsyncHttpResponse[CreateContactResponse]</code></summary>
 <dl>
 <dd>
 
@@ -4697,8 +6160,13 @@ Creates new contacts on Brevo. Contacts can be created by passing either - <br><
 <dl>
 <dd>
 
-```typescript
-await client.contacts.createContact();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.contacts.create_contact()
 
 ```
 </dd>
@@ -4714,7 +6182,7 @@ await client.contacts.createContact();
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateContactRequest` 
+**attributes:** `typing.Optional[typing.Dict[str, CreateContactRequestAttributesValue]]` — Pass the set of attributes and their values. The attribute's parameter should be passed in capital letter while creating a contact. Values that don't match the attribute type (e.g. text or string in a date attribute) will be ignored. **These attributes must be present in your Brevo account**. For eg: **{"FNAME":"Elly", "LNAME":"Roger", "COUNTRIES": ["India","China"]}**
     
 </dd>
 </dl>
@@ -4722,7 +6190,63 @@ await client.contacts.createContact();
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**email:** `typing.Optional[str]` — Email address of the user. **Mandatory if "ext_id"  & "SMS" field is not passed.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**email_blacklisted:** `typing.Optional[bool]` — Set this field to blacklist the contact for emails (emailBlacklisted = true)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ext_id:** `typing.Optional[str]` — Pass your own Id to create a contact.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**list_ids:** `typing.Optional[typing.Sequence[int]]` — Ids of the lists to add the contact to
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sms_blacklisted:** `typing.Optional[bool]` — Set this field to blacklist the contact for SMS (smsBlacklisted = true)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**smtp_blacklist_sender:** `typing.Optional[typing.Sequence[str]]` — transactional email forbidden sender for contact. Use only for email Contact ( only available if updateEnabled = true )
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**update_enabled:** `typing.Optional[bool]` — Facilitate to update the existing contact in the same request (updateEnabled = true)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -4734,7 +6258,7 @@ await client.contacts.createContact();
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">getAttributes</a>() -> BrevoApi.GetAttributesResponse</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_attributes</a>() -&gt; AsyncHttpResponse[GetAttributesResponse]</code></summary>
 <dl>
 <dd>
 
@@ -4746,8 +6270,13 @@ await client.contacts.createContact();
 <dl>
 <dd>
 
-```typescript
-await client.contacts.getAttributes();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.contacts.get_attributes()
 
 ```
 </dd>
@@ -4763,7 +6292,7 @@ await client.contacts.getAttributes();
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -4775,7 +6304,7 @@ await client.contacts.getAttributes();
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">createAttribute</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">create_attribute</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -4787,11 +6316,16 @@ await client.contacts.getAttributes();
 <dl>
 <dd>
 
-```typescript
-await client.contacts.createAttribute({
-    attributeCategory: "normal",
-    attributeName: "attributeName"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.contacts.create_attribute(
+    attribute_category="normal",
+    attribute_name="attributeName",
+)
 
 ```
 </dd>
@@ -4807,7 +6341,7 @@ await client.contacts.createAttribute({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateAttributeRequest` 
+**attribute_category:** `CreateAttributeRequestAttributeCategory` — Category of the attribute
     
 </dd>
 </dl>
@@ -4815,7 +6349,55 @@ await client.contacts.createAttribute({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**attribute_name:** `str` — Name of the attribute
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**enumeration:** `typing.Optional[typing.Sequence[CreateAttributeRequestEnumerationItem]]` — List of values and labels that the attribute can take. **Use only if the attribute's category is "category"**. None of the category options can exceed max 200 characters. For example: **[{"value":1, "label":"male"}, {"value":2, "label":"female"}]**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**is_recurring:** `typing.Optional[bool]` — Type of the attribute. **Use only if the attribute's category is 'calculated' or 'global'**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**multi_category_options:** `typing.Optional[typing.Sequence[str]]` — List of options you want to add for multiple-choice attribute. **Use only if the attribute's category is "normal" and attribute's type is "multiple-choice". None of the multicategory options can exceed max 200 characters.** For example: **["USA","INDIA"]**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**type:** `typing.Optional[CreateAttributeRequestType]` — Type of the attribute. **Use only if the attribute's category is 'normal', 'category' or 'transactional'** Type **user and multiple-choice** is only available if the category is **normal** attribute Type **id** is only available if the category is **transactional** attribute Type **category** is only available if the category is **category** attribute
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**value:** `typing.Optional[str]` — Value of the attribute. **Use only if the attribute's category is 'calculated' or 'global'**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -4827,7 +6409,7 @@ await client.contacts.createAttribute({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">updateAttribute</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">update_attribute</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -4839,11 +6421,16 @@ await client.contacts.createAttribute({
 <dl>
 <dd>
 
-```typescript
-await client.contacts.updateAttribute({
-    attributeCategory: "category",
-    attributeName: "attributeName"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.contacts.update_attribute(
+    attribute_category="category",
+    attribute_name="attributeName",
+)
 
 ```
 </dd>
@@ -4859,7 +6446,7 @@ await client.contacts.updateAttribute({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateAttributeRequest` 
+**attribute_category:** `UpdateAttributeRequestAttributeCategory` — Category of the attribute
     
 </dd>
 </dl>
@@ -4867,7 +6454,39 @@ await client.contacts.updateAttribute({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**attribute_name:** `str` — Name of the existing attribute
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**enumeration:** `typing.Optional[typing.Sequence[UpdateAttributeRequestEnumerationItem]]` — List of the values and labels that the attribute can take. **Use only if the attribute's category is "category"** None of the category options can exceed max 200 characters. For example, **[{"value":1, "label":"male"}, {"value":2, "label":"female"}]**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**multi_category_options:** `typing.Optional[typing.Sequence[str]]` — Use this option to add multiple-choice attributes options only if the attribute's category is "normal". **This option is specifically designed for updating multiple-choice attributes. None of the multicategory options can exceed max 200 characters.**. For example: **["USA","INDIA"]**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**value:** `typing.Optional[str]` — Value of the attribute to update. **Use only if the attribute's category is 'calculated' or 'global'**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -4879,7 +6498,7 @@ await client.contacts.updateAttribute({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">deleteAttribute</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">delete_attribute</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -4891,11 +6510,16 @@ await client.contacts.updateAttribute({
 <dl>
 <dd>
 
-```typescript
-await client.contacts.deleteAttribute({
-    attributeCategory: "normal",
-    attributeName: "attributeName"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.contacts.delete_attribute(
+    attribute_category="normal",
+    attribute_name="attributeName",
+)
 
 ```
 </dd>
@@ -4911,7 +6535,7 @@ await client.contacts.deleteAttribute({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteAttributeRequest` 
+**attribute_category:** `DeleteAttributeRequestAttributeCategory` — Category of the attribute
     
 </dd>
 </dl>
@@ -4919,7 +6543,15 @@ await client.contacts.deleteAttribute({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**attribute_name:** `str` — Name of the existing attribute
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -4931,7 +6563,7 @@ await client.contacts.deleteAttribute({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">deleteMultiAttributeOptions</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">delete_multi_attribute_options</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -4943,12 +6575,16 @@ await client.contacts.deleteAttribute({
 <dl>
 <dd>
 
-```typescript
-await client.contacts.deleteMultiAttributeOptions({
-    attributeType: "multiple-choice",
-    multipleChoiceAttribute: "multipleChoiceAttribute",
-    multipleChoiceAttributeOption: "multipleChoiceAttributeOption"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.contacts.delete_multi_attribute_options(
+    multiple_choice_attribute="multipleChoiceAttribute",
+    multiple_choice_attribute_option="multipleChoiceAttributeOption",
+)
 
 ```
 </dd>
@@ -4964,7 +6600,7 @@ await client.contacts.deleteMultiAttributeOptions({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteMultiAttributeOptionsRequest` 
+**multiple_choice_attribute:** `str` — Name of the existing multiple-choice attribute
     
 </dd>
 </dl>
@@ -4972,7 +6608,15 @@ await client.contacts.deleteMultiAttributeOptions({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**multiple_choice_attribute_option:** `str` — Name of the existing multiple-choice attribute option that you want to delete
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -4984,7 +6628,7 @@ await client.contacts.deleteMultiAttributeOptions({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">updateBatchContacts</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">update_batch_contacts</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -4996,8 +6640,13 @@ await client.contacts.deleteMultiAttributeOptions({
 <dl>
 <dd>
 
-```typescript
-await client.contacts.updateBatchContacts();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.contacts.update_batch_contacts()
 
 ```
 </dd>
@@ -5013,7 +6662,7 @@ await client.contacts.updateBatchContacts();
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateBatchContactsRequest` 
+**contacts:** `typing.Optional[typing.Sequence[UpdateBatchContactsRequestContactsItem]]` — List of contacts to be updated
     
 </dd>
 </dl>
@@ -5021,7 +6670,7 @@ await client.contacts.updateBatchContacts();
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -5033,7 +6682,7 @@ await client.contacts.updateBatchContacts();
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">createDoiContact</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">create_doi_contact</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -5061,13 +6710,18 @@ attributes param in this endpoint is an object containing key-value pairs where 
 <dl>
 <dd>
 
-```typescript
-await client.contacts.createDoiContact({
-    email: "elly@example.com",
-    includeListIds: [36],
-    redirectionUrl: "http://requestb.in/173lyyx1",
-    templateId: 2
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.contacts.create_doi_contact(
+    email="elly@example.com",
+    include_list_ids=[36],
+    redirection_url="http://requestb.in/173lyyx1",
+    template_id=2,
+)
 
 ```
 </dd>
@@ -5083,7 +6737,7 @@ await client.contacts.createDoiContact({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateDoiContactRequest` 
+**email:** `str` — Email address where the confirmation email will be sent. This email address will be the identifier for all other contact attributes.
     
 </dd>
 </dl>
@@ -5091,7 +6745,47 @@ await client.contacts.createDoiContact({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**include_list_ids:** `typing.Sequence[int]` — Lists under user account where contact should be added
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**redirection_url:** `str` — URL of the web page that user will be redirected to after clicking on the double opt in URL. When editing your DOI template you can reference this URL by using the tag **{{ params.DOIurl }}**.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**template_id:** `int` — Id of the Double opt-in (DOI) template
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attributes:** `typing.Optional[typing.Dict[str, CreateDoiContactRequestAttributesValue]]` — Pass the set of attributes and their values. **These attributes must be present in your Brevo account**. For eg. **{'FNAME':'Elly', 'LNAME':'Roger', 'COUNTRIES': ['India','China']}**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**exclude_list_ids:** `typing.Optional[typing.Sequence[int]]` — Lists under user account where contact should not be added
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -5103,7 +6797,7 @@ await client.contacts.createDoiContact({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">requestContactExport</a>({ ...params }) -> BrevoApi.RequestContactExportResponse</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">request_contact_export</a>(...) -&gt; AsyncHttpResponse[RequestContactExportResponse]</code></summary>
 <dl>
 <dd>
 
@@ -5129,10 +6823,16 @@ It returns the background process ID which on completion calls the notify URL th
 <dl>
 <dd>
 
-```typescript
-await client.contacts.requestContactExport({
-    customContactFilter: {}
-});
+```python
+from brevo import BrevoApi
+from brevo.contacts import RequestContactExportRequestCustomContactFilter
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.contacts.request_contact_export(
+    custom_contact_filter=RequestContactExportRequestCustomContactFilter(),
+)
 
 ```
 </dd>
@@ -5148,7 +6848,7 @@ await client.contacts.requestContactExport({
 <dl>
 <dd>
 
-**request:** `BrevoApi.RequestContactExportRequest` 
+**custom_contact_filter:** `RequestContactExportRequestCustomContactFilter` — Set the filter for the contacts to be exported.
     
 </dd>
 </dl>
@@ -5156,7 +6856,63 @@ await client.contacts.requestContactExport({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**disable_notification:** `typing.Optional[bool]` — To avoid generating the email notification upon contact export, pass **true**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**export_attributes:** `typing.Optional[typing.Sequence[str]]` — List of all the attributes that you want to export. **These attributes must be present in your contact database. It is required if exportMandatoryAttributes is set false. ** For example: **['fname', 'lname', 'email']**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**export_mandatory_attributes:** `typing.Optional[bool]` — To export mandatory attributes like EMAIL, ADDED_TIME, MODIFIED_TIME
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**export_metadata:** `typing.Optional[typing.Sequence[str]]` — Export metadata of contacts such as _listIds, ADDED_TIME, MODIFIED_TIME.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**export_date_in_utc:** `typing.Optional[bool]` — Specifies whether the date fields createdAt, modifiedAt in the exported data should be returned in UTC format.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**export_subscription_status:** `typing.Optional[typing.Sequence[str]]` — Export subscription status of contacts for email & sms marketting. Pass email_marketing to obtain the marketing email subscription status & sms_marketing to retrieve the marketing SMS status of the contact.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notify_url:** `typing.Optional[str]` — Webhook that will be called once the export process is finished. For reference, https://help.brevo.com/hc/en-us/articles/360007666479
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -5168,7 +6924,7 @@ await client.contacts.requestContactExport({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">getFolders</a>({ ...params }) -> BrevoApi.GetFoldersResponse</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_folders</a>(...) -&gt; AsyncHttpResponse[GetFoldersResponse]</code></summary>
 <dl>
 <dd>
 
@@ -5204,8 +6960,13 @@ The uniqueSubscribers field is deprecated
 <dl>
 <dd>
 
-```typescript
-await client.contacts.getFolders();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.contacts.get_folders()
 
 ```
 </dd>
@@ -5221,7 +6982,7 @@ await client.contacts.getFolders();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetFoldersRequest` 
+**limit:** `typing.Optional[int]` — Number of documents per page
     
 </dd>
 </dl>
@@ -5229,7 +6990,23 @@ await client.contacts.getFolders();
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**offset:** `typing.Optional[int]` — Index of the first document of the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetFoldersRequestSort]` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -5241,7 +7018,7 @@ await client.contacts.getFolders();
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">createFolder</a>({ ...params }) -> BrevoApi.CreateFolderResponse</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">create_folder</a>(...) -&gt; AsyncHttpResponse[CreateFolderResponse]</code></summary>
 <dl>
 <dd>
 
@@ -5253,8 +7030,13 @@ await client.contacts.getFolders();
 <dl>
 <dd>
 
-```typescript
-await client.contacts.createFolder({});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.contacts.create_folder()
 
 ```
 </dd>
@@ -5270,7 +7052,7 @@ await client.contacts.createFolder({});
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateUpdateFolder` 
+**name:** `typing.Optional[str]` — Name of the folder
     
 </dd>
 </dl>
@@ -5278,7 +7060,7 @@ await client.contacts.createFolder({});
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -5290,7 +7072,7 @@ await client.contacts.createFolder({});
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">getFolder</a>({ ...params }) -> BrevoApi.GetFolder</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_folder</a>(...) -&gt; AsyncHttpResponse[GetFolder]</code></summary>
 <dl>
 <dd>
 
@@ -5322,10 +7104,15 @@ These are non breaking changes. The default value for the attributes will be 0.
 <dl>
 <dd>
 
-```typescript
-await client.contacts.getFolder({
-    folderId: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.contacts.get_folder(
+    folder_id=1000000,
+)
 
 ```
 </dd>
@@ -5341,7 +7128,7 @@ await client.contacts.getFolder({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetFolderRequest` 
+**folder_id:** `int` — id of the folder
     
 </dd>
 </dl>
@@ -5349,7 +7136,7 @@ await client.contacts.getFolder({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -5361,7 +7148,7 @@ await client.contacts.getFolder({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">updateFolder</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">update_folder</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -5373,11 +7160,15 @@ await client.contacts.getFolder({
 <dl>
 <dd>
 
-```typescript
-await client.contacts.updateFolder({
-    folderId: 1000000,
-    body: {}
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.contacts.update_folder(
+    folder_id=1000000,
+)
 
 ```
 </dd>
@@ -5393,7 +7184,7 @@ await client.contacts.updateFolder({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateFolderRequest` 
+**folder_id:** `int` — Id of the folder
     
 </dd>
 </dl>
@@ -5401,7 +7192,15 @@ await client.contacts.updateFolder({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**name:** `typing.Optional[str]` — Name of the folder
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -5413,7 +7212,7 @@ await client.contacts.updateFolder({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">deleteFolder</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">delete_folder</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -5425,10 +7224,15 @@ await client.contacts.updateFolder({
 <dl>
 <dd>
 
-```typescript
-await client.contacts.deleteFolder({
-    folderId: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.contacts.delete_folder(
+    folder_id=1000000,
+)
 
 ```
 </dd>
@@ -5444,7 +7248,7 @@ await client.contacts.deleteFolder({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteFolderRequest` 
+**folder_id:** `int` — Id of the folder
     
 </dd>
 </dl>
@@ -5452,7 +7256,7 @@ await client.contacts.deleteFolder({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -5464,7 +7268,7 @@ await client.contacts.deleteFolder({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">getFolderLists</a>({ ...params }) -> BrevoApi.GetFolderListsResponse</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_folder_lists</a>(...) -&gt; AsyncHttpResponse[GetFolderListsResponse]</code></summary>
 <dl>
 <dd>
 
@@ -5496,10 +7300,15 @@ These are non breaking changes. The default value for the attributes will be 0.
 <dl>
 <dd>
 
-```typescript
-await client.contacts.getFolderLists({
-    folderId: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.contacts.get_folder_lists(
+    folder_id=1000000,
+)
 
 ```
 </dd>
@@ -5515,7 +7324,7 @@ await client.contacts.getFolderLists({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetFolderListsRequest` 
+**folder_id:** `int` — Id of the folder
     
 </dd>
 </dl>
@@ -5523,7 +7332,31 @@ await client.contacts.getFolderLists({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**limit:** `typing.Optional[int]` — Number of documents per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**offset:** `typing.Optional[int]` — Index of the first document of the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetFolderListsRequestSort]` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -5535,7 +7368,7 @@ await client.contacts.getFolderLists({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">importContacts</a>({ ...params }) -> BrevoApi.ImportContactsResponse</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">import_contacts</a>(...) -&gt; AsyncHttpResponse[ImportContactsResponse]</code></summary>
 <dl>
 <dd>
 
@@ -5561,8 +7394,13 @@ It returns the background process ID which on completion calls the notify URL th
 <dl>
 <dd>
 
-```typescript
-await client.contacts.importContacts();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.contacts.import_contacts()
 
 ```
 </dd>
@@ -5578,7 +7416,7 @@ await client.contacts.importContacts();
 <dl>
 <dd>
 
-**request:** `BrevoApi.ImportContactsRequest` 
+**disable_notification:** `typing.Optional[bool]` — To disable email notification
     
 </dd>
 </dl>
@@ -5586,7 +7424,87 @@ await client.contacts.importContacts();
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**email_blacklist:** `typing.Optional[bool]` — To blacklist all the contacts for email
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**empty_contacts_attributes:** `typing.Optional[bool]` — To facilitate the choice to erase any attribute of the existing contacts with empty value. emptyContactsAttributes = true means the empty fields in your import will erase any attribute that currently contain data in Brevo, & emptyContactsAttributes = false means the empty fields will not affect your existing data ( **only available if `updateExistingContacts` set to true **)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**file_body:** `typing.Optional[str]` — **Mandatory if fileUrl and jsonBody is not defined.** CSV content to be imported. Use semicolon to separate multiple attributes. **Maximum allowed file body size is 10MB** . However we recommend a safe limit of around 8 MB to avoid the issues caused due to increase of file body size while parsing. Please use fileUrl instead to import bigger files.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**file_url:** `typing.Optional[str]` — **Mandatory if fileBody and jsonBody is not defined.** URL of the file to be imported (**no local file**). Possible file formats: #### .txt, .csv, .json
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**json_body:** `typing.Optional[typing.Sequence[ImportContactsRequestJsonBodyItem]]` — **Mandatory if fileUrl and fileBody is not defined.** JSON content to be imported. **Maximum allowed json body size is 10MB** . However we recommend a safe limit of around 8 MB to avoid the issues caused due to increase of json body size while parsing. Please use fileUrl instead to import bigger files.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**list_ids:** `typing.Optional[typing.Sequence[int]]` — **Mandatory if newList is not defined.** Ids of the lists in which the contacts shall be imported. For example, **[2, 4, 7]**.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**new_list:** `typing.Optional[ImportContactsRequestNewList]` — To create a new list and import the contacts into it, pass the listName and an optional folderId.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notify_url:** `typing.Optional[str]` — URL that will be called once the import process is finished. For reference, https://help.brevo.com/hc/en-us/articles/360007666479
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sms_blacklist:** `typing.Optional[bool]` — To blacklist all the contacts for sms
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**update_existing_contacts:** `typing.Optional[bool]` — To facilitate the choice to update the existing contacts
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -5598,7 +7516,7 @@ await client.contacts.importContacts();
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">getLists</a>({ ...params }) -> BrevoApi.GetListsResponse</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_lists</a>(...) -&gt; AsyncHttpResponse[GetListsResponse]</code></summary>
 <dl>
 <dd>
 
@@ -5630,8 +7548,13 @@ These are non breaking changes. The default value for the attributes will be 0.
 <dl>
 <dd>
 
-```typescript
-await client.contacts.getLists();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.contacts.get_lists()
 
 ```
 </dd>
@@ -5647,7 +7570,7 @@ await client.contacts.getLists();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetListsRequest` 
+**limit:** `typing.Optional[int]` — Number of documents per page
     
 </dd>
 </dl>
@@ -5655,7 +7578,23 @@ await client.contacts.getLists();
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**offset:** `typing.Optional[int]` — Index of the first document of the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetListsRequestSort]` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -5667,7 +7606,7 @@ await client.contacts.getLists();
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">createList</a>({ ...params }) -> BrevoApi.CreateListResponse</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">create_list</a>(...) -&gt; AsyncHttpResponse[CreateListResponse]</code></summary>
 <dl>
 <dd>
 
@@ -5679,11 +7618,16 @@ await client.contacts.getLists();
 <dl>
 <dd>
 
-```typescript
-await client.contacts.createList({
-    folderId: 2,
-    name: "Magento Customer - ES"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.contacts.create_list(
+    folder_id=2,
+    name="Magento Customer - ES",
+)
 
 ```
 </dd>
@@ -5699,7 +7643,7 @@ await client.contacts.createList({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateListRequest` 
+**folder_id:** `int` — Id of the parent folder in which this list is to be created
     
 </dd>
 </dl>
@@ -5707,7 +7651,15 @@ await client.contacts.createList({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**name:** `str` — Name of the list
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -5719,7 +7671,7 @@ await client.contacts.createList({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">getList</a>({ ...params }) -> BrevoApi.GetListResponse</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_list</a>(...) -&gt; AsyncHttpResponse[GetListResponse]</code></summary>
 <dl>
 <dd>
 
@@ -5731,10 +7683,15 @@ await client.contacts.createList({
 <dl>
 <dd>
 
-```typescript
-await client.contacts.getList({
-    listId: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.contacts.get_list(
+    list_id=1000000,
+)
 
 ```
 </dd>
@@ -5750,7 +7707,7 @@ await client.contacts.getList({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetListRequest` 
+**list_id:** `int` — Id of the list
     
 </dd>
 </dl>
@@ -5758,7 +7715,23 @@ await client.contacts.getList({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**start_date:** `typing.Optional[str]` — **Mandatory if endDate is used**. Ending (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to aggregate the sent email campaigns for a specific list id. **Prefer to pass your timezone in date-time format for accurate result**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**end_date:** `typing.Optional[str]` — **Mandatory if startDate is used**. Ending (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to aggregate the sent email campaigns for a specific list id. **Prefer to pass your timezone in date-time format for accurate result**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -5770,7 +7743,7 @@ await client.contacts.getList({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">updateList</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">update_list</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -5782,10 +7755,15 @@ await client.contacts.getList({
 <dl>
 <dd>
 
-```typescript
-await client.contacts.updateList({
-    listId: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.contacts.update_list(
+    list_id=1000000,
+)
 
 ```
 </dd>
@@ -5801,7 +7779,7 @@ await client.contacts.updateList({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateListRequest` 
+**list_id:** `int` — Id of the list
     
 </dd>
 </dl>
@@ -5809,7 +7787,23 @@ await client.contacts.updateList({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**folder_id:** `typing.Optional[int]` — Id of the folder in which the list is to be moved. Either of the two parameters (name, folderId) can be updated at a time.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `typing.Optional[str]` — Name of the list. Either of the two parameters (name, folderId) can be updated at a time.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -5821,7 +7815,7 @@ await client.contacts.updateList({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">deleteList</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">delete_list</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -5833,10 +7827,15 @@ await client.contacts.updateList({
 <dl>
 <dd>
 
-```typescript
-await client.contacts.deleteList({
-    listId: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.contacts.delete_list(
+    list_id=1000000,
+)
 
 ```
 </dd>
@@ -5852,7 +7851,7 @@ await client.contacts.deleteList({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteListRequest` 
+**list_id:** `int` — Id of the list
     
 </dd>
 </dl>
@@ -5860,7 +7859,7 @@ await client.contacts.deleteList({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -5872,7 +7871,7 @@ await client.contacts.deleteList({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">getContactsFromList</a>({ ...params }) -> BrevoApi.GetContacts</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_contacts_from_list</a>(...) -&gt; AsyncHttpResponse[GetContacts]</code></summary>
 <dl>
 <dd>
 
@@ -5884,10 +7883,15 @@ await client.contacts.deleteList({
 <dl>
 <dd>
 
-```typescript
-await client.contacts.getContactsFromList({
-    listId: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.contacts.get_contacts_from_list(
+    list_id=1000000,
+)
 
 ```
 </dd>
@@ -5903,7 +7907,7 @@ await client.contacts.getContactsFromList({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetContactsFromListRequest` 
+**list_id:** `int` — Id of the list
     
 </dd>
 </dl>
@@ -5911,7 +7915,39 @@ await client.contacts.getContactsFromList({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**modified_since:** `typing.Optional[str]` — Filter (urlencoded) the contacts modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` — Number of documents per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**offset:** `typing.Optional[int]` — Index of the first document of the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetContactsFromListRequestSort]` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -5923,7 +7959,7 @@ await client.contacts.getContactsFromList({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">addContactToList</a>({ ...params }) -> BrevoApi.PostContactInfo</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">add_contact_to_list</a>(...) -&gt; AsyncHttpResponse[PostContactInfo]</code></summary>
 <dl>
 <dd>
 
@@ -5935,13 +7971,19 @@ await client.contacts.getContactsFromList({
 <dl>
 <dd>
 
-```typescript
-await client.contacts.addContactToList({
-    listId: 1000000,
-    body: {
-        emails: ["jeff32@example.com", "jim56@example.com"]
-    }
-});
+```python
+from brevo import BrevoApi
+from brevo.contacts import AddContactToListRequestBodyEmails
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.contacts.add_contact_to_list(
+    list_id=1000000,
+    request=AddContactToListRequestBodyEmails(
+        emails=["jeff32@example.com", "jim56@example.com"],
+    ),
+)
 
 ```
 </dd>
@@ -5957,7 +7999,7 @@ await client.contacts.addContactToList({
 <dl>
 <dd>
 
-**request:** `BrevoApi.AddContactToListRequest` 
+**list_id:** `int` — Id of the list
     
 </dd>
 </dl>
@@ -5965,7 +8007,15 @@ await client.contacts.addContactToList({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**request:** `AddContactToListRequestBody` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -5977,7 +8027,7 @@ await client.contacts.addContactToList({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">removeContactFromList</a>({ ...params }) -> BrevoApi.PostContactInfo</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">remove_contact_from_list</a>(...) -&gt; AsyncHttpResponse[PostContactInfo]</code></summary>
 <dl>
 <dd>
 
@@ -5989,13 +8039,19 @@ await client.contacts.addContactToList({
 <dl>
 <dd>
 
-```typescript
-await client.contacts.removeContactFromList({
-    listId: 1000000,
-    body: {
-        all: true
-    }
-});
+```python
+from brevo import BrevoApi
+from brevo.contacts import RemoveContactFromListRequestBodyAll
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.contacts.remove_contact_from_list(
+    list_id=1000000,
+    request=RemoveContactFromListRequestBodyAll(
+        all_=True,
+    ),
+)
 
 ```
 </dd>
@@ -6011,7 +8067,7 @@ await client.contacts.removeContactFromList({
 <dl>
 <dd>
 
-**request:** `BrevoApi.RemoveContactFromListRequest` 
+**list_id:** `int` — Id of the list
     
 </dd>
 </dl>
@@ -6019,7 +8075,15 @@ await client.contacts.removeContactFromList({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**request:** `RemoveContactFromListRequestBody` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -6031,7 +8095,7 @@ await client.contacts.removeContactFromList({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">getSegments</a>({ ...params }) -> BrevoApi.GetSegmentsResponse</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_segments</a>(...) -&gt; AsyncHttpResponse[GetSegmentsResponse]</code></summary>
 <dl>
 <dd>
 
@@ -6043,8 +8107,13 @@ await client.contacts.removeContactFromList({
 <dl>
 <dd>
 
-```typescript
-await client.contacts.getSegments();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.contacts.get_segments()
 
 ```
 </dd>
@@ -6060,7 +8129,7 @@ await client.contacts.getSegments();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetSegmentsRequest` 
+**limit:** `typing.Optional[int]` — Number of documents per page
     
 </dd>
 </dl>
@@ -6068,7 +8137,23 @@ await client.contacts.getSegments();
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**offset:** `typing.Optional[int]` — Index of the first document of the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetSegmentsRequestSort]` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -6080,7 +8165,7 @@ await client.contacts.getSegments();
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">getContactInfo</a>({ ...params }) -> BrevoApi.GetContactInfoResponse</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_contact_info</a>(...) -&gt; AsyncHttpResponse[GetContactInfoResponse]</code></summary>
 <dl>
 <dd>
 
@@ -6114,10 +8199,15 @@ There are 2 ways to get a contact <br><br> Option 1- https://api.brevo.com/v3/co
 <dl>
 <dd>
 
-```typescript
-await client.contacts.getContactInfo({
-    identifier: "identifier"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.contacts.get_contact_info(
+    identifier="identifier",
+)
 
 ```
 </dd>
@@ -6133,7 +8223,7 @@ await client.contacts.getContactInfo({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetContactInfoRequest` 
+**identifier:** `GetContactInfoRequestIdentifier` — Email (urlencoded) OR ID of the contact OR its SMS attribute value OR EXT_ID attribute (urlencoded)
     
 </dd>
 </dl>
@@ -6141,7 +8231,31 @@ await client.contacts.getContactInfo({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**identifier_type:** `typing.Optional[GetContactInfoRequestIdentifierType]` — email_id for Email, phone_id for SMS attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**start_date:** `typing.Optional[str]` — **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be lower than equal to endDate
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**end_date:** `typing.Optional[str]` — **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be greater than equal to startDate.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -6153,7 +8267,7 @@ await client.contacts.getContactInfo({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">updateContact</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">update_contact</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -6179,10 +8293,15 @@ There are 2 ways to update a contact <br><br> Option 1- https://api.brevo.com/v3
 <dl>
 <dd>
 
-```typescript
-await client.contacts.updateContact({
-    identifier: "identifier"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.contacts.update_contact(
+    identifier="identifier",
+)
 
 ```
 </dd>
@@ -6198,7 +8317,7 @@ await client.contacts.updateContact({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateContactRequest` 
+**identifier:** `UpdateContactRequestIdentifier` — Email (urlencoded) OR ID of the contact OR EXT_ID attribute (urlencoded) OR its SMS attribute value OR its WHATSAPP attribute value OR its LANDLINE attribute value
     
 </dd>
 </dl>
@@ -6206,7 +8325,71 @@ await client.contacts.updateContact({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**identifier_type:** `typing.Optional[UpdateContactRequestIdentifierType]` — email_id for Email, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE attribute
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attributes:** `typing.Optional[typing.Dict[str, UpdateContactRequestAttributesValue]]` — Pass the set of attributes to be updated. **These attributes must be present in your account**. To update existing email address of a contact with the new one please pass EMAIL in attributes. For example, **{ "EMAIL":"newemail@domain.com", "FNAME":"Ellie", "LNAME":"Roger", "COUNTRIES":["India","China"]}**. The attribute's parameter should be passed in capital letter while updating a contact. Values that don't match the attribute type (e.g. text or string in a date attribute) will be ignored .Keep in mind transactional attributes can be updated the same way as normal attributes. Mobile Number in **SMS** field should be passed with proper country code. For example: **{"SMS":"+91xxxxxxxxxx"} or {"SMS":"0091xxxxxxxxxx"}**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**email_blacklisted:** `typing.Optional[bool]` — Set/unset this field to blacklist/allow the contact for emails (emailBlacklisted = true)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ext_id:** `typing.Optional[str]` — Pass your own Id to update ext_id of a contact.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**list_ids:** `typing.Optional[typing.Sequence[int]]` — Ids of the lists to add the contact to
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sms_blacklisted:** `typing.Optional[bool]` — Set/unset this field to blacklist/allow the contact for SMS (smsBlacklisted = true)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**smtp_blacklist_sender:** `typing.Optional[typing.Sequence[str]]` — transactional email forbidden sender for contact. Use only for email Contact
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**unlink_list_ids:** `typing.Optional[typing.Sequence[int]]` — Ids of the lists to remove the contact from
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -6218,7 +8401,7 @@ await client.contacts.updateContact({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">deleteContact</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">delete_contact</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -6244,10 +8427,15 @@ There are 2 ways to delete a contact <br><br> Option 1- https://api.brevo.com/v3
 <dl>
 <dd>
 
-```typescript
-await client.contacts.deleteContact({
-    identifier: "identifier"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.contacts.delete_contact(
+    identifier="identifier",
+)
 
 ```
 </dd>
@@ -6263,7 +8451,7 @@ await client.contacts.deleteContact({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteContactRequest` 
+**identifier:** `DeleteContactRequestIdentifier` — Email (urlencoded) OR ID of the contact OR EXT_ID attribute (urlencoded)
     
 </dd>
 </dl>
@@ -6271,7 +8459,15 @@ await client.contacts.deleteContact({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**identifier_type:** `typing.Optional[DeleteContactRequestIdentifierType]` — email_id for Email, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -6283,7 +8479,7 @@ await client.contacts.deleteContact({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">getContactStats</a>({ ...params }) -> BrevoApi.GetContactStatsResponse</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_contact_stats</a>(...) -&gt; AsyncHttpResponse[GetContactStatsResponse]</code></summary>
 <dl>
 <dd>
 
@@ -6295,10 +8491,15 @@ await client.contacts.deleteContact({
 <dl>
 <dd>
 
-```typescript
-await client.contacts.getContactStats({
-    identifier: "identifier"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.contacts.get_contact_stats(
+    identifier="identifier",
+)
 
 ```
 </dd>
@@ -6314,7 +8515,7 @@ await client.contacts.getContactStats({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetContactStatsRequest` 
+**identifier:** `GetContactStatsRequestIdentifier` — Email (urlencoded) OR ID of the contact
     
 </dd>
 </dl>
@@ -6322,7 +8523,23 @@ await client.contacts.getContactStats({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**start_date:** `typing.Optional[str]` — **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be lower than equal to endDate
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**end_date:** `typing.Optional[str]` — **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be greater than equal to startDate. Maximum difference between startDate and endDate should not be greater than 90 days
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -6335,7 +8552,7 @@ await client.contacts.getContactStats({
 </details>
 
 ## Conversations
-<details><summary><code>client.conversations.<a href="/src/api/resources/conversations/client/Client.ts">setsAgentsStatusToOnlineFor23Minutes</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.conversations.<a href="src/brevo/conversations/client.py">sets_agents_status_to_online_for23minutes</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -6361,10 +8578,17 @@ We recommend pinging this endpoint every minute for as long as the agent has to 
 <dl>
 <dd>
 
-```typescript
-await client.conversations.setsAgentsStatusToOnlineFor23Minutes({
-    agentId: "d9nKoegKSjmCtyK78"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.conversations.sets_agents_status_to_online_for23minutes(
+    agent_email="liz@getwear.com",
+    agent_name="Liz",
+    received_from="SuperAwesomeHelpdesk",
+)
 
 ```
 </dd>
@@ -6380,7 +8604,7 @@ await client.conversations.setsAgentsStatusToOnlineFor23Minutes({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostConversationsAgentOnlinePingRequest` 
+**agent_email:** `typing.Optional[typing.Any]` — agent email. When sending online pings from a standalone system, it’s hard to maintain a 1-to-1 relationship between the users of both systems. In this case, an agent can be specified by their email address. If there’s no agent with the specified email address in your Brevo organization, a dummy agent will be created automatically.
     
 </dd>
 </dl>
@@ -6388,7 +8612,31 @@ await client.conversations.setsAgentsStatusToOnlineFor23Minutes({
 <dl>
 <dd>
 
-**requestOptions:** `ConversationsClient.RequestOptions` 
+**agent_id:** `typing.Optional[typing.Any]` — agent ID. It can be found on agent’s page or received <a href="https://developers.brevo.com/docs/conversations-webhooks">from a webhook</a>. Alternatively, you can use `agentEmail` + `agentName` + `receivedFrom` instead (all 3 fields required).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent_name:** `typing.Optional[typing.Any]` — agent name
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**received_from:** `typing.Optional[typing.Any]` — mark your messages to distinguish messages created by you from the others.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -6400,7 +8648,7 @@ await client.conversations.setsAgentsStatusToOnlineFor23Minutes({
 </dl>
 </details>
 
-<details><summary><code>client.conversations.<a href="/src/api/resources/conversations/client/Client.ts">sendAMessageAsAnAgent</a>({ ...params }) -> BrevoApi.ConversationsMessage</code></summary>
+<details><summary><code>client.conversations.<a href="src/brevo/conversations/client.py">send_a_message_as_an_agent</a>(...) -&gt; AsyncHttpResponse[ConversationsMessage]</code></summary>
 <dl>
 <dd>
 
@@ -6412,12 +8660,18 @@ await client.conversations.setsAgentsStatusToOnlineFor23Minutes({
 <dl>
 <dd>
 
-```typescript
-await client.conversations.sendAMessageAsAnAgent({
-    agentId: "d9nKoegKSjmCtyK78",
-    text: "Hello! How can I help you?",
-    visitorId: "kZMvWhf8npAu3H6qd57w2Hv6nh6rnxvg"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.conversations.send_a_message_as_an_agent(
+    agent_id="d9nKoegKSjmCtyK78",
+    received_from="SuperAwesomeHelpdesk",
+    text="Hello! How can I help you?",
+    visitor_id="kZMvWhf8npAu3H6qd57w2Hv6nh6rnxvg",
+)
 
 ```
 </dd>
@@ -6433,7 +8687,7 @@ await client.conversations.sendAMessageAsAnAgent({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostConversationsMessagesRequest` 
+**text:** `typing.Any` 
     
 </dd>
 </dl>
@@ -6441,7 +8695,47 @@ await client.conversations.sendAMessageAsAnAgent({
 <dl>
 <dd>
 
-**requestOptions:** `ConversationsClient.RequestOptions` 
+**visitor_id:** `typing.Any` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent_email:** `typing.Optional[typing.Any]` — agent email. When sending messages from a standalone system, it’s hard to maintain a 1-to-1 relationship between the users of both systems. In this case, an agent can be specified by their email address.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent_id:** `typing.Optional[typing.Any]` — agent ID. It can be found on agent’s page or received <a href="https://developers.brevo.com/docs/conversations-webhooks">from a webhook</a>. Alternatively, you can use `agentEmail` + `agentName` + `receivedFrom` instead (all 3 fields required).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent_name:** `typing.Optional[typing.Any]` — agent name
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**received_from:** `typing.Optional[typing.Any]` — mark your messages to distinguish messages created by you from the others.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -6453,7 +8747,7 @@ await client.conversations.sendAMessageAsAnAgent({
 </dl>
 </details>
 
-<details><summary><code>client.conversations.<a href="/src/api/resources/conversations/client/Client.ts">getAMessage</a>({ ...params }) -> BrevoApi.ConversationsMessage</code></summary>
+<details><summary><code>client.conversations.<a href="src/brevo/conversations/client.py">get_a_message</a>(...) -&gt; AsyncHttpResponse[ConversationsMessage]</code></summary>
 <dl>
 <dd>
 
@@ -6465,10 +8759,15 @@ await client.conversations.sendAMessageAsAnAgent({
 <dl>
 <dd>
 
-```typescript
-await client.conversations.getAMessage({
-    id: "id"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.conversations.get_a_message(
+    id="id",
+)
 
 ```
 </dd>
@@ -6484,7 +8783,7 @@ await client.conversations.getAMessage({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetConversationsMessagesIdRequest` 
+**id:** `str` — ID of the message
     
 </dd>
 </dl>
@@ -6492,7 +8791,7 @@ await client.conversations.getAMessage({
 <dl>
 <dd>
 
-**requestOptions:** `ConversationsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -6504,7 +8803,7 @@ await client.conversations.getAMessage({
 </dl>
 </details>
 
-<details><summary><code>client.conversations.<a href="/src/api/resources/conversations/client/Client.ts">updateAMessageSentByAnAgent</a>({ ...params }) -> BrevoApi.ConversationsMessage</code></summary>
+<details><summary><code>client.conversations.<a href="src/brevo/conversations/client.py">update_a_message_sent_by_an_agent</a>(...) -&gt; AsyncHttpResponse[ConversationsMessage]</code></summary>
 <dl>
 <dd>
 
@@ -6530,11 +8829,16 @@ Only agents’ messages can be edited.
 <dl>
 <dd>
 
-```typescript
-await client.conversations.updateAMessageSentByAnAgent({
-    id: "id",
-    text: "Good morning! How can I help you?"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.conversations.update_a_message_sent_by_an_agent(
+    id="id",
+    text="Good morning! How can I help you?",
+)
 
 ```
 </dd>
@@ -6550,7 +8854,7 @@ await client.conversations.updateAMessageSentByAnAgent({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PutConversationsMessagesIdRequest` 
+**id:** `str` — ID of the message
     
 </dd>
 </dl>
@@ -6558,7 +8862,15 @@ await client.conversations.updateAMessageSentByAnAgent({
 <dl>
 <dd>
 
-**requestOptions:** `ConversationsClient.RequestOptions` 
+**text:** `str` — edited message text
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -6570,7 +8882,7 @@ await client.conversations.updateAMessageSentByAnAgent({
 </dl>
 </details>
 
-<details><summary><code>client.conversations.<a href="/src/api/resources/conversations/client/Client.ts">deleteAMessageSentByAnAgent</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.conversations.<a href="src/brevo/conversations/client.py">delete_a_message_sent_by_an_agent</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -6596,10 +8908,15 @@ Only agents’ messages can be deleted.
 <dl>
 <dd>
 
-```typescript
-await client.conversations.deleteAMessageSentByAnAgent({
-    id: "id"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.conversations.delete_a_message_sent_by_an_agent(
+    id="id",
+)
 
 ```
 </dd>
@@ -6615,7 +8932,7 @@ await client.conversations.deleteAMessageSentByAnAgent({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteConversationsMessagesIdRequest` 
+**id:** `str` — ID of the message
     
 </dd>
 </dl>
@@ -6623,7 +8940,7 @@ await client.conversations.deleteAMessageSentByAnAgent({
 <dl>
 <dd>
 
-**requestOptions:** `ConversationsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -6635,7 +8952,7 @@ await client.conversations.deleteAMessageSentByAnAgent({
 </dl>
 </details>
 
-<details><summary><code>client.conversations.<a href="/src/api/resources/conversations/client/Client.ts">sendAnAutomatedMessageToAVisitor</a>({ ...params }) -> BrevoApi.ConversationsMessage</code></summary>
+<details><summary><code>client.conversations.<a href="src/brevo/conversations/client.py">send_an_automated_message_to_a_visitor</a>(...) -&gt; AsyncHttpResponse[ConversationsMessage]</code></summary>
 <dl>
 <dd>
 
@@ -6661,12 +8978,17 @@ Example of automated messages: order status, announce new features in your web a
 <dl>
 <dd>
 
-```typescript
-await client.conversations.sendAnAutomatedMessageToAVisitor({
-    groupId: "PjRBMhWGen6aRHjif",
-    text: "Your order has shipped! Here\u2019s your tracking number: 9114 5847 3325 9667 4328 88",
-    visitorId: "kZMvWhf8npAu3H6qd57w2Hv6nh6rnxvg"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.conversations.send_an_automated_message_to_a_visitor(
+    agent_id="d9nKoegKSjmCtyK78",
+    text="Your order has shipped! Here’s your tracking number: 9114 5847 3325 9667 4328 88",
+    visitor_id="kZMvWhf8npAu3H6qd57w2Hv6nh6rnxvg",
+)
 
 ```
 </dd>
@@ -6682,7 +9004,7 @@ await client.conversations.sendAnAutomatedMessageToAVisitor({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostConversationsPushedMessagesRequest` 
+**text:** `typing.Any` 
     
 </dd>
 </dl>
@@ -6690,7 +9012,31 @@ await client.conversations.sendAnAutomatedMessageToAVisitor({
 <dl>
 <dd>
 
-**requestOptions:** `ConversationsClient.RequestOptions` 
+**visitor_id:** `typing.Any` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent_id:** `typing.Optional[typing.Any]` — agent ID. It can be found on agent’s page or received <a href="https://developers.brevo.com/docs/conversations-webhooks">from a webhook</a>.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**group_id:** `typing.Optional[typing.Any]` — group ID. It can be found on group’s page.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -6702,7 +9048,7 @@ await client.conversations.sendAnAutomatedMessageToAVisitor({
 </dl>
 </details>
 
-<details><summary><code>client.conversations.<a href="/src/api/resources/conversations/client/Client.ts">getAnAutomatedMessage</a>({ ...params }) -> BrevoApi.ConversationsMessage</code></summary>
+<details><summary><code>client.conversations.<a href="src/brevo/conversations/client.py">get_an_automated_message</a>(...) -&gt; AsyncHttpResponse[ConversationsMessage]</code></summary>
 <dl>
 <dd>
 
@@ -6714,10 +9060,15 @@ await client.conversations.sendAnAutomatedMessageToAVisitor({
 <dl>
 <dd>
 
-```typescript
-await client.conversations.getAnAutomatedMessage({
-    id: "id"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.conversations.get_an_automated_message(
+    id="id",
+)
 
 ```
 </dd>
@@ -6733,7 +9084,7 @@ await client.conversations.getAnAutomatedMessage({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetConversationsPushedMessagesIdRequest` 
+**id:** `str` — ID of the message sent previously
     
 </dd>
 </dl>
@@ -6741,7 +9092,7 @@ await client.conversations.getAnAutomatedMessage({
 <dl>
 <dd>
 
-**requestOptions:** `ConversationsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -6753,7 +9104,7 @@ await client.conversations.getAnAutomatedMessage({
 </dl>
 </details>
 
-<details><summary><code>client.conversations.<a href="/src/api/resources/conversations/client/Client.ts">updateAnAutomatedMessage</a>({ ...params }) -> BrevoApi.ConversationsMessage</code></summary>
+<details><summary><code>client.conversations.<a href="src/brevo/conversations/client.py">update_an_automated_message</a>(...) -&gt; AsyncHttpResponse[ConversationsMessage]</code></summary>
 <dl>
 <dd>
 
@@ -6765,11 +9116,16 @@ await client.conversations.getAnAutomatedMessage({
 <dl>
 <dd>
 
-```typescript
-await client.conversations.updateAnAutomatedMessage({
-    id: "id",
-    text: "Your order has shipped! Here\u2019s your tracking number: 9114 5847 4668 7775 9233 54"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.conversations.update_an_automated_message(
+    id="id",
+    text="Your order has shipped! Here’s your tracking number: 9114 5847 4668 7775 9233 54",
+)
 
 ```
 </dd>
@@ -6785,7 +9141,7 @@ await client.conversations.updateAnAutomatedMessage({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PutConversationsPushedMessagesIdRequest` 
+**id:** `str` — ID of the message
     
 </dd>
 </dl>
@@ -6793,7 +9149,15 @@ await client.conversations.updateAnAutomatedMessage({
 <dl>
 <dd>
 
-**requestOptions:** `ConversationsClient.RequestOptions` 
+**text:** `str` — edited message text
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -6805,7 +9169,7 @@ await client.conversations.updateAnAutomatedMessage({
 </dl>
 </details>
 
-<details><summary><code>client.conversations.<a href="/src/api/resources/conversations/client/Client.ts">deleteAnAutomatedMessage</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.conversations.<a href="src/brevo/conversations/client.py">delete_an_automated_message</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -6817,10 +9181,15 @@ await client.conversations.updateAnAutomatedMessage({
 <dl>
 <dd>
 
-```typescript
-await client.conversations.deleteAnAutomatedMessage({
-    id: "id"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.conversations.delete_an_automated_message(
+    id="id",
+)
 
 ```
 </dd>
@@ -6836,7 +9205,7 @@ await client.conversations.deleteAnAutomatedMessage({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteConversationsPushedMessagesIdRequest` 
+**id:** `str` — ID of the message
     
 </dd>
 </dl>
@@ -6844,7 +9213,7 @@ await client.conversations.deleteAnAutomatedMessage({
 <dl>
 <dd>
 
-**requestOptions:** `ConversationsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -6856,7 +9225,7 @@ await client.conversations.deleteAnAutomatedMessage({
 </dl>
 </details>
 
-<details><summary><code>client.conversations.<a href="/src/api/resources/conversations/client/Client.ts">setVisitorGroupAssignment</a>({ ...params }) -> BrevoApi.PutConversationsVisitorGroupResponse</code></summary>
+<details><summary><code>client.conversations.<a href="src/brevo/conversations/client.py">set_visitor_group_assignment</a>(...) -&gt; AsyncHttpResponse[PutConversationsVisitorGroupResponse]</code></summary>
 <dl>
 <dd>
 
@@ -6882,10 +9251,15 @@ Assigns a visitor to a specific agent group or removes them from their current g
 <dl>
 <dd>
 
-```typescript
-await client.conversations.setVisitorGroupAssignment({
-    groupId: "PjRBMhWGen6aRHjif"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.conversations.set_visitor_group_assignment(
+    group_id="PjRBMhWGen6aRHjif",
+)
 
 ```
 </dd>
@@ -6901,7 +9275,7 @@ await client.conversations.setVisitorGroupAssignment({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PutConversationsVisitorGroupRequest` 
+**group_id:** `typing.Any` 
     
 </dd>
 </dl>
@@ -6909,7 +9283,7 @@ await client.conversations.setVisitorGroupAssignment({
 <dl>
 <dd>
 
-**requestOptions:** `ConversationsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -6922,7 +9296,7 @@ await client.conversations.setVisitorGroupAssignment({
 </details>
 
 ## Ecommerce
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">getCategories</a>({ ...params }) -> BrevoApi.GetCategoriesResponse</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">get_categories</a>(...) -&gt; AsyncHttpResponse[GetCategoriesResponse]</code></summary>
 <dl>
 <dd>
 
@@ -6934,8 +9308,13 @@ await client.conversations.setVisitorGroupAssignment({
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.getCategories();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.ecommerce.get_categories()
 
 ```
 </dd>
@@ -6951,7 +9330,7 @@ await client.ecommerce.getCategories();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCategoriesRequest` 
+**limit:** `typing.Optional[int]` — Number of documents per page
     
 </dd>
 </dl>
@@ -6959,7 +9338,63 @@ await client.ecommerce.getCategories();
 <dl>
 <dd>
 
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**offset:** `typing.Optional[int]` — Index of the first document in the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetCategoriesRequestSort]` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ids:** `typing.Optional[typing.Union[str, typing.Sequence[str]]]` — Filter by category ids
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `typing.Optional[str]` — Filter by category name
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**modified_since:** `typing.Optional[str]` — Filter (urlencoded) the categories modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**created_since:** `typing.Optional[str]` — Filter (urlencoded) the categories created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**is_deleted:** `typing.Optional[str]` — Filter categories by their deletion status. If `false` is passed, only categories that are not deleted will be returned.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -6971,7 +9406,7 @@ await client.ecommerce.getCategories();
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">createUpdateCategory</a>({ ...params }) -> BrevoApi.CreateUpdateCategoryResponse</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">create_update_category</a>(...) -&gt; AsyncHttpResponse[CreateUpdateCategoryResponse]</code></summary>
 <dl>
 <dd>
 
@@ -6983,10 +9418,15 @@ await client.ecommerce.getCategories();
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.createUpdateCategory({
-    id: "CAT123"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.ecommerce.create_update_category(
+    id="CAT123",
+)
 
 ```
 </dd>
@@ -7002,7 +9442,7 @@ await client.ecommerce.createUpdateCategory({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateUpdateCategoryRequest` 
+**id:** `str` — Unique Category ID as saved in the shop
     
 </dd>
 </dl>
@@ -7010,7 +9450,47 @@ await client.ecommerce.createUpdateCategory({
 <dl>
 <dd>
 
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**deleted_at:** `typing.Optional[str]` — UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) of the category deleted from the shop's database
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**is_deleted:** `typing.Optional[bool]` — category deleted from the shop's database
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `typing.Optional[str]` — **Mandatory in case of creation**. Name of the Category, as displayed in the shop
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**update_enabled:** `typing.Optional[bool]` — Facilitate to update the existing category in the same request (updateEnabled = true)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**url:** `typing.Optional[str]` — URL to the category
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -7022,7 +9502,7 @@ await client.ecommerce.createUpdateCategory({
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">createUpdateBatchCategory</a>({ ...params }) -> BrevoApi.CreateUpdateBatchCategoryResponse</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">create_update_batch_category</a>(...) -&gt; AsyncHttpResponse[CreateUpdateBatchCategoryResponse]</code></summary>
 <dl>
 <dd>
 
@@ -7034,12 +9514,20 @@ await client.ecommerce.createUpdateCategory({
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.createUpdateBatchCategory({
-    categories: [{
-            id: "CAT123"
-        }]
-});
+```python
+from brevo import BrevoApi
+from brevo.ecommerce import CreateUpdateBatchCategoryRequestCategoriesItem
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.ecommerce.create_update_batch_category(
+    categories=[
+        CreateUpdateBatchCategoryRequestCategoriesItem(
+            id="CAT123",
+        )
+    ],
+)
 
 ```
 </dd>
@@ -7055,7 +9543,7 @@ await client.ecommerce.createUpdateBatchCategory({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateUpdateBatchCategoryRequest` 
+**categories:** `typing.Sequence[CreateUpdateBatchCategoryRequestCategoriesItem]` — array of categories objects
     
 </dd>
 </dl>
@@ -7063,7 +9551,15 @@ await client.ecommerce.createUpdateBatchCategory({
 <dl>
 <dd>
 
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**update_enabled:** `typing.Optional[bool]` — Facilitate to update the existing categories in the same request (updateEnabled = true)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -7075,7 +9571,7 @@ await client.ecommerce.createUpdateBatchCategory({
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">getCategoryInfo</a>({ ...params }) -> BrevoApi.GetCategoryDetails</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">get_category_info</a>(...) -&gt; AsyncHttpResponse[GetCategoryDetails]</code></summary>
 <dl>
 <dd>
 
@@ -7087,10 +9583,15 @@ await client.ecommerce.createUpdateBatchCategory({
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.getCategoryInfo({
-    id: "id"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.ecommerce.get_category_info(
+    id="id",
+)
 
 ```
 </dd>
@@ -7106,7 +9607,7 @@ await client.ecommerce.getCategoryInfo({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCategoryInfoRequest` 
+**id:** `str` — Category ID
     
 </dd>
 </dl>
@@ -7114,7 +9615,7 @@ await client.ecommerce.getCategoryInfo({
 <dl>
 <dd>
 
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -7126,7 +9627,7 @@ await client.ecommerce.getCategoryInfo({
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">activateTheECommerceApp</a>() -> void</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">activate_the_e_commerce_app</a>() -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -7152,8 +9653,13 @@ Getting access to Brevo eCommerce.
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.activateTheECommerceApp();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.ecommerce.activate_the_e_commerce_app()
 
 ```
 </dd>
@@ -7169,7 +9675,7 @@ await client.ecommerce.activateTheECommerceApp();
 <dl>
 <dd>
 
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -7181,7 +9687,7 @@ await client.ecommerce.activateTheECommerceApp();
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">getAttributionMetricsForOneOrMoreBrevoCampaignsOrWorkflows</a>({ ...params }) -> BrevoApi.GetEcommerceAttributionMetricsResponse</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">get_attribution_metrics_for_one_or_more_brevo_campaigns_or_workflows</a>(...) -&gt; AsyncHttpResponse[GetEcommerceAttributionMetricsResponse]</code></summary>
 <dl>
 <dd>
 
@@ -7193,11 +9699,22 @@ await client.ecommerce.activateTheECommerceApp();
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.getAttributionMetricsForOneOrMoreBrevoCampaignsOrWorkflows({
-    periodFrom: "2022-01-02T00:00:00Z",
-    periodTo: "2022-01-03T00:00:00Z"
-});
+```python
+import datetime
+
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.ecommerce.get_attribution_metrics_for_one_or_more_brevo_campaigns_or_workflows(
+    period_from=datetime.datetime.fromisoformat(
+        "2022-01-02 00:00:00+00:00",
+    ),
+    period_to=datetime.datetime.fromisoformat(
+        "2022-01-03 00:00:00+00:00",
+    ),
+)
 
 ```
 </dd>
@@ -7213,7 +9730,7 @@ await client.ecommerce.getAttributionMetricsForOneOrMoreBrevoCampaignsOrWorkflow
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetEcommerceAttributionMetricsRequest` 
+**period_from:** `typing.Optional[dt.datetime]` — When getting metrics for a specific period, define the starting datetime in RFC3339 format
     
 </dd>
 </dl>
@@ -7221,7 +9738,47 @@ await client.ecommerce.getAttributionMetricsForOneOrMoreBrevoCampaignsOrWorkflow
 <dl>
 <dd>
 
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**period_to:** `typing.Optional[dt.datetime]` — When getting metrics for a specific period, define the end datetime in RFC3339 format
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**email_campaign_id_array:** `typing.Optional[typing.Union[str, typing.Sequence[str]]]` — The email campaign ID(s) to get metrics for
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sms_campaign_id_array:** `typing.Optional[typing.Union[str, typing.Sequence[str]]]` — The SMS campaign ID(s) to get metrics for
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**automation_workflow_email_id_array:** `typing.Optional[typing.Union[str, typing.Sequence[str]]]` — The automation workflow ID(s) to get email attribution metrics for
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**automation_workflow_sms_id_array:** `typing.Optional[typing.Union[str, typing.Sequence[str]]]` — The automation workflow ID(s) to get SMS attribution metrics for
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -7233,7 +9790,9 @@ await client.ecommerce.getAttributionMetricsForOneOrMoreBrevoCampaignsOrWorkflow
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">getDetailedAttributionMetricsForASingleBrevoCampaignOrWorkflow</a>({ ...params }) -> BrevoApi.GetEcommerceAttributionMetricsConversionSourceConversionSourceIdResponse</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">get_detailed_attribution_metrics_for_a_single_brevo_campaign_or_workflow</a>(...) -&gt; AsyncHttpResponse[
+    GetEcommerceAttributionMetricsConversionSourceConversionSourceIdResponse
+]</code></summary>
 <dl>
 <dd>
 
@@ -7245,11 +9804,16 @@ await client.ecommerce.getAttributionMetricsForOneOrMoreBrevoCampaignsOrWorkflow
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.getDetailedAttributionMetricsForASingleBrevoCampaignOrWorkflow({
-    conversionSource: "email_campaign",
-    conversionSourceId: "sale"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.ecommerce.get_detailed_attribution_metrics_for_a_single_brevo_campaign_or_workflow(
+    conversion_source="email_campaign",
+    conversion_source_id="sale",
+)
 
 ```
 </dd>
@@ -7265,7 +9829,7 @@ await client.ecommerce.getDetailedAttributionMetricsForASingleBrevoCampaignOrWor
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetEcommerceAttributionMetricsConversionSourceConversionSourceIdRequest` 
+**conversion_source:** `GetEcommerceAttributionMetricsConversionSourceConversionSourceIdRequestConversionSource` — The Brevo campaign type or workflow type for which data will be retrieved
     
 </dd>
 </dl>
@@ -7273,7 +9837,15 @@ await client.ecommerce.getDetailedAttributionMetricsForASingleBrevoCampaignOrWor
 <dl>
 <dd>
 
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**conversion_source_id:** `str` — The Brevo campaign or automation workflow id for which data will be retrieved
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -7285,7 +9857,9 @@ await client.ecommerce.getDetailedAttributionMetricsForASingleBrevoCampaignOrWor
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">getAttributedProductSalesForASingleBrevoCampaignOrWorkflow</a>({ ...params }) -> BrevoApi.GetEcommerceAttributionProductsConversionSourceConversionSourceIdResponse</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">get_attributed_product_sales_for_a_single_brevo_campaign_or_workflow</a>(...) -&gt; AsyncHttpResponse[
+    GetEcommerceAttributionProductsConversionSourceConversionSourceIdResponse
+]</code></summary>
 <dl>
 <dd>
 
@@ -7297,11 +9871,16 @@ await client.ecommerce.getDetailedAttributionMetricsForASingleBrevoCampaignOrWor
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.getAttributedProductSalesForASingleBrevoCampaignOrWorkflow({
-    conversionSource: "email_campaign",
-    conversionSourceId: "sale"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.ecommerce.get_attributed_product_sales_for_a_single_brevo_campaign_or_workflow(
+    conversion_source="email_campaign",
+    conversion_source_id="sale",
+)
 
 ```
 </dd>
@@ -7317,7 +9896,7 @@ await client.ecommerce.getAttributedProductSalesForASingleBrevoCampaignOrWorkflo
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetEcommerceAttributionProductsConversionSourceConversionSourceIdRequest` 
+**conversion_source:** `GetEcommerceAttributionProductsConversionSourceConversionSourceIdRequestConversionSource` — The Brevo campaign or automation workflow type for which data will be retrieved
     
 </dd>
 </dl>
@@ -7325,7 +9904,15 @@ await client.ecommerce.getAttributedProductSalesForASingleBrevoCampaignOrWorkflo
 <dl>
 <dd>
 
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**conversion_source_id:** `str` — The Brevo campaign or automation workflow id for which data will be retrieved
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -7337,7 +9924,7 @@ await client.ecommerce.getAttributedProductSalesForASingleBrevoCampaignOrWorkflo
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">getTheIso4217CompliantDisplayCurrencyCodeForYourBrevoAccount</a>() -> BrevoApi.GetEcommerceConfigDisplayCurrencyResponse</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">get_the_iso4217compliant_display_currency_code_for_your_brevo_account</a>() -&gt; AsyncHttpResponse[GetEcommerceConfigDisplayCurrencyResponse]</code></summary>
 <dl>
 <dd>
 
@@ -7349,8 +9936,13 @@ await client.ecommerce.getAttributedProductSalesForASingleBrevoCampaignOrWorkflo
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.getTheIso4217CompliantDisplayCurrencyCodeForYourBrevoAccount();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.ecommerce.get_the_iso4217compliant_display_currency_code_for_your_brevo_account()
 
 ```
 </dd>
@@ -7366,7 +9958,7 @@ await client.ecommerce.getTheIso4217CompliantDisplayCurrencyCodeForYourBrevoAcco
 <dl>
 <dd>
 
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -7378,7 +9970,7 @@ await client.ecommerce.getTheIso4217CompliantDisplayCurrencyCodeForYourBrevoAcco
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">setConfigDisplayCurrency</a>({ ...params }) -> BrevoApi.SetConfigDisplayCurrencyResponse</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">set_config_display_currency</a>(...) -&gt; AsyncHttpResponse[SetConfigDisplayCurrencyResponse]</code></summary>
 <dl>
 <dd>
 
@@ -7390,10 +9982,15 @@ await client.ecommerce.getTheIso4217CompliantDisplayCurrencyCodeForYourBrevoAcco
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.setConfigDisplayCurrency({
-    code: "EUR"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.ecommerce.set_config_display_currency(
+    code="EUR",
+)
 
 ```
 </dd>
@@ -7409,7 +10006,7 @@ await client.ecommerce.setConfigDisplayCurrency({
 <dl>
 <dd>
 
-**request:** `BrevoApi.SetConfigDisplayCurrencyRequest` 
+**code:** `str` — ISO 4217 compliant display currency code
     
 </dd>
 </dl>
@@ -7417,7 +10014,7 @@ await client.ecommerce.setConfigDisplayCurrency({
 <dl>
 <dd>
 
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -7429,7 +10026,7 @@ await client.ecommerce.setConfigDisplayCurrency({
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">getOrders</a>({ ...params }) -> unknown</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">get_orders</a>(...) -&gt; AsyncHttpResponse[typing.Any]</code></summary>
 <dl>
 <dd>
 
@@ -7455,8 +10052,13 @@ Get all the orders
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.getOrders();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.ecommerce.get_orders()
 
 ```
 </dd>
@@ -7472,7 +10074,7 @@ await client.ecommerce.getOrders();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetOrdersRequest` 
+**limit:** `typing.Optional[int]` — Number of documents per page
     
 </dd>
 </dl>
@@ -7480,7 +10082,39 @@ await client.ecommerce.getOrders();
 <dl>
 <dd>
 
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**offset:** `typing.Optional[int]` — Index of the first document in the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetOrdersRequestSort]` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**modified_since:** `typing.Optional[str]` — Filter (urlencoded) the orders modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**created_since:** `typing.Optional[str]` — Filter (urlencoded) the orders created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -7492,7 +10126,7 @@ await client.ecommerce.getOrders();
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">createOrder</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">create_order</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -7518,19 +10152,26 @@ Manages the transactional status of the order
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.createOrder({
-    amount: 308.42,
-    createdAt: "2021-07-29T20:59:23.383Z",
-    id: "14",
-    products: [{
-            price: 99.99,
-            productId: "P1",
-            quantity: 10
-        }],
-    status: "completed",
-    updatedAt: "2021-07-30T10:59:23.383Z"
-});
+```python
+from brevo import BrevoApi, OrderProductsItem
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.ecommerce.create_order(
+    amount=308.42,
+    created_at="2021-07-29T20:59:23.383Z",
+    id="14",
+    products=[
+        OrderProductsItem(
+            price=99.99,
+            product_id="P1",
+            quantity=10.0,
+        )
+    ],
+    status="completed",
+    updated_at="2021-07-30T10:59:23.383Z",
+)
 
 ```
 </dd>
@@ -7546,7 +10187,7 @@ await client.ecommerce.createOrder({
 <dl>
 <dd>
 
-**request:** `BrevoApi.Order` 
+**amount:** `float` — Total amount of the order, including all shipping expenses, tax and the price of items.
     
 </dd>
 </dl>
@@ -7554,7 +10195,87 @@ await client.ecommerce.createOrder({
 <dl>
 <dd>
 
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**created_at:** `str` — Event occurrence UTC date-time (YYYY-MM-DDTHH:mm:ssZ), when order is actually created.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**id:** `str` — Unique ID of the order.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**products:** `typing.Sequence[OrderProductsItem]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**status:** `str` — State of the order.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**updated_at:** `str` — Event updated UTC date-time (YYYY-MM-DDTHH:mm:ssZ), when the status of the order is actually changed/updated.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**billing:** `typing.Optional[OrderBilling]` — Billing details of an order.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**coupons:** `typing.Optional[typing.Sequence[str]]` — Coupons applied to the order. Stored case insensitive.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**identifiers:** `typing.Optional[OrderIdentifiers]` — Identifies the contact associated with the order.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**meta_info:** `typing.Optional[typing.Dict[str, OrderMetaInfoValue]]` — Meta data of order to store additional detal such as custom message, customer type, source.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**store_id:** `typing.Optional[str]` — ID of store where the order is placed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -7566,7 +10287,7 @@ await client.ecommerce.createOrder({
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">createBatchOrder</a>({ ...params }) -> BrevoApi.CreateBatchOrderResponse</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">create_batch_order</a>(...) -&gt; AsyncHttpResponse[CreateBatchOrderResponse]</code></summary>
 <dl>
 <dd>
 
@@ -7592,21 +10313,30 @@ Create multiple orders at one time instead of one order at a time
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.createBatchOrder({
-    orders: [{
-            amount: 308.42,
-            createdAt: "2021-07-29T20:59:23.383Z",
-            id: "14",
-            products: [{
-                    price: 99.99,
-                    productId: "P1",
-                    quantity: 10
-                }],
-            status: "completed",
-            updatedAt: "2021-07-30T10:59:23.383Z"
-        }]
-});
+```python
+from brevo import BrevoApi, Order, OrderProductsItem
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.ecommerce.create_batch_order(
+    orders=[
+        Order(
+            amount=308.42,
+            created_at="2021-07-29T20:59:23.383Z",
+            id="14",
+            products=[
+                OrderProductsItem(
+                    price=99.99,
+                    product_id="P1",
+                    quantity=10.0,
+                )
+            ],
+            status="completed",
+            updated_at="2021-07-30T10:59:23.383Z",
+        )
+    ],
+)
 
 ```
 </dd>
@@ -7622,7 +10352,7 @@ await client.ecommerce.createBatchOrder({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateBatchOrderRequest` 
+**orders:** `typing.Sequence[Order]` — array of order objects
     
 </dd>
 </dl>
@@ -7630,7 +10360,23 @@ await client.ecommerce.createBatchOrder({
 <dl>
 <dd>
 
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**historical:** `typing.Optional[bool]` — Defines wether you want your orders to be considered as live data or as historical data (import of past data, synchronising data). True: orders will not trigger any automation workflows. False: orders will trigger workflows as usual.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notify_url:** `typing.Optional[str]` — Notify Url provided by client_dev to get the status of batch request
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -7642,7 +10388,7 @@ await client.ecommerce.createBatchOrder({
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">getProducts</a>({ ...params }) -> BrevoApi.GetProductsResponse</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">get_products</a>(...) -&gt; AsyncHttpResponse[GetProductsResponse]</code></summary>
 <dl>
 <dd>
 
@@ -7654,8 +10400,13 @@ await client.ecommerce.createBatchOrder({
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.getProducts();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.ecommerce.get_products()
 
 ```
 </dd>
@@ -7671,7 +10422,7 @@ await client.ecommerce.getProducts();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetProductsRequest` 
+**limit:** `typing.Optional[int]` — Number of documents per page
     
 </dd>
 </dl>
@@ -7679,7 +10430,119 @@ await client.ecommerce.getProducts();
 <dl>
 <dd>
 
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**offset:** `typing.Optional[int]` — Index of the first document in the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetProductsRequestSort]` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ids:** `typing.Optional[typing.Union[str, typing.Sequence[str]]]` — Filter by product ids
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `typing.Optional[str]` — Filter by product name, minimum 3 characters should be present for search.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**price_lte:** `typing.Optional[float]` — Price filter for products less than and equals to particular amount
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**price_gte:** `typing.Optional[float]` — Price filter for products greater than and equals to particular amount
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**price_lt:** `typing.Optional[float]` — Price filter for products less than particular amount
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**price_gt:** `typing.Optional[float]` — Price filter for products greater than particular amount
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**price_eq:** `typing.Optional[float]` — Price filter for products equals to particular amount
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**price_ne:** `typing.Optional[float]` — Price filter for products not equals to particular amount
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**categories:** `typing.Optional[typing.Union[str, typing.Sequence[str]]]` — Filter by categories ids
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**modified_since:** `typing.Optional[str]` — Filter (urlencoded) the orders modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**created_since:** `typing.Optional[str]` — Filter (urlencoded) the orders created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**is_deleted:** `typing.Optional[str]` — Filter products by their deletion status. If `false` is passed, only products that are not deleted will be returned.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -7691,7 +10554,7 @@ await client.ecommerce.getProducts();
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">createUpdateProduct</a>({ ...params }) -> BrevoApi.CreateUpdateProductResponse</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">create_update_product</a>(...) -&gt; AsyncHttpResponse[CreateUpdateProductResponse]</code></summary>
 <dl>
 <dd>
 
@@ -7703,11 +10566,16 @@ await client.ecommerce.getProducts();
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.createUpdateProduct({
-    id: "P11",
-    name: "Iphone 11"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.ecommerce.create_update_product(
+    id="P11",
+    name="Iphone 11",
+)
 
 ```
 </dd>
@@ -7723,7 +10591,7 @@ await client.ecommerce.createUpdateProduct({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateUpdateProductRequest` 
+**id:** `str` — Product ID for which you requested the details
     
 </dd>
 </dl>
@@ -7731,7 +10599,103 @@ await client.ecommerce.createUpdateProduct({
 <dl>
 <dd>
 
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**name:** `str` — Mandatory in case of creation**. Name of the product for which you requested the details
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**categories:** `typing.Optional[typing.Sequence[str]]` — Category ID-s of the product
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**deleted_at:** `typing.Optional[str]` — UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) of the product deleted from the shop's database
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**image_url:** `typing.Optional[str]` — Absolute URL to the cover image of the product
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**is_deleted:** `typing.Optional[bool]` — product deleted from the shop's database
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**meta_info:** `typing.Optional[typing.Dict[str, CreateUpdateProductRequestMetaInfoValue]]` — Meta data of product such as description, vendor, producer, stock level. The size of cumulative metaInfo shall not exceed **1000 KB**. Maximum length of metaInfo object can be 20.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**parent_id:** `typing.Optional[str]` — Parent product id of the product
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**price:** `typing.Optional[float]` — Price of the product
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sku:** `typing.Optional[str]` — Product identifier from the shop
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**stock:** `typing.Optional[float]` — Current stock value of the product from the shop's database
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**update_enabled:** `typing.Optional[bool]` — Facilitate to update the existing category in the same request (updateEnabled = true)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**url:** `typing.Optional[str]` — URL to the product
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -7743,7 +10707,7 @@ await client.ecommerce.createUpdateProduct({
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">createUpdateBatchProducts</a>({ ...params }) -> BrevoApi.CreateUpdateBatchProductsResponse</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">create_update_batch_products</a>(...) -&gt; AsyncHttpResponse[CreateUpdateBatchProductsResponse]</code></summary>
 <dl>
 <dd>
 
@@ -7755,13 +10719,21 @@ await client.ecommerce.createUpdateProduct({
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.createUpdateBatchProducts({
-    products: [{
-            id: "P11",
-            name: "Iphone 11"
-        }]
-});
+```python
+from brevo import BrevoApi
+from brevo.ecommerce import CreateUpdateBatchProductsRequestProductsItem
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.ecommerce.create_update_batch_products(
+    products=[
+        CreateUpdateBatchProductsRequestProductsItem(
+            id="P11",
+            name="Iphone 11",
+        )
+    ],
+)
 
 ```
 </dd>
@@ -7777,7 +10749,7 @@ await client.ecommerce.createUpdateBatchProducts({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateUpdateBatchProductsRequest` 
+**products:** `typing.Sequence[CreateUpdateBatchProductsRequestProductsItem]` — array of products objects
     
 </dd>
 </dl>
@@ -7785,7 +10757,15 @@ await client.ecommerce.createUpdateBatchProducts({
 <dl>
 <dd>
 
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**update_enabled:** `typing.Optional[bool]` — Facilitate to update the existing categories in the same request (updateEnabled = true)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -7797,7 +10777,7 @@ await client.ecommerce.createUpdateBatchProducts({
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">getProductInfo</a>({ ...params }) -> BrevoApi.GetProductDetails</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">get_product_info</a>(...) -&gt; AsyncHttpResponse[GetProductDetails]</code></summary>
 <dl>
 <dd>
 
@@ -7809,10 +10789,15 @@ await client.ecommerce.createUpdateBatchProducts({
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.getProductInfo({
-    id: "id"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.ecommerce.get_product_info(
+    id="id",
+)
 
 ```
 </dd>
@@ -7828,7 +10813,7 @@ await client.ecommerce.getProductInfo({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetProductInfoRequest` 
+**id:** `str` — Product ID
     
 </dd>
 </dl>
@@ -7836,7 +10821,7 @@ await client.ecommerce.getProductInfo({
 <dl>
 <dd>
 
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -7848,7 +10833,7 @@ await client.ecommerce.getProductInfo({
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">createProductAlert</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">create_product_alert</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -7860,11 +10845,15 @@ await client.ecommerce.getProductInfo({
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.createProductAlert({
-    id: "id",
-    type: "back_in_stock"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.ecommerce.create_product_alert(
+    id="id",
+)
 
 ```
 </dd>
@@ -7880,7 +10869,7 @@ await client.ecommerce.createProductAlert({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateProductAlertRequest` 
+**id:** `str` — Product ID
     
 </dd>
 </dl>
@@ -7888,7 +10877,15 @@ await client.ecommerce.createProductAlert({
 <dl>
 <dd>
 
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**contact_identifiers:** `typing.Optional[CreateProductAlertRequestContactIdentifiers]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -7901,7 +10898,7 @@ await client.ecommerce.createProductAlert({
 </details>
 
 ## Coupons
-<details><summary><code>client.coupons.<a href="/src/api/resources/coupons/client/Client.ts">getCouponCollections</a>({ ...params }) -> BrevoApi.GetCouponCollection</code></summary>
+<details><summary><code>client.coupons.<a href="src/brevo/coupons/client.py">get_coupon_collections</a>(...) -&gt; AsyncHttpResponse[GetCouponCollection]</code></summary>
 <dl>
 <dd>
 
@@ -7913,8 +10910,13 @@ await client.ecommerce.createProductAlert({
 <dl>
 <dd>
 
-```typescript
-await client.coupons.getCouponCollections();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.coupons.get_coupon_collections()
 
 ```
 </dd>
@@ -7930,7 +10932,7 @@ await client.coupons.getCouponCollections();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCouponCollectionsRequest` 
+**limit:** `typing.Optional[int]` — Number of documents returned per page
     
 </dd>
 </dl>
@@ -7938,7 +10940,31 @@ await client.coupons.getCouponCollections();
 <dl>
 <dd>
 
-**requestOptions:** `CouponsClient.RequestOptions` 
+**offset:** `typing.Optional[int]` — Index of the first document on the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetCouponCollectionsRequestSort]` — Sort the results by creation time in ascending/descending order
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort_by:** `typing.Optional[GetCouponCollectionsRequestSortBy]` — The field used to sort coupon collections
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -7950,7 +10976,7 @@ await client.coupons.getCouponCollections();
 </dl>
 </details>
 
-<details><summary><code>client.coupons.<a href="/src/api/resources/coupons/client/Client.ts">createCouponCollection</a>({ ...params }) -> BrevoApi.CreateCouponCollectionResponse</code></summary>
+<details><summary><code>client.coupons.<a href="src/brevo/coupons/client.py">create_coupon_collection</a>(...) -&gt; AsyncHttpResponse[CreateCouponCollectionResponse]</code></summary>
 <dl>
 <dd>
 
@@ -7962,11 +10988,16 @@ await client.coupons.getCouponCollections();
 <dl>
 <dd>
 
-```typescript
-await client.coupons.createCouponCollection({
-    defaultCoupon: "Winter",
-    name: "10%OFF"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.coupons.create_coupon_collection(
+    default_coupon="Winter",
+    name="10%OFF",
+)
 
 ```
 </dd>
@@ -7982,7 +11013,7 @@ await client.coupons.createCouponCollection({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateCouponCollectionRequest` 
+**default_coupon:** `str` — Default coupons collection name
     
 </dd>
 </dl>
@@ -7990,7 +11021,39 @@ await client.coupons.createCouponCollection({
 <dl>
 <dd>
 
-**requestOptions:** `CouponsClient.RequestOptions` 
+**name:** `str` — Name of the coupons collection
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**expiration_date:** `typing.Optional[dt.datetime]` — Specify an expiration date for the coupon collection in RFC3339 format. Use null to remove the expiration date.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**remaining_coupons_alert:** `typing.Optional[int]` — Send a notification alert (email) when the remaining coupons count is equal or fall bellow this number. Use null to disable alerts.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**remaining_days_alert:** `typing.Optional[int]` — Send a notification alert (email) when the remaining days until the expiration date are equal or fall bellow this number. Use null to disable alerts.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -8002,7 +11065,7 @@ await client.coupons.createCouponCollection({
 </dl>
 </details>
 
-<details><summary><code>client.coupons.<a href="/src/api/resources/coupons/client/Client.ts">getCouponCollection</a>({ ...params }) -> BrevoApi.GetCouponCollection</code></summary>
+<details><summary><code>client.coupons.<a href="src/brevo/coupons/client.py">get_coupon_collection</a>(...) -&gt; AsyncHttpResponse[GetCouponCollection]</code></summary>
 <dl>
 <dd>
 
@@ -8014,10 +11077,15 @@ await client.coupons.createCouponCollection({
 <dl>
 <dd>
 
-```typescript
-await client.coupons.getCouponCollection({
-    id: "id"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.coupons.get_coupon_collection(
+    id="id",
+)
 
 ```
 </dd>
@@ -8033,7 +11101,7 @@ await client.coupons.getCouponCollection({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCouponCollectionRequest` 
+**id:** `str` — Id of the collection to return
     
 </dd>
 </dl>
@@ -8041,7 +11109,7 @@ await client.coupons.getCouponCollection({
 <dl>
 <dd>
 
-**requestOptions:** `CouponsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -8053,7 +11121,7 @@ await client.coupons.getCouponCollection({
 </dl>
 </details>
 
-<details><summary><code>client.coupons.<a href="/src/api/resources/coupons/client/Client.ts">updateCouponCollection</a>({ ...params }) -> BrevoApi.UpdateCouponCollectionResponse</code></summary>
+<details><summary><code>client.coupons.<a href="src/brevo/coupons/client.py">update_coupon_collection</a>(...) -&gt; AsyncHttpResponse[UpdateCouponCollectionResponse]</code></summary>
 <dl>
 <dd>
 
@@ -8065,10 +11133,15 @@ await client.coupons.getCouponCollection({
 <dl>
 <dd>
 
-```typescript
-await client.coupons.updateCouponCollection({
-    id: "id"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.coupons.update_coupon_collection(
+    id="id",
+)
 
 ```
 </dd>
@@ -8084,7 +11157,7 @@ await client.coupons.updateCouponCollection({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateCouponCollectionRequest` 
+**id:** `str` — Id of the collection to update
     
 </dd>
 </dl>
@@ -8092,7 +11165,39 @@ await client.coupons.updateCouponCollection({
 <dl>
 <dd>
 
-**requestOptions:** `CouponsClient.RequestOptions` 
+**default_coupon:** `typing.Optional[str]` — A default coupon to be used in case there are no coupons left
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**expiration_date:** `typing.Optional[dt.datetime]` — Specify an expiration date for the coupon collection in RFC3339 format. Use null to remove the expiration date.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**remaining_coupons_alert:** `typing.Optional[int]` — Send a notification alert (email) when the remaining coupons count is equal or fall bellow this number. Use null to disable alerts.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**remaining_days_alert:** `typing.Optional[int]` — Send a notification alert (email) when the remaining days until the expiration date are equal or fall bellow this number. Use null to disable alerts.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -8104,7 +11209,7 @@ await client.coupons.updateCouponCollection({
 </dl>
 </details>
 
-<details><summary><code>client.coupons.<a href="/src/api/resources/coupons/client/Client.ts">createCoupons</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.coupons.<a href="src/brevo/coupons/client.py">create_coupons</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -8116,11 +11221,16 @@ await client.coupons.updateCouponCollection({
 <dl>
 <dd>
 
-```typescript
-await client.coupons.createCoupons({
-    collectionId: "23befbae-1505-47a8-bd27-e30ef739f32c",
-    coupons: ["Uf12AF"]
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.coupons.create_coupons(
+    collection_id="23befbae-1505-47a8-bd27-e30ef739f32c",
+    coupons=["Uf12AF"],
+)
 
 ```
 </dd>
@@ -8136,7 +11246,7 @@ await client.coupons.createCoupons({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateCouponsRequest` 
+**collection_id:** `str` — The id of the coupon collection for which the coupons will be created
     
 </dd>
 </dl>
@@ -8144,7 +11254,15 @@ await client.coupons.createCoupons({
 <dl>
 <dd>
 
-**requestOptions:** `CouponsClient.RequestOptions` 
+**coupons:** `typing.Sequence[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -8157,7 +11275,7 @@ await client.coupons.createCoupons({
 </details>
 
 ## Payments
-<details><summary><code>client.payments.<a href="/src/api/resources/payments/client/Client.ts">createPaymentRequest</a>({ ...params }) -> BrevoApi.CreatePaymentRequestResponse</code></summary>
+<details><summary><code>client.payments.<a href="src/brevo/payments/client.py">create_payment_request</a>(...) -&gt; AsyncHttpResponse[CreatePaymentRequestResponse]</code></summary>
 <dl>
 <dd>
 
@@ -8169,15 +11287,19 @@ await client.coupons.createCoupons({
 <dl>
 <dd>
 
-```typescript
-await client.payments.createPaymentRequest({
-    cart: {
-        currency: "EUR",
-        specificAmount: 1200
-    },
-    contactId: 43,
-    reference: "Invoice #INV0001"
-});
+```python
+from brevo import BrevoApi, Cart
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.payments.create_payment_request(
+    cart=Cart(
+        specific_amount=1200,
+    ),
+    contact_id=43,
+    reference="Invoice #INV0001",
+)
 
 ```
 </dd>
@@ -8193,7 +11315,7 @@ await client.payments.createPaymentRequest({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreatePaymentRequestRequest` 
+**cart:** `Cart` 
     
 </dd>
 </dl>
@@ -8201,7 +11323,47 @@ await client.payments.createPaymentRequest({
 <dl>
 <dd>
 
-**requestOptions:** `PaymentsClient.RequestOptions` 
+**contact_id:** `int` — Brevo ID of the contact requested to pay.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reference:** `str` — Reference of the payment request, it will appear on the payment page.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**configuration:** `typing.Optional[Configuration]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `typing.Optional[str]` — Description of payment request.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notification:** `typing.Optional[Notification]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -8213,7 +11375,7 @@ await client.payments.createPaymentRequest({
 </dl>
 </details>
 
-<details><summary><code>client.payments.<a href="/src/api/resources/payments/client/Client.ts">getPaymentRequest</a>({ ...params }) -> BrevoApi.GetPaymentRequestResponse</code></summary>
+<details><summary><code>client.payments.<a href="src/brevo/payments/client.py">get_payment_request</a>(...) -&gt; AsyncHttpResponse[GetPaymentRequestResponse]</code></summary>
 <dl>
 <dd>
 
@@ -8225,10 +11387,15 @@ await client.payments.createPaymentRequest({
 <dl>
 <dd>
 
-```typescript
-await client.payments.getPaymentRequest({
-    id: "050db7b0-9bb7-4c1e-9c68-5a8dace8c1dc"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.payments.get_payment_request(
+    id="050db7b0-9bb7-4c1e-9c68-5a8dace8c1dc",
+)
 
 ```
 </dd>
@@ -8244,7 +11411,7 @@ await client.payments.getPaymentRequest({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetPaymentRequestRequest` 
+**id:** `str` — Id of the payment Request
     
 </dd>
 </dl>
@@ -8252,7 +11419,7 @@ await client.payments.getPaymentRequest({
 <dl>
 <dd>
 
-**requestOptions:** `PaymentsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -8264,7 +11431,7 @@ await client.payments.getPaymentRequest({
 </dl>
 </details>
 
-<details><summary><code>client.payments.<a href="/src/api/resources/payments/client/Client.ts">deletePaymentRequest</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.payments.<a href="src/brevo/payments/client.py">delete_payment_request</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -8276,10 +11443,15 @@ await client.payments.getPaymentRequest({
 <dl>
 <dd>
 
-```typescript
-await client.payments.deletePaymentRequest({
-    id: "9ae7d68a-565c-4695-9381-d8fb3e3a14cc"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.payments.delete_payment_request(
+    id="9ae7d68a-565c-4695-9381-d8fb3e3a14cc",
+)
 
 ```
 </dd>
@@ -8295,7 +11467,7 @@ await client.payments.deletePaymentRequest({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeletePaymentRequestRequest` 
+**id:** `str` — ID of the payment request.
     
 </dd>
 </dl>
@@ -8303,7 +11475,7 @@ await client.payments.deletePaymentRequest({
 <dl>
 <dd>
 
-**requestOptions:** `PaymentsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -8316,7 +11488,7 @@ await client.payments.deletePaymentRequest({
 </details>
 
 ## Event
-<details><summary><code>client.event.<a href="/src/api/resources/event/client/Client.ts">createEvent</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.event.<a href="src/brevo/event/client.py">create_event</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -8342,11 +11514,17 @@ Create an event to track a contact's interaction.
 <dl>
 <dd>
 
-```typescript
-await client.event.createEvent({
-    event_name: "video_played",
-    identifiers: {}
-});
+```python
+from brevo import BrevoApi
+from brevo.event import CreateEventRequestIdentifiers
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.event.create_event(
+    event_name="video_played",
+    identifiers=CreateEventRequestIdentifiers(),
+)
 
 ```
 </dd>
@@ -8362,7 +11540,7 @@ await client.event.createEvent({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateEventRequest` 
+**event_name:** `str` — The name of the event that occurred. This is how you will find your event in Brevo. Limited to 255 characters, alphanumerical characters and - _ only.
     
 </dd>
 </dl>
@@ -8370,7 +11548,47 @@ await client.event.createEvent({
 <dl>
 <dd>
 
-**requestOptions:** `EventClient.RequestOptions` 
+**identifiers:** `CreateEventRequestIdentifiers` — Identifies the contact associated with the event. At least one identifier is required.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contact_properties:** `typing.Optional[typing.Dict[str, CreateEventRequestContactPropertiesValue]]` — Properties defining the state of the contact associated to this event. Useful to update contact attributes defined in your contacts database while passing the event. For example: **"FIRSTNAME": "Jane" , "AGE": 37**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**event_date:** `typing.Optional[str]` — Timestamp of when the event occurred (e.g. "2024-01-24T17:39:57+01:00"). If no value is passed, the timestamp of the event creation is used.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**event_properties:** `typing.Optional[typing.Dict[str, CreateEventRequestEventPropertiesValue]]` — Properties of the event. Top level properties and nested properties can be used to better segment contacts and personalise workflow conditions. The following field type are supported: string, number, boolean (true/false), date (Timestamp e.g. "2024-01-24T17:39:57+01:00"). Keys are limited to 255 characters, alphanumerical characters and - _ only. Size is limited to 50Kb.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**object:** `typing.Optional[CreateEventRequestObject]` — Identifiers of the object record associated with this event. Ignored if the object type or identifier for this record does not exist on the account.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -8383,7 +11601,7 @@ await client.event.createEvent({
 </details>
 
 ## InboundParsing
-<details><summary><code>client.inboundParsing.<a href="/src/api/resources/inboundParsing/client/Client.ts">getInboundEmailEvents</a>({ ...params }) -> BrevoApi.GetInboundEmailEventsResponse</code></summary>
+<details><summary><code>client.inbound_parsing.<a href="src/brevo/inbound_parsing/client.py">get_inbound_email_events</a>(...) -&gt; AsyncHttpResponse[GetInboundEmailEventsResponse]</code></summary>
 <dl>
 <dd>
 
@@ -8409,8 +11627,13 @@ This endpoint will show the list of all the events for the received emails.
 <dl>
 <dd>
 
-```typescript
-await client.inboundParsing.getInboundEmailEvents();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.inbound_parsing.get_inbound_email_events()
 
 ```
 </dd>
@@ -8426,7 +11649,7 @@ await client.inboundParsing.getInboundEmailEvents();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetInboundEmailEventsRequest` 
+**sender:** `typing.Optional[str]` — Email address of the sender.
     
 </dd>
 </dl>
@@ -8434,7 +11657,47 @@ await client.inboundParsing.getInboundEmailEvents();
 <dl>
 <dd>
 
-**requestOptions:** `InboundParsingClient.RequestOptions` 
+**start_date:** `typing.Optional[str]` — Mandatory if endDate is used. Starting date (YYYY-MM-DD or YYYY-MM-DDTHH:mm:ss.SSSZ) from which you want to fetch the list. Maximum time period that can be selected is one month.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**end_date:** `typing.Optional[str]` — Mandatory if startDate is used. Ending date (YYYY-MM-DD or YYYY-MM-DDTHH:mm:ss.SSSZ) till which you want to fetch the list. Maximum time period that can be selected is one month.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` — Number of documents returned per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**offset:** `typing.Optional[int]` — Index of the first document on the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetInboundEmailEventsRequestSort]` — Sort the results in the ascending/descending order of record creation
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -8446,7 +11709,7 @@ await client.inboundParsing.getInboundEmailEvents();
 </dl>
 </details>
 
-<details><summary><code>client.inboundParsing.<a href="/src/api/resources/inboundParsing/client/Client.ts">getInboundEmailEventsByUuid</a>({ ...params }) -> BrevoApi.GetInboundEmailEventsByUuidResponse</code></summary>
+<details><summary><code>client.inbound_parsing.<a href="src/brevo/inbound_parsing/client.py">get_inbound_email_events_by_uuid</a>(...) -&gt; AsyncHttpResponse[GetInboundEmailEventsByUuidResponse]</code></summary>
 <dl>
 <dd>
 
@@ -8472,10 +11735,15 @@ This endpoint will show the list of all events history for one particular receiv
 <dl>
 <dd>
 
-```typescript
-await client.inboundParsing.getInboundEmailEventsByUuid({
-    uuid: "uuid"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.inbound_parsing.get_inbound_email_events_by_uuid(
+    uuid_="uuid",
+)
 
 ```
 </dd>
@@ -8491,7 +11759,7 @@ await client.inboundParsing.getInboundEmailEventsByUuid({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetInboundEmailEventsByUuidRequest` 
+**uuid_:** `str` — UUID to fetch events specific to received email
     
 </dd>
 </dl>
@@ -8499,7 +11767,7 @@ await client.inboundParsing.getInboundEmailEventsByUuid({
 <dl>
 <dd>
 
-**requestOptions:** `InboundParsingClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -8511,7 +11779,7 @@ await client.inboundParsing.getInboundEmailEventsByUuid({
 </dl>
 </details>
 
-<details><summary><code>client.inboundParsing.<a href="/src/api/resources/inboundParsing/client/Client.ts">getInboundEmailAttachment</a>({ ...params }) -> core.BinaryResponse</code></summary>
+<details><summary><code>client.inbound_parsing.<a href="src/brevo/inbound_parsing/client.py">get_inbound_email_attachment</a>(...) -&gt; typing.AsyncIterator[AsyncHttpResponse[typing.AsyncIterator[bytes]]]</code></summary>
 <dl>
 <dd>
 
@@ -8537,10 +11805,15 @@ This endpoint will retrieve inbound attachment with download token.
 <dl>
 <dd>
 
-```typescript
-await client.inboundParsing.getInboundEmailAttachment({
-    downloadToken: "downloadToken"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.inbound_parsing.get_inbound_email_attachment(
+    download_token="downloadToken",
+)
 
 ```
 </dd>
@@ -8556,7 +11829,7 @@ await client.inboundParsing.getInboundEmailAttachment({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetInboundEmailAttachmentRequest` 
+**download_token:** `str` — Token to fetch a particular attachment
     
 </dd>
 </dl>
@@ -8564,7 +11837,7 @@ await client.inboundParsing.getInboundEmailAttachment({
 <dl>
 <dd>
 
-**requestOptions:** `InboundParsingClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration. You can pass in configuration such as `chunk_size`, and more to customize the request and response.
     
 </dd>
 </dl>
@@ -8577,7 +11850,7 @@ await client.inboundParsing.getInboundEmailAttachment({
 </details>
 
 ## Balance
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">getActiveBalancesApi</a>({ ...params }) -> BrevoApi.BalanceLimit</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">get_active_balances_api</a>(...) -&gt; AsyncHttpResponse[BalanceLimit]</code></summary>
 <dl>
 <dd>
 
@@ -8603,12 +11876,17 @@ Returns Active Balances
 <dl>
 <dd>
 
-```typescript
-await client.balance.getActiveBalancesApi({
-    pid: "pid",
-    contact_id: 1,
-    balance_definition_id: "balance_definition_id"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.balance.get_active_balances_api(
+    pid="pid",
+    contact_id=1,
+    balance_definition_id="balance_definition_id",
+)
 
 ```
 </dd>
@@ -8624,7 +11902,7 @@ await client.balance.getActiveBalancesApi({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetLoyaltyBalanceProgramsPidActiveBalanceRequest` 
+**pid:** `str` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -8632,7 +11910,55 @@ await client.balance.getActiveBalancesApi({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**contact_id:** `int` — Contact ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**balance_definition_id:** `str` — Balance Definition ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` — Limit
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**offset:** `typing.Optional[int]` — Offset
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort_field:** `typing.Optional[str]` — Sort Field
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[str]` — Sort Order
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -8644,7 +11970,7 @@ await client.balance.getActiveBalancesApi({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">getBalanceDefinitionList</a>({ ...params }) -> BrevoApi.GetBalanceDefinitionListResponse</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">get_balance_definition_list</a>(...) -&gt; AsyncHttpResponse[GetBalanceDefinitionListResponse]</code></summary>
 <dl>
 <dd>
 
@@ -8670,10 +11996,15 @@ Returns balance definition page
 <dl>
 <dd>
 
-```typescript
-await client.balance.getBalanceDefinitionList({
-    pid: "pid"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.balance.get_balance_definition_list(
+    pid="pid",
+)
 
 ```
 </dd>
@@ -8689,7 +12020,7 @@ await client.balance.getBalanceDefinitionList({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetBalanceDefinitionListRequest` 
+**pid:** `str` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -8697,7 +12028,47 @@ await client.balance.getBalanceDefinitionList({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**limit:** `typing.Optional[int]` — Limit the number of records returned
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**offset:** `typing.Optional[int]` — Offset to paginate records
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort_field:** `typing.Optional[GetBalanceDefinitionListRequestSortField]` — Field to sort by
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetBalanceDefinitionListRequestSort]` — Sort direction
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**version:** `typing.Optional[GetBalanceDefinitionListRequestVersion]` — Version
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -8709,7 +12080,7 @@ await client.balance.getBalanceDefinitionList({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">createBalanceDefinition</a>({ ...params }) -> BrevoApi.BalanceDefinition</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">create_balance_definition</a>(...) -&gt; AsyncHttpResponse[BalanceDefinition]</code></summary>
 <dl>
 <dd>
 
@@ -8735,12 +12106,17 @@ Creates balance definition and returns information
 <dl>
 <dd>
 
-```typescript
-await client.balance.createBalanceDefinition({
-    pid: "pid",
-    name: "name",
-    unit: "POINTS"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.balance.create_balance_definition(
+    pid="pid",
+    name="name",
+    unit="POINTS",
+)
 
 ```
 </dd>
@@ -8756,7 +12132,7 @@ await client.balance.createBalanceDefinition({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequest` 
+**pid:** `str` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -8764,7 +12140,145 @@ await client.balance.createBalanceDefinition({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**name:** `str` — Name of the balance definition.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**unit:** `PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequestUnit` — Unit of balance measurement.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**balance_availability_duration_modifier:** `typing.Optional[
+    PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequestBalanceAvailabilityDurationModifier
+]` — Defines when the balance expires within the selected duration.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**balance_availability_duration_unit:** `typing.Optional[
+    PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequestBalanceAvailabilityDurationUnit
+]` — Unit of time for balance validity.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**balance_availability_duration_value:** `typing.Optional[int]` — Number of time units before the balance expires.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**balance_expiration_date:** `typing.Optional[dt.date]` — Fixed expiration date (`dd/mm` format) as an alternative to duration-based expiry.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**balance_option_amount_overtaking_strategy:** `typing.Optional[
+    PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequestBalanceOptionAmountOvertakingStrategy
+]` — Defines whether partial credit is allowed when reaching max balance.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**balance_option_credit_rounding:** `typing.Optional[
+    PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequestBalanceOptionCreditRounding
+]` — Defines rounding strategy for credit transactions.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**balance_option_debit_rounding:** `typing.Optional[
+    PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequestBalanceOptionDebitRounding
+]` — Defines rounding strategy for debit transactions.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `typing.Optional[str]` — Short description of the balance definition.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**image_ref:** `typing.Optional[str]` — URL of an optional image reference.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**max_amount:** `typing.Optional[float]` — Maximum allowable balance amount.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**max_credit_amount_limit:** `typing.Optional[float]` — Maximum credit allowed per operation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**max_debit_amount_limit:** `typing.Optional[float]` — Maximum debit allowed per operation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**meta:** `typing.Optional[typing.Dict[str, typing.Any]]` — Additional metadata for the balance definition.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**min_amount:** `typing.Optional[float]` — Minimum allowable balance amount.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -8776,7 +12290,7 @@ await client.balance.createBalanceDefinition({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">getBalanceDefinition</a>({ ...params }) -> BrevoApi.BalanceDefinition</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">get_balance_definition</a>(...) -&gt; AsyncHttpResponse[BalanceDefinition]</code></summary>
 <dl>
 <dd>
 
@@ -8802,11 +12316,16 @@ Returns balance definition
 <dl>
 <dd>
 
-```typescript
-await client.balance.getBalanceDefinition({
-    pid: "pid",
-    bdid: "bdid"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.balance.get_balance_definition(
+    pid="pid",
+    bdid="bdid",
+)
 
 ```
 </dd>
@@ -8822,7 +12341,7 @@ await client.balance.getBalanceDefinition({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetBalanceDefinitionRequest` 
+**pid:** `str` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -8830,7 +12349,23 @@ await client.balance.getBalanceDefinition({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**bdid:** `str` — Balance Definition Id
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**version:** `typing.Optional[GetBalanceDefinitionRequestVersion]` — Version
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -8842,7 +12377,7 @@ await client.balance.getBalanceDefinition({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">updateBalanceDefinition</a>({ ...params }) -> BrevoApi.BalanceDefinition</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">update_balance_definition</a>(...) -&gt; AsyncHttpResponse[BalanceDefinition]</code></summary>
 <dl>
 <dd>
 
@@ -8868,13 +12403,18 @@ Updates Balance definition
 <dl>
 <dd>
 
-```typescript
-await client.balance.updateBalanceDefinition({
-    pid: "pid",
-    bdid: "bdid",
-    name: "name",
-    unit: "POINTS"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.balance.update_balance_definition(
+    pid="pid",
+    bdid="bdid",
+    name="name",
+    unit="POINTS",
+)
 
 ```
 </dd>
@@ -8890,7 +12430,7 @@ await client.balance.updateBalanceDefinition({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateBalanceDefinitionRequest` 
+**pid:** `str` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -8898,7 +12438,147 @@ await client.balance.updateBalanceDefinition({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**bdid:** `str` — Balance Definition Id
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `str` — Name of the balance definition.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**unit:** `UpdateBalanceDefinitionRequestUnit` — Unit of balance measurement.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**balance_availability_duration_modifier:** `typing.Optional[
+    UpdateBalanceDefinitionRequestBalanceAvailabilityDurationModifier
+]` — Defines when the balance expires within the selected duration.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**balance_availability_duration_unit:** `typing.Optional[UpdateBalanceDefinitionRequestBalanceAvailabilityDurationUnit]` — Unit of time for balance validity.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**balance_availability_duration_value:** `typing.Optional[int]` — Number of time units before the balance expires.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**balance_expiration_date:** `typing.Optional[str]` — Expiration date (`dd/mm` format) or empty if not applicable.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**balance_option_amount_overtaking_strategy:** `typing.Optional[
+    UpdateBalanceDefinitionRequestBalanceOptionAmountOvertakingStrategy
+]` — Defines whether partial credit is allowed when reaching max balance.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**balance_option_credit_rounding:** `typing.Optional[UpdateBalanceDefinitionRequestBalanceOptionCreditRounding]` — Rounding strategy for credit transactions.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**balance_option_debit_rounding:** `typing.Optional[UpdateBalanceDefinitionRequestBalanceOptionDebitRounding]` — Rounding strategy for debit transactions.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `typing.Optional[str]` — Short description of the balance definition.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**image_ref:** `typing.Optional[str]` — URL of an optional image reference.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**max_amount:** `typing.Optional[float]` — Maximum allowable balance amount.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**max_credit_amount_limit:** `typing.Optional[float]` — Maximum credit allowed per operation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**max_debit_amount_limit:** `typing.Optional[float]` — Maximum debit allowed per operation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**meta:** `typing.Optional[typing.Dict[str, typing.Any]]` — Optional metadata for the balance definition.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**min_amount:** `typing.Optional[float]` — Minimum allowable balance amount.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -8910,7 +12590,7 @@ await client.balance.updateBalanceDefinition({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">deleteBalanceDefinition</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">delete_balance_definition</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -8936,11 +12616,16 @@ Delete Balance definition
 <dl>
 <dd>
 
-```typescript
-await client.balance.deleteBalanceDefinition({
-    pid: "pid",
-    bdid: "bdid"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.balance.delete_balance_definition(
+    pid="pid",
+    bdid="bdid",
+)
 
 ```
 </dd>
@@ -8956,7 +12641,7 @@ await client.balance.deleteBalanceDefinition({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteBalanceDefinitionRequest` 
+**pid:** `str` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -8964,7 +12649,15 @@ await client.balance.deleteBalanceDefinition({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**bdid:** `str` — Balance Definition Id
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -8976,7 +12669,7 @@ await client.balance.deleteBalanceDefinition({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">createBalanceLimit</a>({ ...params }) -> BrevoApi.BalanceLimit</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">create_balance_limit</a>(...) -&gt; AsyncHttpResponse[BalanceLimit]</code></summary>
 <dl>
 <dd>
 
@@ -9002,16 +12695,21 @@ Creates balance limit and sends the created UUID along with the data
 <dl>
 <dd>
 
-```typescript
-await client.balance.createBalanceLimit({
-    pid: "pid",
-    bdid: "bdid",
-    constraintType: "transaction",
-    durationUnit: "day",
-    durationValue: 1,
-    transactionType: "credit",
-    value: 1
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.balance.create_balance_limit(
+    pid="pid",
+    bdid="bdid",
+    constraint_type="transaction",
+    duration_unit="day",
+    duration_value=1,
+    transaction_type="credit",
+    value=1,
+)
 
 ```
 </dd>
@@ -9027,7 +12725,7 @@ await client.balance.createBalanceLimit({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateBalanceLimitRequest` 
+**pid:** `str` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -9035,7 +12733,63 @@ await client.balance.createBalanceLimit({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**bdid:** `str` — Balance Definition Id
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**constraint_type:** `CreateBalanceLimitRequestConstraintType` — Defines whether the limit applies to transaction count or amount.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**duration_unit:** `CreateBalanceLimitRequestDurationUnit` — Unit of time for which the limit is applicable.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**duration_value:** `int` — Number of time units for the balance limit.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**transaction_type:** `CreateBalanceLimitRequestTransactionType` — Specifies whether the limit applies to credit or debit transactions.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**value:** `int` — Maximum allowed value for the specified constraint type.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sliding_schedule:** `typing.Optional[bool]` — Determines if the limit resets on a rolling schedule.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -9047,7 +12801,7 @@ await client.balance.createBalanceLimit({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">getBalanceLimit</a>({ ...params }) -> BrevoApi.BalanceLimit</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">get_balance_limit</a>(...) -&gt; AsyncHttpResponse[BalanceLimit]</code></summary>
 <dl>
 <dd>
 
@@ -9073,12 +12827,17 @@ Fetches balance limits and send the created UUID along with the data
 <dl>
 <dd>
 
-```typescript
-await client.balance.getBalanceLimit({
-    pid: "pid",
-    bdid: "bdid",
-    blid: "blid"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.balance.get_balance_limit(
+    pid="pid",
+    bdid="bdid",
+    blid="blid",
+)
 
 ```
 </dd>
@@ -9094,7 +12853,7 @@ await client.balance.getBalanceLimit({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetBalanceLimitRequest` 
+**pid:** `str` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -9102,7 +12861,31 @@ await client.balance.getBalanceLimit({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**bdid:** `str` — Balance Definition Id
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**blid:** `str` — Balance Limit Id
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**version:** `typing.Optional[GetBalanceLimitRequestVersion]` — Version
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -9114,7 +12897,7 @@ await client.balance.getBalanceLimit({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">updateBalanceLimit</a>({ ...params }) -> BrevoApi.BalanceLimit</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">update_balance_limit</a>(...) -&gt; AsyncHttpResponse[BalanceLimit]</code></summary>
 <dl>
 <dd>
 
@@ -9140,17 +12923,22 @@ Updates balance limit
 <dl>
 <dd>
 
-```typescript
-await client.balance.updateBalanceLimit({
-    pid: "pid",
-    bdid: "bdid",
-    blid: "blid",
-    constraintType: "transaction",
-    durationUnit: "day",
-    durationValue: 1,
-    transactionType: "credit",
-    value: 1
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.balance.update_balance_limit(
+    pid="pid",
+    bdid="bdid",
+    blid="blid",
+    constraint_type="transaction",
+    duration_unit="day",
+    duration_value=1,
+    transaction_type="credit",
+    value=1,
+)
 
 ```
 </dd>
@@ -9166,7 +12954,7 @@ await client.balance.updateBalanceLimit({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateBalanceLimitRequest` 
+**pid:** `str` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -9174,7 +12962,71 @@ await client.balance.updateBalanceLimit({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**bdid:** `str` — Balance Definition Id
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**blid:** `str` — Balance Limit Id
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**constraint_type:** `UpdateBalanceLimitRequestConstraintType` — Defines whether the limit applies to transaction count or amount.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**duration_unit:** `UpdateBalanceLimitRequestDurationUnit` — Unit of time for which the limit is applicable.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**duration_value:** `int` — Number of time units for the balance limit.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**transaction_type:** `UpdateBalanceLimitRequestTransactionType` — Specifies whether the limit applies to credit or debit transactions.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**value:** `int` — Maximum allowed value for the specified constraint type.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sliding_schedule:** `typing.Optional[bool]` — Determines if the limit resets on a rolling schedule.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -9186,7 +13038,7 @@ await client.balance.updateBalanceLimit({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">deleteBalanceLimit</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">delete_balance_limit</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -9212,12 +13064,17 @@ Delete balance limit
 <dl>
 <dd>
 
-```typescript
-await client.balance.deleteBalanceLimit({
-    pid: "pid",
-    bdid: "bdid",
-    blid: "blid"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.balance.delete_balance_limit(
+    pid="pid",
+    bdid="bdid",
+    blid="blid",
+)
 
 ```
 </dd>
@@ -9233,7 +13090,7 @@ await client.balance.deleteBalanceLimit({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteBalanceLimitRequest` 
+**pid:** `str` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -9241,7 +13098,23 @@ await client.balance.deleteBalanceLimit({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**bdid:** `str` — Balance Definition Id
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**blid:** `str` — Balance Limit Id
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -9253,7 +13126,7 @@ await client.balance.deleteBalanceLimit({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">getContactBalances</a>({ ...params }) -> BrevoApi.GetContactBalancesResponse</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">get_contact_balances</a>(...) -&gt; AsyncHttpResponse[GetContactBalancesResponse]</code></summary>
 <dl>
 <dd>
 
@@ -9279,10 +13152,15 @@ Returns balance list
 <dl>
 <dd>
 
-```typescript
-await client.balance.getContactBalances({
-    pid: "pid"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.balance.get_contact_balances(
+    pid="pid",
+)
 
 ```
 </dd>
@@ -9298,7 +13176,7 @@ await client.balance.getContactBalances({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetContactBalancesRequest` 
+**pid:** `str` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -9306,7 +13184,7 @@ await client.balance.getContactBalances({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -9318,7 +13196,7 @@ await client.balance.getContactBalances({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">createBalanceOrder</a>({ ...params }) -> BrevoApi.CreateBalanceOrderResponse</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">create_balance_order</a>(...) -&gt; AsyncHttpResponse[CreateBalanceOrderResponse]</code></summary>
 <dl>
 <dd>
 
@@ -9344,15 +13222,20 @@ Returns created order
 <dl>
 <dd>
 
-```typescript
-await client.balance.createBalanceOrder({
-    pid: "pid",
-    amount: 1.1,
-    balanceDefinitionId: "balanceDefinitionId",
-    contactId: 1,
-    dueAt: "dueAt",
-    source: "source"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.balance.create_balance_order(
+    pid="pid",
+    amount=1.1,
+    balance_definition_id="balanceDefinitionId",
+    contact_id=1,
+    due_at="dueAt",
+    source="source",
+)
 
 ```
 </dd>
@@ -9368,7 +13251,7 @@ await client.balance.createBalanceOrder({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateBalanceOrderRequest` 
+**pid:** `str` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -9376,7 +13259,63 @@ await client.balance.createBalanceOrder({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**amount:** `float` — Order amount (must be non-zero).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**balance_definition_id:** `str` — Unique identifier (UUID) of the associated balance definition.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contact_id:** `int` — Unique identifier of the contact placing the order (must be ≥ 1).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**due_at:** `str` — RFC3339 timestamp specifying when the order is due.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**source:** `str` — Specifies the origin of the order (`engine` or `user`).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**expires_at:** `typing.Optional[str]` — Optional RFC3339 timestamp defining order expiration.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**meta:** `typing.Optional[typing.Dict[str, typing.Any]]` — Optional metadata associated with the order.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -9388,7 +13327,7 @@ await client.balance.createBalanceOrder({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">getSubscriptionBalances</a>({ ...params }) -> BrevoApi.GetSubscriptionBalancesResponse</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">get_subscription_balances</a>(...) -&gt; AsyncHttpResponse[GetSubscriptionBalancesResponse]</code></summary>
 <dl>
 <dd>
 
@@ -9414,11 +13353,16 @@ Returns subscription balances
 <dl>
 <dd>
 
-```typescript
-await client.balance.getSubscriptionBalances({
-    pid: "pid",
-    cid: "cid"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.balance.get_subscription_balances(
+    pid="pid",
+    cid="cid",
+)
 
 ```
 </dd>
@@ -9434,7 +13378,7 @@ await client.balance.getSubscriptionBalances({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetSubscriptionBalancesRequest` 
+**pid:** `str` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -9442,7 +13386,15 @@ await client.balance.getSubscriptionBalances({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**cid:** `str` — Contact Id
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -9454,7 +13406,7 @@ await client.balance.getSubscriptionBalances({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">createSubscriptionBalances</a>({ ...params }) -> BrevoApi.PostLoyaltyBalanceProgramsPidSubscriptionsCidBalancesResponse</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">create_subscription_balances</a>(...) -&gt; AsyncHttpResponse[PostLoyaltyBalanceProgramsPidSubscriptionsCidBalancesResponse]</code></summary>
 <dl>
 <dd>
 
@@ -9480,12 +13432,17 @@ Creates a balance for a contact
 <dl>
 <dd>
 
-```typescript
-await client.balance.createSubscriptionBalances({
-    pid: "pid",
-    cid: "cid",
-    balanceDefinitionId: "balanceDefinitionId"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.balance.create_subscription_balances(
+    pid="pid",
+    cid="cid",
+    balance_definition_id="balanceDefinitionId",
+)
 
 ```
 </dd>
@@ -9501,7 +13458,7 @@ await client.balance.createSubscriptionBalances({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostLoyaltyBalanceProgramsPidSubscriptionsCidBalancesRequest` 
+**pid:** `str` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -9509,7 +13466,23 @@ await client.balance.createSubscriptionBalances({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**cid:** `str` — Contact Id
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**balance_definition_id:** `str` — Unique identifier (UUID) of the balance definition associated with the new balance.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -9521,7 +13494,7 @@ await client.balance.createSubscriptionBalances({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">getTransactionHistoryApi</a>({ ...params }) -> BrevoApi.GetLoyaltyBalanceProgramsPidTransactionHistoryResponse</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">get_transaction_history_api</a>(...) -&gt; AsyncHttpResponse[GetLoyaltyBalanceProgramsPidTransactionHistoryResponse]</code></summary>
 <dl>
 <dd>
 
@@ -9547,12 +13520,17 @@ Returns transaction history
 <dl>
 <dd>
 
-```typescript
-await client.balance.getTransactionHistoryApi({
-    pid: "pid",
-    contact_id: 1,
-    balance_definition_id: "balance_definition_id"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.balance.get_transaction_history_api(
+    pid="pid",
+    contact_id=1,
+    balance_definition_id="balance_definition_id",
+)
 
 ```
 </dd>
@@ -9568,7 +13546,7 @@ await client.balance.getTransactionHistoryApi({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetLoyaltyBalanceProgramsPidTransactionHistoryRequest` 
+**pid:** `str` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -9576,7 +13554,63 @@ await client.balance.getTransactionHistoryApi({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**contact_id:** `int` — Contact ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**balance_definition_id:** `str` — Balance Definition ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` — Limit the number of records returned
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**offset:** `typing.Optional[int]` — Skip a number of records
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort_field:** `typing.Optional[GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSortField]` — Field to sort by
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSort]` — Sort order, either asc or desc
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filters:** `typing.Optional[typing.Union[str, typing.Sequence[str]]]` — Filters to apply
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -9588,7 +13622,7 @@ await client.balance.getTransactionHistoryApi({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">beginTransaction</a>({ ...params }) -> BrevoApi.Transaction</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">begin_transaction</a>(...) -&gt; AsyncHttpResponse[Transaction]</code></summary>
 <dl>
 <dd>
 
@@ -9614,12 +13648,17 @@ Creates new transaction and returns information
 <dl>
 <dd>
 
-```typescript
-await client.balance.beginTransaction({
-    pid: "pid",
-    amount: 1.1,
-    balanceDefinitionId: "balanceDefinitionId"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.balance.begin_transaction(
+    pid="pid",
+    amount=1.1,
+    balance_definition_id="balanceDefinitionId",
+)
 
 ```
 </dd>
@@ -9635,7 +13674,7 @@ await client.balance.beginTransaction({
 <dl>
 <dd>
 
-**request:** `BrevoApi.BeginTransactionRequest` 
+**pid:** `str` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -9643,7 +13682,79 @@ await client.balance.beginTransaction({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**amount:** `float` — Transaction amount (must be provided).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**balance_definition_id:** `str` — Unique identifier (UUID) of the associated balance definition.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**loyalty_subscription_id:** `typing.Optional[str]` — Unique identifier for the loyalty subscription (required unless `contactId` is provided).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**auto_complete:** `typing.Optional[bool]` — Whether the transaction should be automatically completed.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**balance_expiry_in_minutes:** `typing.Optional[int]` — Optional expiry time for the balance in minutes (must be greater than 0 if provided).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contact_id:** `typing.Optional[int]` — Unique identifier of the contact involved in the transaction (required unless `LoyaltySubscriptionId` is provided).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**event_time:** `typing.Optional[str]` — Optional timestamp specifying when the transaction occurred.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**meta:** `typing.Optional[typing.Dict[str, typing.Any]]` — Optional metadata associated with the transaction.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ttl:** `typing.Optional[int]` — Optional time-to-live for the transaction (must be greater than 0 if provided).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -9655,7 +13766,7 @@ await client.balance.beginTransaction({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">cancelTransaction</a>({ ...params }) -> BrevoApi.Transaction</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">cancel_transaction</a>(...) -&gt; AsyncHttpResponse[Transaction]</code></summary>
 <dl>
 <dd>
 
@@ -9681,11 +13792,16 @@ Cancels transaction
 <dl>
 <dd>
 
-```typescript
-await client.balance.cancelTransaction({
-    pid: "pid",
-    tid: "tid"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.balance.cancel_transaction(
+    pid="pid",
+    tid="tid",
+)
 
 ```
 </dd>
@@ -9701,7 +13817,7 @@ await client.balance.cancelTransaction({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CancelTransactionRequest` 
+**pid:** `str` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -9709,7 +13825,15 @@ await client.balance.cancelTransaction({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**tid:** `str` — Transaction Id
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -9721,7 +13845,7 @@ await client.balance.cancelTransaction({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">completeTransaction</a>({ ...params }) -> BrevoApi.Transaction</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">complete_transaction</a>(...) -&gt; AsyncHttpResponse[Transaction]</code></summary>
 <dl>
 <dd>
 
@@ -9747,11 +13871,16 @@ Completes transaction
 <dl>
 <dd>
 
-```typescript
-await client.balance.completeTransaction({
-    pid: "pid",
-    tid: "tid"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.balance.complete_transaction(
+    pid="pid",
+    tid="tid",
+)
 
 ```
 </dd>
@@ -9767,7 +13896,7 @@ await client.balance.completeTransaction({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CompleteTransactionRequest` 
+**pid:** `str` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -9775,7 +13904,15 @@ await client.balance.completeTransaction({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**tid:** `str` — Transaction Id
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -9788,7 +13925,7 @@ await client.balance.completeTransaction({
 </details>
 
 ## Program
-<details><summary><code>client.program.<a href="/src/api/resources/program/client/Client.ts">getLpList</a>({ ...params }) -> BrevoApi.GetLpListResponse</code></summary>
+<details><summary><code>client.program.<a href="src/brevo/program/client.py">get_lp_list</a>(...) -&gt; AsyncHttpResponse[GetLpListResponse]</code></summary>
 <dl>
 <dd>
 
@@ -9814,8 +13951,13 @@ Returns list of loyalty programs
 <dl>
 <dd>
 
-```typescript
-await client.program.getLpList();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.program.get_lp_list()
 
 ```
 </dd>
@@ -9831,7 +13973,7 @@ await client.program.getLpList();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetLpListRequest` 
+**limit:** `typing.Optional[int]` — Number of documents per page
     
 </dd>
 </dl>
@@ -9839,7 +13981,31 @@ await client.program.getLpList();
 <dl>
 <dd>
 
-**requestOptions:** `ProgramClient.RequestOptions` 
+**offset:** `typing.Optional[int]` — Index of the first document in the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort_field:** `typing.Optional[GetLpListRequestSortField]` — Sort documents by field
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[str]` — Sort documents by field
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -9851,7 +14017,7 @@ await client.program.getLpList();
 </dl>
 </details>
 
-<details><summary><code>client.program.<a href="/src/api/resources/program/client/Client.ts">createNewLp</a>({ ...params }) -> BrevoApi.LoyaltyProgram</code></summary>
+<details><summary><code>client.program.<a href="src/brevo/program/client.py">create_new_lp</a>(...) -&gt; AsyncHttpResponse[LoyaltyProgram]</code></summary>
 <dl>
 <dd>
 
@@ -9877,10 +14043,15 @@ Creates loyalty program
 <dl>
 <dd>
 
-```typescript
-await client.program.createNewLp({
-    name: "name"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.program.create_new_lp(
+    name="name",
+)
 
 ```
 </dd>
@@ -9896,7 +14067,7 @@ await client.program.createNewLp({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateNewLpRequest` 
+**name:** `str` — Required name of the loyalty program (max 128 chars).
     
 </dd>
 </dl>
@@ -9904,7 +14075,31 @@ await client.program.createNewLp({
 <dl>
 <dd>
 
-**requestOptions:** `ProgramClient.RequestOptions` 
+**description:** `typing.Optional[str]` — Optional description of the loyalty program (max 256 chars).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**document_id:** `typing.Optional[str]` — Optional unique document ID.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**meta:** `typing.Optional[typing.Dict[str, typing.Any]]` — Optional metadata related to the loyalty program.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -9916,7 +14111,7 @@ await client.program.createNewLp({
 </dl>
 </details>
 
-<details><summary><code>client.program.<a href="/src/api/resources/program/client/Client.ts">getLoyaltyProgramInfo</a>({ ...params }) -> BrevoApi.LoyaltyProgram</code></summary>
+<details><summary><code>client.program.<a href="src/brevo/program/client.py">get_loyalty_program_info</a>(...) -&gt; AsyncHttpResponse[LoyaltyProgram]</code></summary>
 <dl>
 <dd>
 
@@ -9942,10 +14137,15 @@ Returns loyalty program
 <dl>
 <dd>
 
-```typescript
-await client.program.getLoyaltyProgramInfo({
-    pid: "pid"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.program.get_loyalty_program_info(
+    pid="pid",
+)
 
 ```
 </dd>
@@ -9961,7 +14161,7 @@ await client.program.getLoyaltyProgramInfo({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetLoyaltyProgramInfoRequest` 
+**pid:** `str` — Loyalty Program ID. A unique identifier for the loyalty program.
     
 </dd>
 </dl>
@@ -9969,7 +14169,7 @@ await client.program.getLoyaltyProgramInfo({
 <dl>
 <dd>
 
-**requestOptions:** `ProgramClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -9981,7 +14181,7 @@ await client.program.getLoyaltyProgramInfo({
 </dl>
 </details>
 
-<details><summary><code>client.program.<a href="/src/api/resources/program/client/Client.ts">updateLoyaltyProgram</a>({ ...params }) -> BrevoApi.LoyaltyProgram</code></summary>
+<details><summary><code>client.program.<a href="src/brevo/program/client.py">update_loyalty_program</a>(...) -&gt; AsyncHttpResponse[LoyaltyProgram]</code></summary>
 <dl>
 <dd>
 
@@ -10007,11 +14207,16 @@ Updates loyalty program
 <dl>
 <dd>
 
-```typescript
-await client.program.updateLoyaltyProgram({
-    pid: "pid",
-    name: "name"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.program.update_loyalty_program(
+    pid="pid",
+    name="name",
+)
 
 ```
 </dd>
@@ -10027,7 +14232,7 @@ await client.program.updateLoyaltyProgram({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateLoyaltyProgramRequest` 
+**pid:** `str` — Loyalty Program ID. A unique identifier for the loyalty program.
     
 </dd>
 </dl>
@@ -10035,7 +14240,31 @@ await client.program.updateLoyaltyProgram({
 <dl>
 <dd>
 
-**requestOptions:** `ProgramClient.RequestOptions` 
+**name:** `str` — Loyalty Program name
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `typing.Optional[str]` — Loyalty Program description
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**meta:** `typing.Optional[typing.Dict[str, typing.Any]]` — Loyalty Program meta data
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -10047,7 +14276,7 @@ await client.program.updateLoyaltyProgram({
 </dl>
 </details>
 
-<details><summary><code>client.program.<a href="/src/api/resources/program/client/Client.ts">deleteLoyaltyProgram</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.program.<a href="src/brevo/program/client.py">delete_loyalty_program</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -10073,10 +14302,15 @@ Deletes Loyalty Program
 <dl>
 <dd>
 
-```typescript
-await client.program.deleteLoyaltyProgram({
-    pid: "pid"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.program.delete_loyalty_program(
+    pid="pid",
+)
 
 ```
 </dd>
@@ -10092,7 +14326,7 @@ await client.program.deleteLoyaltyProgram({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteLoyaltyProgramRequest` 
+**pid:** `str` — Loyalty Program ID. A unique identifier for the loyalty program.
     
 </dd>
 </dl>
@@ -10100,7 +14334,7 @@ await client.program.deleteLoyaltyProgram({
 <dl>
 <dd>
 
-**requestOptions:** `ProgramClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -10112,7 +14346,7 @@ await client.program.deleteLoyaltyProgram({
 </dl>
 </details>
 
-<details><summary><code>client.program.<a href="/src/api/resources/program/client/Client.ts">partiallyUpdateLoyaltyProgram</a>({ ...params }) -> BrevoApi.LoyaltyProgram</code></summary>
+<details><summary><code>client.program.<a href="src/brevo/program/client.py">partially_update_loyalty_program</a>(...) -&gt; AsyncHttpResponse[LoyaltyProgram]</code></summary>
 <dl>
 <dd>
 
@@ -10138,10 +14372,15 @@ Partially updates loyalty program
 <dl>
 <dd>
 
-```typescript
-await client.program.partiallyUpdateLoyaltyProgram({
-    pid: "pid"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.program.partially_update_loyalty_program(
+    pid="pid",
+)
 
 ```
 </dd>
@@ -10157,7 +14396,7 @@ await client.program.partiallyUpdateLoyaltyProgram({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PartiallyUpdateLoyaltyProgramRequest` 
+**pid:** `str` — Loyalty Program ID. A unique identifier for the loyalty program.
     
 </dd>
 </dl>
@@ -10165,7 +14404,31 @@ await client.program.partiallyUpdateLoyaltyProgram({
 <dl>
 <dd>
 
-**requestOptions:** `ProgramClient.RequestOptions` 
+**description:** `typing.Optional[str]` — Loyalty Program description
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**meta:** `typing.Optional[typing.Dict[str, typing.Any]]` — Loyalty Program meta data
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `typing.Optional[str]` — Loyalty Program name
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -10177,7 +14440,7 @@ await client.program.partiallyUpdateLoyaltyProgram({
 </dl>
 </details>
 
-<details><summary><code>client.program.<a href="/src/api/resources/program/client/Client.ts">getParameterSubscriptionInfo</a>({ ...params }) -> BrevoApi.GetParameterSubscriptionInfoResponse</code></summary>
+<details><summary><code>client.program.<a href="src/brevo/program/client.py">get_parameter_subscription_info</a>(...) -&gt; AsyncHttpResponse[GetParameterSubscriptionInfoResponse]</code></summary>
 <dl>
 <dd>
 
@@ -10203,10 +14466,15 @@ Get Information of balances, tiers, rewards and subscription members for a subsc
 <dl>
 <dd>
 
-```typescript
-await client.program.getParameterSubscriptionInfo({
-    pid: "pid"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.program.get_parameter_subscription_info(
+    pid="pid",
+)
 
 ```
 </dd>
@@ -10222,7 +14490,7 @@ await client.program.getParameterSubscriptionInfo({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetParameterSubscriptionInfoRequest` 
+**pid:** `str` — Loyalty Program ID. A unique identifier for the loyalty program.
     
 </dd>
 </dl>
@@ -10230,7 +14498,31 @@ await client.program.getParameterSubscriptionInfo({
 <dl>
 <dd>
 
-**requestOptions:** `ProgramClient.RequestOptions` 
+**contact_id:** `typing.Optional[str]` — The contact ID to filter by.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**params:** `typing.Optional[str]` — A list of filter parameters for querying the subscription info.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**loyalty_subscription_id:** `typing.Optional[str]` — The loyalty subscription ID to filter by.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -10242,7 +14534,7 @@ await client.program.getParameterSubscriptionInfo({
 </dl>
 </details>
 
-<details><summary><code>client.program.<a href="/src/api/resources/program/client/Client.ts">publishLoyaltyProgram</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.program.<a href="src/brevo/program/client.py">publish_loyalty_program</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -10268,10 +14560,15 @@ Publishes loyalty program
 <dl>
 <dd>
 
-```typescript
-await client.program.publishLoyaltyProgram({
-    pid: "pid"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.program.publish_loyalty_program(
+    pid="pid",
+)
 
 ```
 </dd>
@@ -10287,7 +14584,7 @@ await client.program.publishLoyaltyProgram({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PublishLoyaltyProgramRequest` 
+**pid:** `str` — Loyalty Program ID. A unique identifier for the loyalty program.
     
 </dd>
 </dl>
@@ -10295,7 +14592,7 @@ await client.program.publishLoyaltyProgram({
 <dl>
 <dd>
 
-**requestOptions:** `ProgramClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -10307,7 +14604,7 @@ await client.program.publishLoyaltyProgram({
 </dl>
 </details>
 
-<details><summary><code>client.program.<a href="/src/api/resources/program/client/Client.ts">subscribeMemberToASubscription</a>({ ...params }) -> BrevoApi.SubscribeMemberToASubscriptionResponse</code></summary>
+<details><summary><code>client.program.<a href="src/brevo/program/client.py">subscribe_member_to_a_subscription</a>(...) -&gt; AsyncHttpResponse[SubscribeMemberToASubscriptionResponse]</code></summary>
 <dl>
 <dd>
 
@@ -10333,11 +14630,16 @@ Add member to a subscription
 <dl>
 <dd>
 
-```typescript
-await client.program.subscribeMemberToASubscription({
-    pid: "pid",
-    memberContactIds: [1]
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.program.subscribe_member_to_a_subscription(
+    pid="pid",
+    member_contact_ids=[1],
+)
 
 ```
 </dd>
@@ -10353,7 +14655,7 @@ await client.program.subscribeMemberToASubscription({
 <dl>
 <dd>
 
-**request:** `BrevoApi.SubscribeMemberToASubscriptionRequest` 
+**pid:** `str` — Loyalty Program ID. A unique identifier for the loyalty program.
     
 </dd>
 </dl>
@@ -10361,7 +14663,31 @@ await client.program.subscribeMemberToASubscription({
 <dl>
 <dd>
 
-**requestOptions:** `ProgramClient.RequestOptions` 
+**member_contact_ids:** `typing.Sequence[int]` — Required, each item must be greater than or equal to 1
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contact_id:** `typing.Optional[int]` — Required if LoyaltySubscriptionId is not provided, must be greater than 0
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**loyalty_subscription_id:** `typing.Optional[str]` — Required if ContactId is not provided, max length 64
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -10373,7 +14699,7 @@ await client.program.subscribeMemberToASubscription({
 </dl>
 </details>
 
-<details><summary><code>client.program.<a href="/src/api/resources/program/client/Client.ts">deleteContactMembers</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.program.<a href="src/brevo/program/client.py">delete_contact_members</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -10399,11 +14725,16 @@ Deletes member from a subscription
 <dl>
 <dd>
 
-```typescript
-await client.program.deleteContactMembers({
-    pid: "pid",
-    memberContactIds: "memberContactIds"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.program.delete_contact_members(
+    pid="pid",
+    member_contact_ids="memberContactIds",
+)
 
 ```
 </dd>
@@ -10419,7 +14750,7 @@ await client.program.deleteContactMembers({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteContactMembersRequest` 
+**pid:** `str` — Loyalty Program ID. A unique identifier for the loyalty program.
     
 </dd>
 </dl>
@@ -10427,7 +14758,15 @@ await client.program.deleteContactMembers({
 <dl>
 <dd>
 
-**requestOptions:** `ProgramClient.RequestOptions` 
+**member_contact_ids:** `str` — Comma-separated list of member contact IDs to delete from the subscription.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -10439,7 +14778,7 @@ await client.program.deleteContactMembers({
 </dl>
 </details>
 
-<details><summary><code>client.program.<a href="/src/api/resources/program/client/Client.ts">subscribeToLoyaltyProgram</a>({ ...params }) -> BrevoApi.SubscribeToLoyaltyProgramResponse</code></summary>
+<details><summary><code>client.program.<a href="src/brevo/program/client.py">subscribe_to_loyalty_program</a>(...) -&gt; AsyncHttpResponse[SubscribeToLoyaltyProgramResponse]</code></summary>
 <dl>
 <dd>
 
@@ -10465,11 +14804,16 @@ Subscribes to a loyalty program
 <dl>
 <dd>
 
-```typescript
-await client.program.subscribeToLoyaltyProgram({
-    pid: "pid",
-    contactId: 1
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.program.subscribe_to_loyalty_program(
+    pid="pid",
+    contact_id=1,
+)
 
 ```
 </dd>
@@ -10485,7 +14829,7 @@ await client.program.subscribeToLoyaltyProgram({
 <dl>
 <dd>
 
-**request:** `BrevoApi.SubscribeToLoyaltyProgramRequest` 
+**pid:** `str` — Loyalty Program ID. A unique identifier for the loyalty program.
     
 </dd>
 </dl>
@@ -10493,7 +14837,31 @@ await client.program.subscribeToLoyaltyProgram({
 <dl>
 <dd>
 
-**requestOptions:** `ProgramClient.RequestOptions` 
+**contact_id:** `int` — Required contact ID; must be greater than 0.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**creation_date:** `typing.Optional[str]` — Optional custom date-time format.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**loyalty_subscription_id:** `typing.Optional[str]` — Optional subscription ID (max length 64).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -10506,7 +14874,7 @@ await client.program.subscribeToLoyaltyProgram({
 </details>
 
 ## Reward
-<details><summary><code>client.reward.<a href="/src/api/resources/reward/client/Client.ts">getCodeCount</a>({ ...params }) -> BrevoApi.GetCodeCountResponse</code></summary>
+<details><summary><code>client.reward.<a href="src/brevo/reward/client.py">get_code_count</a>(...) -&gt; AsyncHttpResponse[GetCodeCountResponse]</code></summary>
 <dl>
 <dd>
 
@@ -10532,11 +14900,16 @@ Get code count
 <dl>
 <dd>
 
-```typescript
-await client.reward.getCodeCount({
-    pid: "pid",
-    cpid: "cpid"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.reward.get_code_count(
+    pid="pid",
+    cpid="cpid",
+)
 
 ```
 </dd>
@@ -10552,7 +14925,7 @@ await client.reward.getCodeCount({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCodeCountRequest` 
+**pid:** `str` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -10560,7 +14933,15 @@ await client.reward.getCodeCount({
 <dl>
 <dd>
 
-**requestOptions:** `RewardClient.RequestOptions` 
+**cpid:** `str` — Code Pool ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -10572,7 +14953,7 @@ await client.reward.getCodeCount({
 </dl>
 </details>
 
-<details><summary><code>client.reward.<a href="/src/api/resources/reward/client/Client.ts">getRewardPageApi</a>({ ...params }) -> BrevoApi.GetLoyaltyOfferProgramsPidOffersResponse</code></summary>
+<details><summary><code>client.reward.<a href="src/brevo/reward/client.py">get_reward_page_api</a>(...) -&gt; AsyncHttpResponse[GetLoyaltyOfferProgramsPidOffersResponse]</code></summary>
 <dl>
 <dd>
 
@@ -10598,10 +14979,15 @@ Returns a reward page
 <dl>
 <dd>
 
-```typescript
-await client.reward.getRewardPageApi({
-    pid: "pid"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.reward.get_reward_page_api(
+    pid="pid",
+)
 
 ```
 </dd>
@@ -10617,7 +15003,7 @@ await client.reward.getRewardPageApi({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetLoyaltyOfferProgramsPidOffersRequest` 
+**pid:** `str` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -10625,7 +15011,39 @@ await client.reward.getRewardPageApi({
 <dl>
 <dd>
 
-**requestOptions:** `RewardClient.RequestOptions` 
+**limit:** `typing.Optional[int]` — Page size
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**offset:** `typing.Optional[int]` — Pagination offset
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**state:** `typing.Optional[str]` — State of the reward
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**version:** `typing.Optional[GetLoyaltyOfferProgramsPidOffersRequestVersion]` — Version
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -10637,7 +15055,7 @@ await client.reward.getRewardPageApi({
 </dl>
 </details>
 
-<details><summary><code>client.reward.<a href="/src/api/resources/reward/client/Client.ts">createReward</a>({ ...params }) -> BrevoApi.CreateRewardResponse</code></summary>
+<details><summary><code>client.reward.<a href="src/brevo/reward/client.py">create_reward</a>(...) -&gt; AsyncHttpResponse[CreateRewardResponse]</code></summary>
 <dl>
 <dd>
 
@@ -10663,11 +15081,16 @@ Creates a new reward in the loyalty program.
 <dl>
 <dd>
 
-```typescript
-await client.reward.createReward({
-    pid: "pid",
-    name: "name"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.reward.create_reward(
+    pid="pid",
+    name="name",
+)
 
 ```
 </dd>
@@ -10683,7 +15106,7 @@ await client.reward.createReward({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateRewardRequest` 
+**pid:** `str` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -10691,7 +15114,39 @@ await client.reward.createReward({
 <dl>
 <dd>
 
-**requestOptions:** `RewardClient.RequestOptions` 
+**name:** `str` — Internal name of the reward
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**public_description:** `typing.Optional[str]` — Public facing description of the reward
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**public_image:** `typing.Optional[str]` — URL of the public image for the reward
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**public_name:** `typing.Optional[str]` — Public facing name of the reward
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -10703,7 +15158,7 @@ await client.reward.createReward({
 </dl>
 </details>
 
-<details><summary><code>client.reward.<a href="/src/api/resources/reward/client/Client.ts">createVoucher</a>({ ...params }) -> BrevoApi.CreateVoucherResponse</code></summary>
+<details><summary><code>client.reward.<a href="src/brevo/reward/client.py">create_voucher</a>(...) -&gt; AsyncHttpResponse[CreateVoucherResponse]</code></summary>
 <dl>
 <dd>
 
@@ -10729,11 +15184,16 @@ Create a voucher and attribute it to a specific membership.
 <dl>
 <dd>
 
-```typescript
-await client.reward.createVoucher({
-    pid: "pid",
-    rewardId: "rewardId"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.reward.create_voucher(
+    pid="pid",
+    reward_id="rewardId",
+)
 
 ```
 </dd>
@@ -10749,7 +15209,7 @@ await client.reward.createVoucher({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateVoucherRequest` 
+**pid:** `str` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -10757,7 +15217,63 @@ await client.reward.createVoucher({
 <dl>
 <dd>
 
-**requestOptions:** `RewardClient.RequestOptions` 
+**reward_id:** `str` — Reward id
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**code:** `typing.Optional[str]` — Code generated to attribute reward to a contact
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contact_id:** `typing.Optional[int]` — Contact to attribute the reward
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**expiration_date:** `typing.Optional[str]` — Reward expiration date
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**loyalty_subscription_id:** `typing.Optional[str]` — One of contactId or loyaltySubscriptionId is required
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**meta:** `typing.Optional[typing.Dict[str, typing.Any]]` — Offer meta information (key/value object)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**value:** `typing.Optional[float]` — Value of the selected reward config
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -10769,7 +15285,7 @@ await client.reward.createVoucher({
 </dl>
 </details>
 
-<details><summary><code>client.reward.<a href="/src/api/resources/reward/client/Client.ts">redeemVoucher</a>({ ...params }) -> BrevoApi.Redeem</code></summary>
+<details><summary><code>client.reward.<a href="src/brevo/reward/client.py">redeem_voucher</a>(...) -&gt; AsyncHttpResponse[Redeem]</code></summary>
 <dl>
 <dd>
 
@@ -10795,10 +15311,15 @@ Creates a request to redeem a voucher.
 <dl>
 <dd>
 
-```typescript
-await client.reward.redeemVoucher({
-    pid: "pid"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.reward.redeem_voucher(
+    pid="pid",
+)
 
 ```
 </dd>
@@ -10814,7 +15335,7 @@ await client.reward.redeemVoucher({
 <dl>
 <dd>
 
-**request:** `BrevoApi.RedeemVoucherRequest` 
+**pid:** `str` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -10822,7 +15343,71 @@ await client.reward.redeemVoucher({
 <dl>
 <dd>
 
-**requestOptions:** `RewardClient.RequestOptions` 
+**attributed_reward_id:** `typing.Optional[str]` — Unique identifier for the attributed reward
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**code:** `typing.Optional[str]` — Redemption code for the reward
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contact_id:** `typing.Optional[int]` — Unique identifier for the contact
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**loyalty_subscription_id:** `typing.Optional[str]` — Identifier for the loyalty subscription
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**meta:** `typing.Optional[typing.Dict[str, typing.Any]]` — Additional metadata associated with the redeem request
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**order:** `typing.Optional[RedeemVoucherRequestOrder]` — Order details for the redemption
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reward_id:** `typing.Optional[str]` — Unique identifier for the reward
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ttl:** `typing.Optional[int]` — Time to live in seconds for the redemption request
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -10834,7 +15419,7 @@ await client.reward.redeemVoucher({
 </dl>
 </details>
 
-<details><summary><code>client.reward.<a href="/src/api/resources/reward/client/Client.ts">completeRedeemTransaction</a>({ ...params }) -> BrevoApi.Redeem</code></summary>
+<details><summary><code>client.reward.<a href="src/brevo/reward/client.py">complete_redeem_transaction</a>(...) -&gt; AsyncHttpResponse[Redeem]</code></summary>
 <dl>
 <dd>
 
@@ -10860,11 +15445,16 @@ Completes voucher redeem request.
 <dl>
 <dd>
 
-```typescript
-await client.reward.completeRedeemTransaction({
-    pid: "pid",
-    tid: "tid"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.reward.complete_redeem_transaction(
+    pid="pid",
+    tid="tid",
+)
 
 ```
 </dd>
@@ -10880,7 +15470,7 @@ await client.reward.completeRedeemTransaction({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CompleteRedeemTransactionRequest` 
+**pid:** `str` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -10888,7 +15478,15 @@ await client.reward.completeRedeemTransaction({
 <dl>
 <dd>
 
-**requestOptions:** `RewardClient.RequestOptions` 
+**tid:** `str` — Redeem transaction ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -10900,7 +15498,7 @@ await client.reward.completeRedeemTransaction({
 </dl>
 </details>
 
-<details><summary><code>client.reward.<a href="/src/api/resources/reward/client/Client.ts">revokeVouchers</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.reward.<a href="src/brevo/reward/client.py">revoke_vouchers</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -10926,10 +15524,15 @@ Revoke attributed vouchers.
 <dl>
 <dd>
 
-```typescript
-await client.reward.revokeVouchers({
-    pid: "pid"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.reward.revoke_vouchers(
+    pid="pid",
+)
 
 ```
 </dd>
@@ -10945,7 +15548,7 @@ await client.reward.revokeVouchers({
 <dl>
 <dd>
 
-**request:** `BrevoApi.RevokeVouchersRequest` 
+**pid:** `str` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -10953,7 +15556,15 @@ await client.reward.revokeVouchers({
 <dl>
 <dd>
 
-**requestOptions:** `RewardClient.RequestOptions` 
+**attributed_reward_ids:** `typing.Optional[str]` — Reward Attribution IDs (comma seperated)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -10965,7 +15576,7 @@ await client.reward.revokeVouchers({
 </dl>
 </details>
 
-<details><summary><code>client.reward.<a href="/src/api/resources/reward/client/Client.ts">validateReward</a>({ ...params }) -> BrevoApi.ValidateRewardResponse</code></summary>
+<details><summary><code>client.reward.<a href="src/brevo/reward/client.py">validate_reward</a>(...) -&gt; AsyncHttpResponse[ValidateRewardResponse]</code></summary>
 <dl>
 <dd>
 
@@ -10991,10 +15602,15 @@ Validates a reward.
 <dl>
 <dd>
 
-```typescript
-await client.reward.validateReward({
-    pid: "pid"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.reward.validate_reward(
+    pid="pid",
+)
 
 ```
 </dd>
@@ -11010,7 +15626,7 @@ await client.reward.validateReward({
 <dl>
 <dd>
 
-**request:** `BrevoApi.ValidateRewardRequest` 
+**pid:** `str` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -11018,7 +15634,55 @@ await client.reward.validateReward({
 <dl>
 <dd>
 
-**requestOptions:** `RewardClient.RequestOptions` 
+**attributed_reward_id:** `typing.Optional[str]` — Unique identifier for the attributed reward
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**code:** `typing.Optional[str]` — Validation code for the reward
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contact_id:** `typing.Optional[int]` — Unique identifier for the contact
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**loyalty_subscription_id:** `typing.Optional[str]` — Identifier for the loyalty subscription
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**point_of_sell_id:** `typing.Optional[str]` — Identifier for the point of sale
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reward_id:** `typing.Optional[str]` — Unique identifier for the reward
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -11030,7 +15694,7 @@ await client.reward.validateReward({
 </dl>
 </details>
 
-<details><summary><code>client.reward.<a href="/src/api/resources/reward/client/Client.ts">getRewardInformation</a>({ ...params }) -> BrevoApi.GetLoyaltyOfferProgramsPidRewardsRidResponse</code></summary>
+<details><summary><code>client.reward.<a href="src/brevo/reward/client.py">get_reward_information</a>(...) -&gt; AsyncHttpResponse[GetLoyaltyOfferProgramsPidRewardsRidResponse]</code></summary>
 <dl>
 <dd>
 
@@ -11056,11 +15720,16 @@ Returns reward information.
 <dl>
 <dd>
 
-```typescript
-await client.reward.getRewardInformation({
-    pid: "pid",
-    rid: "rid"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.reward.get_reward_information(
+    pid="pid",
+    rid="rid",
+)
 
 ```
 </dd>
@@ -11076,7 +15745,7 @@ await client.reward.getRewardInformation({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetLoyaltyOfferProgramsPidRewardsRidRequest` 
+**pid:** `str` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -11084,7 +15753,23 @@ await client.reward.getRewardInformation({
 <dl>
 <dd>
 
-**requestOptions:** `RewardClient.RequestOptions` 
+**rid:** `str` — Reward ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**version:** `typing.Optional[GetLoyaltyOfferProgramsPidRewardsRidRequestVersion]` — Version
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -11096,7 +15781,7 @@ await client.reward.getRewardInformation({
 </dl>
 </details>
 
-<details><summary><code>client.reward.<a href="/src/api/resources/reward/client/Client.ts">getVoucherForAContact</a>({ ...params }) -> BrevoApi.GetLoyaltyOfferProgramsPidVouchersResponse</code></summary>
+<details><summary><code>client.reward.<a href="src/brevo/reward/client.py">get_voucher_for_a_contact</a>(...) -&gt; AsyncHttpResponse[GetLoyaltyOfferProgramsPidVouchersResponse]</code></summary>
 <dl>
 <dd>
 
@@ -11122,11 +15807,16 @@ Get voucher for a contact
 <dl>
 <dd>
 
-```typescript
-await client.reward.getVoucherForAContact({
-    pid: "pid",
-    contactId: 1
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.reward.get_voucher_for_a_contact(
+    pid="pid",
+    contact_id=1,
+)
 
 ```
 </dd>
@@ -11142,7 +15832,7 @@ await client.reward.getVoucherForAContact({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetLoyaltyOfferProgramsPidVouchersRequest` 
+**pid:** `str` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -11150,7 +15840,63 @@ await client.reward.getVoucherForAContact({
 <dl>
 <dd>
 
-**requestOptions:** `RewardClient.RequestOptions` 
+**contact_id:** `int` — Contact ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` — Page size
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**offset:** `typing.Optional[int]` — Pagination offset
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetLoyaltyOfferProgramsPidVouchersRequestSort]` — Sort order
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort_field:** `typing.Optional[GetLoyaltyOfferProgramsPidVouchersRequestSortField]` — Sort field
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**metadata_key_value:** `typing.Optional[str]` — Metadata value for a Key filter
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reward_id:** `typing.Optional[str]` — Reward ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -11163,7 +15909,7 @@ await client.reward.getVoucherForAContact({
 </details>
 
 ## Tier
-<details><summary><code>client.tier.<a href="/src/api/resources/tier/client/Client.ts">addSubscriptionToTier</a>({ ...params }) -> BrevoApi.AddSubscriptionToTierResponse</code></summary>
+<details><summary><code>client.tier.<a href="src/brevo/tier/client.py">add_subscription_to_tier</a>(...) -&gt; AsyncHttpResponse[AddSubscriptionToTierResponse]</code></summary>
 <dl>
 <dd>
 
@@ -11189,12 +15935,17 @@ Manually assigns a tier to a specific membership.
 <dl>
 <dd>
 
-```typescript
-await client.tier.addSubscriptionToTier({
-    pid: "pid",
-    cid: "cid",
-    tid: "tid"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.tier.add_subscription_to_tier(
+    pid="pid",
+    cid="cid",
+    tid="tid",
+)
 
 ```
 </dd>
@@ -11210,7 +15961,7 @@ await client.tier.addSubscriptionToTier({
 <dl>
 <dd>
 
-**request:** `BrevoApi.AddSubscriptionToTierRequest` 
+**pid:** `str` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -11218,7 +15969,23 @@ await client.tier.addSubscriptionToTier({
 <dl>
 <dd>
 
-**requestOptions:** `TierClient.RequestOptions` 
+**cid:** `str` — Contact ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tid:** `str` — Tier ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -11230,7 +15997,7 @@ await client.tier.addSubscriptionToTier({
 </dl>
 </details>
 
-<details><summary><code>client.tier.<a href="/src/api/resources/tier/client/Client.ts">getListOfTierGroups</a>({ ...params }) -> BrevoApi.GetListOfTierGroupsResponse</code></summary>
+<details><summary><code>client.tier.<a href="src/brevo/tier/client.py">get_list_of_tier_groups</a>(...) -&gt; AsyncHttpResponse[GetListOfTierGroupsResponse]</code></summary>
 <dl>
 <dd>
 
@@ -11256,10 +16023,15 @@ Returns the list of tier groups defined within the loyalty program.
 <dl>
 <dd>
 
-```typescript
-await client.tier.getListOfTierGroups({
-    pid: "pid"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.tier.get_list_of_tier_groups(
+    pid="pid",
+)
 
 ```
 </dd>
@@ -11275,7 +16047,7 @@ await client.tier.getListOfTierGroups({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetListOfTierGroupsRequest` 
+**pid:** `str` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -11283,7 +16055,15 @@ await client.tier.getListOfTierGroups({
 <dl>
 <dd>
 
-**requestOptions:** `TierClient.RequestOptions` 
+**version:** `typing.Optional[GetListOfTierGroupsRequestVersion]` — Select 'active' to retrieve list of all tier groups which are live for clients. Select draft to retrieve list of all non deleted tier groups.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -11295,7 +16075,7 @@ await client.tier.getListOfTierGroups({
 </dl>
 </details>
 
-<details><summary><code>client.tier.<a href="/src/api/resources/tier/client/Client.ts">createTierGroup</a>({ ...params }) -> BrevoApi.TierGroup</code></summary>
+<details><summary><code>client.tier.<a href="src/brevo/tier/client.py">create_tier_group</a>(...) -&gt; AsyncHttpResponse[TierGroup]</code></summary>
 <dl>
 <dd>
 
@@ -11321,11 +16101,16 @@ Creates a new tier group in a loyalty program. *(The changes will take effect wi
 <dl>
 <dd>
 
-```typescript
-await client.tier.createTierGroup({
-    pid: "pid",
-    name: "name"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.tier.create_tier_group(
+    pid="pid",
+    name="name",
+)
 
 ```
 </dd>
@@ -11341,7 +16126,7 @@ await client.tier.createTierGroup({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateTierGroupRequest` 
+**pid:** `str` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -11349,7 +16134,39 @@ await client.tier.createTierGroup({
 <dl>
 <dd>
 
-**requestOptions:** `TierClient.RequestOptions` 
+**name:** `str` — Name of the tier group
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**downgrade_strategy:** `typing.Optional[CreateTierGroupRequestDowngradeStrategy]` — Select real_time to downgrade tier on real time balance updates. Select membership_anniversary to downgrade tier on subscription anniversary. Select tier_anniversary to downgrade tier on tier anniversary.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tier_order:** `typing.Optional[typing.Sequence[str]]` — Order of the tiers in the group in ascending order
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**upgrade_strategy:** `typing.Optional[CreateTierGroupRequestUpgradeStrategy]` — Select real_time to upgrade tier on real time balance updates. Select membership_anniversary to upgrade tier on subscription anniversary. Select tier_anniversary to upgrade tier on tier anniversary.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -11361,7 +16178,7 @@ await client.tier.createTierGroup({
 </dl>
 </details>
 
-<details><summary><code>client.tier.<a href="/src/api/resources/tier/client/Client.ts">getTierGroup</a>({ ...params }) -> BrevoApi.TierGroup</code></summary>
+<details><summary><code>client.tier.<a href="src/brevo/tier/client.py">get_tier_group</a>(...) -&gt; AsyncHttpResponse[TierGroup]</code></summary>
 <dl>
 <dd>
 
@@ -11387,11 +16204,16 @@ Returns tier group information.
 <dl>
 <dd>
 
-```typescript
-await client.tier.getTierGroup({
-    pid: "pid",
-    gid: "gid"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.tier.get_tier_group(
+    pid="pid",
+    gid="gid",
+)
 
 ```
 </dd>
@@ -11407,7 +16229,7 @@ await client.tier.getTierGroup({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetTierGroupRequest` 
+**pid:** `str` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -11415,7 +16237,23 @@ await client.tier.getTierGroup({
 <dl>
 <dd>
 
-**requestOptions:** `TierClient.RequestOptions` 
+**gid:** `str` — Tier group ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**version:** `typing.Optional[GetTierGroupRequestVersion]` — Select active to retrieve active version of tier group. Select draft to retrieve latest changes in tier group.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -11427,7 +16265,7 @@ await client.tier.getTierGroup({
 </dl>
 </details>
 
-<details><summary><code>client.tier.<a href="/src/api/resources/tier/client/Client.ts">updateTierGroup</a>({ ...params }) -> BrevoApi.TierGroup</code></summary>
+<details><summary><code>client.tier.<a href="src/brevo/tier/client.py">update_tier_group</a>(...) -&gt; AsyncHttpResponse[TierGroup]</code></summary>
 <dl>
 <dd>
 
@@ -11453,15 +16291,20 @@ Updates a tier group from a loyalty program. *(The changes will take effect with
 <dl>
 <dd>
 
-```typescript
-await client.tier.updateTierGroup({
-    pid: "pid",
-    gid: "gid",
-    downgradeStrategy: "real_time",
-    name: "name",
-    tierOrder: ["tierOrder"],
-    upgradeStrategy: "real_time"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.tier.update_tier_group(
+    pid="pid",
+    gid="gid",
+    downgrade_strategy="real_time",
+    name="name",
+    tier_order=["tierOrder"],
+    upgrade_strategy="real_time",
+)
 
 ```
 </dd>
@@ -11477,7 +16320,7 @@ await client.tier.updateTierGroup({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateTierGroupRequest` 
+**pid:** `str` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -11485,7 +16328,47 @@ await client.tier.updateTierGroup({
 <dl>
 <dd>
 
-**requestOptions:** `TierClient.RequestOptions` 
+**gid:** `str` — Tier group ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**downgrade_strategy:** `UpdateTierGroupRequestDowngradeStrategy` — Select real_time to downgrade tier on real time balance updates. Select membership_anniversary to downgrade tier on subscription anniversary. Select tier_anniversary to downgrade tier on tier anniversary.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `str` — Name of the tier group
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tier_order:** `typing.Sequence[str]` — Order of the tiers in the group in ascending order
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**upgrade_strategy:** `UpdateTierGroupRequestUpgradeStrategy` — Select real_time to upgrade tier on real time balance updates. Select membership_anniversary to upgrade tier on subscription anniversary. Select tier_anniversary to upgrade tier on tier anniversary.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -11497,7 +16380,7 @@ await client.tier.updateTierGroup({
 </dl>
 </details>
 
-<details><summary><code>client.tier.<a href="/src/api/resources/tier/client/Client.ts">deleteTierGroup</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.tier.<a href="src/brevo/tier/client.py">delete_tier_group</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -11523,11 +16406,16 @@ Deletes a tier group from a loyalty program. *(The changes will take effect with
 <dl>
 <dd>
 
-```typescript
-await client.tier.deleteTierGroup({
-    pid: "pid",
-    gid: "gid"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.tier.delete_tier_group(
+    pid="pid",
+    gid="gid",
+)
 
 ```
 </dd>
@@ -11543,7 +16431,7 @@ await client.tier.deleteTierGroup({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteTierGroupRequest` 
+**pid:** `str` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -11551,7 +16439,15 @@ await client.tier.deleteTierGroup({
 <dl>
 <dd>
 
-**requestOptions:** `TierClient.RequestOptions` 
+**gid:** `str` — Tier group ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -11563,7 +16459,7 @@ await client.tier.deleteTierGroup({
 </dl>
 </details>
 
-<details><summary><code>client.tier.<a href="/src/api/resources/tier/client/Client.ts">createTierForTierGroup</a>({ ...params }) -> BrevoApi.Tier</code></summary>
+<details><summary><code>client.tier.<a href="src/brevo/tier/client.py">create_tier_for_tier_group</a>(...) -&gt; AsyncHttpResponse[Tier]</code></summary>
 <dl>
 <dd>
 
@@ -11589,13 +16485,19 @@ Creates a new tier in a loyalty program tier group. *(The changes will take effe
 <dl>
 <dd>
 
-```typescript
-await client.tier.createTierForTierGroup({
-    pid: "pid",
-    gid: "gid",
-    accessConditions: [{}],
-    name: "name"
-});
+```python
+from brevo import BrevoApi
+from brevo.tier import CreateTierForTierGroupRequestAccessConditionsItem
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.tier.create_tier_for_tier_group(
+    pid="pid",
+    gid="gid",
+    access_conditions=[CreateTierForTierGroupRequestAccessConditionsItem()],
+    name="name",
+)
 
 ```
 </dd>
@@ -11611,7 +16513,7 @@ await client.tier.createTierForTierGroup({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateTierForTierGroupRequest` 
+**pid:** `str` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -11619,7 +16521,47 @@ await client.tier.createTierForTierGroup({
 <dl>
 <dd>
 
-**requestOptions:** `TierClient.RequestOptions` 
+**gid:** `str` — Tier group ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**access_conditions:** `typing.Sequence[CreateTierForTierGroupRequestAccessConditionsItem]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `str` — Name of the tier to be created
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**image_ref:** `typing.Optional[str]` — Image of the tier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tier_rewards:** `typing.Optional[typing.Sequence[CreateTierForTierGroupRequestTierRewardsItem]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -11631,7 +16573,7 @@ await client.tier.createTierForTierGroup({
 </dl>
 </details>
 
-<details><summary><code>client.tier.<a href="/src/api/resources/tier/client/Client.ts">getLoyaltyProgramTier</a>({ ...params }) -> BrevoApi.GetLoyaltyProgramTierResponse</code></summary>
+<details><summary><code>client.tier.<a href="src/brevo/tier/client.py">get_loyalty_program_tier</a>(...) -&gt; AsyncHttpResponse[GetLoyaltyProgramTierResponse]</code></summary>
 <dl>
 <dd>
 
@@ -11657,10 +16599,15 @@ Returns the list of tiers defined within the loyalty program.
 <dl>
 <dd>
 
-```typescript
-await client.tier.getLoyaltyProgramTier({
-    pid: "pid"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.tier.get_loyalty_program_tier(
+    pid="pid",
+)
 
 ```
 </dd>
@@ -11676,7 +16623,7 @@ await client.tier.getLoyaltyProgramTier({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetLoyaltyProgramTierRequest` 
+**pid:** `str` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -11684,7 +16631,15 @@ await client.tier.getLoyaltyProgramTier({
 <dl>
 <dd>
 
-**requestOptions:** `TierClient.RequestOptions` 
+**version:** `typing.Optional[GetLoyaltyProgramTierRequestVersion]` — Select 'active' to retrieve list of all tiers which are live for clients. Select draft to retrieve list of all non deleted tiers.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -11696,7 +16651,7 @@ await client.tier.getLoyaltyProgramTier({
 </dl>
 </details>
 
-<details><summary><code>client.tier.<a href="/src/api/resources/tier/client/Client.ts">updateTier</a>({ ...params }) -> BrevoApi.Tier</code></summary>
+<details><summary><code>client.tier.<a href="src/brevo/tier/client.py">update_tier</a>(...) -&gt; AsyncHttpResponse[Tier]</code></summary>
 <dl>
 <dd>
 
@@ -11722,14 +16677,23 @@ Modifies an existing tier for the specified tier group *(The changes will take e
 <dl>
 <dd>
 
-```typescript
-await client.tier.updateTier({
-    pid: "pid",
-    tid: "tid",
-    accessConditions: [{}],
-    name: "name",
-    tierRewards: [{}]
-});
+```python
+from brevo import BrevoApi
+from brevo.tier import (
+    UpdateTierRequestAccessConditionsItem,
+    UpdateTierRequestTierRewardsItem,
+)
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.tier.update_tier(
+    pid="pid",
+    tid="tid",
+    access_conditions=[UpdateTierRequestAccessConditionsItem()],
+    name="name",
+    tier_rewards=[UpdateTierRequestTierRewardsItem()],
+)
 
 ```
 </dd>
@@ -11745,7 +16709,7 @@ await client.tier.updateTier({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateTierRequest` 
+**pid:** `str` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -11753,7 +16717,47 @@ await client.tier.updateTier({
 <dl>
 <dd>
 
-**requestOptions:** `TierClient.RequestOptions` 
+**tid:** `str` — Tier ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**access_conditions:** `typing.Sequence[UpdateTierRequestAccessConditionsItem]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `str` — Name of the tier to be created
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tier_rewards:** `typing.Sequence[UpdateTierRequestTierRewardsItem]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**image_ref:** `typing.Optional[str]` — Image of the tier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -11765,7 +16769,7 @@ await client.tier.updateTier({
 </dl>
 </details>
 
-<details><summary><code>client.tier.<a href="/src/api/resources/tier/client/Client.ts">deleteTier</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.tier.<a href="src/brevo/tier/client.py">delete_tier</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -11791,11 +16795,16 @@ Deletes a tier from a loyalty program tier group. *(The changes will take effect
 <dl>
 <dd>
 
-```typescript
-await client.tier.deleteTier({
-    pid: "pid",
-    tid: "tid"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.tier.delete_tier(
+    pid="pid",
+    tid="tid",
+)
 
 ```
 </dd>
@@ -11811,7 +16820,7 @@ await client.tier.deleteTier({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteTierRequest` 
+**pid:** `str` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -11819,7 +16828,15 @@ await client.tier.deleteTier({
 <dl>
 <dd>
 
-**requestOptions:** `TierClient.RequestOptions` 
+**tid:** `str` — Tier ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -11832,7 +16849,7 @@ await client.tier.deleteTier({
 </details>
 
 ## EmailCampaigns
-<details><summary><code>client.emailCampaigns.<a href="/src/api/resources/emailCampaigns/client/Client.ts">getEmailCampaigns</a>({ ...params }) -> BrevoApi.GetEmailCampaignsResponse</code></summary>
+<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">get_email_campaigns</a>(...) -&gt; AsyncHttpResponse[GetEmailCampaignsResponse]</code></summary>
 <dl>
 <dd>
 
@@ -11862,8 +16879,13 @@ You now need to specify which type of statistics you would like to retrieve. For
 <dl>
 <dd>
 
-```typescript
-await client.emailCampaigns.getEmailCampaigns();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.email_campaigns.get_email_campaigns()
 
 ```
 </dd>
@@ -11879,7 +16901,7 @@ await client.emailCampaigns.getEmailCampaigns();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetEmailCampaignsRequest` 
+**type:** `typing.Optional[GetEmailCampaignsRequestType]` — Filter on the type of the campaigns
     
 </dd>
 </dl>
@@ -11887,7 +16909,71 @@ await client.emailCampaigns.getEmailCampaigns();
 <dl>
 <dd>
 
-**requestOptions:** `EmailCampaignsClient.RequestOptions` 
+**status:** `typing.Optional[GetEmailCampaignsRequestStatus]` — Filter on the status of the campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**statistics:** `typing.Optional[GetEmailCampaignsRequestStatistics]` — Filter on type of the statistics required. Example **globalStats** value will only fetch globalStats info of the campaign in returned response.This option only returns data for events occurred in the last 6 months.For older campaigns, it’s advisable to use the **Get Campaign Report** endpoint.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**start_date:** `typing.Optional[str]` — **Mandatory if endDate is used**. Starting (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to filter the sent email campaigns. **Prefer to pass your timezone in date-time format for accurate result** ( only available if either 'status' not passed and if passed is set to 'sent' )
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**end_date:** `typing.Optional[str]` — **Mandatory if startDate is used**. Ending (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to filter the sent email campaigns. **Prefer to pass your timezone in date-time format for accurate result** ( only available if either 'status' not passed and if passed is set to 'sent' )
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` — Number of documents per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**offset:** `typing.Optional[int]` — Index of the first document in the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetEmailCampaignsRequestSort]` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**exclude_html_content:** `typing.Optional[bool]` — Use this flag to exclude htmlContent from the response body. If set to **true**, htmlContent field will be returned as empty string in the response body
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -11899,7 +16985,7 @@ await client.emailCampaigns.getEmailCampaigns();
 </dl>
 </details>
 
-<details><summary><code>client.emailCampaigns.<a href="/src/api/resources/emailCampaigns/client/Client.ts">createEmailCampaign</a>({ ...params }) -> BrevoApi.CreateEmailCampaignResponse</code></summary>
+<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">create_email_campaign</a>(...) -&gt; AsyncHttpResponse[CreateEmailCampaignResponse]</code></summary>
 <dl>
 <dd>
 
@@ -11911,11 +16997,17 @@ await client.emailCampaigns.getEmailCampaigns();
 <dl>
 <dd>
 
-```typescript
-await client.emailCampaigns.createEmailCampaign({
-    name: "Newsletter - May 2017",
-    sender: {}
-});
+```python
+from brevo import BrevoApi
+from brevo.email_campaigns import CreateEmailCampaignRequestSender
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.email_campaigns.create_email_campaign(
+    name="Newsletter - May 2017",
+    sender=CreateEmailCampaignRequestSender(),
+)
 
 ```
 </dd>
@@ -11931,7 +17023,7 @@ await client.emailCampaigns.createEmailCampaign({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateEmailCampaignRequest` 
+**name:** `str` — Name of the campaign
     
 </dd>
 </dl>
@@ -11939,7 +17031,255 @@ await client.emailCampaigns.createEmailCampaign({
 <dl>
 <dd>
 
-**requestOptions:** `EmailCampaignsClient.RequestOptions` 
+**sender:** `CreateEmailCampaignRequestSender` — Sender details including id or email and name (_optional_). Only one of either Sender's email or Sender's ID shall be passed in one request at a time. For example: **{"name":"xyz", "email":"example@abc.com"}** **{"name":"xyz", "id":123}**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ab_testing:** `typing.Optional[bool]` — Status of A/B Test. abTesting = false means it is disabled & abTesting = true means it is enabled. **subjectA, subjectB, splitRule, winnerCriteria & winnerDelay** will be considered when abTesting is set to true. subjectA & subjectB are mandatory together & subject if passed is ignored. **Can be set to true only if sendAtBestTime is false**. You will be able to set up two subject lines for your campaign and send them to a random sample of your total recipients. Half of the test group will receive version A, and the other half will receive version B
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_url:** `typing.Optional[str]` — Absolute url of the attachment (no local file). Extension allowed: #### xlsx, xls, ods, docx, docm, doc, csv, pdf, txt, gif, jpg, jpeg, png, tif, tiff, rtf, bmp, cgm, css, shtml, html, htm, zip, xml, ppt, pptx, tar, ez, ics, mobi, msg, pub and eps
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**email_expiration_date:** `typing.Optional[CreateEmailCampaignRequestEmailExpirationDate]` — To reduce your carbon footprint, set an expiration date for your email. If supported, it will be automatically deleted from the recipient’s inbox, saving storage space and energy. Learn more about setting an email expiration date. For reference , ``https://help.brevo.com/hc/en-us/articles/4413566705298-Create-an-email-campaign``
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**footer:** `typing.Optional[str]` — Footer of the email campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**header:** `typing.Optional[str]` — Header of the email campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**html_content:** `typing.Optional[str]` — Mandatory if htmlUrl and templateId are empty. Body of the message (HTML).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**html_url:** `typing.Optional[str]` — **Mandatory if htmlContent and templateId are empty**. Url to the message (HTML). For example: **https://html.domain.com**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**increase_rate:** `typing.Optional[int]` — **Mandatory if ipWarmupEnable is set to true**. Set a percentage increase rate for warming up your ip. We recommend you set the increase rate to 30% per day. If you want to send the same number of emails every day, set the daily increase value to 0%.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**initial_quota:** `typing.Optional[int]` — **Mandatory if ipWarmupEnable is set to true**. Set an initial quota greater than 1 for warming up your ip. We recommend you set a value of 3000.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**inline_image_activation:** `typing.Optional[bool]` — Use true to embedded the images in your email. Final size of the email should be less than **4MB**. Campaigns with embedded images can _not be sent to more than 5000 contacts_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ip_warmup_enable:** `typing.Optional[bool]` — **Available for dedicated ip clients**. Set this to true if you wish to warm up your ip.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**mirror_active:** `typing.Optional[bool]` — Use true to enable the mirror link
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**params:** `typing.Optional[typing.Dict[str, typing.Any]]` — Pass the set of attributes to customize the type classic campaign. For example: **{"FNAME":"Joe", "LNAME":"Doe"}**. Only available if **type** is **classic**. It's considered only if campaign is in _New Template Language format_. The New Template Language is dependent on the values of **subject, htmlContent/htmlUrl, sender.name & toField**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**preview_text:** `typing.Optional[str]` — Preview text or preheader of the email campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**recipients:** `typing.Optional[CreateEmailCampaignRequestRecipients]` — Segment ids and List ids to include/exclude from campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reply_to:** `typing.Optional[str]` — Email on which the campaign recipients will be able to reply to
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scheduled_at:** `typing.Optional[str]` — Sending UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result**. If sendAtBestTime is set to true, your campaign will be sent according to the date passed (ignoring the time part). For example: **2017-06-01T12:30:00+02:00**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**send_at_best_time:** `typing.Optional[bool]` — Set this to true if you want to send your campaign at best time.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**split_rule:** `typing.Optional[int]` — Add the size of your test groups. **Mandatory if abTesting = true & 'recipients' is passed**. We'll send version A and B to a random sample of recipients, and then the winning version to everyone else
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**subject:** `typing.Optional[str]` — Subject of the campaign. **Mandatory if abTesting is false**. Ignored if abTesting is true.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**subject_a:** `typing.Optional[str]` — Subject A of the campaign. **Mandatory if abTesting = true**. subjectA & subjectB should have unique value
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**subject_b:** `typing.Optional[str]` — Subject B of the campaign. **Mandatory if abTesting = true**. subjectA & subjectB should have unique value
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tag:** `typing.Optional[str]` — Tag of the campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**template_id:** `typing.Optional[int]` — **Mandatory if htmlContent and htmlUrl are empty**. Id of the transactional email template with status _active_. Used to copy only its content fetched from htmlContent/htmlUrl to an email campaign for RSS feature.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**to_field:** `typing.Optional[str]` — To personalize the **To** Field. If you want to include the first name and last name of your recipient, add **{FNAME} {LNAME}**. These contact attributes must already exist in your Brevo account. If input parameter **params** used please use **{{contact.FNAME}} {{contact.LNAME}}** for personalization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**unsubscription_page_id:** `typing.Optional[str]` — Enter an unsubscription page id. The page id is a 24 digit alphanumeric id that can be found in the URL when editing the page. If not entered, then the default unsubscription page will be used.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**update_form_id:** `typing.Optional[str]` — **Mandatory if templateId is used containing the {{ update_profile }} tag**. Enter an update profile form id. The form id is a 24 digit alphanumeric id that can be found in the URL when editing the form. If not entered, then the default update profile form will be used.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**utm_campaign:** `typing.Optional[str]` — Customize the utm_campaign value. If this field is empty, the campaign name will be used. Only alphanumeric characters and spaces are allowed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**winner_criteria:** `typing.Optional[CreateEmailCampaignRequestWinnerCriteria]` — Choose the metrics that will determinate the winning version. **Mandatory if _splitRule_ >= 1 and < 50**. If splitRule = 50, `winnerCriteria` is ignored if passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**winner_delay:** `typing.Optional[int]` — Choose the duration of the test in hours. Maximum is 7 days, pass 24*7 = 168 hours. The winning version will be sent at the end of the test. **Mandatory if _splitRule_ >= 1 and < 50**. If splitRule = 50, `winnerDelay` is ignored if passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -11951,7 +17291,7 @@ await client.emailCampaigns.createEmailCampaign({
 </dl>
 </details>
 
-<details><summary><code>client.emailCampaigns.<a href="/src/api/resources/emailCampaigns/client/Client.ts">uploadImageToGallery</a>({ ...params }) -> BrevoApi.UploadImageToGalleryResponse</code></summary>
+<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">upload_image_to_gallery</a>(...) -&gt; AsyncHttpResponse[UploadImageToGalleryResponse]</code></summary>
 <dl>
 <dd>
 
@@ -11963,10 +17303,15 @@ await client.emailCampaigns.createEmailCampaign({
 <dl>
 <dd>
 
-```typescript
-await client.emailCampaigns.uploadImageToGallery({
-    imageUrl: "https://somedomain.com/image1.jpg"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.email_campaigns.upload_image_to_gallery(
+    image_url="https://somedomain.com/image1.jpg",
+)
 
 ```
 </dd>
@@ -11982,7 +17327,7 @@ await client.emailCampaigns.uploadImageToGallery({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UploadImageToGalleryRequest` 
+**image_url:** `str` — The absolute url of the image (**no local file**). Maximum allowed size for image is **2MB**. Allowed extensions for images are: #### jpeg, jpg, png, bmp, gif.
     
 </dd>
 </dl>
@@ -11990,7 +17335,15 @@ await client.emailCampaigns.uploadImageToGallery({
 <dl>
 <dd>
 
-**requestOptions:** `EmailCampaignsClient.RequestOptions` 
+**name:** `typing.Optional[str]` — Name of the image.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -12002,7 +17355,7 @@ await client.emailCampaigns.uploadImageToGallery({
 </dl>
 </details>
 
-<details><summary><code>client.emailCampaigns.<a href="/src/api/resources/emailCampaigns/client/Client.ts">getEmailCampaign</a>({ ...params }) -> BrevoApi.GetEmailCampaignResponse</code></summary>
+<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">get_email_campaign</a>(...) -&gt; AsyncHttpResponse[GetEmailCampaignResponse]</code></summary>
 <dl>
 <dd>
 
@@ -12014,10 +17367,15 @@ await client.emailCampaigns.uploadImageToGallery({
 <dl>
 <dd>
 
-```typescript
-await client.emailCampaigns.getEmailCampaign({
-    campaignId: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.email_campaigns.get_email_campaign(
+    campaign_id=1000000,
+)
 
 ```
 </dd>
@@ -12033,7 +17391,7 @@ await client.emailCampaigns.getEmailCampaign({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetEmailCampaignRequest` 
+**campaign_id:** `int` — Id of the campaign
     
 </dd>
 </dl>
@@ -12041,7 +17399,15 @@ await client.emailCampaigns.getEmailCampaign({
 <dl>
 <dd>
 
-**requestOptions:** `EmailCampaignsClient.RequestOptions` 
+**statistics:** `typing.Optional[GetEmailCampaignRequestStatistics]` — Filter on type of the statistics required. Example **globalStats** value will only fetch globalStats info of the campaign in returned response.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -12053,7 +17419,7 @@ await client.emailCampaigns.getEmailCampaign({
 </dl>
 </details>
 
-<details><summary><code>client.emailCampaigns.<a href="/src/api/resources/emailCampaigns/client/Client.ts">updateEmailCampaign</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">update_email_campaign</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -12065,10 +17431,15 @@ await client.emailCampaigns.getEmailCampaign({
 <dl>
 <dd>
 
-```typescript
-await client.emailCampaigns.updateEmailCampaign({
-    campaignId: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.email_campaigns.update_email_campaign(
+    campaign_id=1000000,
+)
 
 ```
 </dd>
@@ -12084,7 +17455,7 @@ await client.emailCampaigns.updateEmailCampaign({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateEmailCampaignRequest` 
+**campaign_id:** `int` — Id of the campaign
     
 </dd>
 </dl>
@@ -12092,7 +17463,263 @@ await client.emailCampaigns.updateEmailCampaign({
 <dl>
 <dd>
 
-**requestOptions:** `EmailCampaignsClient.RequestOptions` 
+**ab_testing:** `typing.Optional[bool]` — Status of A/B Test. abTesting = false means it is disabled & abTesting = true means it is enabled. **subjectA, subjectB, splitRule, winnerCriteria & winnerDelay** will be considered when abTesting is set to true. subjectA & subjectB are mandatory together & subject if passed is ignored. **Can be set to true only if sendAtBestTime is false**. You will be able to set up two subject lines for your campaign and send them to a random sample of your total recipients. Half of the test group will receive version A, and the other half will receive version B
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_url:** `typing.Optional[str]` — Absolute url of the attachment (no local file). Extension allowed: #### xlsx, xls, ods, docx, docm, doc, csv, pdf, txt, gif, jpg, jpeg, png, tif, tiff, rtf, bmp, cgm, css, shtml, html, htm, zip, xml, ppt, pptx, tar, ez, ics, mobi, msg, pub and eps'
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**email_expiration_date:** `typing.Optional[UpdateEmailCampaignRequestEmailExpirationDate]` — To reduce your carbon footprint, set an expiration date for your email. If supported, it will be automatically deleted from the recipient’s inbox, saving storage space and energy.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**footer:** `typing.Optional[str]` — Footer of the email campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**header:** `typing.Optional[str]` — Header of the email campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**html_content:** `typing.Optional[str]` — Body of the message (HTML version). If the campaign is designed using Drag & Drop editor via HTML content, then the design page will not have Drag & Drop editor access for that campaign. **REQUIRED if htmlUrl is empty**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**html_url:** `typing.Optional[str]` — Url which contents the body of the email message. **REQUIRED if htmlContent is empty**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**increase_rate:** `typing.Optional[int]` — Set a percentage increase rate for warming up your ip. We recommend you set the increase rate to 30% per day. If you want to send the same number of emails every day, set the daily increase value to 0%.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**initial_quota:** `typing.Optional[int]` — Set an initial quota greater than 1 for warming up your ip. We recommend you set a value of 3000.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**inline_image_activation:** `typing.Optional[bool]` — Status of inline image. inlineImageActivation = false means image can’t be embedded, & inlineImageActivation = true means image can be embedded, in the email. You cannot send a campaign of more than **4MB** with images embedded in the email. Campaigns with the images embedded in the email _must be sent to less than 5000 contacts_.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ip_warmup_enable:** `typing.Optional[bool]` — **Available for dedicated ip clients**. Set this to true if you wish to warm up your ip.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**mirror_active:** `typing.Optional[bool]` — Status of mirror links in campaign. mirrorActive = false means mirror links are deactivated, & mirrorActive = true means mirror links are activated, in the campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `typing.Optional[str]` — Name of the campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**params:** `typing.Optional[typing.Dict[str, typing.Any]]` — Pass the set of attributes to customize the type classic campaign. For example: **{"FNAME":"Joe", "LNAME":"Doe"}**. Only available if **type** is **classic**. It's considered only if campaign is in _New Template Language format_. The New Template Language is dependent on the values of **subject, htmlContent/htmlUrl, sender.name & toField**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**preview_text:** `typing.Optional[str]` — Preview text or preheader of the email campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**recipients:** `typing.Optional[UpdateEmailCampaignRequestRecipients]` — Segment ids and List ids to include/exclude from campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**recurring:** `typing.Optional[bool]` — **FOR TRIGGER ONLY !** Type of trigger campaign.recurring = false means contact can receive the same Trigger campaign only once, & recurring = true means contact can receive the same Trigger campaign several times
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reply_to:** `typing.Optional[str]` — Email on which campaign recipients will be able to reply to
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scheduled_at:** `typing.Optional[str]` — UTC date-time on which the campaign has to run (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.** If sendAtBestTime is set to true, your campaign will be sent according to the date passed (ignoring the time part).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**send_at_best_time:** `typing.Optional[bool]` — Set this to true if you want to send your campaign at best time. Note:- **if true, warmup ip will be disabled.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sender:** `typing.Optional[UpdateEmailCampaignRequestSender]` — Sender details including id or email and name (optional). Only one of either Sender's email or Sender's ID shall be passed in one request at a time. For example: **{"name":"xyz", "email":"example@abc.com"}** **{"name":"xyz", "id":123}**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**split_rule:** `typing.Optional[int]` — Add the size of your test groups. **Mandatory if abTesting = true & 'recipients' is passed**. We'll send version A and B to a random sample of recipients, and then the winning version to everyone else
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**subject:** `typing.Optional[str]` — Subject of the campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**subject_a:** `typing.Optional[str]` — Subject A of the campaign. **Mandatory if abTesting = true**. subjectA & subjectB should have unique value
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**subject_b:** `typing.Optional[str]` — Subject B of the campaign. **Mandatory if abTesting = true**. subjectA & subjectB should have unique value
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tag:** `typing.Optional[str]` — Tag of the campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**to_field:** `typing.Optional[str]` — To personalize the **To** Field. If you want to include the first name and last name of your recipient, add **{FNAME} {LNAME}**. These contact attributes must already exist in your Brevo account. If input parameter **params** used please use **{{contact.FNAME}} {{contact.LNAME}}** for personalization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**unsubscription_page_id:** `typing.Optional[str]` — Enter an unsubscription page id. The page id is a 24 digit alphanumeric id that can be found in the URL when editing the page.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**update_form_id:** `typing.Optional[str]` — **Mandatory if templateId is used containing the {{ update_profile }} tag**. Enter an update profile form id. The form id is a 24 digit alphanumeric id that can be found in the URL when editing the form.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**utm_campaign:** `typing.Optional[str]` — Customize the utm_campaign value. If this field is empty, the campaign name will be used. Only alphanumeric characters and spaces are allowed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**winner_criteria:** `typing.Optional[UpdateEmailCampaignRequestWinnerCriteria]` — Choose the metrics that will determinate the winning version. **Mandatory if _splitRule_ >= 1 and < 50**. If splitRule = 50, `winnerCriteria` is ignored if passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**winner_delay:** `typing.Optional[int]` — Choose the duration of the test in hours. Maximum is 7 days, pass 24*7 = 168 hours. The winning version will be sent at the end of the test. **Mandatory if _splitRule_ >= 1 and < 50**. If splitRule = 50, `winnerDelay` is ignored if passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -12104,7 +17731,7 @@ await client.emailCampaigns.updateEmailCampaign({
 </dl>
 </details>
 
-<details><summary><code>client.emailCampaigns.<a href="/src/api/resources/emailCampaigns/client/Client.ts">deleteEmailCampaign</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">delete_email_campaign</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -12116,10 +17743,15 @@ await client.emailCampaigns.updateEmailCampaign({
 <dl>
 <dd>
 
-```typescript
-await client.emailCampaigns.deleteEmailCampaign({
-    campaignId: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.email_campaigns.delete_email_campaign(
+    campaign_id=1000000,
+)
 
 ```
 </dd>
@@ -12135,7 +17767,7 @@ await client.emailCampaigns.deleteEmailCampaign({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteEmailCampaignRequest` 
+**campaign_id:** `int` — id of the campaign
     
 </dd>
 </dl>
@@ -12143,7 +17775,7 @@ await client.emailCampaigns.deleteEmailCampaign({
 <dl>
 <dd>
 
-**requestOptions:** `EmailCampaignsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -12155,7 +17787,7 @@ await client.emailCampaigns.deleteEmailCampaign({
 </dl>
 </details>
 
-<details><summary><code>client.emailCampaigns.<a href="/src/api/resources/emailCampaigns/client/Client.ts">getAbTestCampaignResult</a>({ ...params }) -> BrevoApi.GetAbTestCampaignResultResponse</code></summary>
+<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">get_ab_test_campaign_result</a>(...) -&gt; AsyncHttpResponse[GetAbTestCampaignResultResponse]</code></summary>
 <dl>
 <dd>
 
@@ -12181,10 +17813,15 @@ Obtain winning version of an A/B test email campaign
 <dl>
 <dd>
 
-```typescript
-await client.emailCampaigns.getAbTestCampaignResult({
-    campaignId: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.email_campaigns.get_ab_test_campaign_result(
+    campaign_id=1000000,
+)
 
 ```
 </dd>
@@ -12200,7 +17837,7 @@ await client.emailCampaigns.getAbTestCampaignResult({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetAbTestCampaignResultRequest` 
+**campaign_id:** `int` — Id of the A/B test campaign
     
 </dd>
 </dl>
@@ -12208,7 +17845,7 @@ await client.emailCampaigns.getAbTestCampaignResult({
 <dl>
 <dd>
 
-**requestOptions:** `EmailCampaignsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -12220,7 +17857,7 @@ await client.emailCampaigns.getAbTestCampaignResult({
 </dl>
 </details>
 
-<details><summary><code>client.emailCampaigns.<a href="/src/api/resources/emailCampaigns/client/Client.ts">emailExportRecipients</a>({ ...params }) -> BrevoApi.EmailExportRecipientsResponse</code></summary>
+<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">email_export_recipients</a>(...) -&gt; AsyncHttpResponse[EmailExportRecipientsResponse]</code></summary>
 <dl>
 <dd>
 
@@ -12232,11 +17869,16 @@ await client.emailCampaigns.getAbTestCampaignResult({
 <dl>
 <dd>
 
-```typescript
-await client.emailCampaigns.emailExportRecipients({
-    campaignId: 1000000,
-    recipientsType: "all"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.email_campaigns.email_export_recipients(
+    campaign_id=1000000,
+    recipients_type="all",
+)
 
 ```
 </dd>
@@ -12252,7 +17894,7 @@ await client.emailCampaigns.emailExportRecipients({
 <dl>
 <dd>
 
-**request:** `BrevoApi.EmailExportRecipientsRequest` 
+**campaign_id:** `int` — Id of the campaign
     
 </dd>
 </dl>
@@ -12260,7 +17902,23 @@ await client.emailCampaigns.emailExportRecipients({
 <dl>
 <dd>
 
-**requestOptions:** `EmailCampaignsClient.RequestOptions` 
+**recipients_type:** `EmailExportRecipientsRequestRecipientsType` — Type of recipients to export for a campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notify_url:** `typing.Optional[str]` — Webhook called once the export process is finished. For reference, https://help.brevo.com/hc/en-us/articles/360007666479
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -12272,7 +17930,7 @@ await client.emailCampaigns.emailExportRecipients({
 </dl>
 </details>
 
-<details><summary><code>client.emailCampaigns.<a href="/src/api/resources/emailCampaigns/client/Client.ts">sendEmailCampaignNow</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">send_email_campaign_now</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -12284,10 +17942,15 @@ await client.emailCampaigns.emailExportRecipients({
 <dl>
 <dd>
 
-```typescript
-await client.emailCampaigns.sendEmailCampaignNow({
-    campaignId: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.email_campaigns.send_email_campaign_now(
+    campaign_id=1000000,
+)
 
 ```
 </dd>
@@ -12303,7 +17966,7 @@ await client.emailCampaigns.sendEmailCampaignNow({
 <dl>
 <dd>
 
-**request:** `BrevoApi.SendEmailCampaignNowRequest` 
+**campaign_id:** `int` — Id of the campaign
     
 </dd>
 </dl>
@@ -12311,7 +17974,7 @@ await client.emailCampaigns.sendEmailCampaignNow({
 <dl>
 <dd>
 
-**requestOptions:** `EmailCampaignsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -12323,7 +17986,7 @@ await client.emailCampaigns.sendEmailCampaignNow({
 </dl>
 </details>
 
-<details><summary><code>client.emailCampaigns.<a href="/src/api/resources/emailCampaigns/client/Client.ts">sendReport</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">send_report</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -12349,16 +18012,19 @@ A PDF will be sent to the specified email addresses
 <dl>
 <dd>
 
-```typescript
-await client.emailCampaigns.sendReport({
-    campaignId: 1000000,
-    body: {
-        email: {
-            body: "Please find attached the report of our last email campaign.",
-            to: ["jim.suehan@example.com"]
-        }
-    }
-});
+```python
+from brevo import BrevoApi, SendReportEmail
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.email_campaigns.send_report(
+    campaign_id=1000000,
+    email=SendReportEmail(
+        body="Please find attached the report of our last email campaign.",
+        to=["jim.suehan@example.com"],
+    ),
+)
 
 ```
 </dd>
@@ -12374,7 +18040,7 @@ await client.emailCampaigns.sendReport({
 <dl>
 <dd>
 
-**request:** `BrevoApi.SendReportRequest` 
+**campaign_id:** `int` — Id of the campaign
     
 </dd>
 </dl>
@@ -12382,7 +18048,23 @@ await client.emailCampaigns.sendReport({
 <dl>
 <dd>
 
-**requestOptions:** `EmailCampaignsClient.RequestOptions` 
+**email:** `SendReportEmail` — Custom attributes for the report email.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**language:** `typing.Optional[SendReportLanguage]` — Language of email content for campaign report sending.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -12394,7 +18076,7 @@ await client.emailCampaigns.sendReport({
 </dl>
 </details>
 
-<details><summary><code>client.emailCampaigns.<a href="/src/api/resources/emailCampaigns/client/Client.ts">sendTestEmail</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">send_test_email</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -12406,11 +18088,15 @@ await client.emailCampaigns.sendReport({
 <dl>
 <dd>
 
-```typescript
-await client.emailCampaigns.sendTestEmail({
-    campaignId: 1000000,
-    body: {}
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.email_campaigns.send_test_email(
+    campaign_id=1000000,
+)
 
 ```
 </dd>
@@ -12426,7 +18112,7 @@ await client.emailCampaigns.sendTestEmail({
 <dl>
 <dd>
 
-**request:** `BrevoApi.SendTestEmailRequest` 
+**campaign_id:** `int` — Id of the campaign
     
 </dd>
 </dl>
@@ -12434,7 +18120,15 @@ await client.emailCampaigns.sendTestEmail({
 <dl>
 <dd>
 
-**requestOptions:** `EmailCampaignsClient.RequestOptions` 
+**email_to:** `typing.Optional[typing.Sequence[str]]` — List of the email addresses of the recipients whom you wish to send the test mail. _If left empty, the test mail will be sent to your entire test list. You can not send more than 50 test emails per day_.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -12446,7 +18140,7 @@ await client.emailCampaigns.sendTestEmail({
 </dl>
 </details>
 
-<details><summary><code>client.emailCampaigns.<a href="/src/api/resources/emailCampaigns/client/Client.ts">getSharedTemplateUrl</a>({ ...params }) -> BrevoApi.GetSharedTemplateUrlResponse</code></summary>
+<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">get_shared_template_url</a>(...) -&gt; AsyncHttpResponse[GetSharedTemplateUrlResponse]</code></summary>
 <dl>
 <dd>
 
@@ -12472,10 +18166,15 @@ Get a unique URL to share & import an email template from one Brevo account to a
 <dl>
 <dd>
 
-```typescript
-await client.emailCampaigns.getSharedTemplateUrl({
-    campaignId: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.email_campaigns.get_shared_template_url(
+    campaign_id=1000000,
+)
 
 ```
 </dd>
@@ -12491,7 +18190,7 @@ await client.emailCampaigns.getSharedTemplateUrl({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetSharedTemplateUrlRequest` 
+**campaign_id:** `int` — Id of the campaign or template
     
 </dd>
 </dl>
@@ -12499,7 +18198,7 @@ await client.emailCampaigns.getSharedTemplateUrl({
 <dl>
 <dd>
 
-**requestOptions:** `EmailCampaignsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -12511,7 +18210,7 @@ await client.emailCampaigns.getSharedTemplateUrl({
 </dl>
 </details>
 
-<details><summary><code>client.emailCampaigns.<a href="/src/api/resources/emailCampaigns/client/Client.ts">updateCampaignStatus</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">update_campaign_status</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -12523,11 +18222,15 @@ await client.emailCampaigns.getSharedTemplateUrl({
 <dl>
 <dd>
 
-```typescript
-await client.emailCampaigns.updateCampaignStatus({
-    campaignId: 1000000,
-    body: {}
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.email_campaigns.update_campaign_status(
+    campaign_id=1000000,
+)
 
 ```
 </dd>
@@ -12543,7 +18246,7 @@ await client.emailCampaigns.updateCampaignStatus({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateCampaignStatusRequest` 
+**campaign_id:** `int` — Id of the campaign
     
 </dd>
 </dl>
@@ -12551,7 +18254,15 @@ await client.emailCampaigns.updateCampaignStatus({
 <dl>
 <dd>
 
-**requestOptions:** `EmailCampaignsClient.RequestOptions` 
+**status:** `typing.Optional[UpdateCampaignStatusStatus]` — Note:- **replicateTemplate** status will be available **only for template type campaigns.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -12564,7 +18275,7 @@ await client.emailCampaigns.updateCampaignStatus({
 </details>
 
 ## SmsCampaigns
-<details><summary><code>client.smsCampaigns.<a href="/src/api/resources/smsCampaigns/client/Client.ts">getSmsCampaigns</a>({ ...params }) -> BrevoApi.GetSmsCampaignsResponse</code></summary>
+<details><summary><code>client.sms_campaigns.<a href="src/brevo/sms_campaigns/client.py">get_sms_campaigns</a>(...) -&gt; AsyncHttpResponse[GetSmsCampaignsResponse]</code></summary>
 <dl>
 <dd>
 
@@ -12576,8 +18287,13 @@ await client.emailCampaigns.updateCampaignStatus({
 <dl>
 <dd>
 
-```typescript
-await client.smsCampaigns.getSmsCampaigns();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.sms_campaigns.get_sms_campaigns()
 
 ```
 </dd>
@@ -12593,7 +18309,7 @@ await client.smsCampaigns.getSmsCampaigns();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetSmsCampaignsRequest` 
+**status:** `typing.Optional[GetSmsCampaignsRequestStatus]` — Status of campaign.
     
 </dd>
 </dl>
@@ -12601,7 +18317,47 @@ await client.smsCampaigns.getSmsCampaigns();
 <dl>
 <dd>
 
-**requestOptions:** `SmsCampaignsClient.RequestOptions` 
+**start_date:** `typing.Optional[str]` — **Mandatory if endDate is used.** Starting (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to filter the sent sms campaigns. **Prefer to pass your timezone in date-time format for accurate result** ( only available if either 'status' not passed and if passed is set to 'sent' )
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**end_date:** `typing.Optional[str]` — **Mandatory if startDate is used.** Ending (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to filter the sent sms campaigns. **Prefer to pass your timezone in date-time format for accurate result** ( only available if either 'status' not passed and if passed is set to 'sent' )
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` — Number limitation for the result returned
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**offset:** `typing.Optional[int]` — Beginning point in the list to retrieve from.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetSmsCampaignsRequestSort]` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -12613,7 +18369,7 @@ await client.smsCampaigns.getSmsCampaigns();
 </dl>
 </details>
 
-<details><summary><code>client.smsCampaigns.<a href="/src/api/resources/smsCampaigns/client/Client.ts">createSmsCampaign</a>({ ...params }) -> BrevoApi.CreateSmsCampaignResponse</code></summary>
+<details><summary><code>client.sms_campaigns.<a href="src/brevo/sms_campaigns/client.py">create_sms_campaign</a>(...) -&gt; AsyncHttpResponse[CreateSmsCampaignResponse]</code></summary>
 <dl>
 <dd>
 
@@ -12625,12 +18381,17 @@ await client.smsCampaigns.getSmsCampaigns();
 <dl>
 <dd>
 
-```typescript
-await client.smsCampaigns.createSmsCampaign({
-    content: "Get a discount by visiting our NY store and saying : Happy Spring!",
-    name: "Spring Promo Code",
-    sender: "MyShop"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.sms_campaigns.create_sms_campaign(
+    content="Get a discount by visiting our NY store and saying : Happy Spring!",
+    name="Spring Promo Code",
+    sender="MyShop",
+)
 
 ```
 </dd>
@@ -12646,7 +18407,7 @@ await client.smsCampaigns.createSmsCampaign({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateSmsCampaignRequest` 
+**content:** `str` — Content of the message. The **maximum characters used per SMS is 160**, if used more than that, it will be counted as more than one SMS.
     
 </dd>
 </dl>
@@ -12654,7 +18415,63 @@ await client.smsCampaigns.createSmsCampaign({
 <dl>
 <dd>
 
-**requestOptions:** `SmsCampaignsClient.RequestOptions` 
+**name:** `str` — Name of the campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sender:** `str` — Name of the sender. **The number of characters is limited to 11 for alphanumeric characters and 15 for numeric characters**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**organisation_prefix:** `typing.Optional[str]` — A recognizable prefix will ensure your audience knows who you are. Recommended by U.S. carriers. This will be added as your Brand Name before the message content. **Prefer verifying maximum length of 160 characters including this prefix in message content to avoid multiple sending of same sms.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**recipients:** `typing.Optional[CreateSmsCampaignRequestRecipients]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scheduled_at:** `typing.Optional[str]` — UTC date-time on which the campaign has to run (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**unicode_enabled:** `typing.Optional[bool]` — Format of the message. It indicates whether the content should be treated as unicode or not.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**unsubscribe_instruction:** `typing.Optional[str]` — Instructions to unsubscribe from future communications. Recommended by U.S. carriers. Must include **STOP** keyword. This will be added as instructions after the end of message content. **Prefer verifying maximum length of 160 characters including this instructions in message content to avoid multiple sending of same sms.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -12666,7 +18483,7 @@ await client.smsCampaigns.createSmsCampaign({
 </dl>
 </details>
 
-<details><summary><code>client.smsCampaigns.<a href="/src/api/resources/smsCampaigns/client/Client.ts">getSmsCampaign</a>({ ...params }) -> BrevoApi.GetSmsCampaignResponse</code></summary>
+<details><summary><code>client.sms_campaigns.<a href="src/brevo/sms_campaigns/client.py">get_sms_campaign</a>(...) -&gt; AsyncHttpResponse[GetSmsCampaignResponse]</code></summary>
 <dl>
 <dd>
 
@@ -12678,10 +18495,15 @@ await client.smsCampaigns.createSmsCampaign({
 <dl>
 <dd>
 
-```typescript
-await client.smsCampaigns.getSmsCampaign({
-    campaignId: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.sms_campaigns.get_sms_campaign(
+    campaign_id=1000000,
+)
 
 ```
 </dd>
@@ -12697,7 +18519,7 @@ await client.smsCampaigns.getSmsCampaign({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetSmsCampaignRequest` 
+**campaign_id:** `int` — id of the SMS campaign
     
 </dd>
 </dl>
@@ -12705,7 +18527,7 @@ await client.smsCampaigns.getSmsCampaign({
 <dl>
 <dd>
 
-**requestOptions:** `SmsCampaignsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -12717,7 +18539,7 @@ await client.smsCampaigns.getSmsCampaign({
 </dl>
 </details>
 
-<details><summary><code>client.smsCampaigns.<a href="/src/api/resources/smsCampaigns/client/Client.ts">updateSmsCampaign</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.sms_campaigns.<a href="src/brevo/sms_campaigns/client.py">update_sms_campaign</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -12729,10 +18551,15 @@ await client.smsCampaigns.getSmsCampaign({
 <dl>
 <dd>
 
-```typescript
-await client.smsCampaigns.updateSmsCampaign({
-    campaignId: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.sms_campaigns.update_sms_campaign(
+    campaign_id=1000000,
+)
 
 ```
 </dd>
@@ -12748,7 +18575,7 @@ await client.smsCampaigns.updateSmsCampaign({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateSmsCampaignRequest` 
+**campaign_id:** `int` — id of the SMS campaign
     
 </dd>
 </dl>
@@ -12756,7 +18583,71 @@ await client.smsCampaigns.updateSmsCampaign({
 <dl>
 <dd>
 
-**requestOptions:** `SmsCampaignsClient.RequestOptions` 
+**content:** `typing.Optional[str]` — Content of the message. The **maximum characters used per SMS is 160**, if used more than that, it will be counted as more than one SMS
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `typing.Optional[str]` — Name of the campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**organisation_prefix:** `typing.Optional[str]` — A recognizable prefix will ensure your audience knows who you are. Recommended by U.S. carriers. This will be added as your Brand Name before the message content. **Prefer verifying maximum length of 160 characters including this prefix in message content to avoid multiple sending of same sms.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**recipients:** `typing.Optional[UpdateSmsCampaignRequestRecipients]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scheduled_at:** `typing.Optional[str]` — UTC date-time on which the campaign has to run (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sender:** `typing.Optional[str]` — Name of the sender. **The number of characters is limited to 11 for alphanumeric characters and 15 for numeric characters**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**unicode_enabled:** `typing.Optional[bool]` — Format of the message. It indicates whether the content should be treated as unicode or not.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**unsubscribe_instruction:** `typing.Optional[str]` — Instructions to unsubscribe from future communications. Recommended by U.S. carriers. Must include **STOP** keyword. This will be added as instructions after the end of message content. **Prefer verifying maximum length of 160 characters including this instructions in message content to avoid multiple sending of same sms.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -12768,7 +18659,7 @@ await client.smsCampaigns.updateSmsCampaign({
 </dl>
 </details>
 
-<details><summary><code>client.smsCampaigns.<a href="/src/api/resources/smsCampaigns/client/Client.ts">deleteSmsCampaign</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.sms_campaigns.<a href="src/brevo/sms_campaigns/client.py">delete_sms_campaign</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -12780,10 +18671,15 @@ await client.smsCampaigns.updateSmsCampaign({
 <dl>
 <dd>
 
-```typescript
-await client.smsCampaigns.deleteSmsCampaign({
-    campaignId: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.sms_campaigns.delete_sms_campaign(
+    campaign_id=1000000,
+)
 
 ```
 </dd>
@@ -12799,7 +18695,7 @@ await client.smsCampaigns.deleteSmsCampaign({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteSmsCampaignRequest` 
+**campaign_id:** `int` — id of the SMS campaign
     
 </dd>
 </dl>
@@ -12807,7 +18703,7 @@ await client.smsCampaigns.deleteSmsCampaign({
 <dl>
 <dd>
 
-**requestOptions:** `SmsCampaignsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -12819,7 +18715,7 @@ await client.smsCampaigns.deleteSmsCampaign({
 </dl>
 </details>
 
-<details><summary><code>client.smsCampaigns.<a href="/src/api/resources/smsCampaigns/client/Client.ts">requestSmsRecipientExport</a>({ ...params }) -> BrevoApi.RequestSmsRecipientExportResponse</code></summary>
+<details><summary><code>client.sms_campaigns.<a href="src/brevo/sms_campaigns/client.py">request_sms_recipient_export</a>(...) -&gt; AsyncHttpResponse[RequestSmsRecipientExportResponse]</code></summary>
 <dl>
 <dd>
 
@@ -12845,11 +18741,16 @@ It returns the background process ID which on completion calls the notify URL th
 <dl>
 <dd>
 
-```typescript
-await client.smsCampaigns.requestSmsRecipientExport({
-    campaignId: 1000000,
-    recipientsType: "all"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.sms_campaigns.request_sms_recipient_export(
+    campaign_id=1000000,
+    recipients_type="all",
+)
 
 ```
 </dd>
@@ -12865,7 +18766,7 @@ await client.smsCampaigns.requestSmsRecipientExport({
 <dl>
 <dd>
 
-**request:** `BrevoApi.RequestSmsRecipientExportRequest` 
+**campaign_id:** `int` — id of the campaign
     
 </dd>
 </dl>
@@ -12873,7 +18774,23 @@ await client.smsCampaigns.requestSmsRecipientExport({
 <dl>
 <dd>
 
-**requestOptions:** `SmsCampaignsClient.RequestOptions` 
+**recipients_type:** `RequestSmsRecipientExportRequestRecipientsType` — Filter the recipients based on how they interacted with the campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notify_url:** `typing.Optional[str]` — URL that will be called once the export process is finished. For reference, https://help.brevo.com/hc/en-us/articles/360007666479
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -12885,7 +18802,7 @@ await client.smsCampaigns.requestSmsRecipientExport({
 </dl>
 </details>
 
-<details><summary><code>client.smsCampaigns.<a href="/src/api/resources/smsCampaigns/client/Client.ts">sendSmsCampaignNow</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.sms_campaigns.<a href="src/brevo/sms_campaigns/client.py">send_sms_campaign_now</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -12897,10 +18814,15 @@ await client.smsCampaigns.requestSmsRecipientExport({
 <dl>
 <dd>
 
-```typescript
-await client.smsCampaigns.sendSmsCampaignNow({
-    campaignId: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.sms_campaigns.send_sms_campaign_now(
+    campaign_id=1000000,
+)
 
 ```
 </dd>
@@ -12916,7 +18838,7 @@ await client.smsCampaigns.sendSmsCampaignNow({
 <dl>
 <dd>
 
-**request:** `BrevoApi.SendSmsCampaignNowRequest` 
+**campaign_id:** `int` — id of the campaign
     
 </dd>
 </dl>
@@ -12924,7 +18846,7 @@ await client.smsCampaigns.sendSmsCampaignNow({
 <dl>
 <dd>
 
-**requestOptions:** `SmsCampaignsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -12936,7 +18858,7 @@ await client.smsCampaigns.sendSmsCampaignNow({
 </dl>
 </details>
 
-<details><summary><code>client.smsCampaigns.<a href="/src/api/resources/smsCampaigns/client/Client.ts">sendSmsReport</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.sms_campaigns.<a href="src/brevo/sms_campaigns/client.py">send_sms_report</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -12962,16 +18884,19 @@ Send report of Sent and Archived campaign, to the specified email addresses, wit
 <dl>
 <dd>
 
-```typescript
-await client.smsCampaigns.sendSmsReport({
-    campaignId: 1000000,
-    body: {
-        email: {
-            body: "Please find attached the report of our last email campaign.",
-            to: ["jim.suehan@example.com"]
-        }
-    }
-});
+```python
+from brevo import BrevoApi, SendReportEmail
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.sms_campaigns.send_sms_report(
+    campaign_id=1000000,
+    email=SendReportEmail(
+        body="Please find attached the report of our last email campaign.",
+        to=["jim.suehan@example.com"],
+    ),
+)
 
 ```
 </dd>
@@ -12987,7 +18912,7 @@ await client.smsCampaigns.sendSmsReport({
 <dl>
 <dd>
 
-**request:** `BrevoApi.SendSmsReportRequest` 
+**campaign_id:** `int` — id of the campaign
     
 </dd>
 </dl>
@@ -12995,7 +18920,23 @@ await client.smsCampaigns.sendSmsReport({
 <dl>
 <dd>
 
-**requestOptions:** `SmsCampaignsClient.RequestOptions` 
+**email:** `SendReportEmail` — Custom attributes for the report email.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**language:** `typing.Optional[SendReportLanguage]` — Language of email content for campaign report sending.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -13007,7 +18948,7 @@ await client.smsCampaigns.sendSmsReport({
 </dl>
 </details>
 
-<details><summary><code>client.smsCampaigns.<a href="/src/api/resources/smsCampaigns/client/Client.ts">sendTestSms</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.sms_campaigns.<a href="src/brevo/sms_campaigns/client.py">send_test_sms</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -13019,10 +18960,15 @@ await client.smsCampaigns.sendSmsReport({
 <dl>
 <dd>
 
-```typescript
-await client.smsCampaigns.sendTestSms({
-    campaignId: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.sms_campaigns.send_test_sms(
+    campaign_id=1000000,
+)
 
 ```
 </dd>
@@ -13038,7 +18984,7 @@ await client.smsCampaigns.sendTestSms({
 <dl>
 <dd>
 
-**request:** `BrevoApi.SendTestSmsRequest` 
+**campaign_id:** `int` — Id of the SMS campaign
     
 </dd>
 </dl>
@@ -13046,7 +18992,15 @@ await client.smsCampaigns.sendTestSms({
 <dl>
 <dd>
 
-**requestOptions:** `SmsCampaignsClient.RequestOptions` 
+**phone_number:** `typing.Optional[str]` — Mobile number of the recipient with the country code. This number **must belong to one of your contacts in Brevo account and must not be blacklisted**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -13058,7 +19012,7 @@ await client.smsCampaigns.sendTestSms({
 </dl>
 </details>
 
-<details><summary><code>client.smsCampaigns.<a href="/src/api/resources/smsCampaigns/client/Client.ts">updateSmsCampaignStatus</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.sms_campaigns.<a href="src/brevo/sms_campaigns/client.py">update_sms_campaign_status</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -13070,11 +19024,15 @@ await client.smsCampaigns.sendTestSms({
 <dl>
 <dd>
 
-```typescript
-await client.smsCampaigns.updateSmsCampaignStatus({
-    campaignId: 1000000,
-    body: {}
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.sms_campaigns.update_sms_campaign_status(
+    campaign_id=1000000,
+)
 
 ```
 </dd>
@@ -13090,7 +19048,7 @@ await client.smsCampaigns.updateSmsCampaignStatus({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateSmsCampaignStatusRequest` 
+**campaign_id:** `int` — id of the campaign
     
 </dd>
 </dl>
@@ -13098,7 +19056,15 @@ await client.smsCampaigns.updateSmsCampaignStatus({
 <dl>
 <dd>
 
-**requestOptions:** `SmsCampaignsClient.RequestOptions` 
+**status:** `typing.Optional[UpdateCampaignStatusStatus]` — Note:- **replicateTemplate** status will be available **only for template type campaigns.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -13111,7 +19077,7 @@ await client.smsCampaigns.updateSmsCampaignStatus({
 </details>
 
 ## WhatsAppCampaigns
-<details><summary><code>client.whatsAppCampaigns.<a href="/src/api/resources/whatsAppCampaigns/client/Client.ts">getWhatsAppCampaigns</a>({ ...params }) -> BrevoApi.GetWhatsAppCampaignsResponse</code></summary>
+<details><summary><code>client.whats_app_campaigns.<a href="src/brevo/whats_app_campaigns/client.py">get_whats_app_campaigns</a>(...) -&gt; AsyncHttpResponse[GetWhatsAppCampaignsResponse]</code></summary>
 <dl>
 <dd>
 
@@ -13123,8 +19089,13 @@ await client.smsCampaigns.updateSmsCampaignStatus({
 <dl>
 <dd>
 
-```typescript
-await client.whatsAppCampaigns.getWhatsAppCampaigns();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.whats_app_campaigns.get_whats_app_campaigns()
 
 ```
 </dd>
@@ -13140,7 +19111,7 @@ await client.whatsAppCampaigns.getWhatsAppCampaigns();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetWhatsAppCampaignsRequest` 
+**start_date:** `typing.Optional[str]` — **Mandatory if endDate is used**. Starting (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to filter the WhatsApp campaigns created. **Prefer to pass your timezone in date-time format for accurate result**
     
 </dd>
 </dl>
@@ -13148,7 +19119,39 @@ await client.whatsAppCampaigns.getWhatsAppCampaigns();
 <dl>
 <dd>
 
-**requestOptions:** `WhatsAppCampaignsClient.RequestOptions` 
+**end_date:** `typing.Optional[str]` — **Mandatory if startDate is used**. Ending (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to filter the WhatsApp campaigns created. **Prefer to pass your timezone in date-time format for accurate result**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` — Number of documents per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**offset:** `typing.Optional[int]` — Index of the first document in the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetWhatsAppCampaignsRequestSort]` — Sort the results in the ascending/descending order of record modification. Default order is **descending** if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -13160,7 +19163,7 @@ await client.whatsAppCampaigns.getWhatsAppCampaigns();
 </dl>
 </details>
 
-<details><summary><code>client.whatsAppCampaigns.<a href="/src/api/resources/whatsAppCampaigns/client/Client.ts">createWhatsAppCampaign</a>({ ...params }) -> BrevoApi.CreateWhatsAppCampaignResponse</code></summary>
+<details><summary><code>client.whats_app_campaigns.<a href="src/brevo/whats_app_campaigns/client.py">create_whats_app_campaign</a>(...) -&gt; AsyncHttpResponse[CreateWhatsAppCampaignResponse]</code></summary>
 <dl>
 <dd>
 
@@ -13198,13 +19201,19 @@ This API requires the List and Segment ids as recipients in Body params. You can
 <dl>
 <dd>
 
-```typescript
-await client.whatsAppCampaigns.createWhatsAppCampaign({
-    name: "Test Campaign",
-    recipients: {},
-    scheduledAt: "2017-06-01T12:30:00+02:00",
-    templateId: 19
-});
+```python
+from brevo import BrevoApi
+from brevo.whats_app_campaigns import CreateWhatsAppCampaignRequestRecipients
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.whats_app_campaigns.create_whats_app_campaign(
+    name="Test Campaign",
+    recipients=CreateWhatsAppCampaignRequestRecipients(),
+    scheduled_at="2017-06-01T12:30:00+02:00",
+    template_id=19,
+)
 
 ```
 </dd>
@@ -13220,7 +19229,7 @@ await client.whatsAppCampaigns.createWhatsAppCampaign({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateWhatsAppCampaignRequest` 
+**name:** `str` — Name of the WhatsApp campaign creation
     
 </dd>
 </dl>
@@ -13228,7 +19237,31 @@ await client.whatsAppCampaigns.createWhatsAppCampaign({
 <dl>
 <dd>
 
-**requestOptions:** `WhatsAppCampaignsClient.RequestOptions` 
+**recipients:** `CreateWhatsAppCampaignRequestRecipients` — Segment ids and List ids to include/exclude from campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scheduled_at:** `str` — Sending UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.For example: **2017-06-01T12:30:00+02:00**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**template_id:** `int` — Id of the WhatsApp template in **approved** state
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -13240,7 +19273,7 @@ await client.whatsAppCampaigns.createWhatsAppCampaign({
 </dl>
 </details>
 
-<details><summary><code>client.whatsAppCampaigns.<a href="/src/api/resources/whatsAppCampaigns/client/Client.ts">getWhatsAppConfig</a>() -> BrevoApi.GetWhatsAppConfigResponse</code></summary>
+<details><summary><code>client.whats_app_campaigns.<a href="src/brevo/whats_app_campaigns/client.py">get_whats_app_config</a>() -&gt; AsyncHttpResponse[GetWhatsAppConfigResponse]</code></summary>
 <dl>
 <dd>
 
@@ -13270,8 +19303,13 @@ You can use this API for WhatsApp only if you have setup your WhatsApp account o
 <dl>
 <dd>
 
-```typescript
-await client.whatsAppCampaigns.getWhatsAppConfig();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.whats_app_campaigns.get_whats_app_config()
 
 ```
 </dd>
@@ -13287,7 +19325,7 @@ await client.whatsAppCampaigns.getWhatsAppConfig();
 <dl>
 <dd>
 
-**requestOptions:** `WhatsAppCampaignsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -13299,7 +19337,7 @@ await client.whatsAppCampaigns.getWhatsAppConfig();
 </dl>
 </details>
 
-<details><summary><code>client.whatsAppCampaigns.<a href="/src/api/resources/whatsAppCampaigns/client/Client.ts">createWhatsAppTemplate</a>({ ...params }) -> BrevoApi.CreateWhatsAppTemplateResponse</code></summary>
+<details><summary><code>client.whats_app_campaigns.<a href="src/brevo/whats_app_campaigns/client.py">create_whats_app_template</a>(...) -&gt; AsyncHttpResponse[CreateWhatsAppTemplateResponse]</code></summary>
 <dl>
 <dd>
 
@@ -13329,13 +19367,18 @@ You can use this API for WhatsApp only if you have setup your WhatsApp account o
 <dl>
 <dd>
 
-```typescript
-await client.whatsAppCampaigns.createWhatsAppTemplate({
-    bodyText: "making it look like readable English",
-    category: "MARKETING",
-    language: "en",
-    name: "Test template"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.whats_app_campaigns.create_whats_app_template(
+    body_text="making it look like readable English",
+    category="MARKETING",
+    language="en",
+    name="Test template",
+)
 
 ```
 </dd>
@@ -13351,7 +19394,7 @@ await client.whatsAppCampaigns.createWhatsAppTemplate({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateWhatsAppTemplateRequest` 
+**body_text:** `str` — Body of the template. **Maximum allowed characters are 1024**
     
 </dd>
 </dl>
@@ -13359,7 +19402,58 @@ await client.whatsAppCampaigns.createWhatsAppTemplate({
 <dl>
 <dd>
 
-**requestOptions:** `WhatsAppCampaignsClient.RequestOptions` 
+**category:** `CreateWhatsAppTemplateRequestCategory` — Category of the template
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**language:** `str` 
+
+Language of the template. For Example :
+**en** for English
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `str` — Name of the template
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**header_text:** `typing.Optional[str]` — Text content of the header in the template.  **Maximum allowed characters are 45** **Use this field to add text content in template header and if mediaUrl is empty**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**media_url:** `typing.Optional[str]` — Absolute url of the media file **(no local file)** for the header. **Use this field in you want to add media in Template header and headerText is empty** Allowed extensions for media files are: #### jpeg | png | mp4 | pdf
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**source:** `typing.Optional[CreateWhatsAppTemplateRequestSource]` — source of the template
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -13371,7 +19465,7 @@ await client.whatsAppCampaigns.createWhatsAppTemplate({
 </dl>
 </details>
 
-<details><summary><code>client.whatsAppCampaigns.<a href="/src/api/resources/whatsAppCampaigns/client/Client.ts">getWhatsAppTemplates</a>({ ...params }) -> BrevoApi.GetWhatsAppTemplatesResponse</code></summary>
+<details><summary><code>client.whats_app_campaigns.<a href="src/brevo/whats_app_campaigns/client.py">get_whats_app_templates</a>(...) -&gt; AsyncHttpResponse[GetWhatsAppTemplatesResponse]</code></summary>
 <dl>
 <dd>
 
@@ -13383,8 +19477,13 @@ await client.whatsAppCampaigns.createWhatsAppTemplate({
 <dl>
 <dd>
 
-```typescript
-await client.whatsAppCampaigns.getWhatsAppTemplates();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.whats_app_campaigns.get_whats_app_templates()
 
 ```
 </dd>
@@ -13400,7 +19499,7 @@ await client.whatsAppCampaigns.getWhatsAppTemplates();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetWhatsAppTemplatesRequest` 
+**start_date:** `typing.Optional[str]` — **Mandatory if endDate is used**. Starting (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to filter the templates created. **Prefer to pass your timezone in date-time format for accurate result**
     
 </dd>
 </dl>
@@ -13408,7 +19507,47 @@ await client.whatsAppCampaigns.getWhatsAppTemplates();
 <dl>
 <dd>
 
-**requestOptions:** `WhatsAppCampaignsClient.RequestOptions` 
+**end_date:** `typing.Optional[str]` — **Mandatory if startDate is used**. Ending (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to filter the templates created. **Prefer to pass your timezone in date-time format for accurate result**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` — Number of documents per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**offset:** `typing.Optional[int]` — Index of the first document in the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetWhatsAppTemplatesRequestSort]` — Sort the results in the ascending/descending order of record modification. Default order is **descending** if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**source:** `typing.Optional[GetWhatsAppTemplatesRequestSource]` — source of the template
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -13420,7 +19559,7 @@ await client.whatsAppCampaigns.getWhatsAppTemplates();
 </dl>
 </details>
 
-<details><summary><code>client.whatsAppCampaigns.<a href="/src/api/resources/whatsAppCampaigns/client/Client.ts">sendWhatsAppTemplateApproval</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.whats_app_campaigns.<a href="src/brevo/whats_app_campaigns/client.py">send_whats_app_template_approval</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -13450,10 +19589,15 @@ You can use this API for WhatsApp only if you have setup your WhatsApp account o
 <dl>
 <dd>
 
-```typescript
-await client.whatsAppCampaigns.sendWhatsAppTemplateApproval({
-    templateId: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.whats_app_campaigns.send_whats_app_template_approval(
+    template_id=1000000,
+)
 
 ```
 </dd>
@@ -13469,7 +19613,7 @@ await client.whatsAppCampaigns.sendWhatsAppTemplateApproval({
 <dl>
 <dd>
 
-**request:** `BrevoApi.SendWhatsAppTemplateApprovalRequest` 
+**template_id:** `int` — id of the template
     
 </dd>
 </dl>
@@ -13477,7 +19621,7 @@ await client.whatsAppCampaigns.sendWhatsAppTemplateApproval({
 <dl>
 <dd>
 
-**requestOptions:** `WhatsAppCampaignsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -13489,7 +19633,7 @@ await client.whatsAppCampaigns.sendWhatsAppTemplateApproval({
 </dl>
 </details>
 
-<details><summary><code>client.whatsAppCampaigns.<a href="/src/api/resources/whatsAppCampaigns/client/Client.ts">getWhatsAppCampaign</a>({ ...params }) -> BrevoApi.GetWhatsAppCampaignResponse</code></summary>
+<details><summary><code>client.whats_app_campaigns.<a href="src/brevo/whats_app_campaigns/client.py">get_whats_app_campaign</a>(...) -&gt; AsyncHttpResponse[GetWhatsAppCampaignResponse]</code></summary>
 <dl>
 <dd>
 
@@ -13519,10 +19663,15 @@ You can use this API for WhatsApp only if you have setup your WhatsApp account o
 <dl>
 <dd>
 
-```typescript
-await client.whatsAppCampaigns.getWhatsAppCampaign({
-    campaignId: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.whats_app_campaigns.get_whats_app_campaign(
+    campaign_id=1000000,
+)
 
 ```
 </dd>
@@ -13538,7 +19687,7 @@ await client.whatsAppCampaigns.getWhatsAppCampaign({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetWhatsAppCampaignRequest` 
+**campaign_id:** `int` — Id of the campaign
     
 </dd>
 </dl>
@@ -13546,7 +19695,7 @@ await client.whatsAppCampaigns.getWhatsAppCampaign({
 <dl>
 <dd>
 
-**requestOptions:** `WhatsAppCampaignsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -13558,7 +19707,7 @@ await client.whatsAppCampaigns.getWhatsAppCampaign({
 </dl>
 </details>
 
-<details><summary><code>client.whatsAppCampaigns.<a href="/src/api/resources/whatsAppCampaigns/client/Client.ts">updateWhatsAppCampaign</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.whats_app_campaigns.<a href="src/brevo/whats_app_campaigns/client.py">update_whats_app_campaign</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -13596,10 +19745,15 @@ This API requires the List and Segment ids as recipients in Body params. You can
 <dl>
 <dd>
 
-```typescript
-await client.whatsAppCampaigns.updateWhatsAppCampaign({
-    campaignId: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.whats_app_campaigns.update_whats_app_campaign(
+    campaign_id=1000000,
+)
 
 ```
 </dd>
@@ -13615,7 +19769,7 @@ await client.whatsAppCampaigns.updateWhatsAppCampaign({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateWhatsAppCampaignRequest` 
+**campaign_id:** `int` — id of the campaign
     
 </dd>
 </dl>
@@ -13623,7 +19777,39 @@ await client.whatsAppCampaigns.updateWhatsAppCampaign({
 <dl>
 <dd>
 
-**requestOptions:** `WhatsAppCampaignsClient.RequestOptions` 
+**campaign_name:** `typing.Optional[str]` — Name of the campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**campaign_status:** `typing.Optional[UpdateWhatsAppCampaignRequestCampaignStatus]` — Status of the campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**recipients:** `typing.Optional[UpdateWhatsAppCampaignRequestRecipients]` — Segment ids and List ids to include/exclude from campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reschedule_for:** `typing.Optional[str]` — Reschedule the sending UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) of campaign. **Prefer to pass your timezone in date-time format for accurate result.For example: **2017-06-01T12:30:00+02:00** Use this field to update the scheduledAt of any existing draft or scheduled WhatsApp campaign.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -13635,7 +19821,7 @@ await client.whatsAppCampaigns.updateWhatsAppCampaign({
 </dl>
 </details>
 
-<details><summary><code>client.whatsAppCampaigns.<a href="/src/api/resources/whatsAppCampaigns/client/Client.ts">deleteWhatsAppCampaign</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.whats_app_campaigns.<a href="src/brevo/whats_app_campaigns/client.py">delete_whats_app_campaign</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -13647,10 +19833,15 @@ await client.whatsAppCampaigns.updateWhatsAppCampaign({
 <dl>
 <dd>
 
-```typescript
-await client.whatsAppCampaigns.deleteWhatsAppCampaign({
-    campaignId: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.whats_app_campaigns.delete_whats_app_campaign(
+    campaign_id=1000000,
+)
 
 ```
 </dd>
@@ -13666,7 +19857,7 @@ await client.whatsAppCampaigns.deleteWhatsAppCampaign({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteWhatsAppCampaignRequest` 
+**campaign_id:** `int` — id of the campaign
     
 </dd>
 </dl>
@@ -13674,7 +19865,7 @@ await client.whatsAppCampaigns.deleteWhatsAppCampaign({
 <dl>
 <dd>
 
-**requestOptions:** `WhatsAppCampaignsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -13687,7 +19878,7 @@ await client.whatsAppCampaigns.deleteWhatsAppCampaign({
 </details>
 
 ## Companies
-<details><summary><code>client.companies.<a href="/src/api/resources/companies/client/Client.ts">getAllCompanies</a>({ ...params }) -> BrevoApi.GetCompaniesResponse</code></summary>
+<details><summary><code>client.companies.<a href="src/brevo/companies/client.py">get_all_companies</a>(...) -&gt; AsyncHttpResponse[GetCompaniesResponse]</code></summary>
 <dl>
 <dd>
 
@@ -13699,8 +19890,13 @@ await client.whatsAppCampaigns.deleteWhatsAppCampaign({
 <dl>
 <dd>
 
-```typescript
-await client.companies.getAllCompanies();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.companies.get_all_companies()
 
 ```
 </dd>
@@ -13716,7 +19912,7 @@ await client.companies.getAllCompanies();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCompaniesRequest` 
+**filters:** `typing.Optional[str]` — Filter by attrbutes. If you have filter for owner on your side please send it as {"attributes.owner":"6299dcf3874a14eacbc65c46"}
     
 </dd>
 </dl>
@@ -13724,7 +19920,71 @@ await client.companies.getAllCompanies();
 <dl>
 <dd>
 
-**requestOptions:** `CompaniesClient.RequestOptions` 
+**linked_contacts_ids:** `typing.Optional[int]` — Filter by linked contacts ids
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**linked_deals_ids:** `typing.Optional[str]` — Filter by linked Deals ids
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**modified_since:** `typing.Optional[str]` — Filter (urlencoded) the contacts modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**created_since:** `typing.Optional[str]` — Filter (urlencoded) the contacts created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page:** `typing.Optional[int]` — Index of the first document of the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` — Number of documents per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetCompaniesRequestSort]` — Sort the results in the ascending/descending order. Default order is **descending** by creation if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort_by:** `typing.Optional[str]` — The field used to sort field names.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -13736,7 +19996,7 @@ await client.companies.getAllCompanies();
 </dl>
 </details>
 
-<details><summary><code>client.companies.<a href="/src/api/resources/companies/client/Client.ts">createACompany</a>({ ...params }) -> BrevoApi.PostCompaniesResponse</code></summary>
+<details><summary><code>client.companies.<a href="src/brevo/companies/client.py">create_a_company</a>(...) -&gt; AsyncHttpResponse[PostCompaniesResponse]</code></summary>
 <dl>
 <dd>
 
@@ -13748,10 +20008,15 @@ await client.companies.getAllCompanies();
 <dl>
 <dd>
 
-```typescript
-await client.companies.createACompany({
-    name: "company"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.companies.create_a_company(
+    name="company",
+)
 
 ```
 </dd>
@@ -13767,7 +20032,7 @@ await client.companies.createACompany({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostCompaniesRequest` 
+**name:** `str` — Name of company
     
 </dd>
 </dl>
@@ -13775,7 +20040,39 @@ await client.companies.createACompany({
 <dl>
 <dd>
 
-**requestOptions:** `CompaniesClient.RequestOptions` 
+**attributes:** `typing.Optional[typing.Dict[str, typing.Any]]` — Attributes for company creation
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**country_code:** `typing.Optional[int]` — Country code if phone_number is passed in attributes.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**linked_contacts_ids:** `typing.Optional[typing.Sequence[int]]` — Contact ids to be linked with company
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**linked_deals_ids:** `typing.Optional[typing.Sequence[str]]` — Deal ids to be linked with company
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -13787,7 +20084,7 @@ await client.companies.createACompany({
 </dl>
 </details>
 
-<details><summary><code>client.companies.<a href="/src/api/resources/companies/client/Client.ts">importCompaniesCreationAndUpdation</a>({ ...params }) -> BrevoApi.PostCompaniesImportResponse</code></summary>
+<details><summary><code>client.companies.<a href="src/brevo/companies/client.py">import_companies_creation_and_updation</a>(...) -&gt; AsyncHttpResponse[PostCompaniesImportResponse]</code></summary>
 <dl>
 <dd>
 
@@ -13813,8 +20110,13 @@ Import companies from a CSV file with mapping options.
 <dl>
 <dd>
 
-```typescript
-await client.companies.importCompaniesCreationAndUpdation({});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.companies.import_companies_creation_and_updation()
 
 ```
 </dd>
@@ -13830,7 +20132,9 @@ await client.companies.importCompaniesCreationAndUpdation({});
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostCompaniesImportRequest` 
+**file:** `from __future__ import annotations
+
+typing.Optional[core.File]` — See core.File for more documentation
     
 </dd>
 </dl>
@@ -13838,7 +20142,22 @@ await client.companies.importCompaniesCreationAndUpdation({});
 <dl>
 <dd>
 
-**requestOptions:** `CompaniesClient.RequestOptions` 
+**mapping:** `typing.Optional[typing.Dict[str, typing.Any]]` 
+
+The mapping options in JSON format. Here is an example of the JSON structure: ```json {
+  "link_entities": true, // Determines whether to link related entities during the import process
+  "unlink_entities": false, // Determines whether to unlink related entities during the import process
+  "update_existing_records": true, // Determines whether to update based on company ID or treat every row as create
+  "unset_empty_attributes": false // Determines whether to unset a specific attribute during update if the values input is blank
+} ```
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -13850,7 +20169,7 @@ await client.companies.importCompaniesCreationAndUpdation({});
 </dl>
 </details>
 
-<details><summary><code>client.companies.<a href="/src/api/resources/companies/client/Client.ts">linkAndUnlinkCompanyWithContactAndDeal</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.companies.<a href="src/brevo/companies/client.py">link_and_unlink_company_with_contact_and_deal</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -13862,10 +20181,15 @@ await client.companies.importCompaniesCreationAndUpdation({});
 <dl>
 <dd>
 
-```typescript
-await client.companies.linkAndUnlinkCompanyWithContactAndDeal({
-    id: "id"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.companies.link_and_unlink_company_with_contact_and_deal(
+    id="id",
+)
 
 ```
 </dd>
@@ -13881,7 +20205,7 @@ await client.companies.linkAndUnlinkCompanyWithContactAndDeal({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PatchCompaniesLinkUnlinkIdRequest` 
+**id:** `str` 
     
 </dd>
 </dl>
@@ -13889,7 +20213,39 @@ await client.companies.linkAndUnlinkCompanyWithContactAndDeal({
 <dl>
 <dd>
 
-**requestOptions:** `CompaniesClient.RequestOptions` 
+**link_contact_ids:** `typing.Optional[typing.Sequence[int]]` — Contact ids for contacts to be linked with company
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**link_deals_ids:** `typing.Optional[typing.Sequence[str]]` — Deal ids for deals to be linked with company
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**unlink_contact_ids:** `typing.Optional[typing.Sequence[int]]` — Contact ids for contacts to be unlinked from company
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**unlink_deals_ids:** `typing.Optional[typing.Sequence[str]]` — Deal ids for deals to be unlinked from company
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -13901,7 +20257,7 @@ await client.companies.linkAndUnlinkCompanyWithContactAndDeal({
 </dl>
 </details>
 
-<details><summary><code>client.companies.<a href="/src/api/resources/companies/client/Client.ts">getACompany</a>({ ...params }) -> BrevoApi.Company</code></summary>
+<details><summary><code>client.companies.<a href="src/brevo/companies/client.py">get_a_company</a>(...) -&gt; AsyncHttpResponse[Company]</code></summary>
 <dl>
 <dd>
 
@@ -13913,10 +20269,15 @@ await client.companies.linkAndUnlinkCompanyWithContactAndDeal({
 <dl>
 <dd>
 
-```typescript
-await client.companies.getACompany({
-    id: "id"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.companies.get_a_company(
+    id="id",
+)
 
 ```
 </dd>
@@ -13932,7 +20293,7 @@ await client.companies.getACompany({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCompaniesIdRequest` 
+**id:** `str` — Get Company Details
     
 </dd>
 </dl>
@@ -13940,7 +20301,7 @@ await client.companies.getACompany({
 <dl>
 <dd>
 
-**requestOptions:** `CompaniesClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -13952,7 +20313,7 @@ await client.companies.getACompany({
 </dl>
 </details>
 
-<details><summary><code>client.companies.<a href="/src/api/resources/companies/client/Client.ts">deleteACompany</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.companies.<a href="src/brevo/companies/client.py">delete_a_company</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -13964,10 +20325,15 @@ await client.companies.getACompany({
 <dl>
 <dd>
 
-```typescript
-await client.companies.deleteACompany({
-    id: "id"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.companies.delete_a_company(
+    id="id",
+)
 
 ```
 </dd>
@@ -13983,7 +20349,7 @@ await client.companies.deleteACompany({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteCompaniesIdRequest` 
+**id:** `str` — Company ID to delete
     
 </dd>
 </dl>
@@ -13991,7 +20357,7 @@ await client.companies.deleteACompany({
 <dl>
 <dd>
 
-**requestOptions:** `CompaniesClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -14003,7 +20369,7 @@ await client.companies.deleteACompany({
 </dl>
 </details>
 
-<details><summary><code>client.companies.<a href="/src/api/resources/companies/client/Client.ts">updateACompany</a>({ ...params }) -> BrevoApi.Company</code></summary>
+<details><summary><code>client.companies.<a href="src/brevo/companies/client.py">update_a_company</a>(...) -&gt; AsyncHttpResponse[Company]</code></summary>
 <dl>
 <dd>
 
@@ -14015,10 +20381,15 @@ await client.companies.deleteACompany({
 <dl>
 <dd>
 
-```typescript
-await client.companies.updateACompany({
-    id: "id"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.companies.update_a_company(
+    id="id",
+)
 
 ```
 </dd>
@@ -14034,7 +20405,7 @@ await client.companies.updateACompany({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PatchCompaniesIdRequest` 
+**id:** `str` 
     
 </dd>
 </dl>
@@ -14042,7 +20413,47 @@ await client.companies.updateACompany({
 <dl>
 <dd>
 
-**requestOptions:** `CompaniesClient.RequestOptions` 
+**attributes:** `typing.Optional[typing.Dict[str, typing.Any]]` — Attributes for company update
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**country_code:** `typing.Optional[int]` — Country code if phone_number is passed in attributes.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**linked_contacts_ids:** `typing.Optional[typing.Sequence[int]]` — Warning - Using PATCH on linkedContactIds replaces the list of linked contacts. Omitted IDs will be removed.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**linked_deals_ids:** `typing.Optional[typing.Sequence[str]]` — Warning - Using PATCH on linkedDealsIds replaces the list of linked contacts. Omitted IDs will be removed.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `typing.Optional[str]` — Name of company
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -14054,7 +20465,7 @@ await client.companies.updateACompany({
 </dl>
 </details>
 
-<details><summary><code>client.companies.<a href="/src/api/resources/companies/client/Client.ts">createACompanyDealAttribute</a>({ ...params }) -> BrevoApi.PostCrmAttributesResponse</code></summary>
+<details><summary><code>client.companies.<a href="src/brevo/companies/client.py">create_a_company_deal_attribute</a>(...) -&gt; AsyncHttpResponse[PostCrmAttributesResponse]</code></summary>
 <dl>
 <dd>
 
@@ -14066,12 +20477,17 @@ await client.companies.updateACompany({
 <dl>
 <dd>
 
-```typescript
-await client.companies.createACompanyDealAttribute({
-    attributeType: "text",
-    label: "Attribute Label",
-    objectType: "companies"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.companies.create_a_company_deal_attribute(
+    attribute_type="text",
+    label="Attribute Label",
+    object_type="companies",
+)
 
 ```
 </dd>
@@ -14087,7 +20503,7 @@ await client.companies.createACompanyDealAttribute({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostCrmAttributesRequest` 
+**attribute_type:** `PostCrmAttributesRequestAttributeType` — The type of attribute (must be one of the defined enums)
     
 </dd>
 </dl>
@@ -14095,7 +20511,39 @@ await client.companies.createACompanyDealAttribute({
 <dl>
 <dd>
 
-**requestOptions:** `CompaniesClient.RequestOptions` 
+**label:** `str` — The label for the attribute (max 50 characters, cannot be empty)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**object_type:** `PostCrmAttributesRequestObjectType` — The type of object the attribute belongs to (prefilled with `companies`, mandatory)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `typing.Optional[str]` — A description of the attribute
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**options_labels:** `typing.Optional[typing.Sequence[str]]` — Options for multi-choice or single-select attributes
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -14107,7 +20555,7 @@ await client.companies.createACompanyDealAttribute({
 </dl>
 </details>
 
-<details><summary><code>client.companies.<a href="/src/api/resources/companies/client/Client.ts">getCompanyAttributes</a>() -> BrevoApi.GetCrmAttributesCompaniesResponseItem[]</code></summary>
+<details><summary><code>client.companies.<a href="src/brevo/companies/client.py">get_company_attributes</a>() -&gt; AsyncHttpResponse[typing.List[GetCrmAttributesCompaniesResponseItem]]</code></summary>
 <dl>
 <dd>
 
@@ -14119,8 +20567,13 @@ await client.companies.createACompanyDealAttribute({
 <dl>
 <dd>
 
-```typescript
-await client.companies.getCompanyAttributes();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.companies.get_company_attributes()
 
 ```
 </dd>
@@ -14136,7 +20589,7 @@ await client.companies.getCompanyAttributes();
 <dl>
 <dd>
 
-**requestOptions:** `CompaniesClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -14149,7 +20602,7 @@ await client.companies.getCompanyAttributes();
 </details>
 
 ## Deals
-<details><summary><code>client.deals.<a href="/src/api/resources/deals/client/Client.ts">getDealAttributes</a>() -> BrevoApi.GetCrmAttributesDealsResponseItem[]</code></summary>
+<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">get_deal_attributes</a>() -&gt; AsyncHttpResponse[typing.List[GetCrmAttributesDealsResponseItem]]</code></summary>
 <dl>
 <dd>
 
@@ -14161,8 +20614,13 @@ await client.companies.getCompanyAttributes();
 <dl>
 <dd>
 
-```typescript
-await client.deals.getDealAttributes();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.deals.get_deal_attributes()
 
 ```
 </dd>
@@ -14178,7 +20636,7 @@ await client.deals.getDealAttributes();
 <dl>
 <dd>
 
-**requestOptions:** `DealsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -14190,7 +20648,7 @@ await client.deals.getDealAttributes();
 </dl>
 </details>
 
-<details><summary><code>client.deals.<a href="/src/api/resources/deals/client/Client.ts">getAllDeals</a>({ ...params }) -> BrevoApi.GetCrmDealsResponse</code></summary>
+<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">get_all_deals</a>(...) -&gt; AsyncHttpResponse[GetCrmDealsResponse]</code></summary>
 <dl>
 <dd>
 
@@ -14202,8 +20660,13 @@ await client.deals.getDealAttributes();
 <dl>
 <dd>
 
-```typescript
-await client.deals.getAllDeals();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.deals.get_all_deals()
 
 ```
 </dd>
@@ -14219,7 +20682,7 @@ await client.deals.getAllDeals();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCrmDealsRequest` 
+**filters_attributes_deal_name:** `typing.Optional[str]` — Filter by attributes. If you have a filter for the owner on your end, please send it as filters[attributes.deal_owner] and utilize the account email for the filtering.
     
 </dd>
 </dl>
@@ -14227,7 +20690,63 @@ await client.deals.getAllDeals();
 <dl>
 <dd>
 
-**requestOptions:** `DealsClient.RequestOptions` 
+**filters_linked_companies_ids:** `typing.Optional[str]` — Filter by linked companies ids
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filters_linked_contacts_ids:** `typing.Optional[str]` — Filter by linked companies ids
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**modified_since:** `typing.Optional[str]` — Filter (urlencoded) the contacts modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**created_since:** `typing.Optional[str]` — Filter (urlencoded) the contacts created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**offset:** `typing.Optional[int]` — Index of the first document of the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` — Number of documents per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetCrmDealsRequestSort]` — Sort the results in the ascending/descending order. Default order is **descending** by creation if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -14239,7 +20758,7 @@ await client.deals.getAllDeals();
 </dl>
 </details>
 
-<details><summary><code>client.deals.<a href="/src/api/resources/deals/client/Client.ts">createADeal</a>({ ...params }) -> BrevoApi.PostCrmDealsResponse</code></summary>
+<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">create_a_deal</a>(...) -&gt; AsyncHttpResponse[PostCrmDealsResponse]</code></summary>
 <dl>
 <dd>
 
@@ -14251,10 +20770,15 @@ await client.deals.getAllDeals();
 <dl>
 <dd>
 
-```typescript
-await client.deals.createADeal({
-    name: "Deal: Connect with company"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.deals.create_a_deal(
+    name="Deal: Connect with company",
+)
 
 ```
 </dd>
@@ -14270,7 +20794,7 @@ await client.deals.createADeal({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostCrmDealsRequest` 
+**name:** `str` — Name of deal
     
 </dd>
 </dl>
@@ -14278,7 +20802,31 @@ await client.deals.createADeal({
 <dl>
 <dd>
 
-**requestOptions:** `DealsClient.RequestOptions` 
+**attributes:** `typing.Optional[typing.Dict[str, typing.Any]]` — Attributes for deal creation To assign owner of a Deal you can send attributes.deal_owner and utilize the account email or ID. If you want to create a deal on a specific pipeline and stage you can use the following attributes `pipeline` and `deal_stage`. Pipeline and deal_stage are ids you can fetch using this endpoint `/crm/pipeline/details/{pipelineID}`
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**linked_companies_ids:** `typing.Optional[typing.Sequence[str]]` — Company ids to be linked with deal
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**linked_contacts_ids:** `typing.Optional[typing.Sequence[int]]` — Contact ids to be linked with deal
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -14290,7 +20838,7 @@ await client.deals.createADeal({
 </dl>
 </details>
 
-<details><summary><code>client.deals.<a href="/src/api/resources/deals/client/Client.ts">importDealsCreationAndUpdation</a>({ ...params }) -> BrevoApi.PostCrmDealsImportResponse</code></summary>
+<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">import_deals_creation_and_updation</a>(...) -&gt; AsyncHttpResponse[PostCrmDealsImportResponse]</code></summary>
 <dl>
 <dd>
 
@@ -14316,8 +20864,13 @@ Import deals from a CSV file with mapping options.
 <dl>
 <dd>
 
-```typescript
-await client.deals.importDealsCreationAndUpdation({});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.deals.import_deals_creation_and_updation()
 
 ```
 </dd>
@@ -14333,7 +20886,9 @@ await client.deals.importDealsCreationAndUpdation({});
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostCrmDealsImportRequest` 
+**file:** `from __future__ import annotations
+
+typing.Optional[core.File]` — See core.File for more documentation
     
 </dd>
 </dl>
@@ -14341,7 +20896,22 @@ await client.deals.importDealsCreationAndUpdation({});
 <dl>
 <dd>
 
-**requestOptions:** `DealsClient.RequestOptions` 
+**mapping:** `typing.Optional[typing.Dict[str, typing.Any]]` 
+
+The mapping options in JSON format. Here is an example of the JSON structure: ```json {
+  "link_entities": true, // Determines whether to link related entities during the import process
+  "unlink_entities": false, // Determines whether to unlink related entities during the import process
+  "update_existing_records": true, // Determines whether to update based on company ID or treat every row as create
+  "unset_empty_attributes": false // Determines whether to unset a specific attribute during update if the values input is blank
+} ```
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -14353,7 +20923,7 @@ await client.deals.importDealsCreationAndUpdation({});
 </dl>
 </details>
 
-<details><summary><code>client.deals.<a href="/src/api/resources/deals/client/Client.ts">linkAndUnlinkADealWithContactsAndCompanies</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">link_and_unlink_a_deal_with_contacts_and_companies</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -14365,10 +20935,15 @@ await client.deals.importDealsCreationAndUpdation({});
 <dl>
 <dd>
 
-```typescript
-await client.deals.linkAndUnlinkADealWithContactsAndCompanies({
-    id: "id"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.deals.link_and_unlink_a_deal_with_contacts_and_companies(
+    id="id",
+)
 
 ```
 </dd>
@@ -14384,7 +20959,7 @@ await client.deals.linkAndUnlinkADealWithContactsAndCompanies({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PatchCrmDealsLinkUnlinkIdRequest` 
+**id:** `str` 
     
 </dd>
 </dl>
@@ -14392,7 +20967,39 @@ await client.deals.linkAndUnlinkADealWithContactsAndCompanies({
 <dl>
 <dd>
 
-**requestOptions:** `DealsClient.RequestOptions` 
+**link_company_ids:** `typing.Optional[typing.Sequence[str]]` — Company ids to be linked with deal
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**link_contact_ids:** `typing.Optional[typing.Sequence[int]]` — Contact ids for contacts to be linked with deal
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**unlink_company_ids:** `typing.Optional[typing.Sequence[str]]` — Company ids to be unlinked from deal
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**unlink_contact_ids:** `typing.Optional[typing.Sequence[int]]` — Contact ids for contacts to be unlinked from deal
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -14404,7 +21011,7 @@ await client.deals.linkAndUnlinkADealWithContactsAndCompanies({
 </dl>
 </details>
 
-<details><summary><code>client.deals.<a href="/src/api/resources/deals/client/Client.ts">getADeal</a>({ ...params }) -> BrevoApi.Deal</code></summary>
+<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">get_a_deal</a>(...) -&gt; AsyncHttpResponse[Deal]</code></summary>
 <dl>
 <dd>
 
@@ -14416,10 +21023,15 @@ await client.deals.linkAndUnlinkADealWithContactsAndCompanies({
 <dl>
 <dd>
 
-```typescript
-await client.deals.getADeal({
-    id: "id"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.deals.get_a_deal(
+    id="id",
+)
 
 ```
 </dd>
@@ -14435,7 +21047,7 @@ await client.deals.getADeal({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCrmDealsIdRequest` 
+**id:** `str` 
     
 </dd>
 </dl>
@@ -14443,7 +21055,7 @@ await client.deals.getADeal({
 <dl>
 <dd>
 
-**requestOptions:** `DealsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -14455,7 +21067,7 @@ await client.deals.getADeal({
 </dl>
 </details>
 
-<details><summary><code>client.deals.<a href="/src/api/resources/deals/client/Client.ts">deleteADeal</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">delete_a_deal</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -14467,10 +21079,15 @@ await client.deals.getADeal({
 <dl>
 <dd>
 
-```typescript
-await client.deals.deleteADeal({
-    id: "id"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.deals.delete_a_deal(
+    id="id",
+)
 
 ```
 </dd>
@@ -14486,7 +21103,7 @@ await client.deals.deleteADeal({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteCrmDealsIdRequest` 
+**id:** `str` 
     
 </dd>
 </dl>
@@ -14494,7 +21111,7 @@ await client.deals.deleteADeal({
 <dl>
 <dd>
 
-**requestOptions:** `DealsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -14506,7 +21123,7 @@ await client.deals.deleteADeal({
 </dl>
 </details>
 
-<details><summary><code>client.deals.<a href="/src/api/resources/deals/client/Client.ts">updateADeal</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">update_a_deal</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -14518,10 +21135,15 @@ await client.deals.deleteADeal({
 <dl>
 <dd>
 
-```typescript
-await client.deals.updateADeal({
-    id: "id"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.deals.update_a_deal(
+    id="id",
+)
 
 ```
 </dd>
@@ -14537,7 +21159,7 @@ await client.deals.updateADeal({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PatchCrmDealsIdRequest` 
+**id:** `str` 
     
 </dd>
 </dl>
@@ -14545,7 +21167,39 @@ await client.deals.updateADeal({
 <dl>
 <dd>
 
-**requestOptions:** `DealsClient.RequestOptions` 
+**attributes:** `typing.Optional[typing.Dict[str, typing.Any]]` — Attributes for deal update To assign owner of a Deal you can send attributes.deal_owner and utilize the account email or ID. If you wish to update the pipeline of a deal you need to provide the `pipeline` and the `deal_stage` Pipeline and deal_stage are ids you can fetch using this endpoint `/crm/pipeline/details/{pipelineID}`
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**linked_companies_ids:** `typing.Optional[typing.Sequence[str]]` — Warning - Using PATCH on linkedCompaniesIds replaces the list of linked contacts. Omitted IDs will be removed.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**linked_contacts_ids:** `typing.Optional[typing.Sequence[int]]` — Warning - Using PATCH on linkedContactIds replaces the list of linked contacts. Omitted IDs will be removed.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `typing.Optional[str]` — Name of deal
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -14557,7 +21211,7 @@ await client.deals.updateADeal({
 </dl>
 </details>
 
-<details><summary><code>client.deals.<a href="/src/api/resources/deals/client/Client.ts">getPipelineStages</a>() -> BrevoApi.Pipeline</code></summary>
+<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">get_pipeline_stages</a>() -&gt; AsyncHttpResponse[Pipeline]</code></summary>
 <dl>
 <dd>
 
@@ -14583,8 +21237,13 @@ This endpoint is deprecated. Prefer /crm/pipeline/details/{pipelineID} instead.
 <dl>
 <dd>
 
-```typescript
-await client.deals.getPipelineStages();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.deals.get_pipeline_stages()
 
 ```
 </dd>
@@ -14600,7 +21259,7 @@ await client.deals.getPipelineStages();
 <dl>
 <dd>
 
-**requestOptions:** `DealsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -14612,7 +21271,7 @@ await client.deals.getPipelineStages();
 </dl>
 </details>
 
-<details><summary><code>client.deals.<a href="/src/api/resources/deals/client/Client.ts">getAllPipelines</a>() -> BrevoApi.Pipelines</code></summary>
+<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">get_all_pipelines</a>() -&gt; AsyncHttpResponse[Pipelines]</code></summary>
 <dl>
 <dd>
 
@@ -14624,8 +21283,13 @@ await client.deals.getPipelineStages();
 <dl>
 <dd>
 
-```typescript
-await client.deals.getAllPipelines();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.deals.get_all_pipelines()
 
 ```
 </dd>
@@ -14641,7 +21305,7 @@ await client.deals.getAllPipelines();
 <dl>
 <dd>
 
-**requestOptions:** `DealsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -14653,7 +21317,7 @@ await client.deals.getAllPipelines();
 </dl>
 </details>
 
-<details><summary><code>client.deals.<a href="/src/api/resources/deals/client/Client.ts">getAPipeline</a>({ ...params }) -> BrevoApi.Pipelines</code></summary>
+<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">get_a_pipeline</a>(...) -&gt; AsyncHttpResponse[Pipelines]</code></summary>
 <dl>
 <dd>
 
@@ -14665,10 +21329,15 @@ await client.deals.getAllPipelines();
 <dl>
 <dd>
 
-```typescript
-await client.deals.getAPipeline({
-    pipelineID: "pipelineID"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.deals.get_a_pipeline(
+    pipeline_id="pipelineID",
+)
 
 ```
 </dd>
@@ -14684,7 +21353,7 @@ await client.deals.getAPipeline({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCrmPipelineDetailsPipelineIdRequest` 
+**pipeline_id:** `str` 
     
 </dd>
 </dl>
@@ -14692,7 +21361,7 @@ await client.deals.getAPipeline({
 <dl>
 <dd>
 
-**requestOptions:** `DealsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -14705,7 +21374,7 @@ await client.deals.getAPipeline({
 </details>
 
 ## Files
-<details><summary><code>client.files.<a href="/src/api/resources/files/client/Client.ts">getAllFiles</a>({ ...params }) -> BrevoApi.FileData[]</code></summary>
+<details><summary><code>client.files.<a href="src/brevo/files/client.py">get_all_files</a>(...) -&gt; AsyncHttpResponse[typing.List[FileData]]</code></summary>
 <dl>
 <dd>
 
@@ -14717,8 +21386,13 @@ await client.deals.getAPipeline({
 <dl>
 <dd>
 
-```typescript
-await client.files.getAllFiles();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.files.get_all_files()
 
 ```
 </dd>
@@ -14734,7 +21408,7 @@ await client.files.getAllFiles();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCrmFilesRequest` 
+**entity:** `typing.Optional[GetCrmFilesRequestEntity]` — Filter by file entity type
     
 </dd>
 </dl>
@@ -14742,7 +21416,55 @@ await client.files.getAllFiles();
 <dl>
 <dd>
 
-**requestOptions:** `FilesClient.RequestOptions` 
+**entity_ids:** `typing.Optional[str]` — Filter by file entity IDs
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**date_from:** `typing.Optional[int]` — dateFrom to date range filter type (timestamp in milliseconds)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**date_to:** `typing.Optional[int]` — dateTo to date range filter type (timestamp in milliseconds)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**offset:** `typing.Optional[int]` — Index of the first document of the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` — Number of documents per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetCrmFilesRequestSort]` — Sort the results in the ascending/descending order. Default order is **descending** by creation if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -14754,7 +21476,7 @@ await client.files.getAllFiles();
 </dl>
 </details>
 
-<details><summary><code>client.files.<a href="/src/api/resources/files/client/Client.ts">uploadAFile</a>({ ...params }) -> BrevoApi.FileData</code></summary>
+<details><summary><code>client.files.<a href="src/brevo/files/client.py">upload_a_file</a>(...) -&gt; AsyncHttpResponse[FileData]</code></summary>
 <dl>
 <dd>
 
@@ -14766,10 +21488,13 @@ await client.files.getAllFiles();
 <dl>
 <dd>
 
-```typescript
-await client.files.uploadAFile({
-    file: fs.createReadStream("/path/to/your/file")
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.files.upload_a_file()
 
 ```
 </dd>
@@ -14785,7 +21510,9 @@ await client.files.uploadAFile({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostCrmFilesRequest` 
+**file:** `from __future__ import annotations
+
+core.File` — See core.File for more documentation
     
 </dd>
 </dl>
@@ -14793,7 +21520,31 @@ await client.files.uploadAFile({
 <dl>
 <dd>
 
-**requestOptions:** `FilesClient.RequestOptions` 
+**company_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contact_id:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**deal_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -14805,7 +21556,7 @@ await client.files.uploadAFile({
 </dl>
 </details>
 
-<details><summary><code>client.files.<a href="/src/api/resources/files/client/Client.ts">downloadAFile</a>({ ...params }) -> BrevoApi.GetCrmFilesIdResponse</code></summary>
+<details><summary><code>client.files.<a href="src/brevo/files/client.py">download_a_file</a>(...) -&gt; AsyncHttpResponse[GetCrmFilesIdResponse]</code></summary>
 <dl>
 <dd>
 
@@ -14817,10 +21568,15 @@ await client.files.uploadAFile({
 <dl>
 <dd>
 
-```typescript
-await client.files.downloadAFile({
-    id: "id"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.files.download_a_file(
+    id="id",
+)
 
 ```
 </dd>
@@ -14836,7 +21592,7 @@ await client.files.downloadAFile({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCrmFilesIdRequest` 
+**id:** `str` — File id to download.
     
 </dd>
 </dl>
@@ -14844,7 +21600,7 @@ await client.files.downloadAFile({
 <dl>
 <dd>
 
-**requestOptions:** `FilesClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -14856,7 +21612,7 @@ await client.files.downloadAFile({
 </dl>
 </details>
 
-<details><summary><code>client.files.<a href="/src/api/resources/files/client/Client.ts">deleteAFile</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.files.<a href="src/brevo/files/client.py">delete_a_file</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -14868,10 +21624,15 @@ await client.files.downloadAFile({
 <dl>
 <dd>
 
-```typescript
-await client.files.deleteAFile({
-    id: "id"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.files.delete_a_file(
+    id="id",
+)
 
 ```
 </dd>
@@ -14887,7 +21648,7 @@ await client.files.deleteAFile({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteCrmFilesIdRequest` 
+**id:** `str` — File id to delete.
     
 </dd>
 </dl>
@@ -14895,7 +21656,7 @@ await client.files.deleteAFile({
 <dl>
 <dd>
 
-**requestOptions:** `FilesClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -14907,7 +21668,7 @@ await client.files.deleteAFile({
 </dl>
 </details>
 
-<details><summary><code>client.files.<a href="/src/api/resources/files/client/Client.ts">getFileDetails</a>({ ...params }) -> BrevoApi.FileData</code></summary>
+<details><summary><code>client.files.<a href="src/brevo/files/client.py">get_file_details</a>(...) -&gt; AsyncHttpResponse[FileData]</code></summary>
 <dl>
 <dd>
 
@@ -14919,10 +21680,15 @@ await client.files.deleteAFile({
 <dl>
 <dd>
 
-```typescript
-await client.files.getFileDetails({
-    id: "id"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.files.get_file_details(
+    id="id",
+)
 
 ```
 </dd>
@@ -14938,7 +21704,7 @@ await client.files.getFileDetails({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCrmFilesIdDataRequest` 
+**id:** `str` — File id to get file data.
     
 </dd>
 </dl>
@@ -14946,7 +21712,7 @@ await client.files.getFileDetails({
 <dl>
 <dd>
 
-**requestOptions:** `FilesClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -14959,7 +21725,7 @@ await client.files.getFileDetails({
 </details>
 
 ## Notes
-<details><summary><code>client.notes.<a href="/src/api/resources/notes/client/Client.ts">getAllNotes</a>({ ...params }) -> BrevoApi.Note[]</code></summary>
+<details><summary><code>client.notes.<a href="src/brevo/notes/client.py">get_all_notes</a>(...) -&gt; AsyncHttpResponse[typing.List[Note]]</code></summary>
 <dl>
 <dd>
 
@@ -14971,8 +21737,13 @@ await client.files.getFileDetails({
 <dl>
 <dd>
 
-```typescript
-await client.notes.getAllNotes();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.notes.get_all_notes()
 
 ```
 </dd>
@@ -14988,7 +21759,7 @@ await client.notes.getAllNotes();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCrmNotesRequest` 
+**entity:** `typing.Optional[GetCrmNotesRequestEntity]` — Filter by note entity type
     
 </dd>
 </dl>
@@ -14996,7 +21767,55 @@ await client.notes.getAllNotes();
 <dl>
 <dd>
 
-**requestOptions:** `NotesClient.RequestOptions` 
+**entity_ids:** `typing.Optional[str]` — Filter by note entity IDs
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**date_from:** `typing.Optional[int]` — dateFrom to date range filter type (timestamp in milliseconds)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**date_to:** `typing.Optional[int]` — dateTo to date range filter type (timestamp in milliseconds)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**offset:** `typing.Optional[int]` — Index of the first document of the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` — Number of documents per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetCrmNotesRequestSort]` — Sort the results in the ascending/descending order. Default order is **descending** by creation if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -15008,7 +21827,7 @@ await client.notes.getAllNotes();
 </dl>
 </details>
 
-<details><summary><code>client.notes.<a href="/src/api/resources/notes/client/Client.ts">createANote</a>({ ...params }) -> BrevoApi.PostCrmNotesResponse</code></summary>
+<details><summary><code>client.notes.<a href="src/brevo/notes/client.py">create_a_note</a>(...) -&gt; AsyncHttpResponse[PostCrmNotesResponse]</code></summary>
 <dl>
 <dd>
 
@@ -15020,10 +21839,15 @@ await client.notes.getAllNotes();
 <dl>
 <dd>
 
-```typescript
-await client.notes.createANote({
-    text: "In communication with client_dev for resolution of queries."
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.notes.create_a_note(
+    text="In communication with client_dev for resolution of queries.",
+)
 
 ```
 </dd>
@@ -15039,7 +21863,7 @@ await client.notes.createANote({
 <dl>
 <dd>
 
-**request:** `BrevoApi.NoteData` 
+**text:** `str` — Text content of a note
     
 </dd>
 </dl>
@@ -15047,7 +21871,31 @@ await client.notes.createANote({
 <dl>
 <dd>
 
-**requestOptions:** `NotesClient.RequestOptions` 
+**company_ids:** `typing.Optional[typing.Sequence[str]]` — Company Ids linked to a note
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contact_ids:** `typing.Optional[typing.Sequence[int]]` — Contact Ids linked to a note
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**deal_ids:** `typing.Optional[typing.Sequence[str]]` — Deal Ids linked to a note
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -15059,7 +21907,7 @@ await client.notes.createANote({
 </dl>
 </details>
 
-<details><summary><code>client.notes.<a href="/src/api/resources/notes/client/Client.ts">getANote</a>({ ...params }) -> BrevoApi.Note</code></summary>
+<details><summary><code>client.notes.<a href="src/brevo/notes/client.py">get_a_note</a>(...) -&gt; AsyncHttpResponse[Note]</code></summary>
 <dl>
 <dd>
 
@@ -15071,10 +21919,15 @@ await client.notes.createANote({
 <dl>
 <dd>
 
-```typescript
-await client.notes.getANote({
-    id: "id"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.notes.get_a_note(
+    id="id",
+)
 
 ```
 </dd>
@@ -15090,7 +21943,7 @@ await client.notes.getANote({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCrmNotesIdRequest` 
+**id:** `str` — Note ID to get
     
 </dd>
 </dl>
@@ -15098,7 +21951,7 @@ await client.notes.getANote({
 <dl>
 <dd>
 
-**requestOptions:** `NotesClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -15110,7 +21963,7 @@ await client.notes.getANote({
 </dl>
 </details>
 
-<details><summary><code>client.notes.<a href="/src/api/resources/notes/client/Client.ts">deleteANote</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.notes.<a href="src/brevo/notes/client.py">delete_a_note</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -15122,10 +21975,15 @@ await client.notes.getANote({
 <dl>
 <dd>
 
-```typescript
-await client.notes.deleteANote({
-    id: "id"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.notes.delete_a_note(
+    id="id",
+)
 
 ```
 </dd>
@@ -15141,7 +21999,7 @@ await client.notes.deleteANote({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteCrmNotesIdRequest` 
+**id:** `str` — Note ID to delete
     
 </dd>
 </dl>
@@ -15149,7 +22007,7 @@ await client.notes.deleteANote({
 <dl>
 <dd>
 
-**requestOptions:** `NotesClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -15161,7 +22019,7 @@ await client.notes.deleteANote({
 </dl>
 </details>
 
-<details><summary><code>client.notes.<a href="/src/api/resources/notes/client/Client.ts">updateANote</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.notes.<a href="src/brevo/notes/client.py">update_a_note</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -15173,13 +22031,16 @@ await client.notes.deleteANote({
 <dl>
 <dd>
 
-```typescript
-await client.notes.updateANote({
-    id: "id",
-    body: {
-        text: "In communication with client_dev for resolution of queries."
-    }
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.notes.update_a_note(
+    id="id",
+    text="In communication with client_dev for resolution of queries.",
+)
 
 ```
 </dd>
@@ -15195,7 +22056,7 @@ await client.notes.updateANote({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PatchCrmNotesIdRequest` 
+**id:** `str` — Note ID to update
     
 </dd>
 </dl>
@@ -15203,7 +22064,39 @@ await client.notes.updateANote({
 <dl>
 <dd>
 
-**requestOptions:** `NotesClient.RequestOptions` 
+**text:** `str` — Text content of a note
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**company_ids:** `typing.Optional[typing.Sequence[str]]` — Company Ids linked to a note
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contact_ids:** `typing.Optional[typing.Sequence[int]]` — Contact Ids linked to a note
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**deal_ids:** `typing.Optional[typing.Sequence[str]]` — Deal Ids linked to a note
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -15216,7 +22109,7 @@ await client.notes.updateANote({
 </details>
 
 ## Tasks
-<details><summary><code>client.tasks.<a href="/src/api/resources/tasks/client/Client.ts">getAllTasks</a>({ ...params }) -> BrevoApi.GetCrmTasksResponse</code></summary>
+<details><summary><code>client.tasks.<a href="src/brevo/tasks/client.py">get_all_tasks</a>(...) -&gt; AsyncHttpResponse[GetCrmTasksResponse]</code></summary>
 <dl>
 <dd>
 
@@ -15228,10 +22121,15 @@ await client.notes.updateANote({
 <dl>
 <dd>
 
-```typescript
-await client.tasks.getAllTasks({
-    sortBy: "name"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.tasks.get_all_tasks(
+    sort_by="name",
+)
 
 ```
 </dd>
@@ -15247,7 +22145,7 @@ await client.tasks.getAllTasks({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCrmTasksRequest` 
+**filter_type:** `typing.Optional[str]` — Filter by task type (ID)
     
 </dd>
 </dl>
@@ -15255,7 +22153,103 @@ await client.tasks.getAllTasks({
 <dl>
 <dd>
 
-**requestOptions:** `TasksClient.RequestOptions` 
+**filter_status:** `typing.Optional[GetCrmTasksRequestFilterStatus]` — Filter by task status
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter_date:** `typing.Optional[GetCrmTasksRequestFilterDate]` — Filter by date
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter_assign_to:** `typing.Optional[str]` — Filter by the "assignTo" ID. You can utilize account emails for the "assignTo" attribute.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter_contacts:** `typing.Optional[str]` — Filter by contact ids
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter_deals:** `typing.Optional[str]` — Filter by deals ids
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter_companies:** `typing.Optional[str]` — Filter by companies ids
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**date_from:** `typing.Optional[int]` — dateFrom to date range filter type (timestamp in milliseconds)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**date_to:** `typing.Optional[int]` — dateTo to date range filter type (timestamp in milliseconds)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**offset:** `typing.Optional[int]` — Index of the first document of the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` — Number of documents per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetCrmTasksRequestSort]` — Sort the results in the ascending/descending order. Default order is **descending** by creation if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort_by:** `typing.Optional[str]` — The field used to sort field names.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -15267,7 +22261,7 @@ await client.tasks.getAllTasks({
 </dl>
 </details>
 
-<details><summary><code>client.tasks.<a href="/src/api/resources/tasks/client/Client.ts">createATask</a>({ ...params }) -> BrevoApi.PostCrmTasksResponse</code></summary>
+<details><summary><code>client.tasks.<a href="src/brevo/tasks/client.py">create_a_task</a>(...) -&gt; AsyncHttpResponse[PostCrmTasksResponse]</code></summary>
 <dl>
 <dd>
 
@@ -15279,12 +22273,21 @@ await client.tasks.getAllTasks({
 <dl>
 <dd>
 
-```typescript
-await client.tasks.createATask({
-    date: "2021-11-01T17:44:54Z",
-    name: "Task: Connect with client_dev",
-    taskTypeId: "61a5cd07ca1347c82306ad09"
-});
+```python
+import datetime
+
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.tasks.create_a_task(
+    date=datetime.datetime.fromisoformat(
+        "2021-11-01 17:44:54+00:00",
+    ),
+    name="Task: Connect with client_dev",
+    task_type_id="61a5cd07ca1347c82306ad09",
+)
 
 ```
 </dd>
@@ -15300,7 +22303,7 @@ await client.tasks.createATask({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostCrmTasksRequest` 
+**date:** `dt.datetime` — Task due date and time
     
 </dd>
 </dl>
@@ -15308,7 +22311,87 @@ await client.tasks.createATask({
 <dl>
 <dd>
 
-**requestOptions:** `TasksClient.RequestOptions` 
+**name:** `str` — Name of task
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**task_type_id:** `str` — Id for type of task e.g Call / Email / Meeting etc.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**assign_to_id:** `typing.Optional[str]` — To assign a task to a user you can use either the account email or ID.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**companies_ids:** `typing.Optional[typing.Sequence[str]]` — Companies ids for companies a task is linked to
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contacts_ids:** `typing.Optional[typing.Sequence[int]]` — Contact ids for contacts linked to this task
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**deals_ids:** `typing.Optional[typing.Sequence[str]]` — Deal ids for deals a task is linked to
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**done:** `typing.Optional[bool]` — Task marked as done
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**duration:** `typing.Optional[int]` — Duration of task in milliseconds [1 minute = 60000 ms]
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `typing.Optional[str]` — Notes added to a task
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reminder:** `typing.Optional[TaskReminder]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -15320,7 +22403,7 @@ await client.tasks.createATask({
 </dl>
 </details>
 
-<details><summary><code>client.tasks.<a href="/src/api/resources/tasks/client/Client.ts">getATask</a>({ ...params }) -> BrevoApi.Task</code></summary>
+<details><summary><code>client.tasks.<a href="src/brevo/tasks/client.py">get_a_task</a>(...) -&gt; AsyncHttpResponse[Task]</code></summary>
 <dl>
 <dd>
 
@@ -15332,10 +22415,15 @@ await client.tasks.createATask({
 <dl>
 <dd>
 
-```typescript
-await client.tasks.getATask({
-    id: "id"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.tasks.get_a_task(
+    id="id",
+)
 
 ```
 </dd>
@@ -15351,7 +22439,7 @@ await client.tasks.getATask({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCrmTasksIdRequest` 
+**id:** `str` 
     
 </dd>
 </dl>
@@ -15359,7 +22447,7 @@ await client.tasks.getATask({
 <dl>
 <dd>
 
-**requestOptions:** `TasksClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -15371,7 +22459,7 @@ await client.tasks.getATask({
 </dl>
 </details>
 
-<details><summary><code>client.tasks.<a href="/src/api/resources/tasks/client/Client.ts">deleteATask</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.tasks.<a href="src/brevo/tasks/client.py">delete_a_task</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -15383,10 +22471,15 @@ await client.tasks.getATask({
 <dl>
 <dd>
 
-```typescript
-await client.tasks.deleteATask({
-    id: "id"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.tasks.delete_a_task(
+    id="id",
+)
 
 ```
 </dd>
@@ -15402,7 +22495,7 @@ await client.tasks.deleteATask({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteCrmTasksIdRequest` 
+**id:** `str` 
     
 </dd>
 </dl>
@@ -15410,7 +22503,7 @@ await client.tasks.deleteATask({
 <dl>
 <dd>
 
-**requestOptions:** `TasksClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -15422,7 +22515,7 @@ await client.tasks.deleteATask({
 </dl>
 </details>
 
-<details><summary><code>client.tasks.<a href="/src/api/resources/tasks/client/Client.ts">updateATask</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.tasks.<a href="src/brevo/tasks/client.py">update_a_task</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -15434,10 +22527,15 @@ await client.tasks.deleteATask({
 <dl>
 <dd>
 
-```typescript
-await client.tasks.updateATask({
-    id: "id"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.tasks.update_a_task(
+    id="id",
+)
 
 ```
 </dd>
@@ -15453,7 +22551,7 @@ await client.tasks.updateATask({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PatchCrmTasksIdRequest` 
+**id:** `str` 
     
 </dd>
 </dl>
@@ -15461,7 +22559,95 @@ await client.tasks.updateATask({
 <dl>
 <dd>
 
-**requestOptions:** `TasksClient.RequestOptions` 
+**assign_to_id:** `typing.Optional[str]` — To assign a task to a user you can use either the account email or ID.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**companies_ids:** `typing.Optional[typing.Sequence[str]]` — Companies ids for companies a task is linked to
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contacts_ids:** `typing.Optional[typing.Sequence[int]]` — Contact ids for contacts linked to this task
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**date:** `typing.Optional[dt.datetime]` — Task date/time
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**deals_ids:** `typing.Optional[typing.Sequence[str]]` — Deal ids for deals a task is linked to
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**done:** `typing.Optional[bool]` — Task marked as done
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**duration:** `typing.Optional[int]` — Duration of task in milliseconds [1 minute = 60000 ms]
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `typing.Optional[str]` — Name of task
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `typing.Optional[str]` — Notes added to a task
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reminder:** `typing.Optional[TaskReminder]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**task_type_id:** `typing.Optional[str]` — Id for type of task e.g Call / Email / Meeting etc.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -15473,7 +22659,7 @@ await client.tasks.updateATask({
 </dl>
 </details>
 
-<details><summary><code>client.tasks.<a href="/src/api/resources/tasks/client/Client.ts">getAllTaskTypes</a>() -> BrevoApi.GetCrmTasktypesResponse</code></summary>
+<details><summary><code>client.tasks.<a href="src/brevo/tasks/client.py">get_all_task_types</a>() -&gt; AsyncHttpResponse[GetCrmTasktypesResponse]</code></summary>
 <dl>
 <dd>
 
@@ -15485,8 +22671,13 @@ await client.tasks.updateATask({
 <dl>
 <dd>
 
-```typescript
-await client.tasks.getAllTaskTypes();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.tasks.get_all_task_types()
 
 ```
 </dd>
@@ -15502,7 +22693,7 @@ await client.tasks.getAllTaskTypes();
 <dl>
 <dd>
 
-**requestOptions:** `TasksClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -15515,7 +22706,7 @@ await client.tasks.getAllTaskTypes();
 </details>
 
 ## TransactionalWhatsApp
-<details><summary><code>client.transactionalWhatsApp.<a href="/src/api/resources/transactionalWhatsApp/client/Client.ts">sendWhatsappMessage</a>({ ...params }) -> BrevoApi.SendWhatsappMessageResponse</code></summary>
+<details><summary><code>client.transactional_whats_app.<a href="src/brevo/transactional_whats_app/client.py">send_whatsapp_message</a>(...) -&gt; AsyncHttpResponse[SendWhatsappMessageResponse]</code></summary>
 <dl>
 <dd>
 
@@ -15542,12 +22733,20 @@ This endpoint is used to send a WhatsApp message. <br/>(**The first message you 
 <dl>
 <dd>
 
-```typescript
-await client.transactionalWhatsApp.sendWhatsappMessage({
-    contactNumbers: ["contactNumbers"],
-    senderNumber: "senderNumber",
-    templateId: 123
-});
+```python
+from brevo import BrevoApi
+from brevo.transactional_whats_app import SendWhatsappMessageRequestParams
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.transactional_whats_app.send_whatsapp_message(
+    request=SendWhatsappMessageRequestParams(
+        contact_numbers=["contactNumbers"],
+        sender_number="senderNumber",
+        template_id=123,
+    ),
+)
 
 ```
 </dd>
@@ -15563,7 +22762,7 @@ await client.transactionalWhatsApp.sendWhatsappMessage({
 <dl>
 <dd>
 
-**request:** `BrevoApi.SendWhatsappMessageRequest` 
+**request:** `SendWhatsappMessageRequest` 
     
 </dd>
 </dl>
@@ -15571,7 +22770,7 @@ await client.transactionalWhatsApp.sendWhatsappMessage({
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalWhatsAppClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -15583,7 +22782,7 @@ await client.transactionalWhatsApp.sendWhatsappMessage({
 </dl>
 </details>
 
-<details><summary><code>client.transactionalWhatsApp.<a href="/src/api/resources/transactionalWhatsApp/client/Client.ts">getWhatsappEventReport</a>({ ...params }) -> BrevoApi.GetWhatsappEventReportResponse</code></summary>
+<details><summary><code>client.transactional_whats_app.<a href="src/brevo/transactional_whats_app/client.py">get_whatsapp_event_report</a>(...) -&gt; AsyncHttpResponse[GetWhatsappEventReportResponse]</code></summary>
 <dl>
 <dd>
 
@@ -15609,8 +22808,13 @@ This endpoint will show the unaggregated statistics for WhatsApp activity (30 da
 <dl>
 <dd>
 
-```typescript
-await client.transactionalWhatsApp.getWhatsappEventReport();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.transactional_whats_app.get_whatsapp_event_report()
 
 ```
 </dd>
@@ -15626,7 +22830,7 @@ await client.transactionalWhatsApp.getWhatsappEventReport();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetWhatsappEventReportRequest` 
+**limit:** `typing.Optional[int]` — Number limitation for the result returned
     
 </dd>
 </dl>
@@ -15634,7 +22838,63 @@ await client.transactionalWhatsApp.getWhatsappEventReport();
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalWhatsAppClient.RequestOptions` 
+**offset:** `typing.Optional[int]` — Beginning point in the list to retrieve from
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**start_date:** `typing.Optional[str]` — **Mandatory if endDate is used.** Starting date of the report (YYYY-MM-DD). Must be lower than equal to endDate
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**end_date:** `typing.Optional[str]` — **Mandatory if startDate is used.** Ending date of the report (YYYY-MM-DD). Must be greater than equal to startDate
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**days:** `typing.Optional[int]` — Number of days in the past including today (positive integer). _Not compatible with 'startDate' and 'endDate'_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contact_number:** `typing.Optional[str]` — Filter results for specific contact (WhatsApp Number with country code. Example, 85264318721)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**event:** `typing.Optional[GetWhatsappEventReportRequestEvent]` — Filter the report for a specific event type
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetWhatsappEventReportRequestSort]` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -15647,7 +22907,7 @@ await client.transactionalWhatsApp.getWhatsappEventReport();
 </details>
 
 ## TransactionalEmails
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">getTransacBlockedContacts</a>({ ...params }) -> BrevoApi.GetTransacBlockedContactsResponse</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">get_transac_blocked_contacts</a>(...) -&gt; AsyncHttpResponse[GetTransacBlockedContactsResponse]</code></summary>
 <dl>
 <dd>
 
@@ -15659,8 +22919,13 @@ await client.transactionalWhatsApp.getWhatsappEventReport();
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.getTransacBlockedContacts();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.transactional_emails.get_transac_blocked_contacts()
 
 ```
 </dd>
@@ -15676,7 +22941,7 @@ await client.transactionalEmails.getTransacBlockedContacts();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetTransacBlockedContactsRequest` 
+**start_date:** `typing.Optional[str]` — **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) from which you want to fetch the blocked or unsubscribed contacts
     
 </dd>
 </dl>
@@ -15684,7 +22949,47 @@ await client.transactionalEmails.getTransacBlockedContacts();
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**end_date:** `typing.Optional[str]` — **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) till which you want to fetch the blocked or unsubscribed contacts
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` — Number of documents returned per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**offset:** `typing.Optional[int]` — Index of the first document on the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**senders:** `typing.Optional[typing.Union[str, typing.Sequence[str]]]` — Comma separated list of emails of the senders from which contacts are blocked or unsubscribed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetTransacBlockedContactsRequestSort]` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -15696,7 +23001,7 @@ await client.transactionalEmails.getTransacBlockedContacts();
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">unblockOrResubscribeATransactionalContact</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">unblock_or_resubscribe_a_transactional_contact</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -15708,10 +23013,15 @@ await client.transactionalEmails.getTransacBlockedContacts();
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.unblockOrResubscribeATransactionalContact({
-    email: "email"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.transactional_emails.unblock_or_resubscribe_a_transactional_contact(
+    email="email",
+)
 
 ```
 </dd>
@@ -15727,7 +23037,7 @@ await client.transactionalEmails.unblockOrResubscribeATransactionalContact({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteSmtpBlockedContactsEmailRequest` 
+**email:** `str` — contact email (urlencoded) to unblock.
     
 </dd>
 </dl>
@@ -15735,7 +23045,7 @@ await client.transactionalEmails.unblockOrResubscribeATransactionalContact({
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -15747,7 +23057,7 @@ await client.transactionalEmails.unblockOrResubscribeATransactionalContact({
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">getBlockedDomains</a>() -> BrevoApi.GetBlockedDomainsResponse</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">get_blocked_domains</a>() -&gt; AsyncHttpResponse[GetBlockedDomainsResponse]</code></summary>
 <dl>
 <dd>
 
@@ -15773,8 +23083,13 @@ Get the list of blocked domains
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.getBlockedDomains();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.transactional_emails.get_blocked_domains()
 
 ```
 </dd>
@@ -15790,7 +23105,7 @@ await client.transactionalEmails.getBlockedDomains();
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -15802,7 +23117,7 @@ await client.transactionalEmails.getBlockedDomains();
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">blockNewDomain</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">block_new_domain</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -15828,10 +23143,15 @@ Blocks a new domain in order to avoid messages being sent to the same
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.blockNewDomain({
-    domain: "example.com"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.transactional_emails.block_new_domain(
+    domain="example.com",
+)
 
 ```
 </dd>
@@ -15847,7 +23167,7 @@ await client.transactionalEmails.blockNewDomain({
 <dl>
 <dd>
 
-**request:** `BrevoApi.BlockNewDomainRequest` 
+**domain:** `str` — name of the domain to be blocked
     
 </dd>
 </dl>
@@ -15855,7 +23175,7 @@ await client.transactionalEmails.blockNewDomain({
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -15867,7 +23187,7 @@ await client.transactionalEmails.blockNewDomain({
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">deleteBlockedDomain</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">delete_blocked_domain</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -15893,10 +23213,15 @@ Unblocks an existing domain from the list of blocked domains
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.deleteBlockedDomain({
-    domain: "domain"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.transactional_emails.delete_blocked_domain(
+    domain="domain",
+)
 
 ```
 </dd>
@@ -15912,7 +23237,7 @@ await client.transactionalEmails.deleteBlockedDomain({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteBlockedDomainRequest` 
+**domain:** `str` — The name of the domain to be deleted
     
 </dd>
 </dl>
@@ -15920,7 +23245,7 @@ await client.transactionalEmails.deleteBlockedDomain({
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -15932,7 +23257,7 @@ await client.transactionalEmails.deleteBlockedDomain({
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">deleteHardbounces</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">delete_hardbounces</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -15958,8 +23283,13 @@ Delete hardbounces. To use carefully (e.g. in case of temporary ISP failures)
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.deleteHardbounces();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.transactional_emails.delete_hardbounces()
 
 ```
 </dd>
@@ -15975,7 +23305,7 @@ await client.transactionalEmails.deleteHardbounces();
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteHardbouncesRequest` 
+**contact_email:** `typing.Optional[str]` — Target a specific email address
     
 </dd>
 </dl>
@@ -15983,7 +23313,23 @@ await client.transactionalEmails.deleteHardbounces();
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**end_date:** `typing.Optional[str]` — Ending date (YYYY-MM-DD) of the time period for deletion. The hardbounces until this date will be deleted. Must be greater than or equal to the startDate
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**start_date:** `typing.Optional[str]` — Starting date (YYYY-MM-DD) of the time period for deletion. The hardbounces occurred after this date will be deleted. Must be less than or equal to the endDate
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -15995,7 +23341,7 @@ await client.transactionalEmails.deleteHardbounces();
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">sendTransacEmail</a>({ ...params }) -> BrevoApi.SendTransacEmailResponse</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">send_transac_email</a>(...) -&gt; AsyncHttpResponse[SendTransacEmailResponse]</code></summary>
 <dl>
 <dd>
 
@@ -16007,19 +23353,34 @@ await client.transactionalEmails.deleteHardbounces();
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.sendTransacEmail({
-    htmlContent: "<html><head></head><body><p>Hello,</p>This is my first transactional email sent from Brevo.</p></body></html>",
-    sender: {
-        email: "hello@brevo.com",
-        name: "Alex from Brevo"
+```python
+from brevo import BrevoApi
+from brevo.transactional_emails import (
+    SendTransacEmailRequestSender,
+    SendTransacEmailRequestToItem,
+)
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.transactional_emails.send_transac_email(
+    html_content="<html><head></head><body>Your delivery is expected {{params.estimatedArrival}}.Your tracking code: {{params.trackingCode}}</p></body></html>",
+    params={
+        "trackingCode": "JD01460000300002350000",
+        "estimatedArrival": "Tomorrow",
     },
-    subject: "Hello from Brevo!",
-    to: [{
-            email: "johndoe@example.com",
-            name: "John Doe"
-        }]
-});
+    sender=SendTransacEmailRequestSender(
+        email="hello@brevo.com",
+        name="Alex from Brevo",
+    ),
+    subject="Hello from Brevo!",
+    to=[
+        SendTransacEmailRequestToItem(
+            email="johndoe@example.com",
+            name="John Doe",
+        )
+    ],
+)
 
 ```
 </dd>
@@ -16035,7 +23396,7 @@ await client.transactionalEmails.sendTransacEmail({
 <dl>
 <dd>
 
-**request:** `BrevoApi.SendTransacEmailRequest` 
+**attachment:** `typing.Optional[typing.Sequence[SendTransacEmailRequestAttachmentItem]]` — Array of attachment objects. Each attachment must include either an absolute URL (no local file paths) or base64-encoded content, along with the attachment filename. The `name` field is required when `content` is provided. Supported file extensions: xlsx, xls, ods, docx, docm, doc, csv, pdf, txt, gif, jpg, jpeg, png, tif, tiff, rtf, bmp, cgm, css, shtml, html, htm, zip, xml, ppt, pptx, tar, ez, ics, mobi, msg, pub, eps, odt, mp3, m4a, m4v, wma, ogg, flac, wav, aif, aifc, aiff, mp4, mov, avi, mkv, mpeg, mpg, wmv, pkpass, xlsm. When `templateId` is specified: if the template uses the New Template Language format, both `url` and `content` attachment types are supported; if the template uses the Old Template Language format, the `attachment` parameter is ignored.
     
 </dd>
 </dl>
@@ -16043,7 +23404,127 @@ await client.transactionalEmails.sendTransacEmail({
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**batch_id:** `typing.Optional[str]` — UUIDv4 identifier for the scheduled batch of transactional emails. If omitted, a valid UUIDv4 batch identifier is automatically generated.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**bcc:** `typing.Optional[typing.Sequence[SendTransacEmailRequestBccItem]]` — Array of BCC recipient objects. Each object contains an email address and an optional name.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**cc:** `typing.Optional[typing.Sequence[SendTransacEmailRequestCcItem]]` — Array of CC recipient objects. Each object contains an email address and an optional name.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**headers:** `typing.Optional[typing.Dict[str, typing.Any]]` — Custom email headers (non-standard headers) to include in the email. The `sender.ip` header can be set to specify the IP address used for sending transactional emails (dedicated IP users only). Header names must use Title-Case-Format (words separated by hyphens with the first letter of each word capitalized). Headers not in this format are automatically converted. Standard email headers are not supported. Example: `{"sender.ip":"1.2.3.4", "X-Mailin-custom":"some_custom_value", "Idempotency-Key":"abc-123"}`
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**html_content:** `typing.Optional[str]` — HTML body content of the email. Required when `templateId` is not provided. Ignored when `templateId` is provided.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**message_versions:** `typing.Optional[typing.Sequence[SendTransacEmailRequestMessageVersionsItem]]` — Array of message version objects for sending customized email variants. The `templateId` can be customized per version only if a global `templateId` is provided. The `htmlContent` and `textContent` can be customized per version only if at least one of these is present in the global parameters. Global parameters such as `to` (required), `bcc`, `cc`, `replyTo`, and `subject` can be customized per version. Maximum total recipients per API request is 2000. Maximum recipients per message version is 99. Individual `params` objects must not exceed 100 KB. Cumulative `params` across all versions must not exceed 1000 KB. See https://developers.brevo.com/docs/batch-send-transactional-emails for detailed usage instructions.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**params:** `typing.Optional[typing.Dict[str, typing.Any]]` — Key-value pairs for template variable substitution. Only applicable when the template uses the New Template Language format.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reply_to:** `typing.Optional[SendTransacEmailRequestReplyTo]` — Reply-to email address (required) and optional display name. Recipients will use this address when replying to the email.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scheduled_at:** `typing.Optional[dt.datetime]` — UTC date-time when the email should be sent (format: YYYY-MM-DDTHH:mm:ss.SSSZ). Include timezone information in the date-time value. Scheduled emails may be delayed by up to 5 minutes.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sender:** `typing.Optional[SendTransacEmailRequestSender]` — Sender information. Required when `templateId` is not provided. Specify either an email address (with optional name) or a sender ID. The `name` field is ignored when `id` is provided.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**subject:** `typing.Optional[str]` — Email subject line. Required when `templateId` is not provided.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tags:** `typing.Optional[typing.Sequence[str]]` — Array of tags for categorizing and filtering emails
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**template_id:** `typing.Optional[int]` — Template identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**text_content:** `typing.Optional[str]` — Plain text body content of the email. Ignored when `templateId` is provided.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**to:** `typing.Optional[typing.Sequence[SendTransacEmailRequestToItem]]` — Array of recipient objects. Each object contains an email address and an optional display name. Required when `messageVersions` is not provided. Ignored when `messageVersions` is provided. Example: `[{"name":"Jimmy", "email":"jimmy@example.com"}, {"name":"Joe", "email":"joe@example.com"}]`
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -16055,7 +23536,7 @@ await client.transactionalEmails.sendTransacEmail({
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">deleteScheduledEmailById</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">delete_scheduled_email_by_id</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -16081,10 +23562,15 @@ Delete scheduled batch of emails by batchId or single scheduled email by message
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.deleteScheduledEmailById({
-    identifier: "4320f270-a4e3-4a2e-b591-edfe30a5e627"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.transactional_emails.delete_scheduled_email_by_id(
+    identifier="4320f270-a4e3-4a2e-b591-edfe30a5e627",
+)
 
 ```
 </dd>
@@ -16100,7 +23586,7 @@ await client.transactionalEmails.deleteScheduledEmailById({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteScheduledEmailByIdRequest` 
+**identifier:** `str` — The `batchId` of scheduled emails batch (Should be a valid UUIDv4) or the `messageId` of scheduled email.
     
 </dd>
 </dl>
@@ -16108,7 +23594,7 @@ await client.transactionalEmails.deleteScheduledEmailById({
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -16120,7 +23606,7 @@ await client.transactionalEmails.deleteScheduledEmailById({
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">getScheduledEmailById</a>({ ...params }) -> BrevoApi.GetScheduledEmailByIdResponse</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">get_scheduled_email_by_id</a>(...) -&gt; AsyncHttpResponse[GetScheduledEmailByIdResponse]</code></summary>
 <dl>
 <dd>
 
@@ -16146,12 +23632,23 @@ Fetch scheduled batch of emails by batchId or single scheduled email by messageI
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.getScheduledEmailById({
-    identifier: "4320f270-a4e3-4a2e-b591-edfe30a5e627",
-    startDate: "2022-02-02",
-    endDate: "2022-03-02"
-});
+```python
+import datetime
+
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.transactional_emails.get_scheduled_email_by_id(
+    identifier="4320f270-a4e3-4a2e-b591-edfe30a5e627",
+    start_date=datetime.date.fromisoformat(
+        "2022-02-02",
+    ),
+    end_date=datetime.date.fromisoformat(
+        "2022-03-02",
+    ),
+)
 
 ```
 </dd>
@@ -16167,7 +23664,7 @@ await client.transactionalEmails.getScheduledEmailById({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetScheduledEmailByIdRequest` 
+**identifier:** `str` — The `batchId` of scheduled emails batch (Should be a valid UUIDv4) or the `messageId` of scheduled email.
     
 </dd>
 </dl>
@@ -16175,7 +23672,55 @@ await client.transactionalEmails.getScheduledEmailById({
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**start_date:** `typing.Optional[dt.date]` — Mandatory if `endDate` is used. Starting date (YYYY-MM-DD) from which you want to fetch the list. Can be maximum 30 days older tha current date.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**end_date:** `typing.Optional[dt.date]` — Mandatory if `startDate` is used. Ending date (YYYY-MM-DD) till which you want to fetch the list. Maximum time period that can be selected is one month.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetScheduledEmailByIdRequestSort]` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed. Not valid when identifier is `messageId`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**status:** `typing.Optional[GetScheduledEmailByIdRequestStatus]` — Filter the records by `status` of the scheduled email batch or message. Not valid when identifier is `messageId`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` — Number of documents returned per page. Not valid when identifier is `messageId`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**offset:** `typing.Optional[int]` — Index of the first document on the page.  Not valid when identifier is `messageId`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -16187,7 +23732,7 @@ await client.transactionalEmails.getScheduledEmailById({
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">getTransacEmailsList</a>({ ...params }) -> BrevoApi.GetTransacEmailsListResponse</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">get_transac_emails_list</a>(...) -&gt; AsyncHttpResponse[GetTransacEmailsListResponse]</code></summary>
 <dl>
 <dd>
 
@@ -16213,8 +23758,13 @@ This endpoint will show the list of emails for past 30 days by default. To retri
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.getTransacEmailsList();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.transactional_emails.get_transac_emails_list()
 
 ```
 </dd>
@@ -16230,7 +23780,7 @@ await client.transactionalEmails.getTransacEmailsList();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetTransacEmailsListRequest` 
+**email:** `typing.Optional[str]` — **Mandatory if templateId and messageId are not passed in query filters.** Email address to which transactional email has been sent.
     
 </dd>
 </dl>
@@ -16238,7 +23788,63 @@ await client.transactionalEmails.getTransacEmailsList();
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**template_id:** `typing.Optional[int]` — **Mandatory if email and messageId are not passed in query filters.** Id of the template that was used to compose transactional email.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**message_id:** `typing.Optional[str]` — **Mandatory if templateId and email are not passed in query filters.** Message ID of the transactional email sent.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**start_date:** `typing.Optional[str]` — **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) from which you want to fetch the list. **Maximum time period that can be selected is one month**.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**end_date:** `typing.Optional[str]` — **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) till which you want to fetch the list. **Maximum time period that can be selected is one month.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetTransacEmailsListRequestSort]` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` — Number of documents returned per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**offset:** `typing.Optional[int]` — Index of the first document in the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -16250,7 +23856,7 @@ await client.transactionalEmails.getTransacEmailsList();
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">getTransacEmailContent</a>({ ...params }) -> BrevoApi.GetTransacEmailContentResponse</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">get_transac_email_content</a>(...) -&gt; AsyncHttpResponse[GetTransacEmailContentResponse]</code></summary>
 <dl>
 <dd>
 
@@ -16282,10 +23888,15 @@ The uuid can also be fetched from the transactional logs page in your Brevo acco
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.getTransacEmailContent({
-    uuid: "uuid"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.transactional_emails.get_transac_email_content(
+    uuid_="uuid",
+)
 
 ```
 </dd>
@@ -16301,7 +23912,7 @@ await client.transactionalEmails.getTransacEmailContent({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetTransacEmailContentRequest` 
+**uuid_:** `str` — Unique id of the transactional email that has been sent to a particular contact
     
 </dd>
 </dl>
@@ -16309,7 +23920,7 @@ await client.transactionalEmails.getTransacEmailContent({
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -16321,7 +23932,7 @@ await client.transactionalEmails.getTransacEmailContent({
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">deleteAnSmtpTransactionalLog</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">delete_an_smtp_transactional_log</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -16333,10 +23944,15 @@ await client.transactionalEmails.getTransacEmailContent({
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.deleteAnSmtpTransactionalLog({
-    identifier: "identifier"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.transactional_emails.delete_an_smtp_transactional_log(
+    identifier="identifier",
+)
 
 ```
 </dd>
@@ -16352,7 +23968,7 @@ await client.transactionalEmails.deleteAnSmtpTransactionalLog({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteSmtpLogIdentifierRequest` 
+**identifier:** `str` — MessageId of the transactional log(s) to delete
     
 </dd>
 </dl>
@@ -16360,7 +23976,7 @@ await client.transactionalEmails.deleteAnSmtpTransactionalLog({
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -16372,7 +23988,7 @@ await client.transactionalEmails.deleteAnSmtpTransactionalLog({
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">getAggregatedSmtpReport</a>({ ...params }) -> BrevoApi.GetAggregatedSmtpReportResponse</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">get_aggregated_smtp_report</a>(...) -&gt; AsyncHttpResponse[GetAggregatedSmtpReportResponse]</code></summary>
 <dl>
 <dd>
 
@@ -16398,8 +24014,13 @@ This endpoint will show the aggregated stats for past 90 days by default if `sta
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.getAggregatedSmtpReport();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.transactional_emails.get_aggregated_smtp_report()
 
 ```
 </dd>
@@ -16415,7 +24036,7 @@ await client.transactionalEmails.getAggregatedSmtpReport();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetAggregatedSmtpReportRequest` 
+**start_date:** `typing.Optional[str]` — **Mandatory if endDate is used.** Starting date of the report (YYYY-MM-DD). Must be lower than equal to endDate
     
 </dd>
 </dl>
@@ -16423,7 +24044,31 @@ await client.transactionalEmails.getAggregatedSmtpReport();
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**end_date:** `typing.Optional[str]` — **Mandatory if startDate is used.** Ending date of the report (YYYY-MM-DD). Must be greater than equal to startDate
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**days:** `typing.Optional[int]` — Number of days in the past including today (positive integer). _Not compatible with 'startDate' and 'endDate'_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tag:** `typing.Optional[str]` — Tag of the emails
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -16435,7 +24080,7 @@ await client.transactionalEmails.getAggregatedSmtpReport();
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">getEmailEventReport</a>({ ...params }) -> BrevoApi.GetEmailEventReportResponse</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">get_email_event_report</a>(...) -&gt; AsyncHttpResponse[GetEmailEventReportResponse]</code></summary>
 <dl>
 <dd>
 
@@ -16461,8 +24106,13 @@ This endpoint will show the aggregated stats for past 30 days by default if `sta
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.getEmailEventReport();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.transactional_emails.get_email_event_report()
 
 ```
 </dd>
@@ -16478,7 +24128,7 @@ await client.transactionalEmails.getEmailEventReport();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetEmailEventReportRequest` 
+**limit:** `typing.Optional[int]` — Number limitation for the result returned
     
 </dd>
 </dl>
@@ -16486,7 +24136,87 @@ await client.transactionalEmails.getEmailEventReport();
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**offset:** `typing.Optional[int]` — Beginning point in the list to retrieve from.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**start_date:** `typing.Optional[str]` — **Mandatory if endDate is used.** Starting date of the report (YYYY-MM-DD). Must be lower than equal to endDate
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**end_date:** `typing.Optional[str]` — **Mandatory if startDate is used.** Ending date of the report (YYYY-MM-DD). Must be greater than equal to startDate
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**days:** `typing.Optional[int]` — Number of days in the past including today (positive integer). _Not compatible with 'startDate' and 'endDate'_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**email:** `typing.Optional[str]` — Filter the report for a specific email addresses
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**event:** `typing.Optional[GetEmailEventReportRequestEvent]` — Filter the report for a specific event type
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tags:** `typing.Optional[str]` — Filter the report for tags (serialized and urlencoded array)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**message_id:** `typing.Optional[str]` — Filter on a specific message id
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**template_id:** `typing.Optional[int]` — Filter on a specific template id
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetEmailEventReportRequestSort]` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -16498,7 +24228,7 @@ await client.transactionalEmails.getEmailEventReport();
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">getSmtpReport</a>({ ...params }) -> BrevoApi.GetSmtpReportResponse</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">get_smtp_report</a>(...) -&gt; AsyncHttpResponse[GetSmtpReportResponse]</code></summary>
 <dl>
 <dd>
 
@@ -16510,8 +24240,13 @@ await client.transactionalEmails.getEmailEventReport();
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.getSmtpReport();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.transactional_emails.get_smtp_report()
 
 ```
 </dd>
@@ -16527,7 +24262,7 @@ await client.transactionalEmails.getSmtpReport();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetSmtpReportRequest` 
+**limit:** `typing.Optional[int]` — Number of documents returned per page
     
 </dd>
 </dl>
@@ -16535,7 +24270,55 @@ await client.transactionalEmails.getSmtpReport();
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**offset:** `typing.Optional[int]` — Index of the first document on the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**start_date:** `typing.Optional[str]` — **Mandatory if endDate is used.** Starting date of the report (YYYY-MM-DD)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**end_date:** `typing.Optional[str]` — **Mandatory if startDate is used.** Ending date of the report (YYYY-MM-DD)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**days:** `typing.Optional[int]` — Number of days in the past including today (positive integer). _Not compatible with 'startDate' and 'endDate'_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tag:** `typing.Optional[str]` — Tag of the emails
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetSmtpReportRequestSort]` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -16547,7 +24330,7 @@ await client.transactionalEmails.getSmtpReport();
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">postPreviewSmtpEmailTemplates</a>({ ...params }) -> BrevoApi.PostPreviewSmtpEmailTemplatesResponse</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">post_preview_smtp_email_templates</a>(...) -&gt; AsyncHttpResponse[PostPreviewSmtpEmailTemplatesResponse]</code></summary>
 <dl>
 <dd>
 
@@ -16559,10 +24342,15 @@ await client.transactionalEmails.getSmtpReport();
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.postPreviewSmtpEmailTemplates({
-    "key": "value"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.transactional_emails.post_preview_smtp_email_templates(
+    request={"key": "value"},
+)
 
 ```
 </dd>
@@ -16578,7 +24366,7 @@ await client.transactionalEmails.postPreviewSmtpEmailTemplates({
 <dl>
 <dd>
 
-**request:** `unknown` 
+**request:** `typing.Any` 
     
 </dd>
 </dl>
@@ -16586,7 +24374,7 @@ await client.transactionalEmails.postPreviewSmtpEmailTemplates({
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -16598,7 +24386,7 @@ await client.transactionalEmails.postPreviewSmtpEmailTemplates({
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">getSmtpTemplates</a>({ ...params }) -> BrevoApi.GetSmtpTemplatesResponse</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">get_smtp_templates</a>(...) -&gt; AsyncHttpResponse[GetSmtpTemplatesResponse]</code></summary>
 <dl>
 <dd>
 
@@ -16610,8 +24398,13 @@ await client.transactionalEmails.postPreviewSmtpEmailTemplates({
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.getSmtpTemplates();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.transactional_emails.get_smtp_templates()
 
 ```
 </dd>
@@ -16627,7 +24420,7 @@ await client.transactionalEmails.getSmtpTemplates();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetSmtpTemplatesRequest` 
+**template_status:** `typing.Optional[bool]` — Filter on the status of the template. Active = true, inactive = false
     
 </dd>
 </dl>
@@ -16635,7 +24428,31 @@ await client.transactionalEmails.getSmtpTemplates();
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**limit:** `typing.Optional[int]` — Number of documents returned per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**offset:** `typing.Optional[int]` — Index of the first document in the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetSmtpTemplatesRequestSort]` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -16647,7 +24464,7 @@ await client.transactionalEmails.getSmtpTemplates();
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">createSmtpTemplate</a>({ ...params }) -> BrevoApi.CreateSmtpTemplateResponse</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">create_smtp_template</a>(...) -&gt; AsyncHttpResponse[CreateSmtpTemplateResponse]</code></summary>
 <dl>
 <dd>
 
@@ -16659,12 +24476,18 @@ await client.transactionalEmails.getSmtpTemplates();
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.createSmtpTemplate({
-    sender: {},
-    subject: "Thanks for your purchase !",
-    templateName: "Order Confirmation - EN"
-});
+```python
+from brevo import BrevoApi
+from brevo.transactional_emails import CreateSmtpTemplateRequestSender
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.transactional_emails.create_smtp_template(
+    sender=CreateSmtpTemplateRequestSender(),
+    subject="Thanks for your purchase !",
+    template_name="Order Confirmation - EN",
+)
 
 ```
 </dd>
@@ -16680,7 +24503,7 @@ await client.transactionalEmails.createSmtpTemplate({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateSmtpTemplateRequest` 
+**sender:** `CreateSmtpTemplateRequestSender` — Sender details including id or email and name (_optional_). Only one of either Sender's email or Sender's ID shall be passed in one request at a time. For example: **{"name":"xyz", "email":"example@abc.com"}** **{"name":"xyz", "id":123}**
     
 </dd>
 </dl>
@@ -16688,7 +24511,79 @@ await client.transactionalEmails.createSmtpTemplate({
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**subject:** `str` — Subject of the template
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**template_name:** `str` — Name of the template
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_url:** `typing.Optional[str]` — Absolute url of the attachment (**no local file**). Extension allowed: #### xlsx, xls, ods, docx, docm, doc, csv, pdf, txt, gif, jpg, jpeg, png, tif, tiff, rtf, bmp, cgm, css, shtml, html, htm, zip, xml, ppt, pptx, tar, ez, ics, mobi, msg, pub and eps'
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**html_content:** `typing.Optional[str]` — Body of the message (HTML version). The field must have more than 10 characters. **REQUIRED if htmlUrl is empty**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**html_url:** `typing.Optional[str]` — Url which contents the body of the email message. REQUIRED if htmlContent is empty
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**is_active:** `typing.Optional[bool]` — Status of template. isActive = true means template is active and isActive = false means template is inactive
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reply_to:** `typing.Optional[str]` — Email on which campaign recipients will be able to reply to
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tag:** `typing.Optional[str]` — Tag of the template
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**to_field:** `typing.Optional[str]` — To personalize the **To** Field. If you want to include the first name and last name of your recipient, add **{FNAME} {LNAME}**. These contact attributes must already exist in your Brevo account. If input parameter **params** used please use **{{contact.FNAME}} {{contact.LNAME}}** for personalization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -16700,7 +24595,7 @@ await client.transactionalEmails.createSmtpTemplate({
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">getSmtpTemplate</a>({ ...params }) -> BrevoApi.GetSmtpTemplateOverview</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">get_smtp_template</a>(...) -&gt; AsyncHttpResponse[GetSmtpTemplateOverview]</code></summary>
 <dl>
 <dd>
 
@@ -16712,10 +24607,15 @@ await client.transactionalEmails.createSmtpTemplate({
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.getSmtpTemplate({
-    templateId: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.transactional_emails.get_smtp_template(
+    template_id=1000000,
+)
 
 ```
 </dd>
@@ -16731,7 +24631,7 @@ await client.transactionalEmails.getSmtpTemplate({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetSmtpTemplateRequest` 
+**template_id:** `int` — id of the template
     
 </dd>
 </dl>
@@ -16739,7 +24639,7 @@ await client.transactionalEmails.getSmtpTemplate({
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -16751,7 +24651,7 @@ await client.transactionalEmails.getSmtpTemplate({
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">updateSmtpTemplate</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">update_smtp_template</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -16763,10 +24663,15 @@ await client.transactionalEmails.getSmtpTemplate({
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.updateSmtpTemplate({
-    templateId: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.transactional_emails.update_smtp_template(
+    template_id=1000000,
+)
 
 ```
 </dd>
@@ -16782,7 +24687,7 @@ await client.transactionalEmails.updateSmtpTemplate({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateSmtpTemplateRequest` 
+**template_id:** `int` — id of the template
     
 </dd>
 </dl>
@@ -16790,7 +24695,87 @@ await client.transactionalEmails.updateSmtpTemplate({
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**attachment_url:** `typing.Optional[str]` — Absolute url of the attachment (**no local file**). Extensions allowed: #### xlsx, xls, ods, docx, docm, doc, csv, pdf, txt, gif, jpg, jpeg, png, tif, tiff, rtf, bmp, cgm, css, shtml, html, htm, zip, xml, ppt, pptx, tar, ez, ics, mobi, msg, pub and eps
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**html_content:** `typing.Optional[str]` — **Required if htmlUrl is empty**. If the template is designed using Drag & Drop editor via HTML content, then the design page will not have Drag & Drop editor access for that template. Body of the message (HTML must have more than 10 characters)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**html_url:** `typing.Optional[str]` — **Required if htmlContent is empty**. URL to the body of the email (HTML)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**is_active:** `typing.Optional[bool]` — Status of the template. isActive = false means template is inactive, isActive = true means template is active
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reply_to:** `typing.Optional[str]` — Email on which campaign recipients will be able to reply to
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sender:** `typing.Optional[UpdateSmtpTemplateRequestSender]` — Sender details including id or email and name (_optional_). Only one of either Sender's email or Sender's ID shall be passed in one request at a time. For example: **{"name":"xyz", "email":"example@abc.com"}** **{"name":"xyz", "id":123}**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**subject:** `typing.Optional[str]` — Subject of the email
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tag:** `typing.Optional[str]` — Tag of the template
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**template_name:** `typing.Optional[str]` — Name of the template
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**to_field:** `typing.Optional[str]` — To personalize the **To** Field. If you want to include the first name and last name of your recipient, add **{FNAME} {LNAME}**. These contact attributes must already exist in your Brevo account. If input parameter **params** used please use **{{contact.FNAME}} {{contact.LNAME}}** for personalization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -16802,7 +24787,7 @@ await client.transactionalEmails.updateSmtpTemplate({
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">deleteSmtpTemplate</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">delete_smtp_template</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -16814,10 +24799,15 @@ await client.transactionalEmails.updateSmtpTemplate({
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.deleteSmtpTemplate({
-    templateId: 1000000
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.transactional_emails.delete_smtp_template(
+    template_id=1000000,
+)
 
 ```
 </dd>
@@ -16833,7 +24823,7 @@ await client.transactionalEmails.deleteSmtpTemplate({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteSmtpTemplateRequest` 
+**template_id:** `int` — id of the template
     
 </dd>
 </dl>
@@ -16841,7 +24831,7 @@ await client.transactionalEmails.deleteSmtpTemplate({
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -16853,7 +24843,7 @@ await client.transactionalEmails.deleteSmtpTemplate({
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">sendTestTemplate</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">send_test_template</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
 <dl>
 <dd>
 
@@ -16865,11 +24855,15 @@ await client.transactionalEmails.deleteSmtpTemplate({
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.sendTestTemplate({
-    templateId: 1000000,
-    body: {}
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.transactional_emails.send_test_template(
+    template_id=1000000,
+)
 
 ```
 </dd>
@@ -16885,7 +24879,7 @@ await client.transactionalEmails.sendTestTemplate({
 <dl>
 <dd>
 
-**request:** `BrevoApi.SendTestTemplateRequest` 
+**template_id:** `int` — Id of the template
     
 </dd>
 </dl>
@@ -16893,7 +24887,15 @@ await client.transactionalEmails.sendTestTemplate({
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**email_to:** `typing.Optional[typing.Sequence[str]]` — List of the email addresses of the recipients whom you wish to send the test mail. _If left empty, the test mail will be sent to your entire test list. You can not send more than 50 test emails per day_.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -16906,7 +24908,7 @@ await client.transactionalEmails.sendTestTemplate({
 </details>
 
 ## TransactionalSms
-<details><summary><code>client.transactionalSms.<a href="/src/api/resources/transactionalSms/client/Client.ts">sendAsyncTransactionalSms</a>({ ...params }) -> BrevoApi.SendAsyncTransactionalSmsResponse</code></summary>
+<details><summary><code>client.transactional_sms.<a href="src/brevo/transactional_sms/client.py">send_async_transactional_sms</a>(...) -&gt; AsyncHttpResponse[SendAsyncTransactionalSmsResponse]</code></summary>
 <dl>
 <dd>
 
@@ -16940,11 +24942,16 @@ Transactional SMS can be sent at any time without time restrictions. However, if
 <dl>
 <dd>
 
-```typescript
-await client.transactionalSms.sendAsyncTransactionalSms({
-    recipient: "33689965433",
-    sender: "MyShop"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.transactional_sms.send_async_transactional_sms(
+    recipient="33689965433",
+    sender="MyShop",
+)
 
 ```
 </dd>
@@ -16960,7 +24967,7 @@ await client.transactionalSms.sendAsyncTransactionalSms({
 <dl>
 <dd>
 
-**request:** `BrevoApi.SendTransacSms` 
+**recipient:** `str` — Mobile number to send SMS with the country code
     
 </dd>
 </dl>
@@ -16968,7 +24975,55 @@ await client.transactionalSms.sendAsyncTransactionalSms({
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalSmsClient.RequestOptions` 
+**sender:** `str` — Name of the sender. **The number of characters is limited to 11 for alphanumeric characters and 15 for numeric characters**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**organisation_prefix:** `typing.Optional[str]` — A recognizable prefix will ensure your audience knows who you are. Recommended by U.S. carriers. This will be added as your Brand Name before the message content. **Prefer verifying maximum length of 160 characters including this prefix in message content to avoid multiple sending of same sms.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tag:** `typing.Optional[SendTransacSmsTag]` — Tag of the message
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**type:** `typing.Optional[SendTransacSmsType]` — Type of the SMS. Marketing SMS messages are those sent typically with marketing content. Transactional SMS messages are sent to individuals and are triggered in response to some action, such as a sign-up, purchase, etc.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**unicode_enabled:** `typing.Optional[bool]` — Format of the message. It indicates whether the content should be treated as unicode or not.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**web_url:** `typing.Optional[str]` — Webhook to call for each event triggered by the message (delivered etc.)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -16980,7 +25035,7 @@ await client.transactionalSms.sendAsyncTransactionalSms({
 </dl>
 </details>
 
-<details><summary><code>client.transactionalSms.<a href="/src/api/resources/transactionalSms/client/Client.ts">sendTransacSms</a>({ ...params }) -> BrevoApi.SendTransacSmsResponse</code></summary>
+<details><summary><code>client.transactional_sms.<a href="src/brevo/transactional_sms/client.py">send_transac_sms</a>(...) -&gt; AsyncHttpResponse[SendTransacSmsResponse]</code></summary>
 <dl>
 <dd>
 
@@ -16992,11 +25047,16 @@ await client.transactionalSms.sendAsyncTransactionalSms({
 <dl>
 <dd>
 
-```typescript
-await client.transactionalSms.sendTransacSms({
-    recipient: "33689965433",
-    sender: "MyShop"
-});
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.transactional_sms.send_transac_sms(
+    recipient="33689965433",
+    sender="MyShop",
+)
 
 ```
 </dd>
@@ -17012,7 +25072,7 @@ await client.transactionalSms.sendTransacSms({
 <dl>
 <dd>
 
-**request:** `BrevoApi.SendTransacSms` 
+**recipient:** `str` — Mobile number to send SMS with the country code
     
 </dd>
 </dl>
@@ -17020,7 +25080,55 @@ await client.transactionalSms.sendTransacSms({
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalSmsClient.RequestOptions` 
+**sender:** `str` — Name of the sender. **The number of characters is limited to 11 for alphanumeric characters and 15 for numeric characters**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**organisation_prefix:** `typing.Optional[str]` — A recognizable prefix will ensure your audience knows who you are. Recommended by U.S. carriers. This will be added as your Brand Name before the message content. **Prefer verifying maximum length of 160 characters including this prefix in message content to avoid multiple sending of same sms.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tag:** `typing.Optional[SendTransacSmsTag]` — Tag of the message
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**type:** `typing.Optional[SendTransacSmsType]` — Type of the SMS. Marketing SMS messages are those sent typically with marketing content. Transactional SMS messages are sent to individuals and are triggered in response to some action, such as a sign-up, purchase, etc.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**unicode_enabled:** `typing.Optional[bool]` — Format of the message. It indicates whether the content should be treated as unicode or not.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**web_url:** `typing.Optional[str]` — Webhook to call for each event triggered by the message (delivered etc.)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -17032,7 +25140,7 @@ await client.transactionalSms.sendTransacSms({
 </dl>
 </details>
 
-<details><summary><code>client.transactionalSms.<a href="/src/api/resources/transactionalSms/client/Client.ts">getTransacAggregatedSmsReport</a>({ ...params }) -> BrevoApi.GetTransacAggregatedSmsReportResponse</code></summary>
+<details><summary><code>client.transactional_sms.<a href="src/brevo/transactional_sms/client.py">get_transac_aggregated_sms_report</a>(...) -&gt; AsyncHttpResponse[GetTransacAggregatedSmsReportResponse]</code></summary>
 <dl>
 <dd>
 
@@ -17044,8 +25152,13 @@ await client.transactionalSms.sendTransacSms({
 <dl>
 <dd>
 
-```typescript
-await client.transactionalSms.getTransacAggregatedSmsReport();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.transactional_sms.get_transac_aggregated_sms_report()
 
 ```
 </dd>
@@ -17061,7 +25174,7 @@ await client.transactionalSms.getTransacAggregatedSmsReport();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetTransacAggregatedSmsReportRequest` 
+**start_date:** `typing.Optional[str]` — **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) of the report
     
 </dd>
 </dl>
@@ -17069,7 +25182,31 @@ await client.transactionalSms.getTransacAggregatedSmsReport();
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalSmsClient.RequestOptions` 
+**end_date:** `typing.Optional[str]` — **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) of the report
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**days:** `typing.Optional[int]` — Number of days in the past including today (positive integer). **Not compatible with startDate and endDate**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tag:** `typing.Optional[str]` — Filter on a tag
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -17081,7 +25218,7 @@ await client.transactionalSms.getTransacAggregatedSmsReport();
 </dl>
 </details>
 
-<details><summary><code>client.transactionalSms.<a href="/src/api/resources/transactionalSms/client/Client.ts">getSmsEvents</a>({ ...params }) -> BrevoApi.GetSmsEventsResponse</code></summary>
+<details><summary><code>client.transactional_sms.<a href="src/brevo/transactional_sms/client.py">get_sms_events</a>(...) -&gt; AsyncHttpResponse[GetSmsEventsResponse]</code></summary>
 <dl>
 <dd>
 
@@ -17093,8 +25230,13 @@ await client.transactionalSms.getTransacAggregatedSmsReport();
 <dl>
 <dd>
 
-```typescript
-await client.transactionalSms.getSmsEvents();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.transactional_sms.get_sms_events()
 
 ```
 </dd>
@@ -17110,7 +25252,7 @@ await client.transactionalSms.getSmsEvents();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetSmsEventsRequest` 
+**limit:** `typing.Optional[int]` — Number of documents per page
     
 </dd>
 </dl>
@@ -17118,7 +25260,71 @@ await client.transactionalSms.getSmsEvents();
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalSmsClient.RequestOptions` 
+**start_date:** `typing.Optional[str]` — **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) of the report
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**end_date:** `typing.Optional[str]` — **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) of the report
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**offset:** `typing.Optional[int]` — Index of the first document of the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**days:** `typing.Optional[int]` — Number of days in the past including today (positive integer). **Not compatible with 'startDate' and 'endDate'**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**phone_number:** `typing.Optional[str]` — Filter the report for a specific phone number
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**event:** `typing.Optional[GetSmsEventsRequestEvent]` — Filter the report for specific events
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tags:** `typing.Optional[str]` — Filter the report for specific tags passed as a serialized urlencoded array
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetSmsEventsRequestSort]` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -17130,7 +25336,7 @@ await client.transactionalSms.getSmsEvents();
 </dl>
 </details>
 
-<details><summary><code>client.transactionalSms.<a href="/src/api/resources/transactionalSms/client/Client.ts">getTransacSmsReport</a>({ ...params }) -> BrevoApi.GetTransacSmsReportResponse</code></summary>
+<details><summary><code>client.transactional_sms.<a href="src/brevo/transactional_sms/client.py">get_transac_sms_report</a>(...) -&gt; AsyncHttpResponse[GetTransacSmsReportResponse]</code></summary>
 <dl>
 <dd>
 
@@ -17142,8 +25348,13 @@ await client.transactionalSms.getSmsEvents();
 <dl>
 <dd>
 
-```typescript
-await client.transactionalSms.getTransacSmsReport();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.transactional_sms.get_transac_sms_report()
 
 ```
 </dd>
@@ -17159,7 +25370,7 @@ await client.transactionalSms.getTransacSmsReport();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetTransacSmsReportRequest` 
+**start_date:** `typing.Optional[str]` — **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) of the report
     
 </dd>
 </dl>
@@ -17167,7 +25378,39 @@ await client.transactionalSms.getTransacSmsReport();
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalSmsClient.RequestOptions` 
+**end_date:** `typing.Optional[str]` — **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) of the report
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**days:** `typing.Optional[int]` — Number of days in the past including today (positive integer). **Not compatible with 'startDate' and 'endDate'**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tag:** `typing.Optional[str]` — Filter on a tag
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetTransacSmsReportRequestSort]` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -17180,7 +25423,7 @@ await client.transactionalSms.getTransacSmsReport();
 </details>
 
 ## SmsTemplates
-<details><summary><code>client.smsTemplates.<a href="/src/api/resources/smsTemplates/client/Client.ts">getSmsTemplates</a>({ ...params }) -> BrevoApi.GetSmsTemplatesResponse</code></summary>
+<details><summary><code>client.sms_templates.<a href="src/brevo/sms_templates/client.py">get_sms_templates</a>(...) -&gt; AsyncHttpResponse[GetSmsTemplatesResponse]</code></summary>
 <dl>
 <dd>
 
@@ -17192,8 +25435,13 @@ await client.transactionalSms.getTransacSmsReport();
 <dl>
 <dd>
 
-```typescript
-await client.smsTemplates.getSmsTemplates();
+```python
+from brevo import BrevoApi
+
+client = BrevoApi(
+    api_key="YOUR_API_KEY",
+)
+client.sms_templates.get_sms_templates()
 
 ```
 </dd>
@@ -17209,7 +25457,7 @@ await client.smsTemplates.getSmsTemplates();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetSmsTemplatesRequest` 
+**limit:** `typing.Optional[int]` — Number of documents returned per page
     
 </dd>
 </dl>
@@ -17217,7 +25465,23 @@ await client.smsTemplates.getSmsTemplates();
 <dl>
 <dd>
 
-**requestOptions:** `SmsTemplatesClient.RequestOptions` 
+**offset:** `typing.Optional[int]` — Index of the first document in the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[GetSmsTemplatesRequestSort]` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -17228,3 +25492,4 @@ await client.smsTemplates.getSmsTemplates();
 </dd>
 </dl>
 </details>
+
