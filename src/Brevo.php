@@ -265,8 +265,8 @@ class Brevo implements BrevoInterface
             'api-key' => $apiKey,
             'X-Fern-Language' => 'PHP',
             'X-Fern-SDK-Name' => 'Brevo',
-            'X-Fern-SDK-Version' => '0.0.102',
-            'User-Agent' => 'getbrevo/brevo-php/0.0.102',
+            'X-Fern-SDK-Version' => '0.0.103',
+            'User-Agent' => 'getbrevo/brevo-php/0.0.103',
         ];
 
         $this->options = $options ?? [];

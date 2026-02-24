@@ -72,9 +72,9 @@ use Brevo\TransactionalEmails\Requests\SendTransacEmailRequest;
 use Brevo\TransactionalEmails\Types\SendTransacEmailRequestSender;
 use Brevo\TransactionalEmails\Types\SendTransacEmailRequestToItem;
 
-$brevo = new Brevo('xkeysib-xxx');
+$client = new Brevo(apiKey: 'xkeysib-xxx');
 
-$brevo->transactionalEmails->sendTransacEmail(
+$client->transactionalEmails->sendTransacEmail(
     new SendTransacEmailRequest([
         'subject' => 'First email',
         'textContent' => 'Hello world!',
