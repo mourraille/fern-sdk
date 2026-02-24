@@ -40,6 +40,9 @@ A full reference for this library is available [here](https://github.com/mourrai
 
 > **Warning**: The legacy v1.x SDK (`brevo-python` < 4.0) will continue to receive critical security updates but no new features. We recommend migrating to v4.x.
 
+<details>
+<summary>View migration guide</summary>
+
 **Key changes:**
 - New client initialization via `Brevo(api_key="...")`
 - Native async support with `AsyncBrevo`
@@ -75,6 +78,8 @@ account = client.account.get_your_account_information_plan_and_credits_details()
 | Async | Not available | `AsyncBrevo` |
 | Retries | Not built-in | Automatic with exponential backoff |
 | Python | 2.7, 3.4+ | 3.8+ |
+
+</details>
 
 
 ## Usage
