@@ -1,14 +1,18 @@
 # Brevo API Python Library
 
+![](https://raw.githubusercontent.com/getbrevo/brevo-node/v4/banner.png)
+
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Fmourraille%2Ffern-sdk)
 [![pypi](https://img.shields.io/pypi/v/brevo)](https://pypi.python.org/pypi/brevo)
 
-SDK for Brevo API
+Official SDK for the Brevo API.
 
 ## Table of Contents
 
+- [Documentation](#documentation)
 - [Installation](#installation)
 - [Reference](#reference)
+- [Migration From V1X](#migration-from-v1x)
 - [Usage](#usage)
 - [Async Client](#async-client)
 - [Exception Handling](#exception-handling)
@@ -17,7 +21,10 @@ SDK for Brevo API
   - [Retries](#retries)
   - [Timeouts](#timeouts)
   - [Custom Client](#custom-client)
-- [Contributing](#contributing)
+
+## Documentation
+
+API reference documentation is available [here](https://developers.brevo.com).
 
 ## Installation
 
@@ -28,6 +35,47 @@ pip install brevo
 ## Reference
 
 A full reference for this library is available [here](https://github.com/mourraille/fern-sdk/blob/HEAD/./reference.md).
+
+## Migration from v1.x
+
+> **Warning**: The legacy v1.x SDK (`brevo-python` < 4.0) will continue to receive critical security updates but no new features. We recommend migrating to v4.x.
+
+**Key changes:**
+- New client initialization via `Brevo(api_key="...")`
+- Native async support with `AsyncBrevo`
+- Pydantic-based typed models
+- Automatic retries with exponential backoff
+- `httpx` replaces `urllib3`
+
+**v1.x:**
+```python
+import brevo_python
+from brevo_python.rest import ApiException
+
+configuration = brevo_python.Configuration()
+configuration.api_key['api-key'] = 'YOUR_API_KEY'
+api_instance = brevo_python.AccountApi(brevo_python.ApiClient(configuration))
+api_response = api_instance.get_account()
+```
+
+**v4.x:**
+```python
+from brevo import Brevo
+
+client = Brevo(api_key="YOUR_API_KEY")
+account = client.account.get_your_account_information_plan_and_credits_details()
+```
+
+| Area | v1.x (`brevo_python`) | v4.x (`brevo`) |
+|---|---|---|
+| Module | `import brevo_python` | `from brevo import Brevo` |
+| Client | `AccountApi(ApiClient(config))` | `Brevo(api_key="...")` |
+| Errors | `ApiException` | `ApiError` with `.status_code`, `.body` |
+| HTTP | `urllib3` | `httpx` |
+| Async | Not available | `AsyncBrevo` |
+| Retries | Not built-in | Automatic with exponential backoff |
+| Python | 2.7, 3.4+ | 3.8+ |
+
 
 ## Usage
 
@@ -197,12 +245,3 @@ client = BrevoApi(
 )
 ```
 
-## Contributing
-
-While we value open-source contributions to this SDK, this library is generated programmatically.
-Additions made directly to this library would have to be moved over to our generation code,
-otherwise they would be overwritten upon the next generated release. Feel free to open a PR as
-a proof of concept, but know that we will not be able to merge it as-is. We suggest opening
-an issue first to discuss with us!
-
-On the other hand, contributions to the README are always very welcome!
