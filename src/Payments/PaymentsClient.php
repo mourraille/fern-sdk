@@ -15,7 +15,7 @@ use JsonException;
 use Psr\Http\Client\ClientExceptionInterface;
 use Brevo\Payments\Types\GetPaymentRequestResponse;
 
-class PaymentsClient
+class PaymentsClient implements PaymentsClientInterface
 {
     /**
      * @var array{

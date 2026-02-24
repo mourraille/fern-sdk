@@ -25,7 +25,7 @@ use Brevo\Program\Requests\DeleteContactMembersRequest;
 use Brevo\Program\Requests\SubscribeToLoyaltyProgramRequest;
 use Brevo\Program\Types\SubscribeToLoyaltyProgramResponse;
 
-class ProgramClient
+class ProgramClient implements ProgramClientInterface
 {
     /**
      * @var array{

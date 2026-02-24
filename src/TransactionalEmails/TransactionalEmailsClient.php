@@ -42,7 +42,7 @@ use Brevo\Types\GetSmtpTemplateOverview;
 use Brevo\TransactionalEmails\Requests\UpdateSmtpTemplateRequest;
 use Brevo\TransactionalEmails\Requests\SendTestTemplateRequest;
 
-class TransactionalEmailsClient
+class TransactionalEmailsClient implements TransactionalEmailsClientInterface
 {
     /**
      * @var array{

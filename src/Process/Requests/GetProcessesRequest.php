@@ -10,12 +10,12 @@ class GetProcessesRequest extends JsonSerializableType
     /**
      * @var ?int $limit Number limitation for the result returned
      */
-    public ?int $limit;
+    public ?int $limit = 10;
 
     /**
      * @var ?int $offset Beginning point in the list to retrieve from.
      */
-    public ?int $offset;
+    public ?int $offset = 0;
 
     /**
      * Sort the results in the ascending/descending order of record creation.

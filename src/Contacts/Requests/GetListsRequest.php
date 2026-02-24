@@ -10,12 +10,12 @@ class GetListsRequest extends JsonSerializableType
     /**
      * @var ?int $limit Number of documents per page
      */
-    public ?int $limit;
+    public ?int $limit = 10;
 
     /**
      * @var ?int $offset Index of the first document of the page
      */
-    public ?int $offset;
+    public ?int $offset = 0;
 
     /**
      * @var ?value-of<GetListsRequestSort> $sort Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed

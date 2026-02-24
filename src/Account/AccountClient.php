@@ -15,7 +15,7 @@ use Psr\Http\Client\ClientExceptionInterface;
 use Brevo\Account\Requests\GetAccountActivityRequest;
 use Brevo\Account\Types\GetAccountActivityResponse;
 
-class AccountClient
+class AccountClient implements AccountClientInterface
 {
     /**
      * @var array{

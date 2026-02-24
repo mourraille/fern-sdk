@@ -27,7 +27,7 @@ use Brevo\Types\Deal;
 use Brevo\Deals\Requests\PatchCrmDealsIdRequest;
 use Brevo\Types\Pipeline;
 
-class DealsClient
+class DealsClient implements DealsClientInterface
 {
     /**
      * @var array{

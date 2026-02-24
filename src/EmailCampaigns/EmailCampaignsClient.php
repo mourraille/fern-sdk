@@ -28,7 +28,7 @@ use Brevo\EmailCampaigns\Requests\SendTestEmailRequest;
 use Brevo\EmailCampaigns\Types\GetSharedTemplateUrlResponse;
 use Brevo\EmailCampaigns\Requests\UpdateCampaignStatusRequest;
 
-class EmailCampaignsClient
+class EmailCampaignsClient implements EmailCampaignsClientInterface
 {
     /**
      * @var array{

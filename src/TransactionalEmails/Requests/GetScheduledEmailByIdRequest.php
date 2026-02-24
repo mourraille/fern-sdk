@@ -32,12 +32,12 @@ class GetScheduledEmailByIdRequest extends JsonSerializableType
     /**
      * @var ?int $limit Number of documents returned per page. Not valid when identifier is `messageId`.
      */
-    public ?int $limit;
+    public ?int $limit = 100;
 
     /**
      * @var ?int $offset Index of the first document on the page.  Not valid when identifier is `messageId`.
      */
-    public ?int $offset;
+    public ?int $offset = 0;
 
     /**
      * @param array{

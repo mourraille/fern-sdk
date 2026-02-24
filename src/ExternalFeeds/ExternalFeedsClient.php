@@ -19,7 +19,7 @@ use Brevo\ExternalFeeds\Types\CreateExternalFeedResponse;
 use Brevo\ExternalFeeds\Types\GetExternalFeedByUuidResponse;
 use Brevo\ExternalFeeds\Requests\UpdateExternalFeedRequest;
 
-class ExternalFeedsClient
+class ExternalFeedsClient implements ExternalFeedsClientInterface
 {
     /**
      * @var array{

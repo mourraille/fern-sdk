@@ -23,7 +23,7 @@ use Brevo\SmsCampaigns\Requests\SendSmsReportRequest;
 use Brevo\SmsCampaigns\Requests\SendTestSmsRequest;
 use Brevo\SmsCampaigns\Requests\UpdateSmsCampaignStatusRequest;
 
-class SmsCampaignsClient
+class SmsCampaignsClient implements SmsCampaignsClientInterface
 {
     /**
      * @var array{

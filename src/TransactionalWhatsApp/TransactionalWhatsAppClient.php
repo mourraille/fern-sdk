@@ -19,7 +19,7 @@ use Psr\Http\Client\ClientExceptionInterface;
 use Brevo\TransactionalWhatsApp\Requests\GetWhatsappEventReportRequest;
 use Brevo\TransactionalWhatsApp\Types\GetWhatsappEventReportResponse;
 
-class TransactionalWhatsAppClient
+class TransactionalWhatsAppClient implements TransactionalWhatsAppClientInterface
 {
     /**
      * @var array{

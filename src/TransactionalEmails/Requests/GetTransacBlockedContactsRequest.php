@@ -20,12 +20,12 @@ class GetTransacBlockedContactsRequest extends JsonSerializableType
     /**
      * @var ?int $limit Number of documents returned per page
      */
-    public ?int $limit;
+    public ?int $limit = 50;
 
     /**
      * @var ?int $offset Index of the first document on the page
      */
-    public ?int $offset;
+    public ?int $offset = 0;
 
     /**
      * @var ?array<string> $senders Comma separated list of emails of the senders from which contacts are blocked or unsubscribed

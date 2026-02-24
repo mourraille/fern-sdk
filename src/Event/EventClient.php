@@ -12,7 +12,7 @@ use Brevo\Environments;
 use Brevo\Core\Client\HttpMethod;
 use Psr\Http\Client\ClientExceptionInterface;
 
-class EventClient
+class EventClient implements EventClientInterface
 {
     /**
      * @var array{

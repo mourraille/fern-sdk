@@ -20,7 +20,7 @@ use Brevo\User\Types\PutresendcancelinvitationResponse;
 use Brevo\User\Types\EditUserPermissionResponse;
 use Brevo\User\Types\GetUserPermissionResponse;
 
-class UserClient
+class UserClient implements UserClientInterface
 {
     /**
      * @var array{

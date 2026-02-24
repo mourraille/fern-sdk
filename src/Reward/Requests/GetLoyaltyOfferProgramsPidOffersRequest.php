@@ -10,17 +10,17 @@ class GetLoyaltyOfferProgramsPidOffersRequest extends JsonSerializableType
     /**
      * @var ?int $limit Page size
      */
-    public ?int $limit;
+    public ?int $limit = 25;
 
     /**
      * @var ?int $offset Pagination offset
      */
-    public ?int $offset;
+    public ?int $offset = 0;
 
     /**
      * @var ?string $state State of the reward
      */
-    public ?string $state;
+    public ?string $state = 'all';
 
     /**
      * @var ?value-of<GetLoyaltyOfferProgramsPidOffersRequestVersion> $version Version

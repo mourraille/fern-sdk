@@ -11,12 +11,12 @@ class GetLoyaltyOfferProgramsPidVouchersRequest extends JsonSerializableType
     /**
      * @var ?int $limit Page size
      */
-    public ?int $limit;
+    public ?int $limit = 25;
 
     /**
      * @var ?int $offset Pagination offset
      */
-    public ?int $offset;
+    public ?int $offset = 0;
 
     /**
      * @var ?value-of<GetLoyaltyOfferProgramsPidVouchersRequestSort> $sort Sort order

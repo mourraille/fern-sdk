@@ -23,7 +23,7 @@ use Brevo\WhatsAppCampaigns\Types\GetWhatsAppTemplatesResponse;
 use Brevo\WhatsAppCampaigns\Types\GetWhatsAppCampaignResponse;
 use Brevo\WhatsAppCampaigns\Requests\UpdateWhatsAppCampaignRequest;
 
-class WhatsAppCampaignsClient
+class WhatsAppCampaignsClient implements WhatsAppCampaignsClientInterface
 {
     /**
      * @var array{

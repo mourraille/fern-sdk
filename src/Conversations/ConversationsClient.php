@@ -20,7 +20,7 @@ use Brevo\Conversations\Requests\PutConversationsPushedMessagesIdRequest;
 use Brevo\Conversations\Requests\PutConversationsVisitorGroupRequest;
 use Brevo\Conversations\Types\PutConversationsVisitorGroupResponse;
 
-class ConversationsClient
+class ConversationsClient implements ConversationsClientInterface
 {
     /**
      * @var array{

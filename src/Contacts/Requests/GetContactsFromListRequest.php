@@ -15,12 +15,12 @@ class GetContactsFromListRequest extends JsonSerializableType
     /**
      * @var ?int $limit Number of documents per page
      */
-    public ?int $limit;
+    public ?int $limit = 50;
 
     /**
      * @var ?int $offset Index of the first document of the page
      */
-    public ?int $offset;
+    public ?int $offset = 0;
 
     /**
      * @var ?value-of<GetContactsFromListRequestSort> $sort Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed

@@ -20,7 +20,7 @@ use Brevo\Senders\Requests\UpdateSenderRequest;
 use Brevo\Senders\Types\GetIpsFromSenderResponse;
 use Brevo\Senders\Requests\ValidateSenderByOtpRequest;
 
-class SendersClient
+class SendersClient implements SendersClientInterface
 {
     /**
      * @var array{

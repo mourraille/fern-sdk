@@ -48,12 +48,12 @@ class GetAllExternalFeedsRequest extends JsonSerializableType
     /**
      * @var ?int $limit Number of documents returned per page.
      */
-    public ?int $limit;
+    public ?int $limit = 50;
 
     /**
      * @var ?int $offset Index of the first document on the page.
      */
-    public ?int $offset;
+    public ?int $offset = 0;
 
     /**
      * @param array{

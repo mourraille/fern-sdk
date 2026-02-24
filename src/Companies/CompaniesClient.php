@@ -28,7 +28,7 @@ use Brevo\Companies\Types\PostCrmAttributesResponse;
 use Brevo\Companies\Types\GetCrmAttributesCompaniesResponseItem;
 use Brevo\Core\Json\JsonDecoder;
 
-class CompaniesClient
+class CompaniesClient implements CompaniesClientInterface
 {
     /**
      * @var array{

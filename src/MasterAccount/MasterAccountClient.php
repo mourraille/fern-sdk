@@ -44,7 +44,7 @@ use Brevo\MasterAccount\Types\PutCorporateUserInvitationActionEmailResponse;
 use Brevo\MasterAccount\Types\GetCorporateUserPermissionResponse;
 use Brevo\MasterAccount\Requests\PutCorporateUserEmailPermissionsRequest;
 
-class MasterAccountClient
+class MasterAccountClient implements MasterAccountClientInterface
 {
     /**
      * @var array{

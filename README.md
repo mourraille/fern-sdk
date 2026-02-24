@@ -3,7 +3,7 @@
 ![](https://raw.githubusercontent.com/getbrevo/brevo-node/v4/banner.png)
 
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Fmourraille%2Ffern-sdk)
-[![php shield](https://img.shields.io/badge/php-packagist-pink)](https://packagist.org/packages/brevo/brevo)
+[![php shield](https://img.shields.io/badge/php-packagist-pink)](https://packagist.org/packages/getbrevo/brevo-php)
 
 Official SDK for the Brevo API.
 
@@ -32,12 +32,15 @@ This SDK requires PHP ^8.1.
 ## Installation
 
 ```sh
-composer require brevo/brevo
+composer require getbrevo/brevo-php
 ```
 
 ## Migration from v1.x
 
 > **Warning**: The legacy v1.x SDK will continue to receive critical security updates but no new features. We recommend migrating to v4.x.
+
+<details>
+<summary>View migration guide</summary>
 
 **Key changes:**
 - Unified `Brevo` client with namespaced resources
@@ -89,6 +92,8 @@ $brevo->transactionalEmails->sendTransacEmail(
 );
 ```
 
+</details>
+
 
 ## Usage
 
@@ -99,12 +104,12 @@ Instantiate and use the client with the following:
 
 namespace Example;
 
-use Brevo\BrevoClient;
+use Brevo\Brevo;
 use Brevo\TransactionalEmails\Requests\SendTransacEmailRequest;
 use Brevo\TransactionalEmails\Types\SendTransacEmailRequestSender;
 use Brevo\TransactionalEmails\Types\SendTransacEmailRequestToItem;
 
-$client = new BrevoClient(
+$client = new Brevo(
     apiKey: '<value>',
 );
 $client->transactionalEmails->sendTransacEmail(
@@ -153,7 +158,7 @@ By default, if no client is provided, the SDK will use `php-http/discovery` to f
 However, you can pass your own client that adheres to `ClientInterface`:
 
 ```php
-use Brevo\BrevoClient;
+use Brevo\Brevo;
 
 // Pass any PSR-18 compatible HTTP client implementation.
 // For example, using Guzzle:
@@ -161,7 +166,7 @@ $customClient = new \GuzzleHttp\Client([
     'timeout' => 5.0,
 ]);
 
-$client = new BrevoClient(options: [
+$client = new Brevo(options: [
     'client' => $customClient
 ]);
 
@@ -169,7 +174,7 @@ $client = new BrevoClient(options: [
 // $customClient = (new \Symfony\Component\HttpClient\Psr18Client())
 //     ->withOptions(['timeout' => 5.0]);
 //
-// $client = new BrevoClient(options: [
+// $client = new Brevo(options: [
 //     'client' => $customClient
 // ]);
 ```

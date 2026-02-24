@@ -11,12 +11,12 @@ class GetLoyaltyBalanceProgramsPidTransactionHistoryRequest extends JsonSerializ
     /**
      * @var ?int $limit Limit the number of records returned
      */
-    public ?int $limit;
+    public ?int $limit = 20;
 
     /**
      * @var ?int $offset Skip a number of records
      */
-    public ?int $offset;
+    public ?int $offset = 0;
 
     /**
      * @var ?value-of<GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSortField> $sortField Field to sort by
@@ -31,7 +31,7 @@ class GetLoyaltyBalanceProgramsPidTransactionHistoryRequest extends JsonSerializ
     /**
      * @var int $contactId Contact ID
      */
-    public int $contactId;
+    public int $contactId = 0;
 
     /**
      * @var string $balanceDefinitionId Balance Definition ID
@@ -45,7 +45,7 @@ class GetLoyaltyBalanceProgramsPidTransactionHistoryRequest extends JsonSerializ
 
     /**
      * @param array{
-     *   contactId: int,
+     *   contactId?: int,
      *   balanceDefinitionId: string,
      *   limit?: ?int,
      *   offset?: ?int,
@@ -61,7 +61,7 @@ class GetLoyaltyBalanceProgramsPidTransactionHistoryRequest extends JsonSerializ
         $this->offset = $values['offset'] ?? null;
         $this->sortField = $values['sortField'] ?? null;
         $this->sort = $values['sort'] ?? null;
-        $this->contactId = $values['contactId'];
+        $this->contactId = $values['contactId'] ?? 0;
         $this->balanceDefinitionId = $values['balanceDefinitionId'];
         $this->filters = $values['filters'] ?? null;
     }

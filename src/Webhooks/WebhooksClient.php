@@ -20,7 +20,7 @@ use Brevo\Webhooks\Types\ExportWebhooksHistoryResponse;
 use Brevo\Types\GetWebhook;
 use Brevo\Webhooks\Requests\UpdateWebhookRequest;
 
-class WebhooksClient
+class WebhooksClient implements WebhooksClientInterface
 {
     /**
      * @var array{

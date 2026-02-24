@@ -36,7 +36,7 @@ class GetCrmFilesRequest extends JsonSerializableType
     /**
      * @var ?int $limit Number of documents per page
      */
-    public ?int $limit;
+    public ?int $limit = 50;
 
     /**
      * @var ?value-of<GetCrmFilesRequestSort> $sort Sort the results in the ascending/descending order. Default order is **descending** by creation if `sort` is not passed

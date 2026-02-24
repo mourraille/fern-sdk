@@ -55,7 +55,7 @@ use Brevo\Contacts\Requests\DeleteContactRequest;
 use Brevo\Contacts\Requests\GetContactStatsRequest;
 use Brevo\Contacts\Types\GetContactStatsResponse;
 
-class ContactsClient
+class ContactsClient implements ContactsClientInterface
 {
     /**
      * @var array{

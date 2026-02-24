@@ -15,7 +15,7 @@ use JsonException;
 use Psr\Http\Client\ClientExceptionInterface;
 use Brevo\InboundParsing\Types\GetInboundEmailEventsByUuidResponse;
 
-class InboundParsingClient
+class InboundParsingClient implements InboundParsingClientInterface
 {
     /**
      * @var array{

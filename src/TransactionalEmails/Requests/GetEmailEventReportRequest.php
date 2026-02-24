@@ -11,12 +11,12 @@ class GetEmailEventReportRequest extends JsonSerializableType
     /**
      * @var ?int $limit Number limitation for the result returned
      */
-    public ?int $limit;
+    public ?int $limit = 2500;
 
     /**
      * @var ?int $offset Beginning point in the list to retrieve from.
      */
-    public ?int $offset;
+    public ?int $offset = 0;
 
     /**
      * @var ?string $startDate **Mandatory if endDate is used.** Starting date of the report (YYYY-MM-DD). Must be lower than equal to endDate

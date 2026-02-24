@@ -15,7 +15,7 @@ use JsonException;
 use Psr\Http\Client\ClientExceptionInterface;
 use Brevo\Process\Types\GetProcessResponse;
 
-class ProcessClient
+class ProcessClient implements ProcessClientInterface
 {
     /**
      * @var array{

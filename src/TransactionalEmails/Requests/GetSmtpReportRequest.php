@@ -10,12 +10,12 @@ class GetSmtpReportRequest extends JsonSerializableType
     /**
      * @var ?int $limit Number of documents returned per page
      */
-    public ?int $limit;
+    public ?int $limit = 10;
 
     /**
      * @var ?int $offset Index of the first document on the page
      */
-    public ?int $offset;
+    public ?int $offset = 0;
 
     /**
      * @var ?string $startDate **Mandatory if endDate is used.** Starting date of the report (YYYY-MM-DD)

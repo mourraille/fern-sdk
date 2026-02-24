@@ -33,12 +33,12 @@ class GetAccountActivityRequest extends JsonSerializableType
     /**
      * @var ?int $limit Number of documents per page
      */
-    public ?int $limit;
+    public ?int $limit = 10;
 
     /**
      * @var ?int $offset Index of the first document in the page.
      */
-    public ?int $offset;
+    public ?int $offset = 0;
 
     /**
      * @param array{

@@ -17,7 +17,7 @@ use Brevo\Domains\Types\CreateDomainResponse;
 use Brevo\Domains\Types\GetDomainConfigurationResponse;
 use Brevo\Domains\Types\AuthenticateDomainResponse;
 
-class DomainsClient
+class DomainsClient implements DomainsClientInterface
 {
     /**
      * @var array{

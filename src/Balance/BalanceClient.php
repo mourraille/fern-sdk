@@ -33,7 +33,7 @@ use Brevo\Balance\Types\GetLoyaltyBalanceProgramsPidTransactionHistoryResponse;
 use Brevo\Balance\Requests\BeginTransactionRequest;
 use Brevo\Types\Transaction;
 
-class BalanceClient
+class BalanceClient implements BalanceClientInterface
 {
     /**
      * @var array{

@@ -19,7 +19,7 @@ use Brevo\Types\Task;
 use Brevo\Tasks\Requests\PatchCrmTasksIdRequest;
 use Brevo\Tasks\Types\GetCrmTasktypesResponse;
 
-class TasksClient
+class TasksClient implements TasksClientInterface
 {
     /**
      * @var array{

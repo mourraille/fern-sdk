@@ -19,7 +19,7 @@ use Brevo\Coupons\Requests\UpdateCouponCollectionRequest;
 use Brevo\Coupons\Types\UpdateCouponCollectionResponse;
 use Brevo\Coupons\Requests\CreateCouponsRequest;
 
-class CouponsClient
+class CouponsClient implements CouponsClientInterface
 {
     /**
      * @var array{

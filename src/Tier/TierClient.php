@@ -24,7 +24,7 @@ use Brevo\Tier\Requests\GetLoyaltyProgramTierRequest;
 use Brevo\Tier\Types\GetLoyaltyProgramTierResponse;
 use Brevo\Tier\Requests\UpdateTierRequest;
 
-class TierClient
+class TierClient implements TierClientInterface
 {
     /**
      * @var array{

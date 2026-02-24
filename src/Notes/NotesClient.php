@@ -18,7 +18,7 @@ use Brevo\Types\NoteData;
 use Brevo\Notes\Types\PostCrmNotesResponse;
 use Brevo\Notes\Requests\PatchCrmNotesIdRequest;
 
-class NotesClient
+class NotesClient implements NotesClientInterface
 {
     /**
      * @var array{

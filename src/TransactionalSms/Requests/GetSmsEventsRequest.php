@@ -11,7 +11,7 @@ class GetSmsEventsRequest extends JsonSerializableType
     /**
      * @var ?int $limit Number of documents per page
      */
-    public ?int $limit;
+    public ?int $limit = 50;
 
     /**
      * @var ?string $startDate **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) of the report
@@ -26,7 +26,7 @@ class GetSmsEventsRequest extends JsonSerializableType
     /**
      * @var ?int $offset Index of the first document of the page
      */
-    public ?int $offset;
+    public ?int $offset = 0;
 
     /**
      * @var ?int $days Number of days in the past including today (positive integer). **Not compatible with 'startDate' and 'endDate'**

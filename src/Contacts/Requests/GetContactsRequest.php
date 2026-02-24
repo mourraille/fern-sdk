@@ -10,12 +10,12 @@ class GetContactsRequest extends JsonSerializableType
     /**
      * @var ?int $limit Number of documents per page
      */
-    public ?int $limit;
+    public ?int $limit = 50;
 
     /**
      * @var ?int $offset Index of the first document of the page
      */
-    public ?int $offset;
+    public ?int $offset = 0;
 
     /**
      * @var ?string $modifiedSince Filter (urlencoded) the contacts modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**

@@ -28,7 +28,7 @@ use Brevo\Reward\Types\GetLoyaltyOfferProgramsPidRewardsRidResponse;
 use Brevo\Reward\Requests\GetLoyaltyOfferProgramsPidVouchersRequest;
 use Brevo\Reward\Types\GetLoyaltyOfferProgramsPidVouchersResponse;
 
-class RewardClient
+class RewardClient implements RewardClientInterface
 {
     /**
      * @var array{

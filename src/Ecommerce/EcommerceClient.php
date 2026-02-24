@@ -42,7 +42,7 @@ use Brevo\Ecommerce\Types\CreateUpdateBatchProductsResponse;
 use Brevo\Types\GetProductDetails;
 use Brevo\Ecommerce\Requests\CreateProductAlertRequest;
 
-class EcommerceClient
+class EcommerceClient implements EcommerceClientInterface
 {
     /**
      * @var array{

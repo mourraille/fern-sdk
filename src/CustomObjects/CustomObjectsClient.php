@@ -18,7 +18,7 @@ use Brevo\CustomObjects\Types\GetrecordsResponse;
 use Brevo\CustomObjects\Requests\BatchDeleteObjectRecordsRequest;
 use Brevo\CustomObjects\Types\BatchDeleteObjectRecordsResponse;
 
-class CustomObjectsClient
+class CustomObjectsClient implements CustomObjectsClientInterface
 {
     /**
      * @var array{

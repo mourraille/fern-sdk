@@ -12,12 +12,12 @@ class GetBalanceDefinitionListRequest extends JsonSerializableType
     /**
      * @var ?int $limit Limit the number of records returned
      */
-    public ?int $limit;
+    public ?int $limit = 200;
 
     /**
      * @var ?int $offset Offset to paginate records
      */
-    public ?int $offset;
+    public ?int $offset = 0;
 
     /**
      * @var ?value-of<GetBalanceDefinitionListRequestSortField> $sortField Field to sort by

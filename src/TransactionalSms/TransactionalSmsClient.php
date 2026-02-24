@@ -21,7 +21,7 @@ use Brevo\TransactionalSms\Types\GetSmsEventsResponse;
 use Brevo\TransactionalSms\Requests\GetTransacSmsReportRequest;
 use Brevo\TransactionalSms\Types\GetTransacSmsReportResponse;
 
-class TransactionalSmsClient
+class TransactionalSmsClient implements TransactionalSmsClientInterface
 {
     /**
      * @var array{

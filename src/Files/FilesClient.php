@@ -19,7 +19,7 @@ use Brevo\Core\Multipart\MultipartFormData;
 use Brevo\Core\Multipart\MultipartApiRequest;
 use Brevo\Files\Types\GetCrmFilesIdResponse;
 
-class FilesClient
+class FilesClient implements FilesClientInterface
 {
     /**
      * @var array{

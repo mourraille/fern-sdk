@@ -14,7 +14,7 @@ use Brevo\Core\Client\HttpMethod;
 use JsonException;
 use Psr\Http\Client\ClientExceptionInterface;
 
-class SmsTemplatesClient
+class SmsTemplatesClient implements SmsTemplatesClientInterface
 {
     /**
      * @var array{
