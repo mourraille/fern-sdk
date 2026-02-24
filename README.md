@@ -35,11 +35,32 @@ Instantiate and use the client with the following:
 
 ```python
 from brevo import BrevoApi
+from brevo.transactional_emails import (
+    SendTransacEmailRequestSender,
+    SendTransacEmailRequestToItem,
+)
 
 client = BrevoApi(
     api_key="YOUR_API_KEY",
 )
-client.contacts.get_attributes()
+client.transactional_emails.send_transac_email(
+    html_content="<html><head></head><body>Your delivery is expected {{params.estimatedArrival}}.Your tracking code: {{params.trackingCode}}</p></body></html>",
+    params={
+        "trackingCode": "JD01460000300002350000",
+        "estimatedArrival": "Tomorrow",
+    },
+    sender=SendTransacEmailRequestSender(
+        email="hello@brevo.com",
+        name="Alex from Brevo",
+    ),
+    subject="Hello from Brevo!",
+    to=[
+        SendTransacEmailRequestToItem(
+            email="johndoe@example.com",
+            name="John Doe",
+        )
+    ],
+)
 ```
 
 ## Async Client
@@ -50,6 +71,10 @@ The SDK also exports an `async` client so that you can make non-blocking calls t
 import asyncio
 
 from brevo import AsyncBrevoApi
+from brevo.transactional_emails import (
+    SendTransacEmailRequestSender,
+    SendTransacEmailRequestToItem,
+)
 
 client = AsyncBrevoApi(
     api_key="YOUR_API_KEY",
@@ -57,7 +82,24 @@ client = AsyncBrevoApi(
 
 
 async def main() -> None:
-    await client.contacts.get_attributes()
+    await client.transactional_emails.send_transac_email(
+        html_content="<html><head></head><body>Your delivery is expected {{params.estimatedArrival}}.Your tracking code: {{params.trackingCode}}</p></body></html>",
+        params={
+            "trackingCode": "JD01460000300002350000",
+            "estimatedArrival": "Tomorrow",
+        },
+        sender=SendTransacEmailRequestSender(
+            email="hello@brevo.com",
+            name="Alex from Brevo",
+        ),
+        subject="Hello from Brevo!",
+        to=[
+            SendTransacEmailRequestToItem(
+                email="johndoe@example.com",
+                name="John Doe",
+            )
+        ],
+    )
 
 
 asyncio.run(main())
@@ -72,7 +114,7 @@ will be thrown.
 from brevo.core.api_error import ApiError
 
 try:
-    client.contacts.get_attributes(...)
+    client.transactional_emails.send_transac_email(...)
 except ApiError as e:
     print(e.status_code)
     print(e.body)
@@ -91,7 +133,7 @@ from brevo import BrevoApi
 client = BrevoApi(
     ...,
 )
-response = client.contacts.with_raw_response.get_attributes(...)
+response = client.transactional_emails.with_raw_response.send_transac_email(...)
 print(response.headers)  # access the response headers
 print(response.status_code)  # access the response status code
 print(response.data)  # access the underlying object
@@ -112,7 +154,7 @@ A request is deemed retryable when any of the following HTTP status codes is ret
 Use the `max_retries` request option to configure this behavior.
 
 ```python
-client.contacts.get_attributes(..., request_options={
+client.transactional_emails.send_transac_email(..., request_options={
     "max_retries": 1
 })
 ```
@@ -132,7 +174,7 @@ client = BrevoApi(
 
 
 # Override timeout for a specific method
-client.contacts.get_attributes(..., request_options={
+client.transactional_emails.send_transac_email(..., request_options={
     "timeout_in_seconds": 1
 })
 ```
