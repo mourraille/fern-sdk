@@ -1,14 +1,18 @@
 # Brevo PHP Library
 
+![](https://raw.githubusercontent.com/getbrevo/brevo-node/v4/banner.png)
+
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Fmourraille%2Ffern-sdk)
 [![php shield](https://img.shields.io/badge/php-packagist-pink)](https://packagist.org/packages/brevo/brevo)
 
-SDK for Brevo API
+Official SDK for the Brevo API.
 
 ## Table of Contents
 
+- [Documentation](#documentation)
 - [Requirements](#requirements)
 - [Installation](#installation)
+- [Migration From V1X](#migration-from-v1x)
 - [Usage](#usage)
 - [Exception Handling](#exception-handling)
 - [Advanced](#advanced)
@@ -16,6 +20,10 @@ SDK for Brevo API
   - [Retries](#retries)
   - [Timeouts](#timeouts)
 - [Contributing](#contributing)
+
+## Documentation
+
+API reference documentation is available [here](https://developers.brevo.com).
 
 ## Requirements
 
@@ -26,6 +34,61 @@ This SDK requires PHP ^8.1.
 ```sh
 composer require brevo/brevo
 ```
+
+## Migration from v1.x
+
+> **Warning**: The legacy v1.x SDK will continue to receive critical security updates but no new features. We recommend migrating to v4.x.
+
+**Key changes:**
+- Unified `Brevo` client with namespaced resources
+- Standardized error handling via `BrevoApiException`
+- PSR-18 HTTP client support
+
+**v1.x:**
+```php
+use Brevo\Client\Configuration;
+use Brevo\Client\Api\TransactionalEmailsApi;
+use Brevo\Client\Model\SendSmtpEmail;
+
+$config = Configuration::getDefaultConfiguration()->setApiKey('api-key', 'xkeysib-xxx');
+$api = new TransactionalEmailsApi(new \GuzzleHttp\Client(), $config);
+
+$message = new SendSmtpEmail();
+$message->setSubject('First email');
+$message->setTextContent('Hello world!');
+$message->setSender(['name' => 'Bob Wilson', 'email' => 'bob.wilson@example.com']);
+$message->setTo([['email' => 'sarah.davis@example.com', 'name' => 'Sarah Davis']]);
+
+$api->sendTransacEmail($message);
+```
+
+**v4.x:**
+```php
+use Brevo\Brevo;
+use Brevo\TransactionalEmails\Requests\SendTransacEmailRequest;
+use Brevo\TransactionalEmails\Types\SendTransacEmailRequestSender;
+use Brevo\TransactionalEmails\Types\SendTransacEmailRequestToItem;
+
+$brevo = new Brevo('xkeysib-xxx');
+
+$brevo->transactionalEmails->sendTransacEmail(
+    new SendTransacEmailRequest([
+        'subject' => 'First email',
+        'textContent' => 'Hello world!',
+        'sender' => new SendTransacEmailRequestSender([
+            'name' => 'Bob Wilson',
+            'email' => 'bob.wilson@example.com',
+        ]),
+        'to' => [
+            new SendTransacEmailRequestToItem([
+                'email' => 'sarah.davis@example.com',
+                'name' => 'Sarah Davis',
+            ]),
+        ],
+    ])
+);
+```
+
 
 ## Usage
 
