@@ -1,6 +1,6 @@
 {
-    "cliVersion": "3.82.0",
-    "generatorName": "fernapi/fern-typescript-sdk",
-    "generatorVersion": "3.49.3",
-    "sdkVersion": "0.0.89"
+  "cliVersion": "3.82.0",
+  "generatorName": "fernapi/fern-php-sdk",
+  "generatorVersion": "2.1.2",
+  "sdkVersion": "0.0.94"
 }

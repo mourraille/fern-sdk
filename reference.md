@@ -1,6 +1,6 @@
 # Reference
 ## Account
-<details><summary><code>client.account.<a href="/src/api/resources/account/client/Client.ts">getAccount</a>() -> BrevoApi.GetAccountResponse</code></summary>
+<details><summary><code>$client-&gt;account-&gt;getAccount() -> GetAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -52,25 +52,9 @@ Retrieves details of your Brevo account.
 <dl>
 <dd>
 
-```typescript
-await client.account.getAccount();
-
+```php
+$client->account->getAccount();
 ```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `AccountClient.RequestOptions` 
-    
 </dd>
 </dl>
 </dd>
@@ -81,7 +65,7 @@ await client.account.getAccount();
 </dl>
 </details>
 
-<details><summary><code>client.account.<a href="/src/api/resources/account/client/Client.ts">getAccountActivity</a>({ ...params }) -> BrevoApi.GetAccountActivityResponse</code></summary>
+<details><summary><code>$client-&gt;account-&gt;getAccountActivity($request) -> GetAccountActivityResponse</code></summary>
 <dl>
 <dd>
 
@@ -123,9 +107,10 @@ Note: Requires Enterprise plan for access to organization activity logs.
 <dl>
 <dd>
 
-```typescript
-await client.account.getAccountActivity();
-
+```php
+$client->account->getAccountActivity(
+    new GetAccountActivityRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -140,7 +125,12 @@ await client.account.getAccountActivity();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetAccountActivityRequest` 
+**$startDate:** `?string` 
+
+Mandatory if endDate is used. Enter start date in UTC date (YYYY-MM-DD)
+format to filter the activity in your account. Maximum time period that
+can be selected is one month. Additionally, you can retrieve activity
+logs from the past 12 months from the date of your search.
     
 </dd>
 </dl>
@@ -148,7 +138,35 @@ await client.account.getAccountActivity();
 <dl>
 <dd>
 
-**requestOptions:** `AccountClient.RequestOptions` 
+**$endDate:** `?string` 
+
+Mandatory if startDate is used. Enter end date in UTC date (YYYY-MM-DD)
+format to filter the activity in your account. Maximum time period that
+can be selected is one month.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$email:** `?string` — Enter the user's email address to filter their activity in the account.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$limit:** `?int` — Number of documents per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$offset:** `?int` — Index of the first document in the page.
     
 </dd>
 </dl>
@@ -161,7 +179,7 @@ await client.account.getAccountActivity();
 </details>
 
 ## MasterAccount
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">createANewGroupOfSubAccounts</a>({ ...params }) -> BrevoApi.PostCorporateGroupResponse</code></summary>
+<details><summary><code>$client-&gt;masterAccount-&gt;createANewGroupOfSubAccounts($request) -> PostCorporateGroupResponse</code></summary>
 <dl>
 <dd>
 
@@ -187,11 +205,12 @@ This endpoint allows to create a group of sub-accounts
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.createANewGroupOfSubAccounts({
-    groupName: "My group"
-});
-
+```php
+$client->masterAccount->createANewGroupOfSubAccounts(
+    new PostCorporateGroupRequest([
+        'groupName' => 'My group',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -206,7 +225,7 @@ await client.masterAccount.createANewGroupOfSubAccounts({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostCorporateGroupRequest` 
+**$groupName:** `string` — The name of the group of sub-accounts
     
 </dd>
 </dl>
@@ -214,7 +233,7 @@ await client.masterAccount.createANewGroupOfSubAccounts({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**$subAccountIds:** `?array` — Pass the list of sub-account Ids to be included in the group
     
 </dd>
 </dl>
@@ -226,7 +245,7 @@ await client.masterAccount.createANewGroupOfSubAccounts({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">deleteSubAccountFromGroup</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;masterAccount-&gt;deleteSubAccountFromGroup($groupId, $request)</code></summary>
 <dl>
 <dd>
 
@@ -252,12 +271,17 @@ This endpoint allows you to remove a sub-organization from a group.
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.deleteSubAccountFromGroup({
-    groupId: "groupId",
-    subAccountIds: [423432, 234323, 87678]
-});
-
+```php
+$client->masterAccount->deleteSubAccountFromGroup(
+    'groupId',
+    new PutCorporateGroupUnlinkGroupIdSubAccountsRequest([
+        'subAccountIds' => [
+            423432,
+            234323,
+            87678,
+        ],
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -272,7 +296,7 @@ await client.masterAccount.deleteSubAccountFromGroup({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PutCorporateGroupUnlinkGroupIdSubAccountsRequest` 
+**$groupId:** `string` — Group id
     
 </dd>
 </dl>
@@ -280,7 +304,7 @@ await client.masterAccount.deleteSubAccountFromGroup({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**$subAccountIds:** `array` — List of sub-account ids
     
 </dd>
 </dl>
@@ -292,7 +316,7 @@ await client.masterAccount.deleteSubAccountFromGroup({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">getAGroupDetails</a>({ ...params }) -> BrevoApi.GetCorporateGroupIdResponse</code></summary>
+<details><summary><code>$client-&gt;masterAccount-&gt;getAGroupDetails($id) -> GetCorporateGroupIdResponse</code></summary>
 <dl>
 <dd>
 
@@ -319,11 +343,10 @@ the list of sub-organizations and the user associated with the group.
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.getAGroupDetails({
-    id: "id"
-});
-
+```php
+$client->masterAccount->getAGroupDetails(
+    'id',
+);
 ```
 </dd>
 </dl>
@@ -338,15 +361,7 @@ await client.masterAccount.getAGroupDetails({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCorporateGroupIdRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**$id:** `string` — Id of the group of sub-organization
     
 </dd>
 </dl>
@@ -358,7 +373,7 @@ await client.masterAccount.getAGroupDetails({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">updateAGroupOfSubAccounts</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;masterAccount-&gt;updateAGroupOfSubAccounts($id, $request)</code></summary>
 <dl>
 <dd>
 
@@ -384,11 +399,11 @@ This endpoint allows to update a group of sub-accounts
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.updateAGroupOfSubAccounts({
-    id: "id"
-});
-
+```php
+$client->masterAccount->updateAGroupOfSubAccounts(
+    'id',
+    new PutCorporateGroupIdRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -403,7 +418,7 @@ await client.masterAccount.updateAGroupOfSubAccounts({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PutCorporateGroupIdRequest` 
+**$id:** `string` — Id of the group
     
 </dd>
 </dl>
@@ -411,7 +426,15 @@ await client.masterAccount.updateAGroupOfSubAccounts({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**$groupName:** `?string` — The name of the group of sub-accounts
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$subAccountIds:** `?array` — Pass the list of sub-account Ids to be included in the group
     
 </dd>
 </dl>
@@ -423,7 +446,7 @@ await client.masterAccount.updateAGroupOfSubAccounts({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">deleteAGroup</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;masterAccount-&gt;deleteAGroup($id)</code></summary>
 <dl>
 <dd>
 
@@ -452,11 +475,10 @@ once deleted.
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.deleteAGroup({
-    id: "id"
-});
-
+```php
+$client->masterAccount->deleteAGroup(
+    'id',
+);
 ```
 </dd>
 </dl>
@@ -471,15 +493,7 @@ await client.masterAccount.deleteAGroup({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteCorporateGroupIdRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**$id:** `string` — Id of the group
     
 </dd>
 </dl>
@@ -491,7 +505,7 @@ await client.masterAccount.deleteAGroup({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">getSubAccountGroups</a>() -> BrevoApi.GetSubAccountGroupsResponseItem[]</code></summary>
+<details><summary><code>$client-&gt;masterAccount-&gt;getSubAccountGroups() -> array</code></summary>
 <dl>
 <dd>
 
@@ -517,25 +531,9 @@ This endpoint allows you to list all groups created on your Admin account.
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.getSubAccountGroups();
-
+```php
+$client->masterAccount->getSubAccountGroups();
 ```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `MasterAccountClient.RequestOptions` 
-    
 </dd>
 </dl>
 </dd>
@@ -546,7 +544,7 @@ await client.masterAccount.getSubAccountGroups();
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">getCorporateInvitedUsersList</a>({ ...params }) -> BrevoApi.GetCorporateInvitedUsersListResponse</code></summary>
+<details><summary><code>$client-&gt;masterAccount-&gt;getCorporateInvitedUsersList($request) -> GetCorporateInvitedUsersListResponse</code></summary>
 <dl>
 <dd>
 
@@ -574,9 +572,10 @@ offset and limit.
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.getCorporateInvitedUsersList();
-
+```php
+$client->masterAccount->getCorporateInvitedUsersList(
+    new GetCorporateInvitedUsersListRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -591,7 +590,10 @@ await client.masterAccount.getCorporateInvitedUsersList();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCorporateInvitedUsersListRequest` 
+**$type:** `?string` 
+
+User type (active | pending). This is required if offset is provided for
+limited result.
     
 </dd>
 </dl>
@@ -599,7 +601,21 @@ await client.masterAccount.getCorporateInvitedUsersList();
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**$offset:** `?int` 
+
+Page number for the result set. This is optional, default value will be
+the 1st page.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$limit:** `?int` 
+
+Number of users to be displayed on each page. This is optional, the
+default limit is 20, but max allowed limit is 100.
     
 </dd>
 </dl>
@@ -611,7 +627,7 @@ await client.masterAccount.getCorporateInvitedUsersList();
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">listOfAllIPs</a>() -> BrevoApi.GetCorporateIpResponseItem[]</code></summary>
+<details><summary><code>$client-&gt;masterAccount-&gt;listOfAllIPs() -> array</code></summary>
 <dl>
 <dd>
 
@@ -638,25 +654,9 @@ account
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.listOfAllIPs();
-
+```php
+$client->masterAccount->listOfAllIPs();
 ```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `MasterAccountClient.RequestOptions` 
-    
 </dd>
 </dl>
 </dd>
@@ -667,7 +667,7 @@ await client.masterAccount.listOfAllIPs();
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">getTheDetailsOfRequestedMasterAccount</a>() -> BrevoApi.GetCorporateMasterAccountResponse</code></summary>
+<details><summary><code>$client-&gt;masterAccount-&gt;getTheDetailsOfRequestedMasterAccount() -> GetCorporateMasterAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -693,25 +693,9 @@ This endpoint will provide the details of the master account.
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.getTheDetailsOfRequestedMasterAccount();
-
+```php
+$client->masterAccount->getTheDetailsOfRequestedMasterAccount();
 ```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `MasterAccountClient.RequestOptions` 
-    
 </dd>
 </dl>
 </dd>
@@ -722,7 +706,7 @@ await client.masterAccount.getTheDetailsOfRequestedMasterAccount();
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">generateSsoTokenToAccessAdminAccount</a>({ ...params }) -> BrevoApi.GetSsoToken</code></summary>
+<details><summary><code>$client-&gt;masterAccount-&gt;generateSsoTokenToAccessAdminAccount($request) -> GetSsoToken</code></summary>
 <dl>
 <dd>
 
@@ -751,11 +735,12 @@ https://account-app.brevo.com/account/login/corporate/sso/[token], where
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.generateSsoTokenToAccessAdminAccount({
-    email: "vipin+ent-user@brevo.com"
-});
-
+```php
+$client->masterAccount->generateSsoTokenToAccessAdminAccount(
+    new PostCorporateSsoTokenRequest([
+        'email' => 'vipin+ent-user@brevo.com',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -770,15 +755,7 @@ await client.masterAccount.generateSsoTokenToAccessAdminAccount({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostCorporateSsoTokenRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**$email:** `string` — User email of admin account
     
 </dd>
 </dl>
@@ -790,7 +767,7 @@ await client.masterAccount.generateSsoTokenToAccessAdminAccount({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">getTheListOfAllTheSubAccountsOfTheMasterAccount</a>({ ...params }) -> BrevoApi.GetCorporateSubAccountResponse</code></summary>
+<details><summary><code>$client-&gt;masterAccount-&gt;getTheListOfAllTheSubAccountsOfTheMasterAccount($request) -> GetCorporateSubAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -817,12 +794,13 @@ account.
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.getTheListOfAllTheSubAccountsOfTheMasterAccount({
-    offset: 1,
-    limit: 1
-});
-
+```php
+$client->masterAccount->getTheListOfAllTheSubAccountsOfTheMasterAccount(
+    new GetCorporateSubAccountRequest([
+        'offset' => 1,
+        'limit' => 1,
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -837,7 +815,7 @@ await client.masterAccount.getTheListOfAllTheSubAccountsOfTheMasterAccount({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCorporateSubAccountRequest` 
+**$offset:** `int` — Index of the first sub-account in the page
     
 </dd>
 </dl>
@@ -845,7 +823,7 @@ await client.masterAccount.getTheListOfAllTheSubAccountsOfTheMasterAccount({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**$limit:** `int` — Number of sub-accounts to be displayed on each page
     
 </dd>
 </dl>
@@ -857,7 +835,7 @@ await client.masterAccount.getTheListOfAllTheSubAccountsOfTheMasterAccount({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">createANewSubAccountUnderAMasterAccount</a>({ ...params }) -> BrevoApi.PostCorporateSubAccountResponse</code></summary>
+<details><summary><code>$client-&gt;masterAccount-&gt;createANewSubAccountUnderAMasterAccount($request) -> PostCorporateSubAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -883,15 +861,19 @@ This endpoint will create a new sub-account under a master account
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.createANewSubAccountUnderAMasterAccount({
-    companyName: "Test Sub-account",
-    email: "test-sub@example.com",
-    groupIds: ["5f8f8c3b5f56a02d4433b3a7", "5f8f8c3b5f56a02d4433b3a8"],
-    language: "fr",
-    timezone: "Europe/Paris"
-});
-
+```php
+$client->masterAccount->createANewSubAccountUnderAMasterAccount(
+    new PostCorporateSubAccountRequest([
+        'companyName' => 'Test Sub-account',
+        'email' => 'test-sub@example.com',
+        'groupIds' => [
+            '5f8f8c3b5f56a02d4433b3a7',
+            '5f8f8c3b5f56a02d4433b3a8',
+        ],
+        'language' => PostCorporateSubAccountRequestLanguage::Fr->value,
+        'timezone' => 'Europe/Paris',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -906,7 +888,7 @@ await client.masterAccount.createANewSubAccountUnderAMasterAccount({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostCorporateSubAccountRequest` 
+**$companyName:** `string` — Set the name of the sub-account company
     
 </dd>
 </dl>
@@ -914,7 +896,31 @@ await client.masterAccount.createANewSubAccountUnderAMasterAccount({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**$email:** `string` — Email address for the organization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$groupIds:** `?array` — Set the group(s) for the sub-account
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$language:** `?string` — Set the language of the sub-account
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$timezone:** `?string` — Set the timezone of the sub-account
     
 </dd>
 </dl>
@@ -926,7 +932,7 @@ await client.masterAccount.createANewSubAccountUnderAMasterAccount({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">associateAnIpToSubAccounts</a>({ ...params }) -> Record&lt;string, unknown&gt;</code></summary>
+<details><summary><code>$client-&gt;masterAccount-&gt;associateAnIpToSubAccounts($request) -> array</code></summary>
 <dl>
 <dd>
 
@@ -952,12 +958,17 @@ This endpoint allows to associate an IP to sub-accounts
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.associateAnIpToSubAccounts({
-    ids: [234322, 325553, 893432],
-    ip: "103.11.32.88"
-});
-
+```php
+$client->masterAccount->associateAnIpToSubAccounts(
+    new PostCorporateSubAccountIpAssociateRequest([
+        'ids' => [
+            234322,
+            325553,
+            893432,
+        ],
+        'ip' => '103.11.32.88',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -972,7 +983,10 @@ await client.masterAccount.associateAnIpToSubAccounts({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostCorporateSubAccountIpAssociateRequest` 
+**$ids:** `array` 
+
+Pass the list of sub-account Ids to be associated with the IP
+address
     
 </dd>
 </dl>
@@ -980,7 +994,7 @@ await client.masterAccount.associateAnIpToSubAccounts({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**$ip:** `string` — IP address
     
 </dd>
 </dl>
@@ -992,7 +1006,7 @@ await client.masterAccount.associateAnIpToSubAccounts({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">dissociateAnIpToSubAccounts</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;masterAccount-&gt;dissociateAnIpToSubAccounts($request)</code></summary>
 <dl>
 <dd>
 
@@ -1018,12 +1032,17 @@ This endpoint allows to dissociate an IP from sub-accounts
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.dissociateAnIpToSubAccounts({
-    ids: [234322, 325553, 893432],
-    ip: "103.11.32.88"
-});
-
+```php
+$client->masterAccount->dissociateAnIpToSubAccounts(
+    new PutCorporateSubAccountIpDissociateRequest([
+        'ids' => [
+            234322,
+            325553,
+            893432,
+        ],
+        'ip' => '103.11.32.88',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -1038,7 +1057,10 @@ await client.masterAccount.dissociateAnIpToSubAccounts({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PutCorporateSubAccountIpDissociateRequest` 
+**$ids:** `array` 
+
+Pass the list of sub-account Ids to be dissociated from the IP
+address
     
 </dd>
 </dl>
@@ -1046,7 +1068,7 @@ await client.masterAccount.dissociateAnIpToSubAccounts({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**$ip:** `string` — IP address
     
 </dd>
 </dl>
@@ -1058,7 +1080,7 @@ await client.masterAccount.dissociateAnIpToSubAccounts({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">createAnApiKeyForASubAccount</a>({ ...params }) -> BrevoApi.PostCorporateSubAccountKeyResponse</code></summary>
+<details><summary><code>$client-&gt;masterAccount-&gt;createAnApiKeyForASubAccount($request) -> PostCorporateSubAccountKeyResponse</code></summary>
 <dl>
 <dd>
 
@@ -1084,12 +1106,13 @@ This endpoint will generate an API v3 key for a sub-account
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.createAnApiKeyForASubAccount({
-    id: 3232323,
-    name: "My Api Key"
-});
-
+```php
+$client->masterAccount->createAnApiKeyForASubAccount(
+    new PostCorporateSubAccountKeyRequest([
+        'id' => 3232323,
+        'name' => 'My Api Key',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -1104,7 +1127,7 @@ await client.masterAccount.createAnApiKeyForASubAccount({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostCorporateSubAccountKeyRequest` 
+**$id:** `int` — Id of the sub-account organization
     
 </dd>
 </dl>
@@ -1112,7 +1135,7 @@ await client.masterAccount.createAnApiKeyForASubAccount({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**$name:** `string` — Name of the API key
     
 </dd>
 </dl>
@@ -1124,7 +1147,7 @@ await client.masterAccount.createAnApiKeyForASubAccount({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">generateSsoTokenToAccessSubAccount</a>({ ...params }) -> BrevoApi.GetSsoToken</code></summary>
+<details><summary><code>$client-&gt;masterAccount-&gt;generateSsoTokenToAccessSubAccount($request) -> GetSsoToken</code></summary>
 <dl>
 <dd>
 
@@ -1153,11 +1176,12 @@ https://account-app.brevo.com/account/login/sub-account/sso/[token], where
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.generateSsoTokenToAccessSubAccount({
-    id: 3232323
-});
-
+```php
+$client->masterAccount->generateSsoTokenToAccessSubAccount(
+    new PostCorporateSubAccountSsoTokenRequest([
+        'id' => 3232323,
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -1172,7 +1196,7 @@ await client.masterAccount.generateSsoTokenToAccessSubAccount({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostCorporateSubAccountSsoTokenRequest` 
+**$email:** `?string` — User email of sub-account organization
     
 </dd>
 </dl>
@@ -1180,7 +1204,36 @@ await client.masterAccount.generateSsoTokenToAccessSubAccount({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**$id:** `int` — Id of the sub-account organization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$target:** `?string` 
+
+**Set target after login success** * **automation** - Redirect
+to Automation after login * **email_campaign** - Redirect to
+Email Campaign after login * **contacts** - Redirect to Contacts
+after login * **landing_pages** - Redirect to Landing Pages
+after login * **email_transactional** - Redirect to Email
+Transactional after login * **senders** - Redirect to Senders
+after login * **sms_campaign** - Redirect to Sms Campaign after
+login * **sms_transactional** - Redirect to Sms Transactional
+after login
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$url:** `?string` 
+
+Set the full target URL after login success. The user will land
+directly on this target URL after login
     
 </dd>
 </dl>
@@ -1192,7 +1245,7 @@ await client.masterAccount.generateSsoTokenToAccessSubAccount({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">getSubAccountDetails</a>({ ...params }) -> BrevoApi.GetCorporateSubAccountIdResponse</code></summary>
+<details><summary><code>$client-&gt;masterAccount-&gt;getSubAccountDetails($id) -> GetCorporateSubAccountIdResponse</code></summary>
 <dl>
 <dd>
 
@@ -1218,11 +1271,10 @@ This endpoint will provide the details for the specified sub-account company
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.getSubAccountDetails({
-    id: 1000000
-});
-
+```php
+$client->masterAccount->getSubAccountDetails(
+    1000000,
+);
 ```
 </dd>
 </dl>
@@ -1237,15 +1289,7 @@ await client.masterAccount.getSubAccountDetails({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCorporateSubAccountIdRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**$id:** `int` — Id of the sub-account organization
     
 </dd>
 </dl>
@@ -1257,7 +1301,7 @@ await client.masterAccount.getSubAccountDetails({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">deleteASubAccount</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;masterAccount-&gt;deleteASubAccount($id)</code></summary>
 <dl>
 <dd>
 
@@ -1269,11 +1313,10 @@ await client.masterAccount.getSubAccountDetails({
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.deleteASubAccount({
-    id: 1000000
-});
-
+```php
+$client->masterAccount->deleteASubAccount(
+    1000000,
+);
 ```
 </dd>
 </dl>
@@ -1288,15 +1331,7 @@ await client.masterAccount.deleteASubAccount({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteCorporateSubAccountIdRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**$id:** `int` — Id of the sub-account organization to be deleted
     
 </dd>
 </dl>
@@ -1308,7 +1343,7 @@ await client.masterAccount.deleteASubAccount({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">enableDisableSubAccountApplicationS</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;masterAccount-&gt;enableDisableSubAccountApplicationS($id, $request)</code></summary>
 <dl>
 <dd>
 
@@ -1335,16 +1370,17 @@ sub-account
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.enableDisableSubAccountApplicationS({
-    id: 1000000,
-    "landing-pages": true,
-    meetings: true,
-    "sms-campaigns": false,
-    "web-push": false,
-    whatsapp: true
-});
-
+```php
+$client->masterAccount->enableDisableSubAccountApplicationS(
+    1000000,
+    new PutCorporateSubAccountIdApplicationsToggleRequest([
+        'landingPages' => true,
+        'meetings' => true,
+        'smsCampaigns' => false,
+        'webPush' => false,
+        'whatsapp' => true,
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -1359,7 +1395,7 @@ await client.masterAccount.enableDisableSubAccountApplicationS({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PutCorporateSubAccountIdApplicationsToggleRequest` 
+**$id:** `int` — Id of the sub-account organization (mandatory)
     
 </dd>
 </dl>
@@ -1367,7 +1403,133 @@ await client.masterAccount.enableDisableSubAccountApplicationS({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**$automation:** `?bool` 
+
+Set this field to enable or disable Automation on the
+sub-account
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$conversations:** `?bool` 
+
+Set this field to enable or disable Conversations on the
+sub-account
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$crm:** `?bool` — Set this field to enable or disable Sales CRM on the sub-account
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$emailCampaigns:** `?bool` 
+
+Set this field to enable or disable Email Campaigns on the
+sub-account
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$facebookAds:** `?bool` 
+
+Set this field to enable or disable Facebook ads on the
+sub-account
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$inbox:** `?bool` 
+
+Set this field to enable or disable Inbox on the sub-account /
+Not applicable on ENTv2
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$landingPages:** `?bool` 
+
+Set this field to enable or disable Landing pages on the
+sub-account
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$meetings:** `?bool` — Set this field to enable or disable Meetings on the sub-account
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$smsCampaigns:** `?bool` 
+
+Set this field to enable or disable SMS Marketing on the
+sub-account
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$transactionalEmails:** `?bool` 
+
+Set this field to enable or disable Transactional Email on the
+sub-account
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$transactionalSms:** `?bool` 
+
+Set this field to enable or disable Transactional SMS on the
+sub-account
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$webPush:** `?bool` — Set this field to enable or disable Web Push on the sub-account
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$whatsapp:** `?bool` 
+
+Set this field to enable or disable Whatsapp campaigns on the
+sub-account
     
 </dd>
 </dl>
@@ -1379,7 +1541,7 @@ await client.masterAccount.enableDisableSubAccountApplicationS({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">updateSubAccountPlan</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;masterAccount-&gt;updateSubAccountPlan($id, $request)</code></summary>
 <dl>
 <dd>
 
@@ -1408,24 +1570,25 @@ unlimited mode.
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.updateSubAccountPlan({
-    id: 1000000,
-    credits: {
-        email: 5000,
-        externalFeeds: 1,
-        sms: 2000,
-        whatsapp: 100,
-        wpSubscribers: -1
-    },
-    features: {
-        inbox: 10,
-        landingPage: 20,
-        salesUsers: 6,
-        users: 15
-    }
-});
-
+```php
+$client->masterAccount->updateSubAccountPlan(
+    1000000,
+    new PutCorporateSubAccountIdPlanRequest([
+        'credits' => new PutCorporateSubAccountIdPlanRequestCredits([
+            'email' => 5000,
+            'externalFeeds' => 1,
+            'sms' => 2000,
+            'whatsapp' => 100,
+            'wpSubscribers' => -1,
+        ]),
+        'features' => new PutCorporateSubAccountIdPlanRequestFeatures([
+            'inbox' => 10,
+            'landingPage' => 20,
+            'salesUsers' => 6,
+            'users' => 15,
+        ]),
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -1440,7 +1603,7 @@ await client.masterAccount.updateSubAccountPlan({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PutCorporateSubAccountIdPlanRequest` 
+**$id:** `int` — Id of the sub-account organization
     
 </dd>
 </dl>
@@ -1448,7 +1611,15 @@ await client.masterAccount.updateSubAccountPlan({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**$credits:** `?PutCorporateSubAccountIdPlanRequestCredits` — Credit details to update
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$features:** `?PutCorporateSubAccountIdPlanRequestFeatures` — Features details to update
     
 </dd>
 </dl>
@@ -1460,7 +1631,7 @@ await client.masterAccount.updateSubAccountPlan({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">updateSubAccountsPlan</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;masterAccount-&gt;updateSubAccountsPlan($request)</code></summary>
 <dl>
 <dd>
 
@@ -1489,23 +1660,28 @@ unlimited mode.
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.updateSubAccountsPlan({
-    credits: {
-        email: 5000,
-        externalFeeds: 1,
-        sms: 2000,
-        whatsapp: 100,
-        wpSubscribers: -1
-    },
-    features: {
-        landingPage: 20,
-        salesUsers: 6,
-        users: 15
-    },
-    subAccountIds: [4534345, 987893, 876785]
-});
-
+```php
+$client->masterAccount->updateSubAccountsPlan(
+    new PutCorporateSubAccountsPlanRequest([
+        'credits' => new PutCorporateSubAccountsPlanRequestCredits([
+            'email' => 5000,
+            'externalFeeds' => 1,
+            'sms' => 2000,
+            'whatsapp' => 100,
+            'wpSubscribers' => -1,
+        ]),
+        'features' => new PutCorporateSubAccountsPlanRequestFeatures([
+            'landingPage' => 20,
+            'salesUsers' => 6,
+            'users' => 15,
+        ]),
+        'subAccountIds' => [
+            4534345,
+            987893,
+            876785,
+        ],
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -1520,7 +1696,7 @@ await client.masterAccount.updateSubAccountsPlan({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PutCorporateSubAccountsPlanRequest` 
+**$credits:** `?PutCorporateSubAccountsPlanRequestCredits` — Credit details to update
     
 </dd>
 </dl>
@@ -1528,7 +1704,15 @@ await client.masterAccount.updateSubAccountsPlan({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**$features:** `?PutCorporateSubAccountsPlanRequestFeatures` — Features details to update
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$subAccountIds:** `?array` — List of sub-account ids
     
 </dd>
 </dl>
@@ -1540,7 +1724,7 @@ await client.masterAccount.updateSubAccountsPlan({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">inviteAdminUser</a>({ ...params }) -> BrevoApi.InviteAdminUserResponse</code></summary>
+<details><summary><code>$client-&gt;masterAccount-&gt;inviteAdminUser($request) -> InviteAdminUserResponse</code></summary>
 <dl>
 <dd>
 
@@ -1591,13 +1775,16 @@ there for the invited admin user.
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.inviteAdminUser({
-    all_features_access: true,
-    email: "inviteuser@example.com",
-    privileges: [{}]
-});
-
+```php
+$client->masterAccount->inviteAdminUser(
+    new InviteAdminUserRequest([
+        'allFeaturesAccess' => true,
+        'email' => 'inviteuser@example.com',
+        'privileges' => [
+            new InviteAdminUserRequestPrivilegesItem([]),
+        ],
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -1612,7 +1799,7 @@ await client.masterAccount.inviteAdminUser({
 <dl>
 <dd>
 
-**request:** `BrevoApi.InviteAdminUserRequest` 
+**$allFeaturesAccess:** `bool` — All access to the features
     
 </dd>
 </dl>
@@ -1620,7 +1807,23 @@ await client.masterAccount.inviteAdminUser({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**$email:** `string` — Email address for the organization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$groupIds:** `?array` — Ids of Group
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$privileges:** `array` 
     
 </dd>
 </dl>
@@ -1632,7 +1835,7 @@ await client.masterAccount.inviteAdminUser({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">resendCancelAdminUserInvitation</a>({ ...params }) -> BrevoApi.PutCorporateUserInvitationActionEmailResponse</code></summary>
+<details><summary><code>$client-&gt;masterAccount-&gt;resendCancelAdminUserInvitation($action, $email) -> PutCorporateUserInvitationActionEmailResponse</code></summary>
 <dl>
 <dd>
 
@@ -1660,12 +1863,11 @@ This endpoint will allow the user to:
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.resendCancelAdminUserInvitation({
-    action: "resend",
-    email: "email"
-});
-
+```php
+$client->masterAccount->resendCancelAdminUserInvitation(
+    PutCorporateUserInvitationActionEmailRequestAction::Resend->value,
+    'email',
+);
 ```
 </dd>
 </dl>
@@ -1680,7 +1882,7 @@ await client.masterAccount.resendCancelAdminUserInvitation({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PutCorporateUserInvitationActionEmailRequest` 
+**$action:** `string` — Action to be performed (cancel / resend)
     
 </dd>
 </dl>
@@ -1688,7 +1890,7 @@ await client.masterAccount.resendCancelAdminUserInvitation({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**$email:** `string` — Email address of the recipient
     
 </dd>
 </dl>
@@ -1700,7 +1902,7 @@ await client.masterAccount.resendCancelAdminUserInvitation({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">revokeAnAdminUser</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;masterAccount-&gt;revokeAnAdminUser($email)</code></summary>
 <dl>
 <dd>
 
@@ -1727,11 +1929,10 @@ account
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.revokeAnAdminUser({
-    email: "email"
-});
-
+```php
+$client->masterAccount->revokeAnAdminUser(
+    'email',
+);
 ```
 </dd>
 </dl>
@@ -1746,15 +1947,7 @@ await client.masterAccount.revokeAnAdminUser({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteCorporateUserRevokeEmailRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**$email:** `string` — Email of the invited user
     
 </dd>
 </dl>
@@ -1766,7 +1959,7 @@ await client.masterAccount.revokeAnAdminUser({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">getCorporateUserPermission</a>({ ...params }) -> BrevoApi.GetCorporateUserPermissionResponse</code></summary>
+<details><summary><code>$client-&gt;masterAccount-&gt;getCorporateUserPermission($email) -> GetCorporateUserPermissionResponse</code></summary>
 <dl>
 <dd>
 
@@ -1792,11 +1985,10 @@ This endpoint will provide the list of admin user permissions
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.getCorporateUserPermission({
-    email: "email"
-});
-
+```php
+$client->masterAccount->getCorporateUserPermission(
+    'email',
+);
 ```
 </dd>
 </dl>
@@ -1811,15 +2003,7 @@ await client.masterAccount.getCorporateUserPermission({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCorporateUserPermissionRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**$email:** `string` — Email of the invited user.
     
 </dd>
 </dl>
@@ -1831,7 +2015,7 @@ await client.masterAccount.getCorporateUserPermission({
 </dl>
 </details>
 
-<details><summary><code>client.masterAccount.<a href="/src/api/resources/masterAccount/client/Client.ts">changeAdminUserPermissions</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;masterAccount-&gt;changeAdminUserPermissions($email, $request)</code></summary>
 <dl>
 <dd>
 
@@ -1858,40 +2042,73 @@ your Admin account
 <dl>
 <dd>
 
-```typescript
-await client.masterAccount.changeAdminUserPermissions({
-    email: "email",
-    all_features_access: false,
-    privileges: [{
-            feature: "user_management",
-            permissions: ["all"]
-        }, {
-            feature: "api",
-            permissions: ["all"]
-        }, {
-            feature: "my_plan",
-            permissions: ["none"]
-        }, {
-            feature: "apps_management",
-            permissions: ["all"]
-        }, {
-            feature: "create_sub_organizations",
-            permissions: ["all"]
-        }, {
-            feature: "sub_organization_groups",
-            permissions: ["create", "edit_delete"]
-        }, {
-            feature: "manage_sub_organizations",
-            permissions: ["all"]
-        }, {
-            feature: "security",
-            permissions: ["none"]
-        }, {
-            feature: "analytics",
-            permissions: ["create_alerts", "download_data", "my_looks", "explore_create"]
-        }]
-});
-
+```php
+$client->masterAccount->changeAdminUserPermissions(
+    'email',
+    new PutCorporateUserEmailPermissionsRequest([
+        'allFeaturesAccess' => false,
+        'privileges' => [
+            new PutCorporateUserEmailPermissionsRequestPrivilegesItem([
+                'feature' => PutCorporateUserEmailPermissionsRequestPrivilegesItemFeature::UserManagement->value,
+                'permissions' => [
+                    PutCorporateUserEmailPermissionsRequestPrivilegesItemPermissionsItem::All->value,
+                ],
+            ]),
+            new PutCorporateUserEmailPermissionsRequestPrivilegesItem([
+                'feature' => PutCorporateUserEmailPermissionsRequestPrivilegesItemFeature::Api->value,
+                'permissions' => [
+                    PutCorporateUserEmailPermissionsRequestPrivilegesItemPermissionsItem::All->value,
+                ],
+            ]),
+            new PutCorporateUserEmailPermissionsRequestPrivilegesItem([
+                'feature' => PutCorporateUserEmailPermissionsRequestPrivilegesItemFeature::MyPlan->value,
+                'permissions' => [
+                    PutCorporateUserEmailPermissionsRequestPrivilegesItemPermissionsItem::None->value,
+                ],
+            ]),
+            new PutCorporateUserEmailPermissionsRequestPrivilegesItem([
+                'feature' => PutCorporateUserEmailPermissionsRequestPrivilegesItemFeature::AppsManagement->value,
+                'permissions' => [
+                    PutCorporateUserEmailPermissionsRequestPrivilegesItemPermissionsItem::All->value,
+                ],
+            ]),
+            new PutCorporateUserEmailPermissionsRequestPrivilegesItem([
+                'feature' => PutCorporateUserEmailPermissionsRequestPrivilegesItemFeature::CreateSubOrganizations->value,
+                'permissions' => [
+                    PutCorporateUserEmailPermissionsRequestPrivilegesItemPermissionsItem::All->value,
+                ],
+            ]),
+            new PutCorporateUserEmailPermissionsRequestPrivilegesItem([
+                'feature' => PutCorporateUserEmailPermissionsRequestPrivilegesItemFeature::SubOrganizationGroups->value,
+                'permissions' => [
+                    PutCorporateUserEmailPermissionsRequestPrivilegesItemPermissionsItem::Create->value,
+                    PutCorporateUserEmailPermissionsRequestPrivilegesItemPermissionsItem::EditDelete->value,
+                ],
+            ]),
+            new PutCorporateUserEmailPermissionsRequestPrivilegesItem([
+                'feature' => PutCorporateUserEmailPermissionsRequestPrivilegesItemFeature::ManageSubOrganizations->value,
+                'permissions' => [
+                    PutCorporateUserEmailPermissionsRequestPrivilegesItemPermissionsItem::All->value,
+                ],
+            ]),
+            new PutCorporateUserEmailPermissionsRequestPrivilegesItem([
+                'feature' => PutCorporateUserEmailPermissionsRequestPrivilegesItemFeature::Security->value,
+                'permissions' => [
+                    PutCorporateUserEmailPermissionsRequestPrivilegesItemPermissionsItem::None->value,
+                ],
+            ]),
+            new PutCorporateUserEmailPermissionsRequestPrivilegesItem([
+                'feature' => PutCorporateUserEmailPermissionsRequestPrivilegesItemFeature::Analytics->value,
+                'permissions' => [
+                    PutCorporateUserEmailPermissionsRequestPrivilegesItemPermissionsItem::CreateAlerts->value,
+                    PutCorporateUserEmailPermissionsRequestPrivilegesItemPermissionsItem::DownloadData->value,
+                    PutCorporateUserEmailPermissionsRequestPrivilegesItemPermissionsItem::MyLooks->value,
+                    PutCorporateUserEmailPermissionsRequestPrivilegesItemPermissionsItem::ExploreCreate->value,
+                ],
+            ]),
+        ],
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -1906,7 +2123,7 @@ await client.masterAccount.changeAdminUserPermissions({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PutCorporateUserEmailPermissionsRequest` 
+**$email:** `string` — Email address of Admin user
     
 </dd>
 </dl>
@@ -1914,7 +2131,15 @@ await client.masterAccount.changeAdminUserPermissions({
 <dl>
 <dd>
 
-**requestOptions:** `MasterAccountClient.RequestOptions` 
+**$allFeaturesAccess:** `bool` — All access to the features
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$privileges:** `array` 
     
 </dd>
 </dl>
@@ -1927,7 +2152,7 @@ await client.masterAccount.changeAdminUserPermissions({
 </details>
 
 ## User
-<details><summary><code>client.user.<a href="/src/api/resources/user/client/Client.ts">getInvitedUsersList</a>() -> BrevoApi.GetInvitedUsersListResponse</code></summary>
+<details><summary><code>$client-&gt;user-&gt;getInvitedUsersList() -> GetInvitedUsersListResponse</code></summary>
 <dl>
 <dd>
 
@@ -1939,9 +2164,35 @@ await client.masterAccount.changeAdminUserPermissions({
 <dl>
 <dd>
 
-```typescript
-await client.user.getInvitedUsersList();
+```php
+$client->user->getInvitedUsersList();
+```
+</dd>
+</dl>
+</dd>
+</dl>
 
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>$client-&gt;user-&gt;putRevokeUserPermission($email) -> PutRevokeUserPermissionResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```php
+$client->user->putRevokeUserPermission(
+    'email',
+);
 ```
 </dd>
 </dl>
@@ -1956,7 +2207,7 @@ await client.user.getInvitedUsersList();
 <dl>
 <dd>
 
-**requestOptions:** `UserClient.RequestOptions` 
+**$email:** `string` — Email of the invited user.
     
 </dd>
 </dl>
@@ -1968,58 +2219,7 @@ await client.user.getInvitedUsersList();
 </dl>
 </details>
 
-<details><summary><code>client.user.<a href="/src/api/resources/user/client/Client.ts">putRevokeUserPermission</a>({ ...params }) -> BrevoApi.PutRevokeUserPermissionResponse</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.user.putRevokeUserPermission({
-    email: "email"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `BrevoApi.PutRevokeUserPermissionRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `UserClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.user.<a href="/src/api/resources/user/client/Client.ts">inviteuser</a>({ ...params }) -> BrevoApi.InviteuserResponse</code></summary>
+<details><summary><code>$client-&gt;user-&gt;inviteuser($request) -> InviteuserResponse</code></summary>
 <dl>
 <dd>
 
@@ -2112,13 +2312,16 @@ accordingly.
 <dl>
 <dd>
 
-```typescript
-await client.user.inviteuser({
-    all_features_access: true,
-    email: "inviteuser@example.com",
-    privileges: [{}]
-});
-
+```php
+$client->user->inviteuser(
+    new Inviteuser([
+        'allFeaturesAccess' => true,
+        'email' => 'inviteuser@example.com',
+        'privileges' => [
+            new InviteuserPrivilegesItem([]),
+        ],
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -2133,15 +2336,7 @@ await client.user.inviteuser({
 <dl>
 <dd>
 
-**request:** `BrevoApi.Inviteuser` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `UserClient.RequestOptions` 
+**$request:** `Inviteuser` 
     
 </dd>
 </dl>
@@ -2153,7 +2348,7 @@ await client.user.inviteuser({
 </dl>
 </details>
 
-<details><summary><code>client.user.<a href="/src/api/resources/user/client/Client.ts">putresendcancelinvitation</a>({ ...params }) -> BrevoApi.PutresendcancelinvitationResponse</code></summary>
+<details><summary><code>$client-&gt;user-&gt;putresendcancelinvitation($action, $email) -> PutresendcancelinvitationResponse</code></summary>
 <dl>
 <dd>
 
@@ -2165,12 +2360,11 @@ await client.user.inviteuser({
 <dl>
 <dd>
 
-```typescript
-await client.user.putresendcancelinvitation({
-    action: "resend",
-    email: "email"
-});
-
+```php
+$client->user->putresendcancelinvitation(
+    PutresendcancelinvitationRequestAction::Resend->value,
+    'email',
+);
 ```
 </dd>
 </dl>
@@ -2185,7 +2379,7 @@ await client.user.putresendcancelinvitation({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PutresendcancelinvitationRequest` 
+**$action:** `string` — action
     
 </dd>
 </dl>
@@ -2193,7 +2387,7 @@ await client.user.putresendcancelinvitation({
 <dl>
 <dd>
 
-**requestOptions:** `UserClient.RequestOptions` 
+**$email:** `string` — Email of the invited user.
     
 </dd>
 </dl>
@@ -2205,7 +2399,7 @@ await client.user.putresendcancelinvitation({
 </dl>
 </details>
 
-<details><summary><code>client.user.<a href="/src/api/resources/user/client/Client.ts">editUserPermission</a>({ ...params }) -> BrevoApi.EditUserPermissionResponse</code></summary>
+<details><summary><code>$client-&gt;user-&gt;editUserPermission($request) -> EditUserPermissionResponse</code></summary>
 <dl>
 <dd>
 
@@ -2297,13 +2491,16 @@ Please select the features and permissions accordingly.
 <dl>
 <dd>
 
-```typescript
-await client.user.editUserPermission({
-    all_features_access: true,
-    email: "inviteuser@example.com",
-    privileges: [{}]
-});
-
+```php
+$client->user->editUserPermission(
+    new Inviteuser([
+        'allFeaturesAccess' => true,
+        'email' => 'inviteuser@example.com',
+        'privileges' => [
+            new InviteuserPrivilegesItem([]),
+        ],
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -2318,15 +2515,7 @@ await client.user.editUserPermission({
 <dl>
 <dd>
 
-**request:** `BrevoApi.Inviteuser` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `UserClient.RequestOptions` 
+**$request:** `Inviteuser` 
     
 </dd>
 </dl>
@@ -2338,7 +2527,7 @@ await client.user.editUserPermission({
 </dl>
 </details>
 
-<details><summary><code>client.user.<a href="/src/api/resources/user/client/Client.ts">getUserPermission</a>({ ...params }) -> BrevoApi.GetUserPermissionResponse</code></summary>
+<details><summary><code>$client-&gt;user-&gt;getUserPermission($email) -> GetUserPermissionResponse</code></summary>
 <dl>
 <dd>
 
@@ -2350,11 +2539,10 @@ await client.user.editUserPermission({
 <dl>
 <dd>
 
-```typescript
-await client.user.getUserPermission({
-    email: "email"
-});
-
+```php
+$client->user->getUserPermission(
+    'email',
+);
 ```
 </dd>
 </dl>
@@ -2369,15 +2557,7 @@ await client.user.getUserPermission({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetUserPermissionRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `UserClient.RequestOptions` 
+**$email:** `string` — Email of the invited user.
     
 </dd>
 </dl>
@@ -2390,7 +2570,7 @@ await client.user.getUserPermission({
 </details>
 
 ## Process
-<details><summary><code>client.process.<a href="/src/api/resources/process/client/Client.ts">getProcesses</a>({ ...params }) -> BrevoApi.GetProcessesResponse</code></summary>
+<details><summary><code>$client-&gt;process-&gt;getProcesses($request) -> GetProcessesResponse</code></summary>
 <dl>
 <dd>
 
@@ -2439,9 +2619,10 @@ Retrieves a list of background processes from your Brevo account with filtering 
 <dl>
 <dd>
 
-```typescript
-await client.process.getProcesses();
-
+```php
+$client->process->getProcesses(
+    new GetProcessesRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -2456,7 +2637,7 @@ await client.process.getProcesses();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetProcessesRequest` 
+**$limit:** `?int` — Number limitation for the result returned
     
 </dd>
 </dl>
@@ -2464,7 +2645,18 @@ await client.process.getProcesses();
 <dl>
 <dd>
 
-**requestOptions:** `ProcessClient.RequestOptions` 
+**$offset:** `?int` — Beginning point in the list to retrieve from.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` 
+
+Sort the results in the ascending/descending order of record creation.
+Default order is **descending** if `sort` is not passed
     
 </dd>
 </dl>
@@ -2476,7 +2668,7 @@ await client.process.getProcesses();
 </dl>
 </details>
 
-<details><summary><code>client.process.<a href="/src/api/resources/process/client/Client.ts">getProcess</a>({ ...params }) -> BrevoApi.GetProcessResponse</code></summary>
+<details><summary><code>$client-&gt;process-&gt;getProcess($processId) -> GetProcessResponse</code></summary>
 <dl>
 <dd>
 
@@ -2524,11 +2716,10 @@ Retrieves detailed information about a specific background process.
 <dl>
 <dd>
 
-```typescript
-await client.process.getProcess({
-    processId: 1000000
-});
-
+```php
+$client->process->getProcess(
+    1000000,
+);
 ```
 </dd>
 </dl>
@@ -2543,15 +2734,7 @@ await client.process.getProcess({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetProcessRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ProcessClient.RequestOptions` 
+**$processId:** `int` — Id of the process
     
 </dd>
 </dl>
@@ -2564,7 +2747,7 @@ await client.process.getProcess({
 </details>
 
 ## Senders
-<details><summary><code>client.senders.<a href="/src/api/resources/senders/client/Client.ts">getSenders</a>({ ...params }) -> BrevoApi.GetSendersResponse</code></summary>
+<details><summary><code>$client-&gt;senders-&gt;getSenders($request) -> GetSendersResponse</code></summary>
 <dl>
 <dd>
 
@@ -2610,9 +2793,10 @@ Retrieves a list of all email senders from your Brevo account with optional filt
 <dl>
 <dd>
 
-```typescript
-await client.senders.getSenders();
-
+```php
+$client->senders->getSenders(
+    new GetSendersRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -2627,7 +2811,7 @@ await client.senders.getSenders();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetSendersRequest` 
+**$ip:** `?string` — Filter your senders for a specific ip. **Available for dedicated IP usage only**
     
 </dd>
 </dl>
@@ -2635,7 +2819,7 @@ await client.senders.getSenders();
 <dl>
 <dd>
 
-**requestOptions:** `SendersClient.RequestOptions` 
+**$domain:** `?string` — Filter your senders for a specific domain
     
 </dd>
 </dl>
@@ -2647,7 +2831,7 @@ await client.senders.getSenders();
 </dl>
 </details>
 
-<details><summary><code>client.senders.<a href="/src/api/resources/senders/client/Client.ts">createSender</a>({ ...params }) -> BrevoApi.CreateSenderResponse</code></summary>
+<details><summary><code>$client-&gt;senders-&gt;createSender($request) -> CreateSenderResponse</code></summary>
 <dl>
 <dd>
 
@@ -2691,12 +2875,13 @@ Creates a new email sender in your Brevo account.
 <dl>
 <dd>
 
-```typescript
-await client.senders.createSender({
-    email: "support@example.com",
-    name: "Support Team"
-});
-
+```php
+$client->senders->createSender(
+    new CreateSenderRequest([
+        'email' => 'support@example.com',
+        'name' => 'Support Team',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -2711,7 +2896,10 @@ await client.senders.createSender({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateSenderRequest` 
+**$email:** `string` 
+
+From email to use for the sender. A verification email will be
+sent to this address.
     
 </dd>
 </dl>
@@ -2719,7 +2907,18 @@ await client.senders.createSender({
 <dl>
 <dd>
 
-**requestOptions:** `SendersClient.RequestOptions` 
+**$ips:** `?array` 
+
+**Mandatory in case of dedicated IP**. IPs to associate to the
+sender. Not required for standard accounts.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$name:** `string` — From Name to use for the sender
     
 </dd>
 </dl>
@@ -2731,7 +2930,7 @@ await client.senders.createSender({
 </dl>
 </details>
 
-<details><summary><code>client.senders.<a href="/src/api/resources/senders/client/Client.ts">getIps</a>() -> BrevoApi.GetIpsResponse</code></summary>
+<details><summary><code>$client-&gt;senders-&gt;getIps() -> GetIpsResponse</code></summary>
 <dl>
 <dd>
 
@@ -2770,25 +2969,9 @@ Key information returned:
 <dl>
 <dd>
 
-```typescript
-await client.senders.getIps();
-
+```php
+$client->senders->getIps();
 ```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `SendersClient.RequestOptions` 
-    
 </dd>
 </dl>
 </dd>
@@ -2799,7 +2982,7 @@ await client.senders.getIps();
 </dl>
 </details>
 
-<details><summary><code>client.senders.<a href="/src/api/resources/senders/client/Client.ts">updateSender</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;senders-&gt;updateSender($senderId, $request)</code></summary>
 <dl>
 <dd>
 
@@ -2835,12 +3018,13 @@ Key information returned:
 <dl>
 <dd>
 
-```typescript
-await client.senders.updateSender({
-    senderId: 1000000,
-    name: "New Support Team"
-});
-
+```php
+$client->senders->updateSender(
+    1000000,
+    new UpdateSenderRequest([
+        'name' => 'New Support Team',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -2855,7 +3039,7 @@ await client.senders.updateSender({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateSenderRequest` 
+**$senderId:** `int` — Id of the sender
     
 </dd>
 </dl>
@@ -2863,7 +3047,26 @@ await client.senders.updateSender({
 <dl>
 <dd>
 
-**requestOptions:** `SendersClient.RequestOptions` 
+**$email:** `?string` — From Email to update the sender
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$ips:** `?array` 
+
+**Only in case of dedicated IP**. IPs to associate to the
+sender. If passed, will replace all the existing IPs. Not required for standard accounts.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$name:** `?string` — From Name to update the sender
     
 </dd>
 </dl>
@@ -2875,7 +3078,7 @@ await client.senders.updateSender({
 </dl>
 </details>
 
-<details><summary><code>client.senders.<a href="/src/api/resources/senders/client/Client.ts">deleteSender</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;senders-&gt;deleteSender($senderId)</code></summary>
 <dl>
 <dd>
 
@@ -2909,11 +3112,10 @@ Key information returned:
 <dl>
 <dd>
 
-```typescript
-await client.senders.deleteSender({
-    senderId: 1000000
-});
-
+```php
+$client->senders->deleteSender(
+    1000000,
+);
 ```
 </dd>
 </dl>
@@ -2928,15 +3130,7 @@ await client.senders.deleteSender({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteSenderRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `SendersClient.RequestOptions` 
+**$senderId:** `int` — Id of the sender
     
 </dd>
 </dl>
@@ -2948,7 +3142,7 @@ await client.senders.deleteSender({
 </dl>
 </details>
 
-<details><summary><code>client.senders.<a href="/src/api/resources/senders/client/Client.ts">getIpsFromSender</a>({ ...params }) -> BrevoApi.GetIpsFromSenderResponse</code></summary>
+<details><summary><code>$client-&gt;senders-&gt;getIpsFromSender($senderId) -> GetIpsFromSenderResponse</code></summary>
 <dl>
 <dd>
 
@@ -2985,11 +3179,10 @@ Key information returned:
 <dl>
 <dd>
 
-```typescript
-await client.senders.getIpsFromSender({
-    senderId: 1000000
-});
-
+```php
+$client->senders->getIpsFromSender(
+    1000000,
+);
 ```
 </dd>
 </dl>
@@ -3004,15 +3197,7 @@ await client.senders.getIpsFromSender({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetIpsFromSenderRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `SendersClient.RequestOptions` 
+**$senderId:** `int` — Id of the sender
     
 </dd>
 </dl>
@@ -3024,7 +3209,7 @@ await client.senders.getIpsFromSender({
 </dl>
 </details>
 
-<details><summary><code>client.senders.<a href="/src/api/resources/senders/client/Client.ts">validateSenderByOtp</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;senders-&gt;validateSenderByOtp($senderId, $request)</code></summary>
 <dl>
 <dd>
 
@@ -3060,12 +3245,13 @@ Key information returned:
 <dl>
 <dd>
 
-```typescript
-await client.senders.validateSenderByOtp({
-    senderId: 1000000,
-    otp: 123456
-});
-
+```php
+$client->senders->validateSenderByOtp(
+    1000000,
+    new ValidateSenderByOtpRequest([
+        'otp' => 123456,
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -3080,7 +3266,7 @@ await client.senders.validateSenderByOtp({
 <dl>
 <dd>
 
-**request:** `BrevoApi.ValidateSenderByOtpRequest` 
+**$senderId:** `int` — Id of the sender
     
 </dd>
 </dl>
@@ -3088,7 +3274,7 @@ await client.senders.validateSenderByOtp({
 <dl>
 <dd>
 
-**requestOptions:** `SendersClient.RequestOptions` 
+**$otp:** `int` — 6 digit OTP received on email
     
 </dd>
 </dl>
@@ -3101,7 +3287,7 @@ await client.senders.validateSenderByOtp({
 </details>
 
 ## Domains
-<details><summary><code>client.domains.<a href="/src/api/resources/domains/client/Client.ts">getDomains</a>() -> BrevoApi.GetDomainsResponse</code></summary>
+<details><summary><code>$client-&gt;domains-&gt;getDomains() -> GetDomainsResponse</code></summary>
 <dl>
 <dd>
 
@@ -3141,25 +3327,9 @@ Key information returned:
 <dl>
 <dd>
 
-```typescript
-await client.domains.getDomains();
-
+```php
+$client->domains->getDomains();
 ```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `DomainsClient.RequestOptions` 
-    
 </dd>
 </dl>
 </dd>
@@ -3170,7 +3340,7 @@ await client.domains.getDomains();
 </dl>
 </details>
 
-<details><summary><code>client.domains.<a href="/src/api/resources/domains/client/Client.ts">createDomain</a>({ ...params }) -> BrevoApi.CreateDomainResponse</code></summary>
+<details><summary><code>$client-&gt;domains-&gt;createDomain($request) -> CreateDomainResponse</code></summary>
 <dl>
 <dd>
 
@@ -3208,11 +3378,12 @@ Key information returned:
 <dl>
 <dd>
 
-```typescript
-await client.domains.createDomain({
-    name: "mycompany.com"
-});
-
+```php
+$client->domains->createDomain(
+    new CreateDomainRequest([
+        'name' => 'mycompany.com',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -3227,15 +3398,7 @@ await client.domains.createDomain({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateDomainRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `DomainsClient.RequestOptions` 
+**$name:** `string` — Domain name to be added
     
 </dd>
 </dl>
@@ -3247,7 +3410,7 @@ await client.domains.createDomain({
 </dl>
 </details>
 
-<details><summary><code>client.domains.<a href="/src/api/resources/domains/client/Client.ts">getDomainConfiguration</a>({ ...params }) -> BrevoApi.GetDomainConfigurationResponse</code></summary>
+<details><summary><code>$client-&gt;domains-&gt;getDomainConfiguration($domainName) -> GetDomainConfigurationResponse</code></summary>
 <dl>
 <dd>
 
@@ -3284,11 +3447,10 @@ Key information returned:
 <dl>
 <dd>
 
-```typescript
-await client.domains.getDomainConfiguration({
-    domainName: "domainName"
-});
-
+```php
+$client->domains->getDomainConfiguration(
+    'domainName',
+);
 ```
 </dd>
 </dl>
@@ -3303,15 +3465,7 @@ await client.domains.getDomainConfiguration({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetDomainConfigurationRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `DomainsClient.RequestOptions` 
+**$domainName:** `string` — Domain name
     
 </dd>
 </dl>
@@ -3323,7 +3477,7 @@ await client.domains.getDomainConfiguration({
 </dl>
 </details>
 
-<details><summary><code>client.domains.<a href="/src/api/resources/domains/client/Client.ts">deleteDomain</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;domains-&gt;deleteDomain($domainName)</code></summary>
 <dl>
 <dd>
 
@@ -3357,11 +3511,10 @@ Key information returned:
 <dl>
 <dd>
 
-```typescript
-await client.domains.deleteDomain({
-    domainName: "domainName"
-});
-
+```php
+$client->domains->deleteDomain(
+    'domainName',
+);
 ```
 </dd>
 </dl>
@@ -3376,15 +3529,7 @@ await client.domains.deleteDomain({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteDomainRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `DomainsClient.RequestOptions` 
+**$domainName:** `string` — Domain name
     
 </dd>
 </dl>
@@ -3396,7 +3541,7 @@ await client.domains.deleteDomain({
 </dl>
 </details>
 
-<details><summary><code>client.domains.<a href="/src/api/resources/domains/client/Client.ts">authenticateDomain</a>({ ...params }) -> BrevoApi.AuthenticateDomainResponse</code></summary>
+<details><summary><code>$client-&gt;domains-&gt;authenticateDomain($domainName) -> AuthenticateDomainResponse</code></summary>
 <dl>
 <dd>
 
@@ -3432,11 +3577,10 @@ Key information returned:
 <dl>
 <dd>
 
-```typescript
-await client.domains.authenticateDomain({
-    domainName: "domainName"
-});
-
+```php
+$client->domains->authenticateDomain(
+    'domainName',
+);
 ```
 </dd>
 </dl>
@@ -3451,15 +3595,7 @@ await client.domains.authenticateDomain({
 <dl>
 <dd>
 
-**request:** `BrevoApi.AuthenticateDomainRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `DomainsClient.RequestOptions` 
+**$domainName:** `string` — Domain name
     
 </dd>
 </dl>
@@ -3472,7 +3608,7 @@ await client.domains.authenticateDomain({
 </details>
 
 ## Webhooks
-<details><summary><code>client.webhooks.<a href="/src/api/resources/webhooks/client/Client.ts">getWebhooks</a>({ ...params }) -> BrevoApi.GetWebhooksResponse</code></summary>
+<details><summary><code>$client-&gt;webhooks-&gt;getWebhooks($request) -> GetWebhooksResponse</code></summary>
 <dl>
 <dd>
 
@@ -3512,9 +3648,10 @@ Key information returned:
 <dl>
 <dd>
 
-```typescript
-await client.webhooks.getWebhooks();
-
+```php
+$client->webhooks->getWebhooks(
+    new GetWebhooksRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -3529,7 +3666,7 @@ await client.webhooks.getWebhooks();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetWebhooksRequest` 
+**$type:** `?string` — Filter on webhook type
     
 </dd>
 </dl>
@@ -3537,7 +3674,7 @@ await client.webhooks.getWebhooks();
 <dl>
 <dd>
 
-**requestOptions:** `WebhooksClient.RequestOptions` 
+**$sort:** `?string` — Sort the results in the ascending/descending order of webhook creation
     
 </dd>
 </dl>
@@ -3549,7 +3686,7 @@ await client.webhooks.getWebhooks();
 </dl>
 </details>
 
-<details><summary><code>client.webhooks.<a href="/src/api/resources/webhooks/client/Client.ts">createWebhook</a>({ ...params }) -> BrevoApi.CreateWebhookResponse</code></summary>
+<details><summary><code>$client-&gt;webhooks-&gt;createWebhook($request) -> CreateWebhookResponse</code></summary>
 <dl>
 <dd>
 
@@ -3586,12 +3723,15 @@ Key information returned:
 <dl>
 <dd>
 
-```typescript
-await client.webhooks.createWebhook({
-    events: ["sent"],
-    url: "http://requestb.in/173lyyx1"
-});
-
+```php
+$client->webhooks->createWebhook(
+    new CreateWebhookRequest([
+        'events' => [
+            CreateWebhookRequestEventsItem::Sent->value,
+        ],
+        'url' => 'http://requestb.in/173lyyx1',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -3606,7 +3746,7 @@ await client.webhooks.createWebhook({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateWebhookRequest` 
+**$auth:** `?CreateWebhookRequestAuth` — Add authentication on webhook url
     
 </dd>
 </dl>
@@ -3614,7 +3754,82 @@ await client.webhooks.createWebhook({
 <dl>
 <dd>
 
-**requestOptions:** `WebhooksClient.RequestOptions` 
+**$batched:** `?bool` — To send batched webhooks
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$channel:** `?string` — channel of webhook
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$description:** `?string` — Description of the webhook
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$domain:** `?string` 
+
+Inbound domain of webhook, required in case of event type
+`inbound`
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$events:** `array` 
+
+- Events triggering the webhook. Possible values for
+**Transactional** type webhook: #### `sent` OR `request`,
+`delivered`, `hardBounce`, `softBounce`, `blocked`, `spam`,
+`invalid`, `deferred`, `click`, `opened`, `uniqueOpened` and
+`unsubscribed` - Possible values for **Marketing** type webhook:
+#### `spam`, `opened`, `click`, `hardBounce`, `softBounce`,
+`unsubscribed`, `listAddition` & `delivered` - Possible values
+for **Inbound** type webhook: #### `inboundEmailProcessed` -
+Possible values for type **Transactional** and channel **SMS**
+####
+`accepted`,`delivered`,`softBounce`,`hardBounce`,`unsubscribe`,`reply`,
+`subscribe`,`sent`,`blacklisted`,`skip` - Possible values for
+type **Marketing**  channel **SMS** ####
+`sent`,`delivered`,`softBounce`,`hardBounce`,`unsubscribe`,`reply`,
+`subscribe`,`skip`
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$headers:** `?array` — Custom headers to be send with webhooks
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$type:** `?string` — Type of the webhook
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$url:** `string` — URL of the webhook
     
 </dd>
 </dl>
@@ -3626,7 +3841,7 @@ await client.webhooks.createWebhook({
 </dl>
 </details>
 
-<details><summary><code>client.webhooks.<a href="/src/api/resources/webhooks/client/Client.ts">exportWebhooksHistory</a>({ ...params }) -> BrevoApi.ExportWebhooksHistoryResponse</code></summary>
+<details><summary><code>$client-&gt;webhooks-&gt;exportWebhooksHistory($request) -> ExportWebhooksHistoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -3667,13 +3882,14 @@ Key information returned:
 <dl>
 <dd>
 
-```typescript
-await client.webhooks.exportWebhooksHistory({
-    event: "invalid_parameter",
-    notifyURL: "https://brevo.com",
-    type: "transactional"
-});
-
+```php
+$client->webhooks->exportWebhooksHistory(
+    new ExportWebhooksHistoryRequest([
+        'event' => ExportWebhooksHistoryRequestEvent::InvalidParameter->value,
+        'notifyUrl' => 'https://brevo.com',
+        'type' => ExportWebhooksHistoryRequestType::Transactional->value,
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -3688,7 +3904,10 @@ await client.webhooks.exportWebhooksHistory({
 <dl>
 <dd>
 
-**request:** `BrevoApi.ExportWebhooksHistoryRequest` 
+**$days:** `?int` 
+
+Number of days in the past including today (positive
+integer). _Not compatible with 'startDate' and 'endDate'_
     
 </dd>
 </dl>
@@ -3696,7 +3915,80 @@ await client.webhooks.exportWebhooksHistory({
 <dl>
 <dd>
 
-**requestOptions:** `WebhooksClient.RequestOptions` 
+**$email:** `?string` — Filter the history for a specific email
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$endDate:** `?string` 
+
+Mandatory if startDate is used. Ending date of the report
+(YYYY-MM-DD). Must be greater than equal to startDate
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$event:** `string` — Filter the history for a specific event type
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$messageId:** `?int` 
+
+Filter the history for a specific message id. Applicable
+only for transactional webhooks.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$notifyUrl:** `string` — Webhook URL to receive CSV file link
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sorting order of records (asc or desc)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$startDate:** `?string` 
+
+Mandatory if endDate is used. Starting date of the history
+(YYYY-MM-DD). Must be lower than equal to endDate
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$type:** `string` — Filter the history based on webhook type
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$webhookId:** `?int` — Filter the history for a specific webhook id
     
 </dd>
 </dl>
@@ -3708,7 +4000,7 @@ await client.webhooks.exportWebhooksHistory({
 </dl>
 </details>
 
-<details><summary><code>client.webhooks.<a href="/src/api/resources/webhooks/client/Client.ts">getWebhook</a>({ ...params }) -> BrevoApi.GetWebhook</code></summary>
+<details><summary><code>$client-&gt;webhooks-&gt;getWebhook($webhookId) -> GetWebhook</code></summary>
 <dl>
 <dd>
 
@@ -3748,11 +4040,10 @@ Key information returned:
 <dl>
 <dd>
 
-```typescript
-await client.webhooks.getWebhook({
-    webhookId: 1000000
-});
-
+```php
+$client->webhooks->getWebhook(
+    1000000,
+);
 ```
 </dd>
 </dl>
@@ -3767,15 +4058,7 @@ await client.webhooks.getWebhook({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetWebhookRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `WebhooksClient.RequestOptions` 
+**$webhookId:** `int` — Id of the webhook
     
 </dd>
 </dl>
@@ -3787,7 +4070,7 @@ await client.webhooks.getWebhook({
 </dl>
 </details>
 
-<details><summary><code>client.webhooks.<a href="/src/api/resources/webhooks/client/Client.ts">updateWebhook</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;webhooks-&gt;updateWebhook($webhookId, $request)</code></summary>
 <dl>
 <dd>
 
@@ -3823,11 +4106,11 @@ Key information returned:
 <dl>
 <dd>
 
-```typescript
-await client.webhooks.updateWebhook({
-    webhookId: 1000000
-});
-
+```php
+$client->webhooks->updateWebhook(
+    1000000,
+    new UpdateWebhookRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -3842,7 +4125,7 @@ await client.webhooks.updateWebhook({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateWebhookRequest` 
+**$webhookId:** `int` — Id of the webhook
     
 </dd>
 </dl>
@@ -3850,7 +4133,64 @@ await client.webhooks.updateWebhook({
 <dl>
 <dd>
 
-**requestOptions:** `WebhooksClient.RequestOptions` 
+**$auth:** `?UpdateWebhookRequestAuth` — Add authentication on webhook url
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$batched:** `?bool` — To send batched webhooks
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$description:** `?string` — Description of the webhook
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$domain:** `?string` — Inbound domain of webhook, used in case of event type `inbound`
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$events:** `?array` 
+
+- Events triggering the webhook. Possible values for
+**Transactional** type webhook: #### `sent` OR `request`,
+`delivered`, `hardBounce`, `softBounce`, `blocked`, `spam`,
+`invalid`, `deferred`, `click`, `opened`, `uniqueOpened` and
+`unsubscribed` - Possible values for **Marketing** type webhook:
+#### `spam`, `opened`, `click`, `hardBounce`, `softBounce`,
+`unsubscribed`, `listAddition` & `delivered` - Possible values
+for **Inbound** type webhook: #### `inboundEmailProcessed`
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$headers:** `?array` — Custom headers to be send with webhooks
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$url:** `?string` — URL of the webhook
     
 </dd>
 </dl>
@@ -3862,7 +4202,7 @@ await client.webhooks.updateWebhook({
 </dl>
 </details>
 
-<details><summary><code>client.webhooks.<a href="/src/api/resources/webhooks/client/Client.ts">deleteWebhook</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;webhooks-&gt;deleteWebhook($webhookId)</code></summary>
 <dl>
 <dd>
 
@@ -3897,11 +4237,10 @@ Key information returned:
 <dl>
 <dd>
 
-```typescript
-await client.webhooks.deleteWebhook({
-    webhookId: 1000000
-});
-
+```php
+$client->webhooks->deleteWebhook(
+    1000000,
+);
 ```
 </dd>
 </dl>
@@ -3916,15 +4255,7 @@ await client.webhooks.deleteWebhook({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteWebhookRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `WebhooksClient.RequestOptions` 
+**$webhookId:** `int` — Id of the webhook
     
 </dd>
 </dl>
@@ -3937,7 +4268,7 @@ await client.webhooks.deleteWebhook({
 </details>
 
 ## ExternalFeeds
-<details><summary><code>client.externalFeeds.<a href="/src/api/resources/externalFeeds/client/Client.ts">getAllExternalFeeds</a>({ ...params }) -> BrevoApi.GetAllExternalFeedsResponse</code></summary>
+<details><summary><code>$client-&gt;externalFeeds-&gt;getAllExternalFeeds($request) -> GetAllExternalFeedsResponse</code></summary>
 <dl>
 <dd>
 
@@ -3987,13 +4318,14 @@ Retrieves all external feeds from your Brevo account with filtering and paginati
 <dl>
 <dd>
 
-```typescript
-await client.externalFeeds.getAllExternalFeeds({
-    search: "product",
-    startDate: "2024-01-01",
-    endDate: "2024-01-31"
-});
-
+```php
+$client->externalFeeds->getAllExternalFeeds(
+    new GetAllExternalFeedsRequest([
+        'search' => 'product',
+        'startDate' => new DateTime('2024-01-01'),
+        'endDate' => new DateTime('2024-01-31'),
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -4008,7 +4340,7 @@ await client.externalFeeds.getAllExternalFeeds({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetAllExternalFeedsRequest` 
+**$search:** `?string` — Can be used to filter records by search keyword on feed name
     
 </dd>
 </dl>
@@ -4016,7 +4348,58 @@ await client.externalFeeds.getAllExternalFeeds({
 <dl>
 <dd>
 
-**requestOptions:** `ExternalFeedsClient.RequestOptions` 
+**$startDate:** `?DateTime` 
+
+Mandatory if `endDate` is used. Starting date (YYYY-MM-DD) from which
+you want to fetch the list. Can be maximum 30 days older than current
+date.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$endDate:** `?DateTime` 
+
+Mandatory if `startDate` is used. Ending date (YYYY-MM-DD) till which
+you want to fetch the list. Maximum time period that can be selected is
+one month.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` 
+
+Sort the results in the ascending/descending order of record creation.
+Default order is **descending** if `sort` is not passed.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$authType:** `?string` — Filter the records by `authType` of the feed.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$limit:** `?int` — Number of documents returned per page.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$offset:** `?int` — Index of the first document on the page.
     
 </dd>
 </dl>
@@ -4028,7 +4411,7 @@ await client.externalFeeds.getAllExternalFeeds({
 </dl>
 </details>
 
-<details><summary><code>client.externalFeeds.<a href="/src/api/resources/externalFeeds/client/Client.ts">createExternalFeed</a>({ ...params }) -> BrevoApi.CreateExternalFeedResponse</code></summary>
+<details><summary><code>$client-&gt;externalFeeds-&gt;createExternalFeed($request) -> CreateExternalFeedResponse</code></summary>
 <dl>
 <dd>
 
@@ -4074,15 +4457,16 @@ Creates a new external feed for dynamic content in email campaigns.
 <dl>
 <dd>
 
-```typescript
-await client.externalFeeds.createExternalFeed({
-    name: "Public API Feed",
-    url: "https://jsonplaceholder.typicode.com/posts",
-    authType: "noAuth",
-    maxRetries: 3,
-    cache: true
-});
-
+```php
+$client->externalFeeds->createExternalFeed(
+    new CreateExternalFeedRequest([
+        'name' => 'Public API Feed',
+        'url' => 'https://jsonplaceholder.typicode.com/posts',
+        'authType' => CreateExternalFeedRequestAuthType::NoAuth->value,
+        'maxRetries' => 3,
+        'cache' => true,
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -4097,7 +4481,7 @@ await client.externalFeeds.createExternalFeed({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateExternalFeedRequest` 
+**$name:** `string` — Name of the feed
     
 </dd>
 </dl>
@@ -4105,7 +4489,63 @@ await client.externalFeeds.createExternalFeed({
 <dl>
 <dd>
 
-**requestOptions:** `ExternalFeedsClient.RequestOptions` 
+**$url:** `string` — URL of the external data source
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$authType:** `?string` — Authentication type for accessing the feed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$username:** `?string` — Username for basic authentication (required if authType is 'basic')
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$password:** `?string` — Password for basic authentication (required if authType is 'basic')
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$token:** `?string` — Token for token-based authentication (required if authType is 'token')
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$maxRetries:** `?int` — Maximum number of retry attempts for failed requests
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$cache:** `?bool` — Whether to cache the feed response
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$headers:** `?array` — Custom HTTP headers for the feed request
     
 </dd>
 </dl>
@@ -4117,7 +4557,7 @@ await client.externalFeeds.createExternalFeed({
 </dl>
 </details>
 
-<details><summary><code>client.externalFeeds.<a href="/src/api/resources/externalFeeds/client/Client.ts">getExternalFeedByUuid</a>({ ...params }) -> BrevoApi.GetExternalFeedByUuidResponse</code></summary>
+<details><summary><code>$client-&gt;externalFeeds-&gt;getExternalFeedByUuid($uuid) -> GetExternalFeedByUuidResponse</code></summary>
 <dl>
 <dd>
 
@@ -4164,11 +4604,10 @@ Retrieves details of a specific external feed by its UUID.
 <dl>
 <dd>
 
-```typescript
-await client.externalFeeds.getExternalFeedByUuid({
-    uuid: "b1c2d3e4-f5a6-47b8-89c0-d1e2f3a4b5c6"
-});
-
+```php
+$client->externalFeeds->getExternalFeedByUuid(
+    'b1c2d3e4-f5a6-47b8-89c0-d1e2f3a4b5c6',
+);
 ```
 </dd>
 </dl>
@@ -4183,15 +4622,7 @@ await client.externalFeeds.getExternalFeedByUuid({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetExternalFeedByUuidRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ExternalFeedsClient.RequestOptions` 
+**$uuid:** `string` — UUID of the feed to fetch
     
 </dd>
 </dl>
@@ -4203,7 +4634,7 @@ await client.externalFeeds.getExternalFeedByUuid({
 </dl>
 </details>
 
-<details><summary><code>client.externalFeeds.<a href="/src/api/resources/externalFeeds/client/Client.ts">updateExternalFeed</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;externalFeeds-&gt;updateExternalFeed($uuid, $request)</code></summary>
 <dl>
 <dd>
 
@@ -4246,13 +4677,14 @@ Updates configuration of an existing external feed.
 <dl>
 <dd>
 
-```typescript
-await client.externalFeeds.updateExternalFeed({
-    uuid: "b1c2d3e4-f5a6-47b8-89c0-d1e2f3a4b5c6",
-    name: "Updated Product Catalog",
-    url: "https://api.newstore.com/products/v2"
-});
-
+```php
+$client->externalFeeds->updateExternalFeed(
+    'b1c2d3e4-f5a6-47b8-89c0-d1e2f3a4b5c6',
+    new UpdateExternalFeedRequest([
+        'name' => 'Updated Product Catalog',
+        'url' => 'https://api.newstore.com/products/v2',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -4267,7 +4699,7 @@ await client.externalFeeds.updateExternalFeed({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateExternalFeedRequest` 
+**$uuid:** `string` — UUID of the feed to update
     
 </dd>
 </dl>
@@ -4275,7 +4707,71 @@ await client.externalFeeds.updateExternalFeed({
 <dl>
 <dd>
 
-**requestOptions:** `ExternalFeedsClient.RequestOptions` 
+**$name:** `?string` — Name of the feed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$url:** `?string` — URL of the external data source
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$authType:** `?string` — Authentication type for accessing the feed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$username:** `?string` — Username for basic authentication
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$password:** `?string` — Password for basic authentication
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$token:** `?string` — Token for token-based authentication
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$headers:** `?array` — Custom HTTP headers for the feed request
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$maxRetries:** `?int` — Maximum number of retry attempts for failed requests
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$cache:** `?bool` — Whether to cache the feed response
     
 </dd>
 </dl>
@@ -4287,7 +4783,7 @@ await client.externalFeeds.updateExternalFeed({
 </dl>
 </details>
 
-<details><summary><code>client.externalFeeds.<a href="/src/api/resources/externalFeeds/client/Client.ts">deleteExternalFeed</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;externalFeeds-&gt;deleteExternalFeed($uuid)</code></summary>
 <dl>
 <dd>
 
@@ -4329,11 +4825,10 @@ Deletes an external feed from your Brevo account.
 <dl>
 <dd>
 
-```typescript
-await client.externalFeeds.deleteExternalFeed({
-    uuid: "b1c2d3e4-f5a6-47b8-89c0-d1e2f3a4b5c6"
-});
-
+```php
+$client->externalFeeds->deleteExternalFeed(
+    'b1c2d3e4-f5a6-47b8-89c0-d1e2f3a4b5c6',
+);
 ```
 </dd>
 </dl>
@@ -4348,15 +4843,7 @@ await client.externalFeeds.deleteExternalFeed({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteExternalFeedRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ExternalFeedsClient.RequestOptions` 
+**$uuid:** `string` — UUID of the feed to delete
     
 </dd>
 </dl>
@@ -4369,7 +4856,7 @@ await client.externalFeeds.deleteExternalFeed({
 </details>
 
 ## CustomObjects
-<details><summary><code>client.customObjects.<a href="/src/api/resources/customObjects/client/Client.ts">upsertrecords</a>({ ...params }) -> BrevoApi.UpsertrecordsResponse</code></summary>
+<details><summary><code>$client-&gt;customObjects-&gt;upsertrecords($objectType, $request) -> UpsertrecordsResponse</code></summary>
 <dl>
 <dd>
 
@@ -4418,12 +4905,15 @@ This API allows bulk upsert of object records in a single request. Each object r
 <dl>
 <dd>
 
-```typescript
-await client.customObjects.upsertrecords({
-    object_type: "vehicle",
-    records: [{}]
-});
-
+```php
+$client->customObjects->upsertrecords(
+    'vehicle',
+    new UpsertrecordsRequest([
+        'records' => [
+            new UpsertrecordsRequestRecordsItem([]),
+        ],
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -4438,7 +4928,7 @@ await client.customObjects.upsertrecords({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpsertrecordsRequest` 
+**$objectType:** `string` — object type for the attribute
     
 </dd>
 </dl>
@@ -4446,7 +4936,7 @@ await client.customObjects.upsertrecords({
 <dl>
 <dd>
 
-**requestOptions:** `CustomObjectsClient.RequestOptions` 
+**$records:** `array` — List of object records to be upsert. Each record can have attributes, identifiers, and associations.
     
 </dd>
 </dl>
@@ -4458,7 +4948,7 @@ await client.customObjects.upsertrecords({
 </dl>
 </details>
 
-<details><summary><code>client.customObjects.<a href="/src/api/resources/customObjects/client/Client.ts">getrecords</a>({ ...params }) -> BrevoApi.GetrecordsResponse</code></summary>
+<details><summary><code>$client-&gt;customObjects-&gt;getrecords($objectType, $request) -> GetrecordsResponse</code></summary>
 <dl>
 <dd>
 
@@ -4490,13 +4980,14 @@ This API retrieves a list of object records along with their associated records 
 <dl>
 <dd>
 
-```typescript
-await client.customObjects.getrecords({
-    object_type: "vehicle",
-    limit: 1000000,
-    page_num: 1000000
-});
-
+```php
+$client->customObjects->getrecords(
+    'vehicle',
+    new GetrecordsRequest([
+        'limit' => 1000000,
+        'pageNum' => 1000000,
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -4511,7 +5002,7 @@ await client.customObjects.getrecords({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetrecordsRequest` 
+**$objectType:** `string` — object type for the attribute
     
 </dd>
 </dl>
@@ -4519,7 +5010,31 @@ await client.customObjects.getrecords({
 <dl>
 <dd>
 
-**requestOptions:** `CustomObjectsClient.RequestOptions` 
+**$limit:** `int` — Number of records returned per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$pageNum:** `int` — Page number for pagination. It's used to fetch the object records on a provided page number. Must be a valid positive integer.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort order, must be 'asc' or 'desc'. Default to 'desc' if not provided.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$association:** `?string` — Whether to include associations, must be 'true' or 'false'. Default to 'false' if not provided.
     
 </dd>
 </dl>
@@ -4531,7 +5046,7 @@ await client.customObjects.getrecords({
 </dl>
 </details>
 
-<details><summary><code>client.customObjects.<a href="/src/api/resources/customObjects/client/Client.ts">batchDeleteObjectRecords</a>({ ...params }) -> BrevoApi.BatchDeleteObjectRecordsResponse</code></summary>
+<details><summary><code>$client-&gt;customObjects-&gt;batchDeleteObjectRecords($objectType, $request) -> BatchDeleteObjectRecordsResponse</code></summary>
 <dl>
 <dd>
 
@@ -4559,14 +5074,17 @@ The request is accepted and processed asynchronously.   You can track the status
 <dl>
 <dd>
 
-```typescript
-await client.customObjects.batchDeleteObjectRecords({
-    object_type: "vehicle",
-    identifiers: {
-        ext_ids: ["ext-001", "ext-002"]
-    }
-});
-
+```php
+$client->customObjects->batchDeleteObjectRecords(
+    'vehicle',
+    new BatchDeleteObjectRecordsRequest([
+        'identifiers' => new BatchDeleteObjectRecordsRequestIdentifiersIds([
+            'ids' => [
+                1,
+            ],
+        ]),
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -4581,7 +5099,7 @@ await client.customObjects.batchDeleteObjectRecords({
 <dl>
 <dd>
 
-**request:** `BrevoApi.BatchDeleteObjectRecordsRequest` 
+**$objectType:** `string` — Object type for the records to delete
     
 </dd>
 </dl>
@@ -4589,7 +5107,7 @@ await client.customObjects.batchDeleteObjectRecords({
 <dl>
 <dd>
 
-**requestOptions:** `CustomObjectsClient.RequestOptions` 
+**$identifiers:** `BatchDeleteObjectRecordsRequestIdentifiersIds|BatchDeleteObjectRecordsRequestIdentifiersExtIds|null` — One of the below must be provided
     
 </dd>
 </dl>
@@ -4602,7 +5120,7 @@ await client.customObjects.batchDeleteObjectRecords({
 </details>
 
 ## Contacts
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">getContacts</a>({ ...params }) -> BrevoApi.GetContacts</code></summary>
+<details><summary><code>$client-&gt;contacts-&gt;getContacts($request) -> GetContacts</code></summary>
 <dl>
 <dd>
 
@@ -4634,9 +5152,10 @@ Accepted Number Formats
 <dl>
 <dd>
 
-```typescript
-await client.contacts.getContacts();
-
+```php
+$client->contacts->getContacts(
+    new GetContactsRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -4651,7 +5170,7 @@ await client.contacts.getContacts();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetContactsRequest` 
+**$limit:** `?int` — Number of documents per page
     
 </dd>
 </dl>
@@ -4659,7 +5178,55 @@ await client.contacts.getContacts();
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**$offset:** `?int` — Index of the first document of the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$modifiedSince:** `?string` — Filter (urlencoded) the contacts modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$createdSince:** `?string` — Filter (urlencoded) the contacts created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$segmentId:** `?int` — Id of the segment. **Either listIds or segmentId can be passed.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$listIds:** `?int` — Ids of the list. **Either listIds or segmentId can be passed.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$filter:** `?string` — Filter the contacts on the basis of attributes. **Allowed operator: equals. For multiple-choice options, the filter will apply an AND condition between the options. For category attributes, the filter will work with both id and value. (e.g. filter=equals(FIRSTNAME,"Antoine"), filter=equals(B1, true), filter=equals(DOB, "1989-11-23"), filter=equals(GENDER, "1"), filter=equals(GENDER, "MALE"), filter=equals(COUNTRY,"USA, INDIA")**
     
 </dd>
 </dl>
@@ -4671,7 +5238,7 @@ await client.contacts.getContacts();
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">createContact</a>({ ...params }) -> BrevoApi.CreateContactResponse</code></summary>
+<details><summary><code>$client-&gt;contacts-&gt;createContact($request) -> CreateContactResponse</code></summary>
 <dl>
 <dd>
 
@@ -4697,9 +5264,10 @@ Creates new contacts on Brevo. Contacts can be created by passing either - <br><
 <dl>
 <dd>
 
-```typescript
-await client.contacts.createContact();
-
+```php
+$client->contacts->createContact(
+    new CreateContactRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -4714,7 +5282,7 @@ await client.contacts.createContact();
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateContactRequest` 
+**$attributes:** `?array` — Pass the set of attributes and their values. The attribute's parameter should be passed in capital letter while creating a contact. Values that don't match the attribute type (e.g. text or string in a date attribute) will be ignored. **These attributes must be present in your Brevo account**. For eg: **{"FNAME":"Elly", "LNAME":"Roger", "COUNTRIES": ["India","China"]}**
     
 </dd>
 </dl>
@@ -4722,7 +5290,55 @@ await client.contacts.createContact();
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**$email:** `?string` — Email address of the user. **Mandatory if "ext_id"  & "SMS" field is not passed.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$emailBlacklisted:** `?bool` — Set this field to blacklist the contact for emails (emailBlacklisted = true)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$extId:** `?string` — Pass your own Id to create a contact.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$listIds:** `?array` — Ids of the lists to add the contact to
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$smsBlacklisted:** `?bool` — Set this field to blacklist the contact for SMS (smsBlacklisted = true)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$smtpBlacklistSender:** `?array` — transactional email forbidden sender for contact. Use only for email Contact ( only available if updateEnabled = true )
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$updateEnabled:** `?bool` — Facilitate to update the existing contact in the same request (updateEnabled = true)
     
 </dd>
 </dl>
@@ -4734,7 +5350,7 @@ await client.contacts.createContact();
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">getAttributes</a>() -> BrevoApi.GetAttributesResponse</code></summary>
+<details><summary><code>$client-&gt;contacts-&gt;getAttributes() -> GetAttributesResponse</code></summary>
 <dl>
 <dd>
 
@@ -4746,25 +5362,9 @@ await client.contacts.createContact();
 <dl>
 <dd>
 
-```typescript
-await client.contacts.getAttributes();
-
+```php
+$client->contacts->getAttributes();
 ```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `ContactsClient.RequestOptions` 
-    
 </dd>
 </dl>
 </dd>
@@ -4775,7 +5375,7 @@ await client.contacts.getAttributes();
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">createAttribute</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;contacts-&gt;createAttribute($attributeCategory, $attributeName, $request)</code></summary>
 <dl>
 <dd>
 
@@ -4787,12 +5387,12 @@ await client.contacts.getAttributes();
 <dl>
 <dd>
 
-```typescript
-await client.contacts.createAttribute({
-    attributeCategory: "normal",
-    attributeName: "attributeName"
-});
-
+```php
+$client->contacts->createAttribute(
+    CreateAttributeRequestAttributeCategory::Normal->value,
+    'attributeName',
+    new CreateAttributeRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -4807,7 +5407,7 @@ await client.contacts.createAttribute({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateAttributeRequest` 
+**$attributeCategory:** `string` — Category of the attribute
     
 </dd>
 </dl>
@@ -4815,7 +5415,47 @@ await client.contacts.createAttribute({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**$attributeName:** `string` — Name of the attribute
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$enumeration:** `?array` — List of values and labels that the attribute can take. **Use only if the attribute's category is "category"**. None of the category options can exceed max 200 characters. For example: **[{"value":1, "label":"male"}, {"value":2, "label":"female"}]**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$isRecurring:** `?bool` — Type of the attribute. **Use only if the attribute's category is 'calculated' or 'global'**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$multiCategoryOptions:** `?array` — List of options you want to add for multiple-choice attribute. **Use only if the attribute's category is "normal" and attribute's type is "multiple-choice". None of the multicategory options can exceed max 200 characters.** For example: **["USA","INDIA"]**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$type:** `?string` — Type of the attribute. **Use only if the attribute's category is 'normal', 'category' or 'transactional'** Type **user and multiple-choice** is only available if the category is **normal** attribute Type **id** is only available if the category is **transactional** attribute Type **category** is only available if the category is **category** attribute
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$value:** `?string` — Value of the attribute. **Use only if the attribute's category is 'calculated' or 'global'**
     
 </dd>
 </dl>
@@ -4827,7 +5467,7 @@ await client.contacts.createAttribute({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">updateAttribute</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;contacts-&gt;updateAttribute($attributeCategory, $attributeName, $request)</code></summary>
 <dl>
 <dd>
 
@@ -4839,12 +5479,12 @@ await client.contacts.createAttribute({
 <dl>
 <dd>
 
-```typescript
-await client.contacts.updateAttribute({
-    attributeCategory: "category",
-    attributeName: "attributeName"
-});
-
+```php
+$client->contacts->updateAttribute(
+    UpdateAttributeRequestAttributeCategory::Category->value,
+    'attributeName',
+    new UpdateAttributeRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -4859,7 +5499,7 @@ await client.contacts.updateAttribute({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateAttributeRequest` 
+**$attributeCategory:** `string` — Category of the attribute
     
 </dd>
 </dl>
@@ -4867,7 +5507,31 @@ await client.contacts.updateAttribute({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**$attributeName:** `string` — Name of the existing attribute
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$enumeration:** `?array` — List of the values and labels that the attribute can take. **Use only if the attribute's category is "category"** None of the category options can exceed max 200 characters. For example, **[{"value":1, "label":"male"}, {"value":2, "label":"female"}]**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$multiCategoryOptions:** `?array` — Use this option to add multiple-choice attributes options only if the attribute's category is "normal". **This option is specifically designed for updating multiple-choice attributes. None of the multicategory options can exceed max 200 characters.**. For example: **["USA","INDIA"]**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$value:** `?string` — Value of the attribute to update. **Use only if the attribute's category is 'calculated' or 'global'**
     
 </dd>
 </dl>
@@ -4879,7 +5543,7 @@ await client.contacts.updateAttribute({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">deleteAttribute</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;contacts-&gt;deleteAttribute($attributeCategory, $attributeName)</code></summary>
 <dl>
 <dd>
 
@@ -4891,12 +5555,11 @@ await client.contacts.updateAttribute({
 <dl>
 <dd>
 
-```typescript
-await client.contacts.deleteAttribute({
-    attributeCategory: "normal",
-    attributeName: "attributeName"
-});
-
+```php
+$client->contacts->deleteAttribute(
+    DeleteAttributeRequestAttributeCategory::Normal->value,
+    'attributeName',
+);
 ```
 </dd>
 </dl>
@@ -4911,7 +5574,7 @@ await client.contacts.deleteAttribute({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteAttributeRequest` 
+**$attributeCategory:** `string` — Category of the attribute
     
 </dd>
 </dl>
@@ -4919,7 +5582,7 @@ await client.contacts.deleteAttribute({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**$attributeName:** `string` — Name of the existing attribute
     
 </dd>
 </dl>
@@ -4931,7 +5594,7 @@ await client.contacts.deleteAttribute({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">deleteMultiAttributeOptions</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;contacts-&gt;deleteMultiAttributeOptions($attributeType, $multipleChoiceAttribute, $multipleChoiceAttributeOption)</code></summary>
 <dl>
 <dd>
 
@@ -4943,13 +5606,12 @@ await client.contacts.deleteAttribute({
 <dl>
 <dd>
 
-```typescript
-await client.contacts.deleteMultiAttributeOptions({
-    attributeType: "multiple-choice",
-    multipleChoiceAttribute: "multipleChoiceAttribute",
-    multipleChoiceAttributeOption: "multipleChoiceAttributeOption"
-});
-
+```php
+$client->contacts->deleteMultiAttributeOptions(
+    'multiple-choice',
+    'multipleChoiceAttribute',
+    'multipleChoiceAttributeOption',
+);
 ```
 </dd>
 </dl>
@@ -4964,7 +5626,7 @@ await client.contacts.deleteMultiAttributeOptions({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteMultiAttributeOptionsRequest` 
+**$attributeType:** `string` — Type of the attribute
     
 </dd>
 </dl>
@@ -4972,7 +5634,15 @@ await client.contacts.deleteMultiAttributeOptions({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**$multipleChoiceAttribute:** `string` — Name of the existing multiple-choice attribute
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$multipleChoiceAttributeOption:** `string` — Name of the existing multiple-choice attribute option that you want to delete
     
 </dd>
 </dl>
@@ -4984,7 +5654,7 @@ await client.contacts.deleteMultiAttributeOptions({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">updateBatchContacts</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;contacts-&gt;updateBatchContacts($request)</code></summary>
 <dl>
 <dd>
 
@@ -4996,9 +5666,10 @@ await client.contacts.deleteMultiAttributeOptions({
 <dl>
 <dd>
 
-```typescript
-await client.contacts.updateBatchContacts();
-
+```php
+$client->contacts->updateBatchContacts(
+    new UpdateBatchContactsRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -5013,15 +5684,7 @@ await client.contacts.updateBatchContacts();
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateBatchContactsRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ContactsClient.RequestOptions` 
+**$contacts:** `?array` — List of contacts to be updated
     
 </dd>
 </dl>
@@ -5033,7 +5696,7 @@ await client.contacts.updateBatchContacts();
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">createDoiContact</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;contacts-&gt;createDoiContact($request)</code></summary>
 <dl>
 <dd>
 
@@ -5061,14 +5724,17 @@ attributes param in this endpoint is an object containing key-value pairs where 
 <dl>
 <dd>
 
-```typescript
-await client.contacts.createDoiContact({
-    email: "elly@example.com",
-    includeListIds: [36],
-    redirectionUrl: "http://requestb.in/173lyyx1",
-    templateId: 2
-});
-
+```php
+$client->contacts->createDoiContact(
+    new CreateDoiContactRequest([
+        'email' => 'elly@example.com',
+        'includeListIds' => [
+            36,
+        ],
+        'redirectionUrl' => 'http://requestb.in/173lyyx1',
+        'templateId' => 2,
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -5083,7 +5749,7 @@ await client.contacts.createDoiContact({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateDoiContactRequest` 
+**$attributes:** `?array` — Pass the set of attributes and their values. **These attributes must be present in your Brevo account**. For eg. **{'FNAME':'Elly', 'LNAME':'Roger', 'COUNTRIES': ['India','China']}**
     
 </dd>
 </dl>
@@ -5091,7 +5757,39 @@ await client.contacts.createDoiContact({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**$email:** `string` — Email address where the confirmation email will be sent. This email address will be the identifier for all other contact attributes.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$excludeListIds:** `?array` — Lists under user account where contact should not be added
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$includeListIds:** `array` — Lists under user account where contact should be added
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$redirectionUrl:** `string` — URL of the web page that user will be redirected to after clicking on the double opt in URL. When editing your DOI template you can reference this URL by using the tag **{{ params.DOIurl }}**.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$templateId:** `int` — Id of the Double opt-in (DOI) template
     
 </dd>
 </dl>
@@ -5103,7 +5801,7 @@ await client.contacts.createDoiContact({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">requestContactExport</a>({ ...params }) -> BrevoApi.RequestContactExportResponse</code></summary>
+<details><summary><code>$client-&gt;contacts-&gt;requestContactExport($request) -> RequestContactExportResponse</code></summary>
 <dl>
 <dd>
 
@@ -5129,11 +5827,12 @@ It returns the background process ID which on completion calls the notify URL th
 <dl>
 <dd>
 
-```typescript
-await client.contacts.requestContactExport({
-    customContactFilter: {}
-});
-
+```php
+$client->contacts->requestContactExport(
+    new RequestContactExportRequest([
+        'customContactFilter' => new RequestContactExportRequestCustomContactFilter([]),
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -5148,7 +5847,7 @@ await client.contacts.requestContactExport({
 <dl>
 <dd>
 
-**request:** `BrevoApi.RequestContactExportRequest` 
+**$customContactFilter:** `RequestContactExportRequestCustomContactFilter` — Set the filter for the contacts to be exported.
     
 </dd>
 </dl>
@@ -5156,7 +5855,55 @@ await client.contacts.requestContactExport({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**$disableNotification:** `?bool` — To avoid generating the email notification upon contact export, pass **true**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$exportAttributes:** `?array` — List of all the attributes that you want to export. **These attributes must be present in your contact database. It is required if exportMandatoryAttributes is set false. ** For example: **['fname', 'lname', 'email']**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$exportMandatoryAttributes:** `?bool` — To export mandatory attributes like EMAIL, ADDED_TIME, MODIFIED_TIME
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$exportMetadata:** `?array` — Export metadata of contacts such as _listIds, ADDED_TIME, MODIFIED_TIME.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$exportDateInUtc:** `?bool` — Specifies whether the date fields createdAt, modifiedAt in the exported data should be returned in UTC format.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$exportSubscriptionStatus:** `?array` — Export subscription status of contacts for email & sms marketting. Pass email_marketing to obtain the marketing email subscription status & sms_marketing to retrieve the marketing SMS status of the contact.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$notifyUrl:** `?string` — Webhook that will be called once the export process is finished. For reference, https://help.brevo.com/hc/en-us/articles/360007666479
     
 </dd>
 </dl>
@@ -5168,7 +5915,7 @@ await client.contacts.requestContactExport({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">getFolders</a>({ ...params }) -> BrevoApi.GetFoldersResponse</code></summary>
+<details><summary><code>$client-&gt;contacts-&gt;getFolders($request) -> GetFoldersResponse</code></summary>
 <dl>
 <dd>
 
@@ -5204,9 +5951,10 @@ The uniqueSubscribers field is deprecated
 <dl>
 <dd>
 
-```typescript
-await client.contacts.getFolders();
-
+```php
+$client->contacts->getFolders(
+    new GetFoldersRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -5221,7 +5969,7 @@ await client.contacts.getFolders();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetFoldersRequest` 
+**$limit:** `?int` — Number of documents per page
     
 </dd>
 </dl>
@@ -5229,7 +5977,15 @@ await client.contacts.getFolders();
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**$offset:** `?int` — Index of the first document of the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
     
 </dd>
 </dl>
@@ -5241,7 +5997,7 @@ await client.contacts.getFolders();
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">createFolder</a>({ ...params }) -> BrevoApi.CreateFolderResponse</code></summary>
+<details><summary><code>$client-&gt;contacts-&gt;createFolder($request) -> CreateFolderResponse</code></summary>
 <dl>
 <dd>
 
@@ -5253,9 +6009,10 @@ await client.contacts.getFolders();
 <dl>
 <dd>
 
-```typescript
-await client.contacts.createFolder({});
-
+```php
+$client->contacts->createFolder(
+    new CreateUpdateFolder([]),
+);
 ```
 </dd>
 </dl>
@@ -5270,15 +6027,7 @@ await client.contacts.createFolder({});
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateUpdateFolder` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ContactsClient.RequestOptions` 
+**$request:** `CreateUpdateFolder` 
     
 </dd>
 </dl>
@@ -5290,7 +6039,7 @@ await client.contacts.createFolder({});
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">getFolder</a>({ ...params }) -> BrevoApi.GetFolder</code></summary>
+<details><summary><code>$client-&gt;contacts-&gt;getFolder($folderId) -> GetFolder</code></summary>
 <dl>
 <dd>
 
@@ -5322,11 +6071,10 @@ These are non breaking changes. The default value for the attributes will be 0.
 <dl>
 <dd>
 
-```typescript
-await client.contacts.getFolder({
-    folderId: 1000000
-});
-
+```php
+$client->contacts->getFolder(
+    1000000,
+);
 ```
 </dd>
 </dl>
@@ -5341,15 +6089,7 @@ await client.contacts.getFolder({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetFolderRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ContactsClient.RequestOptions` 
+**$folderId:** `int` — id of the folder
     
 </dd>
 </dl>
@@ -5361,7 +6101,7 @@ await client.contacts.getFolder({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">updateFolder</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;contacts-&gt;updateFolder($folderId, $request)</code></summary>
 <dl>
 <dd>
 
@@ -5373,12 +6113,13 @@ await client.contacts.getFolder({
 <dl>
 <dd>
 
-```typescript
-await client.contacts.updateFolder({
-    folderId: 1000000,
-    body: {}
-});
-
+```php
+$client->contacts->updateFolder(
+    1000000,
+    new UpdateFolderRequest([
+        'body' => new CreateUpdateFolder([]),
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -5393,7 +6134,7 @@ await client.contacts.updateFolder({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateFolderRequest` 
+**$folderId:** `int` — Id of the folder
     
 </dd>
 </dl>
@@ -5401,7 +6142,7 @@ await client.contacts.updateFolder({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**$request:** `CreateUpdateFolder` 
     
 </dd>
 </dl>
@@ -5413,7 +6154,7 @@ await client.contacts.updateFolder({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">deleteFolder</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;contacts-&gt;deleteFolder($folderId)</code></summary>
 <dl>
 <dd>
 
@@ -5425,11 +6166,10 @@ await client.contacts.updateFolder({
 <dl>
 <dd>
 
-```typescript
-await client.contacts.deleteFolder({
-    folderId: 1000000
-});
-
+```php
+$client->contacts->deleteFolder(
+    1000000,
+);
 ```
 </dd>
 </dl>
@@ -5444,15 +6184,7 @@ await client.contacts.deleteFolder({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteFolderRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ContactsClient.RequestOptions` 
+**$folderId:** `int` — Id of the folder
     
 </dd>
 </dl>
@@ -5464,7 +6196,7 @@ await client.contacts.deleteFolder({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">getFolderLists</a>({ ...params }) -> BrevoApi.GetFolderListsResponse</code></summary>
+<details><summary><code>$client-&gt;contacts-&gt;getFolderLists($folderId, $request) -> GetFolderListsResponse</code></summary>
 <dl>
 <dd>
 
@@ -5496,11 +6228,11 @@ These are non breaking changes. The default value for the attributes will be 0.
 <dl>
 <dd>
 
-```typescript
-await client.contacts.getFolderLists({
-    folderId: 1000000
-});
-
+```php
+$client->contacts->getFolderLists(
+    1000000,
+    new GetFolderListsRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -5515,7 +6247,7 @@ await client.contacts.getFolderLists({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetFolderListsRequest` 
+**$folderId:** `int` — Id of the folder
     
 </dd>
 </dl>
@@ -5523,7 +6255,23 @@ await client.contacts.getFolderLists({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**$limit:** `?int` — Number of documents per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$offset:** `?int` — Index of the first document of the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
     
 </dd>
 </dl>
@@ -5535,7 +6283,7 @@ await client.contacts.getFolderLists({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">importContacts</a>({ ...params }) -> BrevoApi.ImportContactsResponse</code></summary>
+<details><summary><code>$client-&gt;contacts-&gt;importContacts($request) -> ImportContactsResponse</code></summary>
 <dl>
 <dd>
 
@@ -5561,9 +6309,10 @@ It returns the background process ID which on completion calls the notify URL th
 <dl>
 <dd>
 
-```typescript
-await client.contacts.importContacts();
-
+```php
+$client->contacts->importContacts(
+    new ImportContactsRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -5578,7 +6327,7 @@ await client.contacts.importContacts();
 <dl>
 <dd>
 
-**request:** `BrevoApi.ImportContactsRequest` 
+**$disableNotification:** `?bool` — To disable email notification
     
 </dd>
 </dl>
@@ -5586,7 +6335,79 @@ await client.contacts.importContacts();
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**$emailBlacklist:** `?bool` — To blacklist all the contacts for email
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$emptyContactsAttributes:** `?bool` — To facilitate the choice to erase any attribute of the existing contacts with empty value. emptyContactsAttributes = true means the empty fields in your import will erase any attribute that currently contain data in Brevo, & emptyContactsAttributes = false means the empty fields will not affect your existing data ( **only available if `updateExistingContacts` set to true **)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$fileBody:** `?string` — **Mandatory if fileUrl and jsonBody is not defined.** CSV content to be imported. Use semicolon to separate multiple attributes. **Maximum allowed file body size is 10MB** . However we recommend a safe limit of around 8 MB to avoid the issues caused due to increase of file body size while parsing. Please use fileUrl instead to import bigger files.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$fileUrl:** `?string` — **Mandatory if fileBody and jsonBody is not defined.** URL of the file to be imported (**no local file**). Possible file formats: #### .txt, .csv, .json
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$jsonBody:** `?array` — **Mandatory if fileUrl and fileBody is not defined.** JSON content to be imported. **Maximum allowed json body size is 10MB** . However we recommend a safe limit of around 8 MB to avoid the issues caused due to increase of json body size while parsing. Please use fileUrl instead to import bigger files.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$listIds:** `?array` — **Mandatory if newList is not defined.** Ids of the lists in which the contacts shall be imported. For example, **[2, 4, 7]**.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$newList:** `?ImportContactsRequestNewList` — To create a new list and import the contacts into it, pass the listName and an optional folderId.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$notifyUrl:** `?string` — URL that will be called once the import process is finished. For reference, https://help.brevo.com/hc/en-us/articles/360007666479
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$smsBlacklist:** `?bool` — To blacklist all the contacts for sms
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$updateExistingContacts:** `?bool` — To facilitate the choice to update the existing contacts
     
 </dd>
 </dl>
@@ -5598,7 +6419,7 @@ await client.contacts.importContacts();
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">getLists</a>({ ...params }) -> BrevoApi.GetListsResponse</code></summary>
+<details><summary><code>$client-&gt;contacts-&gt;getLists($request) -> GetListsResponse</code></summary>
 <dl>
 <dd>
 
@@ -5630,9 +6451,10 @@ These are non breaking changes. The default value for the attributes will be 0.
 <dl>
 <dd>
 
-```typescript
-await client.contacts.getLists();
-
+```php
+$client->contacts->getLists(
+    new GetListsRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -5647,7 +6469,7 @@ await client.contacts.getLists();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetListsRequest` 
+**$limit:** `?int` — Number of documents per page
     
 </dd>
 </dl>
@@ -5655,7 +6477,15 @@ await client.contacts.getLists();
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**$offset:** `?int` — Index of the first document of the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
     
 </dd>
 </dl>
@@ -5667,7 +6497,7 @@ await client.contacts.getLists();
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">createList</a>({ ...params }) -> BrevoApi.CreateListResponse</code></summary>
+<details><summary><code>$client-&gt;contacts-&gt;createList($request) -> CreateListResponse</code></summary>
 <dl>
 <dd>
 
@@ -5679,12 +6509,13 @@ await client.contacts.getLists();
 <dl>
 <dd>
 
-```typescript
-await client.contacts.createList({
-    folderId: 2,
-    name: "Magento Customer - ES"
-});
-
+```php
+$client->contacts->createList(
+    new CreateListRequest([
+        'folderId' => 2,
+        'name' => 'Magento Customer - ES',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -5699,7 +6530,7 @@ await client.contacts.createList({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateListRequest` 
+**$folderId:** `int` — Id of the parent folder in which this list is to be created
     
 </dd>
 </dl>
@@ -5707,7 +6538,7 @@ await client.contacts.createList({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**$name:** `string` — Name of the list
     
 </dd>
 </dl>
@@ -5719,7 +6550,7 @@ await client.contacts.createList({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">getList</a>({ ...params }) -> BrevoApi.GetListResponse</code></summary>
+<details><summary><code>$client-&gt;contacts-&gt;getList($listId, $request) -> GetListResponse</code></summary>
 <dl>
 <dd>
 
@@ -5731,11 +6562,11 @@ await client.contacts.createList({
 <dl>
 <dd>
 
-```typescript
-await client.contacts.getList({
-    listId: 1000000
-});
-
+```php
+$client->contacts->getList(
+    1000000,
+    new GetListRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -5750,7 +6581,7 @@ await client.contacts.getList({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetListRequest` 
+**$listId:** `int` — Id of the list
     
 </dd>
 </dl>
@@ -5758,7 +6589,15 @@ await client.contacts.getList({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**$startDate:** `?string` — **Mandatory if endDate is used**. Ending (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to aggregate the sent email campaigns for a specific list id. **Prefer to pass your timezone in date-time format for accurate result**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$endDate:** `?string` — **Mandatory if startDate is used**. Ending (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to aggregate the sent email campaigns for a specific list id. **Prefer to pass your timezone in date-time format for accurate result**
     
 </dd>
 </dl>
@@ -5770,7 +6609,7 @@ await client.contacts.getList({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">updateList</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;contacts-&gt;updateList($listId, $request)</code></summary>
 <dl>
 <dd>
 
@@ -5782,11 +6621,11 @@ await client.contacts.getList({
 <dl>
 <dd>
 
-```typescript
-await client.contacts.updateList({
-    listId: 1000000
-});
-
+```php
+$client->contacts->updateList(
+    1000000,
+    new UpdateListRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -5801,7 +6640,7 @@ await client.contacts.updateList({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateListRequest` 
+**$listId:** `int` — Id of the list
     
 </dd>
 </dl>
@@ -5809,7 +6648,15 @@ await client.contacts.updateList({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**$folderId:** `?int` — Id of the folder in which the list is to be moved. Either of the two parameters (name, folderId) can be updated at a time.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$name:** `?string` — Name of the list. Either of the two parameters (name, folderId) can be updated at a time.
     
 </dd>
 </dl>
@@ -5821,7 +6668,7 @@ await client.contacts.updateList({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">deleteList</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;contacts-&gt;deleteList($listId)</code></summary>
 <dl>
 <dd>
 
@@ -5833,11 +6680,10 @@ await client.contacts.updateList({
 <dl>
 <dd>
 
-```typescript
-await client.contacts.deleteList({
-    listId: 1000000
-});
-
+```php
+$client->contacts->deleteList(
+    1000000,
+);
 ```
 </dd>
 </dl>
@@ -5852,15 +6698,7 @@ await client.contacts.deleteList({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteListRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ContactsClient.RequestOptions` 
+**$listId:** `int` — Id of the list
     
 </dd>
 </dl>
@@ -5872,7 +6710,7 @@ await client.contacts.deleteList({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">getContactsFromList</a>({ ...params }) -> BrevoApi.GetContacts</code></summary>
+<details><summary><code>$client-&gt;contacts-&gt;getContactsFromList($listId, $request) -> GetContacts</code></summary>
 <dl>
 <dd>
 
@@ -5884,11 +6722,11 @@ await client.contacts.deleteList({
 <dl>
 <dd>
 
-```typescript
-await client.contacts.getContactsFromList({
-    listId: 1000000
-});
-
+```php
+$client->contacts->getContactsFromList(
+    1000000,
+    new GetContactsFromListRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -5903,7 +6741,7 @@ await client.contacts.getContactsFromList({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetContactsFromListRequest` 
+**$listId:** `int` — Id of the list
     
 </dd>
 </dl>
@@ -5911,7 +6749,31 @@ await client.contacts.getContactsFromList({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**$modifiedSince:** `?string` — Filter (urlencoded) the contacts modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$limit:** `?int` — Number of documents per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$offset:** `?int` — Index of the first document of the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
     
 </dd>
 </dl>
@@ -5923,7 +6785,7 @@ await client.contacts.getContactsFromList({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">addContactToList</a>({ ...params }) -> BrevoApi.PostContactInfo</code></summary>
+<details><summary><code>$client-&gt;contacts-&gt;addContactToList($listId, $request) -> PostContactInfo</code></summary>
 <dl>
 <dd>
 
@@ -5935,14 +6797,18 @@ await client.contacts.getContactsFromList({
 <dl>
 <dd>
 
-```typescript
-await client.contacts.addContactToList({
-    listId: 1000000,
-    body: {
-        emails: ["jeff32@example.com", "jim56@example.com"]
-    }
-});
-
+```php
+$client->contacts->addContactToList(
+    1000000,
+    new AddContactToListRequest([
+        'body' => new AddContactToListRequestBodyEmails([
+            'emails' => [
+                'jeff32@example.com',
+                'jim56@example.com',
+            ],
+        ]),
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -5957,7 +6823,7 @@ await client.contacts.addContactToList({
 <dl>
 <dd>
 
-**request:** `BrevoApi.AddContactToListRequest` 
+**$listId:** `int` — Id of the list
     
 </dd>
 </dl>
@@ -5965,7 +6831,7 @@ await client.contacts.addContactToList({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**$request:** `AddContactToListRequestBodyEmails|AddContactToListRequestBodyIds|AddContactToListRequestBodyExtIds` 
     
 </dd>
 </dl>
@@ -5977,7 +6843,7 @@ await client.contacts.addContactToList({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">removeContactFromList</a>({ ...params }) -> BrevoApi.PostContactInfo</code></summary>
+<details><summary><code>$client-&gt;contacts-&gt;removeContactFromList($listId, $request) -> PostContactInfo</code></summary>
 <dl>
 <dd>
 
@@ -5989,14 +6855,13 @@ await client.contacts.addContactToList({
 <dl>
 <dd>
 
-```typescript
-await client.contacts.removeContactFromList({
-    listId: 1000000,
-    body: {
-        all: true
-    }
-});
-
+```php
+$client->contacts->removeContactFromList(
+    1000000,
+    new RemoveContactFromListRequest([
+        'body' => new RemoveContactFromListRequestBodyEmails([]),
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -6011,7 +6876,7 @@ await client.contacts.removeContactFromList({
 <dl>
 <dd>
 
-**request:** `BrevoApi.RemoveContactFromListRequest` 
+**$listId:** `int` — Id of the list
     
 </dd>
 </dl>
@@ -6019,7 +6884,7 @@ await client.contacts.removeContactFromList({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**$request:** `RemoveContactFromListRequestBodyEmails|RemoveContactFromListRequestBodyIds|RemoveContactFromListRequestBodyAll|RemoveContactFromListRequestBodyExtIds` 
     
 </dd>
 </dl>
@@ -6031,7 +6896,7 @@ await client.contacts.removeContactFromList({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">getSegments</a>({ ...params }) -> BrevoApi.GetSegmentsResponse</code></summary>
+<details><summary><code>$client-&gt;contacts-&gt;getSegments($request) -> GetSegmentsResponse</code></summary>
 <dl>
 <dd>
 
@@ -6043,9 +6908,10 @@ await client.contacts.removeContactFromList({
 <dl>
 <dd>
 
-```typescript
-await client.contacts.getSegments();
-
+```php
+$client->contacts->getSegments(
+    new GetSegmentsRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -6060,7 +6926,7 @@ await client.contacts.getSegments();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetSegmentsRequest` 
+**$limit:** `?int` — Number of documents per page
     
 </dd>
 </dl>
@@ -6068,7 +6934,15 @@ await client.contacts.getSegments();
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**$offset:** `?int` — Index of the first document of the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
     
 </dd>
 </dl>
@@ -6080,7 +6954,7 @@ await client.contacts.getSegments();
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">getContactInfo</a>({ ...params }) -> BrevoApi.GetContactInfoResponse</code></summary>
+<details><summary><code>$client-&gt;contacts-&gt;getContactInfo($identifier, $request) -> GetContactInfoResponse</code></summary>
 <dl>
 <dd>
 
@@ -6114,11 +6988,11 @@ There are 2 ways to get a contact <br><br> Option 1- https://api.brevo.com/v3/co
 <dl>
 <dd>
 
-```typescript
-await client.contacts.getContactInfo({
-    identifier: "identifier"
-});
-
+```php
+$client->contacts->getContactInfo(
+    'identifier',
+    new GetContactInfoRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -6133,7 +7007,7 @@ await client.contacts.getContactInfo({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetContactInfoRequest` 
+**$identifier:** `string|int` — Email (urlencoded) OR ID of the contact OR its SMS attribute value OR EXT_ID attribute (urlencoded)
     
 </dd>
 </dl>
@@ -6141,7 +7015,23 @@ await client.contacts.getContactInfo({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**$identifierType:** `?string` — email_id for Email, phone_id for SMS attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$startDate:** `?string` — **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be lower than equal to endDate
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$endDate:** `?string` — **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be greater than equal to startDate.
     
 </dd>
 </dl>
@@ -6153,7 +7043,7 @@ await client.contacts.getContactInfo({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">updateContact</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;contacts-&gt;updateContact($identifier, $request)</code></summary>
 <dl>
 <dd>
 
@@ -6179,11 +7069,11 @@ There are 2 ways to update a contact <br><br> Option 1- https://api.brevo.com/v3
 <dl>
 <dd>
 
-```typescript
-await client.contacts.updateContact({
-    identifier: "identifier"
-});
-
+```php
+$client->contacts->updateContact(
+    'identifier',
+    new UpdateContactRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -6198,7 +7088,7 @@ await client.contacts.updateContact({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateContactRequest` 
+**$identifier:** `string|int` — Email (urlencoded) OR ID of the contact OR EXT_ID attribute (urlencoded) OR its SMS attribute value OR its WHATSAPP attribute value OR its LANDLINE attribute value
     
 </dd>
 </dl>
@@ -6206,7 +7096,63 @@ await client.contacts.updateContact({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**$identifierType:** `?string` — email_id for Email, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE attribute
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$attributes:** `?array` — Pass the set of attributes to be updated. **These attributes must be present in your account**. To update existing email address of a contact with the new one please pass EMAIL in attributes. For example, **{ "EMAIL":"newemail@domain.com", "FNAME":"Ellie", "LNAME":"Roger", "COUNTRIES":["India","China"]}**. The attribute's parameter should be passed in capital letter while updating a contact. Values that don't match the attribute type (e.g. text or string in a date attribute) will be ignored .Keep in mind transactional attributes can be updated the same way as normal attributes. Mobile Number in **SMS** field should be passed with proper country code. For example: **{"SMS":"+91xxxxxxxxxx"} or {"SMS":"0091xxxxxxxxxx"}**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$emailBlacklisted:** `?bool` — Set/unset this field to blacklist/allow the contact for emails (emailBlacklisted = true)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$extId:** `?string` — Pass your own Id to update ext_id of a contact.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$listIds:** `?array` — Ids of the lists to add the contact to
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$smsBlacklisted:** `?bool` — Set/unset this field to blacklist/allow the contact for SMS (smsBlacklisted = true)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$smtpBlacklistSender:** `?array` — transactional email forbidden sender for contact. Use only for email Contact
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$unlinkListIds:** `?array` — Ids of the lists to remove the contact from
     
 </dd>
 </dl>
@@ -6218,7 +7164,7 @@ await client.contacts.updateContact({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">deleteContact</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;contacts-&gt;deleteContact($identifier, $request)</code></summary>
 <dl>
 <dd>
 
@@ -6244,11 +7190,11 @@ There are 2 ways to delete a contact <br><br> Option 1- https://api.brevo.com/v3
 <dl>
 <dd>
 
-```typescript
-await client.contacts.deleteContact({
-    identifier: "identifier"
-});
-
+```php
+$client->contacts->deleteContact(
+    'identifier',
+    new DeleteContactRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -6263,7 +7209,7 @@ await client.contacts.deleteContact({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteContactRequest` 
+**$identifier:** `string|int` — Email (urlencoded) OR ID of the contact OR EXT_ID attribute (urlencoded)
     
 </dd>
 </dl>
@@ -6271,7 +7217,7 @@ await client.contacts.deleteContact({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**$identifierType:** `?string` — email_id for Email, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute
     
 </dd>
 </dl>
@@ -6283,7 +7229,7 @@ await client.contacts.deleteContact({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">getContactStats</a>({ ...params }) -> BrevoApi.GetContactStatsResponse</code></summary>
+<details><summary><code>$client-&gt;contacts-&gt;getContactStats($identifier, $request) -> GetContactStatsResponse</code></summary>
 <dl>
 <dd>
 
@@ -6295,11 +7241,11 @@ await client.contacts.deleteContact({
 <dl>
 <dd>
 
-```typescript
-await client.contacts.getContactStats({
-    identifier: "identifier"
-});
-
+```php
+$client->contacts->getContactStats(
+    'identifier',
+    new GetContactStatsRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -6314,7 +7260,7 @@ await client.contacts.getContactStats({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetContactStatsRequest` 
+**$identifier:** `string|int` — Email (urlencoded) OR ID of the contact
     
 </dd>
 </dl>
@@ -6322,7 +7268,15 @@ await client.contacts.getContactStats({
 <dl>
 <dd>
 
-**requestOptions:** `ContactsClient.RequestOptions` 
+**$startDate:** `?string` — **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be lower than equal to endDate
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$endDate:** `?string` — **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be greater than equal to startDate. Maximum difference between startDate and endDate should not be greater than 90 days
     
 </dd>
 </dl>
@@ -6335,7 +7289,7 @@ await client.contacts.getContactStats({
 </details>
 
 ## Conversations
-<details><summary><code>client.conversations.<a href="/src/api/resources/conversations/client/Client.ts">setsAgentsStatusToOnlineFor23Minutes</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;conversations-&gt;setsAgentsStatusToOnlineFor23Minutes($request)</code></summary>
 <dl>
 <dd>
 
@@ -6361,11 +7315,12 @@ We recommend pinging this endpoint every minute for as long as the agent has to 
 <dl>
 <dd>
 
-```typescript
-await client.conversations.setsAgentsStatusToOnlineFor23Minutes({
-    agentId: "d9nKoegKSjmCtyK78"
-});
-
+```php
+$client->conversations->setsAgentsStatusToOnlineFor23Minutes(
+    new PostConversationsAgentOnlinePingRequest([
+        'agentId' => "d9nKoegKSjmCtyK78",
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -6380,7 +7335,7 @@ await client.conversations.setsAgentsStatusToOnlineFor23Minutes({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostConversationsAgentOnlinePingRequest` 
+**$agentEmail:** `mixed` — agent email. When sending online pings from a standalone system, it’s hard to maintain a 1-to-1 relationship between the users of both systems. In this case, an agent can be specified by their email address. If there’s no agent with the specified email address in your Brevo organization, a dummy agent will be created automatically.
     
 </dd>
 </dl>
@@ -6388,7 +7343,23 @@ await client.conversations.setsAgentsStatusToOnlineFor23Minutes({
 <dl>
 <dd>
 
-**requestOptions:** `ConversationsClient.RequestOptions` 
+**$agentId:** `mixed` — agent ID. It can be found on agent’s page or received <a href="https://developers.brevo.com/docs/conversations-webhooks">from a webhook</a>. Alternatively, you can use `agentEmail` + `agentName` + `receivedFrom` instead (all 3 fields required).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$agentName:** `mixed` — agent name
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$receivedFrom:** `mixed` — mark your messages to distinguish messages created by you from the others.
     
 </dd>
 </dl>
@@ -6400,7 +7371,7 @@ await client.conversations.setsAgentsStatusToOnlineFor23Minutes({
 </dl>
 </details>
 
-<details><summary><code>client.conversations.<a href="/src/api/resources/conversations/client/Client.ts">sendAMessageAsAnAgent</a>({ ...params }) -> BrevoApi.ConversationsMessage</code></summary>
+<details><summary><code>$client-&gt;conversations-&gt;sendAMessageAsAnAgent($request) -> ConversationsMessage</code></summary>
 <dl>
 <dd>
 
@@ -6412,13 +7383,14 @@ await client.conversations.setsAgentsStatusToOnlineFor23Minutes({
 <dl>
 <dd>
 
-```typescript
-await client.conversations.sendAMessageAsAnAgent({
-    agentId: "d9nKoegKSjmCtyK78",
-    text: "Hello! How can I help you?",
-    visitorId: "kZMvWhf8npAu3H6qd57w2Hv6nh6rnxvg"
-});
-
+```php
+$client->conversations->sendAMessageAsAnAgent(
+    new PostConversationsMessagesRequest([
+        'agentId' => "d9nKoegKSjmCtyK78",
+        'text' => "Hello! How can I help you?",
+        'visitorId' => "kZMvWhf8npAu3H6qd57w2Hv6nh6rnxvg",
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -6433,7 +7405,7 @@ await client.conversations.sendAMessageAsAnAgent({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostConversationsMessagesRequest` 
+**$agentEmail:** `mixed` — agent email. When sending messages from a standalone system, it’s hard to maintain a 1-to-1 relationship between the users of both systems. In this case, an agent can be specified by their email address.
     
 </dd>
 </dl>
@@ -6441,7 +7413,39 @@ await client.conversations.sendAMessageAsAnAgent({
 <dl>
 <dd>
 
-**requestOptions:** `ConversationsClient.RequestOptions` 
+**$agentId:** `mixed` — agent ID. It can be found on agent’s page or received <a href="https://developers.brevo.com/docs/conversations-webhooks">from a webhook</a>. Alternatively, you can use `agentEmail` + `agentName` + `receivedFrom` instead (all 3 fields required).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$agentName:** `mixed` — agent name
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$receivedFrom:** `mixed` — mark your messages to distinguish messages created by you from the others.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$text:** `mixed` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$visitorId:** `mixed` 
     
 </dd>
 </dl>
@@ -6453,7 +7457,7 @@ await client.conversations.sendAMessageAsAnAgent({
 </dl>
 </details>
 
-<details><summary><code>client.conversations.<a href="/src/api/resources/conversations/client/Client.ts">getAMessage</a>({ ...params }) -> BrevoApi.ConversationsMessage</code></summary>
+<details><summary><code>$client-&gt;conversations-&gt;getAMessage($id) -> ConversationsMessage</code></summary>
 <dl>
 <dd>
 
@@ -6465,11 +7469,10 @@ await client.conversations.sendAMessageAsAnAgent({
 <dl>
 <dd>
 
-```typescript
-await client.conversations.getAMessage({
-    id: "id"
-});
-
+```php
+$client->conversations->getAMessage(
+    'id',
+);
 ```
 </dd>
 </dl>
@@ -6484,15 +7487,7 @@ await client.conversations.getAMessage({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetConversationsMessagesIdRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ConversationsClient.RequestOptions` 
+**$id:** `string` — ID of the message
     
 </dd>
 </dl>
@@ -6504,7 +7499,7 @@ await client.conversations.getAMessage({
 </dl>
 </details>
 
-<details><summary><code>client.conversations.<a href="/src/api/resources/conversations/client/Client.ts">updateAMessageSentByAnAgent</a>({ ...params }) -> BrevoApi.ConversationsMessage</code></summary>
+<details><summary><code>$client-&gt;conversations-&gt;updateAMessageSentByAnAgent($id, $request) -> ConversationsMessage</code></summary>
 <dl>
 <dd>
 
@@ -6530,12 +7525,13 @@ Only agents’ messages can be edited.
 <dl>
 <dd>
 
-```typescript
-await client.conversations.updateAMessageSentByAnAgent({
-    id: "id",
-    text: "Good morning! How can I help you?"
-});
-
+```php
+$client->conversations->updateAMessageSentByAnAgent(
+    'id',
+    new PutConversationsMessagesIdRequest([
+        'text' => 'Good morning! How can I help you?',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -6550,7 +7546,7 @@ await client.conversations.updateAMessageSentByAnAgent({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PutConversationsMessagesIdRequest` 
+**$id:** `string` — ID of the message
     
 </dd>
 </dl>
@@ -6558,7 +7554,7 @@ await client.conversations.updateAMessageSentByAnAgent({
 <dl>
 <dd>
 
-**requestOptions:** `ConversationsClient.RequestOptions` 
+**$text:** `string` — edited message text
     
 </dd>
 </dl>
@@ -6570,7 +7566,7 @@ await client.conversations.updateAMessageSentByAnAgent({
 </dl>
 </details>
 
-<details><summary><code>client.conversations.<a href="/src/api/resources/conversations/client/Client.ts">deleteAMessageSentByAnAgent</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;conversations-&gt;deleteAMessageSentByAnAgent($id)</code></summary>
 <dl>
 <dd>
 
@@ -6596,11 +7592,10 @@ Only agents’ messages can be deleted.
 <dl>
 <dd>
 
-```typescript
-await client.conversations.deleteAMessageSentByAnAgent({
-    id: "id"
-});
-
+```php
+$client->conversations->deleteAMessageSentByAnAgent(
+    'id',
+);
 ```
 </dd>
 </dl>
@@ -6615,15 +7610,7 @@ await client.conversations.deleteAMessageSentByAnAgent({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteConversationsMessagesIdRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ConversationsClient.RequestOptions` 
+**$id:** `string` — ID of the message
     
 </dd>
 </dl>
@@ -6635,7 +7622,7 @@ await client.conversations.deleteAMessageSentByAnAgent({
 </dl>
 </details>
 
-<details><summary><code>client.conversations.<a href="/src/api/resources/conversations/client/Client.ts">sendAnAutomatedMessageToAVisitor</a>({ ...params }) -> BrevoApi.ConversationsMessage</code></summary>
+<details><summary><code>$client-&gt;conversations-&gt;sendAnAutomatedMessageToAVisitor($request) -> ConversationsMessage</code></summary>
 <dl>
 <dd>
 
@@ -6661,13 +7648,14 @@ Example of automated messages: order status, announce new features in your web a
 <dl>
 <dd>
 
-```typescript
-await client.conversations.sendAnAutomatedMessageToAVisitor({
-    groupId: "PjRBMhWGen6aRHjif",
-    text: "Your order has shipped! Here\u2019s your tracking number: 9114 5847 3325 9667 4328 88",
-    visitorId: "kZMvWhf8npAu3H6qd57w2Hv6nh6rnxvg"
-});
-
+```php
+$client->conversations->sendAnAutomatedMessageToAVisitor(
+    new PostConversationsPushedMessagesRequest([
+        'groupId' => "PjRBMhWGen6aRHjif",
+        'text' => "Your order has shipped! Here’s your tracking number: 9114 5847 3325 9667 4328 88",
+        'visitorId' => "kZMvWhf8npAu3H6qd57w2Hv6nh6rnxvg",
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -6682,7 +7670,7 @@ await client.conversations.sendAnAutomatedMessageToAVisitor({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostConversationsPushedMessagesRequest` 
+**$agentId:** `mixed` — agent ID. It can be found on agent’s page or received <a href="https://developers.brevo.com/docs/conversations-webhooks">from a webhook</a>.
     
 </dd>
 </dl>
@@ -6690,7 +7678,23 @@ await client.conversations.sendAnAutomatedMessageToAVisitor({
 <dl>
 <dd>
 
-**requestOptions:** `ConversationsClient.RequestOptions` 
+**$groupId:** `mixed` — group ID. It can be found on group’s page.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$text:** `mixed` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$visitorId:** `mixed` 
     
 </dd>
 </dl>
@@ -6702,7 +7706,7 @@ await client.conversations.sendAnAutomatedMessageToAVisitor({
 </dl>
 </details>
 
-<details><summary><code>client.conversations.<a href="/src/api/resources/conversations/client/Client.ts">getAnAutomatedMessage</a>({ ...params }) -> BrevoApi.ConversationsMessage</code></summary>
+<details><summary><code>$client-&gt;conversations-&gt;getAnAutomatedMessage($id) -> ConversationsMessage</code></summary>
 <dl>
 <dd>
 
@@ -6714,11 +7718,10 @@ await client.conversations.sendAnAutomatedMessageToAVisitor({
 <dl>
 <dd>
 
-```typescript
-await client.conversations.getAnAutomatedMessage({
-    id: "id"
-});
-
+```php
+$client->conversations->getAnAutomatedMessage(
+    'id',
+);
 ```
 </dd>
 </dl>
@@ -6733,15 +7736,7 @@ await client.conversations.getAnAutomatedMessage({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetConversationsPushedMessagesIdRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ConversationsClient.RequestOptions` 
+**$id:** `string` — ID of the message sent previously
     
 </dd>
 </dl>
@@ -6753,7 +7748,7 @@ await client.conversations.getAnAutomatedMessage({
 </dl>
 </details>
 
-<details><summary><code>client.conversations.<a href="/src/api/resources/conversations/client/Client.ts">updateAnAutomatedMessage</a>({ ...params }) -> BrevoApi.ConversationsMessage</code></summary>
+<details><summary><code>$client-&gt;conversations-&gt;updateAnAutomatedMessage($id, $request) -> ConversationsMessage</code></summary>
 <dl>
 <dd>
 
@@ -6765,12 +7760,13 @@ await client.conversations.getAnAutomatedMessage({
 <dl>
 <dd>
 
-```typescript
-await client.conversations.updateAnAutomatedMessage({
-    id: "id",
-    text: "Your order has shipped! Here\u2019s your tracking number: 9114 5847 4668 7775 9233 54"
-});
-
+```php
+$client->conversations->updateAnAutomatedMessage(
+    'id',
+    new PutConversationsPushedMessagesIdRequest([
+        'text' => 'Your order has shipped! Here’s your tracking number: 9114 5847 4668 7775 9233 54',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -6785,7 +7781,7 @@ await client.conversations.updateAnAutomatedMessage({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PutConversationsPushedMessagesIdRequest` 
+**$id:** `string` — ID of the message
     
 </dd>
 </dl>
@@ -6793,7 +7789,7 @@ await client.conversations.updateAnAutomatedMessage({
 <dl>
 <dd>
 
-**requestOptions:** `ConversationsClient.RequestOptions` 
+**$text:** `string` — edited message text
     
 </dd>
 </dl>
@@ -6805,7 +7801,7 @@ await client.conversations.updateAnAutomatedMessage({
 </dl>
 </details>
 
-<details><summary><code>client.conversations.<a href="/src/api/resources/conversations/client/Client.ts">deleteAnAutomatedMessage</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;conversations-&gt;deleteAnAutomatedMessage($id)</code></summary>
 <dl>
 <dd>
 
@@ -6817,11 +7813,10 @@ await client.conversations.updateAnAutomatedMessage({
 <dl>
 <dd>
 
-```typescript
-await client.conversations.deleteAnAutomatedMessage({
-    id: "id"
-});
-
+```php
+$client->conversations->deleteAnAutomatedMessage(
+    'id',
+);
 ```
 </dd>
 </dl>
@@ -6836,15 +7831,7 @@ await client.conversations.deleteAnAutomatedMessage({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteConversationsPushedMessagesIdRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ConversationsClient.RequestOptions` 
+**$id:** `string` — ID of the message
     
 </dd>
 </dl>
@@ -6856,7 +7843,7 @@ await client.conversations.deleteAnAutomatedMessage({
 </dl>
 </details>
 
-<details><summary><code>client.conversations.<a href="/src/api/resources/conversations/client/Client.ts">setVisitorGroupAssignment</a>({ ...params }) -> BrevoApi.PutConversationsVisitorGroupResponse</code></summary>
+<details><summary><code>$client-&gt;conversations-&gt;setVisitorGroupAssignment($request) -> PutConversationsVisitorGroupResponse</code></summary>
 <dl>
 <dd>
 
@@ -6882,11 +7869,12 @@ Assigns a visitor to a specific agent group or removes them from their current g
 <dl>
 <dd>
 
-```typescript
-await client.conversations.setVisitorGroupAssignment({
-    groupId: "PjRBMhWGen6aRHjif"
-});
-
+```php
+$client->conversations->setVisitorGroupAssignment(
+    new PutConversationsVisitorGroupRequest([
+        'groupId' => "PjRBMhWGen6aRHjif",
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -6901,15 +7889,7 @@ await client.conversations.setVisitorGroupAssignment({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PutConversationsVisitorGroupRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ConversationsClient.RequestOptions` 
+**$groupId:** `mixed` 
     
 </dd>
 </dl>
@@ -6922,7 +7902,7 @@ await client.conversations.setVisitorGroupAssignment({
 </details>
 
 ## Ecommerce
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">getCategories</a>({ ...params }) -> BrevoApi.GetCategoriesResponse</code></summary>
+<details><summary><code>$client-&gt;ecommerce-&gt;getCategories($request) -> GetCategoriesResponse</code></summary>
 <dl>
 <dd>
 
@@ -6934,9 +7914,10 @@ await client.conversations.setVisitorGroupAssignment({
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.getCategories();
-
+```php
+$client->ecommerce->getCategories(
+    new GetCategoriesRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -6951,7 +7932,7 @@ await client.ecommerce.getCategories();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCategoriesRequest` 
+**$limit:** `?int` — Number of documents per page
     
 </dd>
 </dl>
@@ -6959,7 +7940,55 @@ await client.ecommerce.getCategories();
 <dl>
 <dd>
 
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**$offset:** `?int` — Index of the first document in the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$ids:** `?string` — Filter by category ids
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$name:** `?string` — Filter by category name
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$modifiedSince:** `?string` — Filter (urlencoded) the categories modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$createdSince:** `?string` — Filter (urlencoded) the categories created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$isDeleted:** `?string` — Filter categories by their deletion status. If `false` is passed, only categories that are not deleted will be returned.
     
 </dd>
 </dl>
@@ -6971,7 +8000,7 @@ await client.ecommerce.getCategories();
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">createUpdateCategory</a>({ ...params }) -> BrevoApi.CreateUpdateCategoryResponse</code></summary>
+<details><summary><code>$client-&gt;ecommerce-&gt;createUpdateCategory($request) -> CreateUpdateCategoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -6983,11 +8012,12 @@ await client.ecommerce.getCategories();
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.createUpdateCategory({
-    id: "CAT123"
-});
-
+```php
+$client->ecommerce->createUpdateCategory(
+    new CreateUpdateCategoryRequest([
+        'id' => 'CAT123',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -7002,7 +8032,7 @@ await client.ecommerce.createUpdateCategory({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateUpdateCategoryRequest` 
+**$deletedAt:** `?string` — UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) of the category deleted from the shop's database
     
 </dd>
 </dl>
@@ -7010,7 +8040,39 @@ await client.ecommerce.createUpdateCategory({
 <dl>
 <dd>
 
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**$id:** `string` — Unique Category ID as saved in the shop
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$isDeleted:** `?bool` — category deleted from the shop's database
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$name:** `?string` — **Mandatory in case of creation**. Name of the Category, as displayed in the shop
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$updateEnabled:** `?bool` — Facilitate to update the existing category in the same request (updateEnabled = true)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$url:** `?string` — URL to the category
     
 </dd>
 </dl>
@@ -7022,7 +8084,7 @@ await client.ecommerce.createUpdateCategory({
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">createUpdateBatchCategory</a>({ ...params }) -> BrevoApi.CreateUpdateBatchCategoryResponse</code></summary>
+<details><summary><code>$client-&gt;ecommerce-&gt;createUpdateBatchCategory($request) -> CreateUpdateBatchCategoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -7034,13 +8096,16 @@ await client.ecommerce.createUpdateCategory({
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.createUpdateBatchCategory({
-    categories: [{
-            id: "CAT123"
-        }]
-});
-
+```php
+$client->ecommerce->createUpdateBatchCategory(
+    new CreateUpdateBatchCategoryRequest([
+        'categories' => [
+            new CreateUpdateBatchCategoryRequestCategoriesItem([
+                'id' => 'CAT123',
+            ]),
+        ],
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -7055,7 +8120,7 @@ await client.ecommerce.createUpdateBatchCategory({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateUpdateBatchCategoryRequest` 
+**$categories:** `array` — array of categories objects
     
 </dd>
 </dl>
@@ -7063,7 +8128,7 @@ await client.ecommerce.createUpdateBatchCategory({
 <dl>
 <dd>
 
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**$updateEnabled:** `?bool` — Facilitate to update the existing categories in the same request (updateEnabled = true)
     
 </dd>
 </dl>
@@ -7075,7 +8140,7 @@ await client.ecommerce.createUpdateBatchCategory({
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">getCategoryInfo</a>({ ...params }) -> BrevoApi.GetCategoryDetails</code></summary>
+<details><summary><code>$client-&gt;ecommerce-&gt;getCategoryInfo($id) -> GetCategoryDetails</code></summary>
 <dl>
 <dd>
 
@@ -7087,11 +8152,10 @@ await client.ecommerce.createUpdateBatchCategory({
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.getCategoryInfo({
-    id: "id"
-});
-
+```php
+$client->ecommerce->getCategoryInfo(
+    'id',
+);
 ```
 </dd>
 </dl>
@@ -7106,15 +8170,7 @@ await client.ecommerce.getCategoryInfo({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCategoryInfoRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**$id:** `string` — Category ID
     
 </dd>
 </dl>
@@ -7126,7 +8182,7 @@ await client.ecommerce.getCategoryInfo({
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">activateTheECommerceApp</a>() -> void</code></summary>
+<details><summary><code>$client-&gt;ecommerce-&gt;activateTheECommerceApp()</code></summary>
 <dl>
 <dd>
 
@@ -7152,25 +8208,9 @@ Getting access to Brevo eCommerce.
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.activateTheECommerceApp();
-
+```php
+$client->ecommerce->activateTheECommerceApp();
 ```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `EcommerceClient.RequestOptions` 
-    
 </dd>
 </dl>
 </dd>
@@ -7181,7 +8221,7 @@ await client.ecommerce.activateTheECommerceApp();
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">getAttributionMetricsForOneOrMoreBrevoCampaignsOrWorkflows</a>({ ...params }) -> BrevoApi.GetEcommerceAttributionMetricsResponse</code></summary>
+<details><summary><code>$client-&gt;ecommerce-&gt;getAttributionMetricsForOneOrMoreBrevoCampaignsOrWorkflows($request) -> GetEcommerceAttributionMetricsResponse</code></summary>
 <dl>
 <dd>
 
@@ -7193,12 +8233,13 @@ await client.ecommerce.activateTheECommerceApp();
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.getAttributionMetricsForOneOrMoreBrevoCampaignsOrWorkflows({
-    periodFrom: "2022-01-02T00:00:00Z",
-    periodTo: "2022-01-03T00:00:00Z"
-});
-
+```php
+$client->ecommerce->getAttributionMetricsForOneOrMoreBrevoCampaignsOrWorkflows(
+    new GetEcommerceAttributionMetricsRequest([
+        'periodFrom' => new DateTime('2022-01-02T00:00:00Z'),
+        'periodTo' => new DateTime('2022-01-03T00:00:00Z'),
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -7213,7 +8254,7 @@ await client.ecommerce.getAttributionMetricsForOneOrMoreBrevoCampaignsOrWorkflow
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetEcommerceAttributionMetricsRequest` 
+**$periodFrom:** `?DateTime` — When getting metrics for a specific period, define the starting datetime in RFC3339 format
     
 </dd>
 </dl>
@@ -7221,7 +8262,39 @@ await client.ecommerce.getAttributionMetricsForOneOrMoreBrevoCampaignsOrWorkflow
 <dl>
 <dd>
 
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**$periodTo:** `?DateTime` — When getting metrics for a specific period, define the end datetime in RFC3339 format
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$emailCampaignIdArray:** `?string` — The email campaign ID(s) to get metrics for
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$smsCampaignIdArray:** `?string` — The SMS campaign ID(s) to get metrics for
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$automationWorkflowEmailIdArray:** `?string` — The automation workflow ID(s) to get email attribution metrics for
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$automationWorkflowSmsIdArray:** `?string` — The automation workflow ID(s) to get SMS attribution metrics for
     
 </dd>
 </dl>
@@ -7233,7 +8306,7 @@ await client.ecommerce.getAttributionMetricsForOneOrMoreBrevoCampaignsOrWorkflow
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">getDetailedAttributionMetricsForASingleBrevoCampaignOrWorkflow</a>({ ...params }) -> BrevoApi.GetEcommerceAttributionMetricsConversionSourceConversionSourceIdResponse</code></summary>
+<details><summary><code>$client-&gt;ecommerce-&gt;getDetailedAttributionMetricsForASingleBrevoCampaignOrWorkflow($conversionSource, $conversionSourceId) -> GetEcommerceAttributionMetricsConversionSourceConversionSourceIdResponse</code></summary>
 <dl>
 <dd>
 
@@ -7245,12 +8318,11 @@ await client.ecommerce.getAttributionMetricsForOneOrMoreBrevoCampaignsOrWorkflow
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.getDetailedAttributionMetricsForASingleBrevoCampaignOrWorkflow({
-    conversionSource: "email_campaign",
-    conversionSourceId: "sale"
-});
-
+```php
+$client->ecommerce->getDetailedAttributionMetricsForASingleBrevoCampaignOrWorkflow(
+    GetEcommerceAttributionMetricsConversionSourceConversionSourceIdRequestConversionSource::EmailCampaign->value,
+    'sale',
+);
 ```
 </dd>
 </dl>
@@ -7265,7 +8337,7 @@ await client.ecommerce.getDetailedAttributionMetricsForASingleBrevoCampaignOrWor
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetEcommerceAttributionMetricsConversionSourceConversionSourceIdRequest` 
+**$conversionSource:** `string` — The Brevo campaign type or workflow type for which data will be retrieved
     
 </dd>
 </dl>
@@ -7273,7 +8345,7 @@ await client.ecommerce.getDetailedAttributionMetricsForASingleBrevoCampaignOrWor
 <dl>
 <dd>
 
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**$conversionSourceId:** `string` — The Brevo campaign or automation workflow id for which data will be retrieved
     
 </dd>
 </dl>
@@ -7285,7 +8357,7 @@ await client.ecommerce.getDetailedAttributionMetricsForASingleBrevoCampaignOrWor
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">getAttributedProductSalesForASingleBrevoCampaignOrWorkflow</a>({ ...params }) -> BrevoApi.GetEcommerceAttributionProductsConversionSourceConversionSourceIdResponse</code></summary>
+<details><summary><code>$client-&gt;ecommerce-&gt;getAttributedProductSalesForASingleBrevoCampaignOrWorkflow($conversionSource, $conversionSourceId) -> GetEcommerceAttributionProductsConversionSourceConversionSourceIdResponse</code></summary>
 <dl>
 <dd>
 
@@ -7297,12 +8369,11 @@ await client.ecommerce.getDetailedAttributionMetricsForASingleBrevoCampaignOrWor
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.getAttributedProductSalesForASingleBrevoCampaignOrWorkflow({
-    conversionSource: "email_campaign",
-    conversionSourceId: "sale"
-});
-
+```php
+$client->ecommerce->getAttributedProductSalesForASingleBrevoCampaignOrWorkflow(
+    GetEcommerceAttributionProductsConversionSourceConversionSourceIdRequestConversionSource::EmailCampaign->value,
+    'sale',
+);
 ```
 </dd>
 </dl>
@@ -7317,7 +8388,7 @@ await client.ecommerce.getAttributedProductSalesForASingleBrevoCampaignOrWorkflo
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetEcommerceAttributionProductsConversionSourceConversionSourceIdRequest` 
+**$conversionSource:** `string` — The Brevo campaign or automation workflow type for which data will be retrieved
     
 </dd>
 </dl>
@@ -7325,7 +8396,7 @@ await client.ecommerce.getAttributedProductSalesForASingleBrevoCampaignOrWorkflo
 <dl>
 <dd>
 
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**$conversionSourceId:** `string` — The Brevo campaign or automation workflow id for which data will be retrieved
     
 </dd>
 </dl>
@@ -7337,7 +8408,7 @@ await client.ecommerce.getAttributedProductSalesForASingleBrevoCampaignOrWorkflo
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">getTheIso4217CompliantDisplayCurrencyCodeForYourBrevoAccount</a>() -> BrevoApi.GetEcommerceConfigDisplayCurrencyResponse</code></summary>
+<details><summary><code>$client-&gt;ecommerce-&gt;getTheIso4217CompliantDisplayCurrencyCodeForYourBrevoAccount() -> GetEcommerceConfigDisplayCurrencyResponse</code></summary>
 <dl>
 <dd>
 
@@ -7349,25 +8420,9 @@ await client.ecommerce.getAttributedProductSalesForASingleBrevoCampaignOrWorkflo
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.getTheIso4217CompliantDisplayCurrencyCodeForYourBrevoAccount();
-
+```php
+$client->ecommerce->getTheIso4217CompliantDisplayCurrencyCodeForYourBrevoAccount();
 ```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `EcommerceClient.RequestOptions` 
-    
 </dd>
 </dl>
 </dd>
@@ -7378,7 +8433,7 @@ await client.ecommerce.getTheIso4217CompliantDisplayCurrencyCodeForYourBrevoAcco
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">setConfigDisplayCurrency</a>({ ...params }) -> BrevoApi.SetConfigDisplayCurrencyResponse</code></summary>
+<details><summary><code>$client-&gt;ecommerce-&gt;setConfigDisplayCurrency($request) -> SetConfigDisplayCurrencyResponse</code></summary>
 <dl>
 <dd>
 
@@ -7390,11 +8445,12 @@ await client.ecommerce.getTheIso4217CompliantDisplayCurrencyCodeForYourBrevoAcco
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.setConfigDisplayCurrency({
-    code: "EUR"
-});
-
+```php
+$client->ecommerce->setConfigDisplayCurrency(
+    new SetConfigDisplayCurrencyRequest([
+        'code' => 'EUR',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -7409,15 +8465,7 @@ await client.ecommerce.setConfigDisplayCurrency({
 <dl>
 <dd>
 
-**request:** `BrevoApi.SetConfigDisplayCurrencyRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**$code:** `string` — ISO 4217 compliant display currency code
     
 </dd>
 </dl>
@@ -7429,7 +8477,7 @@ await client.ecommerce.setConfigDisplayCurrency({
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">getOrders</a>({ ...params }) -> unknown</code></summary>
+<details><summary><code>$client-&gt;ecommerce-&gt;getOrders($request) -> mixed</code></summary>
 <dl>
 <dd>
 
@@ -7455,9 +8503,10 @@ Get all the orders
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.getOrders();
-
+```php
+$client->ecommerce->getOrders(
+    new GetOrdersRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -7472,7 +8521,7 @@ await client.ecommerce.getOrders();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetOrdersRequest` 
+**$limit:** `?int` — Number of documents per page
     
 </dd>
 </dl>
@@ -7480,7 +8529,31 @@ await client.ecommerce.getOrders();
 <dl>
 <dd>
 
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**$offset:** `?int` — Index of the first document in the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$modifiedSince:** `?string` — Filter (urlencoded) the orders modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$createdSince:** `?string` — Filter (urlencoded) the orders created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**
     
 </dd>
 </dl>
@@ -7492,7 +8565,7 @@ await client.ecommerce.getOrders();
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">createOrder</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;ecommerce-&gt;createOrder($request)</code></summary>
 <dl>
 <dd>
 
@@ -7518,20 +8591,23 @@ Manages the transactional status of the order
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.createOrder({
-    amount: 308.42,
-    createdAt: "2021-07-29T20:59:23.383Z",
-    id: "14",
-    products: [{
-            price: 99.99,
-            productId: "P1",
-            quantity: 10
-        }],
-    status: "completed",
-    updatedAt: "2021-07-30T10:59:23.383Z"
-});
-
+```php
+$client->ecommerce->createOrder(
+    new Order([
+        'amount' => 308.42,
+        'createdAt' => '2021-07-29T20:59:23.383Z',
+        'id' => '14',
+        'products' => [
+            new OrderProductsItem([
+                'price' => 99.99,
+                'productId' => 'P1',
+                'quantity' => 10,
+            ]),
+        ],
+        'status' => 'completed',
+        'updatedAt' => '2021-07-30T10:59:23.383Z',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -7546,15 +8622,7 @@ await client.ecommerce.createOrder({
 <dl>
 <dd>
 
-**request:** `BrevoApi.Order` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**$request:** `Order` 
     
 </dd>
 </dl>
@@ -7566,7 +8634,7 @@ await client.ecommerce.createOrder({
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">createBatchOrder</a>({ ...params }) -> BrevoApi.CreateBatchOrderResponse</code></summary>
+<details><summary><code>$client-&gt;ecommerce-&gt;createBatchOrder($request) -> CreateBatchOrderResponse</code></summary>
 <dl>
 <dd>
 
@@ -7592,22 +8660,27 @@ Create multiple orders at one time instead of one order at a time
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.createBatchOrder({
-    orders: [{
-            amount: 308.42,
-            createdAt: "2021-07-29T20:59:23.383Z",
-            id: "14",
-            products: [{
-                    price: 99.99,
-                    productId: "P1",
-                    quantity: 10
-                }],
-            status: "completed",
-            updatedAt: "2021-07-30T10:59:23.383Z"
-        }]
-});
-
+```php
+$client->ecommerce->createBatchOrder(
+    new CreateBatchOrderRequest([
+        'orders' => [
+            new Order([
+                'amount' => 308.42,
+                'createdAt' => '2021-07-29T20:59:23.383Z',
+                'id' => '14',
+                'products' => [
+                    new OrderProductsItem([
+                        'price' => 99.99,
+                        'productId' => 'P1',
+                        'quantity' => 10,
+                    ]),
+                ],
+                'status' => 'completed',
+                'updatedAt' => '2021-07-30T10:59:23.383Z',
+            ]),
+        ],
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -7622,7 +8695,7 @@ await client.ecommerce.createBatchOrder({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateBatchOrderRequest` 
+**$historical:** `?bool` — Defines wether you want your orders to be considered as live data or as historical data (import of past data, synchronising data). True: orders will not trigger any automation workflows. False: orders will trigger workflows as usual.
     
 </dd>
 </dl>
@@ -7630,7 +8703,15 @@ await client.ecommerce.createBatchOrder({
 <dl>
 <dd>
 
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**$notifyUrl:** `?string` — Notify Url provided by client_dev to get the status of batch request
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$orders:** `array` — array of order objects
     
 </dd>
 </dl>
@@ -7642,7 +8723,7 @@ await client.ecommerce.createBatchOrder({
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">getProducts</a>({ ...params }) -> BrevoApi.GetProductsResponse</code></summary>
+<details><summary><code>$client-&gt;ecommerce-&gt;getProducts($request) -> GetProductsResponse</code></summary>
 <dl>
 <dd>
 
@@ -7654,9 +8735,10 @@ await client.ecommerce.createBatchOrder({
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.getProducts();
-
+```php
+$client->ecommerce->getProducts(
+    new GetProductsRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -7671,7 +8753,7 @@ await client.ecommerce.getProducts();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetProductsRequest` 
+**$limit:** `?int` — Number of documents per page
     
 </dd>
 </dl>
@@ -7679,7 +8761,111 @@ await client.ecommerce.getProducts();
 <dl>
 <dd>
 
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**$offset:** `?int` — Index of the first document in the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$ids:** `?string` — Filter by product ids
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$name:** `?string` — Filter by product name, minimum 3 characters should be present for search.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$priceLte:** `?float` — Price filter for products less than and equals to particular amount
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$priceGte:** `?float` — Price filter for products greater than and equals to particular amount
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$priceLt:** `?float` — Price filter for products less than particular amount
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$priceGt:** `?float` — Price filter for products greater than particular amount
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$priceEq:** `?float` — Price filter for products equals to particular amount
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$priceNe:** `?float` — Price filter for products not equals to particular amount
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$categories:** `?string` — Filter by categories ids
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$modifiedSince:** `?string` — Filter (urlencoded) the orders modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$createdSince:** `?string` — Filter (urlencoded) the orders created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$isDeleted:** `?string` — Filter products by their deletion status. If `false` is passed, only products that are not deleted will be returned.
     
 </dd>
 </dl>
@@ -7691,7 +8877,7 @@ await client.ecommerce.getProducts();
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">createUpdateProduct</a>({ ...params }) -> BrevoApi.CreateUpdateProductResponse</code></summary>
+<details><summary><code>$client-&gt;ecommerce-&gt;createUpdateProduct($request) -> CreateUpdateProductResponse</code></summary>
 <dl>
 <dd>
 
@@ -7703,12 +8889,13 @@ await client.ecommerce.getProducts();
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.createUpdateProduct({
-    id: "P11",
-    name: "Iphone 11"
-});
-
+```php
+$client->ecommerce->createUpdateProduct(
+    new CreateUpdateProductRequest([
+        'id' => 'P11',
+        'name' => 'Iphone 11',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -7723,7 +8910,7 @@ await client.ecommerce.createUpdateProduct({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateUpdateProductRequest` 
+**$categories:** `?array` — Category ID-s of the product
     
 </dd>
 </dl>
@@ -7731,7 +8918,95 @@ await client.ecommerce.createUpdateProduct({
 <dl>
 <dd>
 
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**$deletedAt:** `?string` — UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) of the product deleted from the shop's database
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$id:** `string` — Product ID for which you requested the details
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$imageUrl:** `?string` — Absolute URL to the cover image of the product
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$isDeleted:** `?bool` — product deleted from the shop's database
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$metaInfo:** `?array` — Meta data of product such as description, vendor, producer, stock level. The size of cumulative metaInfo shall not exceed **1000 KB**. Maximum length of metaInfo object can be 20.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$name:** `string` — Mandatory in case of creation**. Name of the product for which you requested the details
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$parentId:** `?string` — Parent product id of the product
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$price:** `?float` — Price of the product
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sku:** `?string` — Product identifier from the shop
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$stock:** `?float` — Current stock value of the product from the shop's database
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$updateEnabled:** `?bool` — Facilitate to update the existing category in the same request (updateEnabled = true)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$url:** `?string` — URL to the product
     
 </dd>
 </dl>
@@ -7743,7 +9018,7 @@ await client.ecommerce.createUpdateProduct({
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">createUpdateBatchProducts</a>({ ...params }) -> BrevoApi.CreateUpdateBatchProductsResponse</code></summary>
+<details><summary><code>$client-&gt;ecommerce-&gt;createUpdateBatchProducts($request) -> CreateUpdateBatchProductsResponse</code></summary>
 <dl>
 <dd>
 
@@ -7755,14 +9030,17 @@ await client.ecommerce.createUpdateProduct({
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.createUpdateBatchProducts({
-    products: [{
-            id: "P11",
-            name: "Iphone 11"
-        }]
-});
-
+```php
+$client->ecommerce->createUpdateBatchProducts(
+    new CreateUpdateBatchProductsRequest([
+        'products' => [
+            new CreateUpdateBatchProductsRequestProductsItem([
+                'id' => 'P11',
+                'name' => 'Iphone 11',
+            ]),
+        ],
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -7777,7 +9055,7 @@ await client.ecommerce.createUpdateBatchProducts({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateUpdateBatchProductsRequest` 
+**$products:** `array` — array of products objects
     
 </dd>
 </dl>
@@ -7785,7 +9063,7 @@ await client.ecommerce.createUpdateBatchProducts({
 <dl>
 <dd>
 
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**$updateEnabled:** `?bool` — Facilitate to update the existing categories in the same request (updateEnabled = true)
     
 </dd>
 </dl>
@@ -7797,7 +9075,7 @@ await client.ecommerce.createUpdateBatchProducts({
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">getProductInfo</a>({ ...params }) -> BrevoApi.GetProductDetails</code></summary>
+<details><summary><code>$client-&gt;ecommerce-&gt;getProductInfo($id) -> GetProductDetails</code></summary>
 <dl>
 <dd>
 
@@ -7809,11 +9087,10 @@ await client.ecommerce.createUpdateBatchProducts({
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.getProductInfo({
-    id: "id"
-});
-
+```php
+$client->ecommerce->getProductInfo(
+    'id',
+);
 ```
 </dd>
 </dl>
@@ -7828,15 +9105,7 @@ await client.ecommerce.getProductInfo({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetProductInfoRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**$id:** `string` — Product ID
     
 </dd>
 </dl>
@@ -7848,7 +9117,7 @@ await client.ecommerce.getProductInfo({
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="/src/api/resources/ecommerce/client/Client.ts">createProductAlert</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;ecommerce-&gt;createProductAlert($id, $type, $request)</code></summary>
 <dl>
 <dd>
 
@@ -7860,12 +9129,12 @@ await client.ecommerce.getProductInfo({
 <dl>
 <dd>
 
-```typescript
-await client.ecommerce.createProductAlert({
-    id: "id",
-    type: "back_in_stock"
-});
-
+```php
+$client->ecommerce->createProductAlert(
+    'id',
+    'back_in_stock',
+    new CreateProductAlertRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -7880,7 +9149,7 @@ await client.ecommerce.createProductAlert({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateProductAlertRequest` 
+**$id:** `string` — Product ID
     
 </dd>
 </dl>
@@ -7888,7 +9157,15 @@ await client.ecommerce.createProductAlert({
 <dl>
 <dd>
 
-**requestOptions:** `EcommerceClient.RequestOptions` 
+**$type:** `string` — Alert type
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$contactIdentifiers:** `?CreateProductAlertRequestContactIdentifiers` 
     
 </dd>
 </dl>
@@ -7901,7 +9178,7 @@ await client.ecommerce.createProductAlert({
 </details>
 
 ## Coupons
-<details><summary><code>client.coupons.<a href="/src/api/resources/coupons/client/Client.ts">getCouponCollections</a>({ ...params }) -> BrevoApi.GetCouponCollection</code></summary>
+<details><summary><code>$client-&gt;coupons-&gt;getCouponCollections($request) -> GetCouponCollection</code></summary>
 <dl>
 <dd>
 
@@ -7913,9 +9190,10 @@ await client.ecommerce.createProductAlert({
 <dl>
 <dd>
 
-```typescript
-await client.coupons.getCouponCollections();
-
+```php
+$client->coupons->getCouponCollections(
+    new GetCouponCollectionsRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -7930,7 +9208,7 @@ await client.coupons.getCouponCollections();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCouponCollectionsRequest` 
+**$limit:** `?int` — Number of documents returned per page
     
 </dd>
 </dl>
@@ -7938,7 +9216,23 @@ await client.coupons.getCouponCollections();
 <dl>
 <dd>
 
-**requestOptions:** `CouponsClient.RequestOptions` 
+**$offset:** `?int` — Index of the first document on the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort the results by creation time in ascending/descending order
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sortBy:** `?string` — The field used to sort coupon collections
     
 </dd>
 </dl>
@@ -7950,7 +9244,7 @@ await client.coupons.getCouponCollections();
 </dl>
 </details>
 
-<details><summary><code>client.coupons.<a href="/src/api/resources/coupons/client/Client.ts">createCouponCollection</a>({ ...params }) -> BrevoApi.CreateCouponCollectionResponse</code></summary>
+<details><summary><code>$client-&gt;coupons-&gt;createCouponCollection($request) -> CreateCouponCollectionResponse</code></summary>
 <dl>
 <dd>
 
@@ -7962,12 +9256,13 @@ await client.coupons.getCouponCollections();
 <dl>
 <dd>
 
-```typescript
-await client.coupons.createCouponCollection({
-    defaultCoupon: "Winter",
-    name: "10%OFF"
-});
-
+```php
+$client->coupons->createCouponCollection(
+    new CreateCouponCollectionRequest([
+        'defaultCoupon' => 'Winter',
+        'name' => '10%OFF',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -7982,7 +9277,7 @@ await client.coupons.createCouponCollection({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateCouponCollectionRequest` 
+**$defaultCoupon:** `string` — Default coupons collection name
     
 </dd>
 </dl>
@@ -7990,7 +9285,31 @@ await client.coupons.createCouponCollection({
 <dl>
 <dd>
 
-**requestOptions:** `CouponsClient.RequestOptions` 
+**$expirationDate:** `?DateTime` — Specify an expiration date for the coupon collection in RFC3339 format. Use null to remove the expiration date.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$name:** `string` — Name of the coupons collection
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$remainingCouponsAlert:** `?int` — Send a notification alert (email) when the remaining coupons count is equal or fall bellow this number. Use null to disable alerts.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$remainingDaysAlert:** `?int` — Send a notification alert (email) when the remaining days until the expiration date are equal or fall bellow this number. Use null to disable alerts.
     
 </dd>
 </dl>
@@ -8002,7 +9321,7 @@ await client.coupons.createCouponCollection({
 </dl>
 </details>
 
-<details><summary><code>client.coupons.<a href="/src/api/resources/coupons/client/Client.ts">getCouponCollection</a>({ ...params }) -> BrevoApi.GetCouponCollection</code></summary>
+<details><summary><code>$client-&gt;coupons-&gt;getCouponCollection($id) -> GetCouponCollection</code></summary>
 <dl>
 <dd>
 
@@ -8014,11 +9333,10 @@ await client.coupons.createCouponCollection({
 <dl>
 <dd>
 
-```typescript
-await client.coupons.getCouponCollection({
-    id: "id"
-});
-
+```php
+$client->coupons->getCouponCollection(
+    'id',
+);
 ```
 </dd>
 </dl>
@@ -8033,15 +9351,7 @@ await client.coupons.getCouponCollection({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCouponCollectionRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `CouponsClient.RequestOptions` 
+**$id:** `string` — Id of the collection to return
     
 </dd>
 </dl>
@@ -8053,7 +9363,7 @@ await client.coupons.getCouponCollection({
 </dl>
 </details>
 
-<details><summary><code>client.coupons.<a href="/src/api/resources/coupons/client/Client.ts">updateCouponCollection</a>({ ...params }) -> BrevoApi.UpdateCouponCollectionResponse</code></summary>
+<details><summary><code>$client-&gt;coupons-&gt;updateCouponCollection($id, $request) -> UpdateCouponCollectionResponse</code></summary>
 <dl>
 <dd>
 
@@ -8065,11 +9375,11 @@ await client.coupons.getCouponCollection({
 <dl>
 <dd>
 
-```typescript
-await client.coupons.updateCouponCollection({
-    id: "id"
-});
-
+```php
+$client->coupons->updateCouponCollection(
+    'id',
+    new UpdateCouponCollectionRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -8084,7 +9394,7 @@ await client.coupons.updateCouponCollection({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateCouponCollectionRequest` 
+**$id:** `string` — Id of the collection to update
     
 </dd>
 </dl>
@@ -8092,7 +9402,31 @@ await client.coupons.updateCouponCollection({
 <dl>
 <dd>
 
-**requestOptions:** `CouponsClient.RequestOptions` 
+**$defaultCoupon:** `?string` — A default coupon to be used in case there are no coupons left
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$expirationDate:** `?DateTime` — Specify an expiration date for the coupon collection in RFC3339 format. Use null to remove the expiration date.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$remainingCouponsAlert:** `?int` — Send a notification alert (email) when the remaining coupons count is equal or fall bellow this number. Use null to disable alerts.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$remainingDaysAlert:** `?int` — Send a notification alert (email) when the remaining days until the expiration date are equal or fall bellow this number. Use null to disable alerts.
     
 </dd>
 </dl>
@@ -8104,7 +9438,7 @@ await client.coupons.updateCouponCollection({
 </dl>
 </details>
 
-<details><summary><code>client.coupons.<a href="/src/api/resources/coupons/client/Client.ts">createCoupons</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;coupons-&gt;createCoupons($request)</code></summary>
 <dl>
 <dd>
 
@@ -8116,12 +9450,15 @@ await client.coupons.updateCouponCollection({
 <dl>
 <dd>
 
-```typescript
-await client.coupons.createCoupons({
-    collectionId: "23befbae-1505-47a8-bd27-e30ef739f32c",
-    coupons: ["Uf12AF"]
-});
-
+```php
+$client->coupons->createCoupons(
+    new CreateCouponsRequest([
+        'collectionId' => '23befbae-1505-47a8-bd27-e30ef739f32c',
+        'coupons' => [
+            'Uf12AF',
+        ],
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -8136,7 +9473,7 @@ await client.coupons.createCoupons({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateCouponsRequest` 
+**$collectionId:** `string` — The id of the coupon collection for which the coupons will be created
     
 </dd>
 </dl>
@@ -8144,7 +9481,7 @@ await client.coupons.createCoupons({
 <dl>
 <dd>
 
-**requestOptions:** `CouponsClient.RequestOptions` 
+**$coupons:** `array` 
     
 </dd>
 </dl>
@@ -8157,7 +9494,7 @@ await client.coupons.createCoupons({
 </details>
 
 ## Payments
-<details><summary><code>client.payments.<a href="/src/api/resources/payments/client/Client.ts">createPaymentRequest</a>({ ...params }) -> BrevoApi.CreatePaymentRequestResponse</code></summary>
+<details><summary><code>$client-&gt;payments-&gt;createPaymentRequest($request) -> CreatePaymentRequestResponse</code></summary>
 <dl>
 <dd>
 
@@ -8169,16 +9506,17 @@ await client.coupons.createCoupons({
 <dl>
 <dd>
 
-```typescript
-await client.payments.createPaymentRequest({
-    cart: {
-        currency: "EUR",
-        specificAmount: 1200
-    },
-    contactId: 43,
-    reference: "Invoice #INV0001"
-});
-
+```php
+$client->payments->createPaymentRequest(
+    new CreatePaymentRequestRequest([
+        'cart' => new Cart([
+            'currency' => 'EUR',
+            'specificAmount' => 1200,
+        ]),
+        'contactId' => 43,
+        'reference' => 'Invoice #INV0001',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -8193,7 +9531,7 @@ await client.payments.createPaymentRequest({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreatePaymentRequestRequest` 
+**$cart:** `Cart` 
     
 </dd>
 </dl>
@@ -8201,7 +9539,39 @@ await client.payments.createPaymentRequest({
 <dl>
 <dd>
 
-**requestOptions:** `PaymentsClient.RequestOptions` 
+**$configuration:** `?Configuration` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$contactId:** `int` — Brevo ID of the contact requested to pay.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$description:** `?string` — Description of payment request.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$notification:** `?Notification` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$reference:** `string` — Reference of the payment request, it will appear on the payment page.
     
 </dd>
 </dl>
@@ -8213,7 +9583,7 @@ await client.payments.createPaymentRequest({
 </dl>
 </details>
 
-<details><summary><code>client.payments.<a href="/src/api/resources/payments/client/Client.ts">getPaymentRequest</a>({ ...params }) -> BrevoApi.GetPaymentRequestResponse</code></summary>
+<details><summary><code>$client-&gt;payments-&gt;getPaymentRequest($id) -> GetPaymentRequestResponse</code></summary>
 <dl>
 <dd>
 
@@ -8225,11 +9595,10 @@ await client.payments.createPaymentRequest({
 <dl>
 <dd>
 
-```typescript
-await client.payments.getPaymentRequest({
-    id: "050db7b0-9bb7-4c1e-9c68-5a8dace8c1dc"
-});
-
+```php
+$client->payments->getPaymentRequest(
+    '050db7b0-9bb7-4c1e-9c68-5a8dace8c1dc',
+);
 ```
 </dd>
 </dl>
@@ -8244,15 +9613,7 @@ await client.payments.getPaymentRequest({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetPaymentRequestRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `PaymentsClient.RequestOptions` 
+**$id:** `string` — Id of the payment Request
     
 </dd>
 </dl>
@@ -8264,7 +9625,7 @@ await client.payments.getPaymentRequest({
 </dl>
 </details>
 
-<details><summary><code>client.payments.<a href="/src/api/resources/payments/client/Client.ts">deletePaymentRequest</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;payments-&gt;deletePaymentRequest($id)</code></summary>
 <dl>
 <dd>
 
@@ -8276,11 +9637,10 @@ await client.payments.getPaymentRequest({
 <dl>
 <dd>
 
-```typescript
-await client.payments.deletePaymentRequest({
-    id: "9ae7d68a-565c-4695-9381-d8fb3e3a14cc"
-});
-
+```php
+$client->payments->deletePaymentRequest(
+    '9ae7d68a-565c-4695-9381-d8fb3e3a14cc',
+);
 ```
 </dd>
 </dl>
@@ -8295,15 +9655,7 @@ await client.payments.deletePaymentRequest({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeletePaymentRequestRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `PaymentsClient.RequestOptions` 
+**$id:** `string` — ID of the payment request.
     
 </dd>
 </dl>
@@ -8316,7 +9668,7 @@ await client.payments.deletePaymentRequest({
 </details>
 
 ## Event
-<details><summary><code>client.event.<a href="/src/api/resources/event/client/Client.ts">createEvent</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;event-&gt;createEvent($request)</code></summary>
 <dl>
 <dd>
 
@@ -8342,12 +9694,13 @@ Create an event to track a contact's interaction.
 <dl>
 <dd>
 
-```typescript
-await client.event.createEvent({
-    event_name: "video_played",
-    identifiers: {}
-});
-
+```php
+$client->event->createEvent(
+    new CreateEventRequest([
+        'eventName' => 'video_played',
+        'identifiers' => new CreateEventRequestIdentifiers([]),
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -8362,7 +9715,7 @@ await client.event.createEvent({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateEventRequest` 
+**$contactProperties:** `?array` — Properties defining the state of the contact associated to this event. Useful to update contact attributes defined in your contacts database while passing the event. For example: **"FIRSTNAME": "Jane" , "AGE": 37**
     
 </dd>
 </dl>
@@ -8370,7 +9723,39 @@ await client.event.createEvent({
 <dl>
 <dd>
 
-**requestOptions:** `EventClient.RequestOptions` 
+**$eventDate:** `?string` — Timestamp of when the event occurred (e.g. "2024-01-24T17:39:57+01:00"). If no value is passed, the timestamp of the event creation is used.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$eventName:** `string` — The name of the event that occurred. This is how you will find your event in Brevo. Limited to 255 characters, alphanumerical characters and - _ only.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$eventProperties:** `?array` — Properties of the event. Top level properties and nested properties can be used to better segment contacts and personalise workflow conditions. The following field type are supported: string, number, boolean (true/false), date (Timestamp e.g. "2024-01-24T17:39:57+01:00"). Keys are limited to 255 characters, alphanumerical characters and - _ only. Size is limited to 50Kb.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$identifiers:** `CreateEventRequestIdentifiers` — Identifies the contact associated with the event. At least one identifier is required.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$object:** `?CreateEventRequestObject` — Identifiers of the object record associated with this event. Ignored if the object type or identifier for this record does not exist on the account.
     
 </dd>
 </dl>
@@ -8383,7 +9768,7 @@ await client.event.createEvent({
 </details>
 
 ## InboundParsing
-<details><summary><code>client.inboundParsing.<a href="/src/api/resources/inboundParsing/client/Client.ts">getInboundEmailEvents</a>({ ...params }) -> BrevoApi.GetInboundEmailEventsResponse</code></summary>
+<details><summary><code>$client-&gt;inboundParsing-&gt;getInboundEmailEvents($request) -> GetInboundEmailEventsResponse</code></summary>
 <dl>
 <dd>
 
@@ -8409,9 +9794,10 @@ This endpoint will show the list of all the events for the received emails.
 <dl>
 <dd>
 
-```typescript
-await client.inboundParsing.getInboundEmailEvents();
-
+```php
+$client->inboundParsing->getInboundEmailEvents(
+    new GetInboundEmailEventsRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -8426,7 +9812,7 @@ await client.inboundParsing.getInboundEmailEvents();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetInboundEmailEventsRequest` 
+**$sender:** `?string` — Email address of the sender.
     
 </dd>
 </dl>
@@ -8434,7 +9820,39 @@ await client.inboundParsing.getInboundEmailEvents();
 <dl>
 <dd>
 
-**requestOptions:** `InboundParsingClient.RequestOptions` 
+**$startDate:** `?string` — Mandatory if endDate is used. Starting date (YYYY-MM-DD or YYYY-MM-DDTHH:mm:ss.SSSZ) from which you want to fetch the list. Maximum time period that can be selected is one month.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$endDate:** `?string` — Mandatory if startDate is used. Ending date (YYYY-MM-DD or YYYY-MM-DDTHH:mm:ss.SSSZ) till which you want to fetch the list. Maximum time period that can be selected is one month.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$limit:** `?int` — Number of documents returned per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$offset:** `?int` — Index of the first document on the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort the results in the ascending/descending order of record creation
     
 </dd>
 </dl>
@@ -8446,7 +9864,7 @@ await client.inboundParsing.getInboundEmailEvents();
 </dl>
 </details>
 
-<details><summary><code>client.inboundParsing.<a href="/src/api/resources/inboundParsing/client/Client.ts">getInboundEmailEventsByUuid</a>({ ...params }) -> BrevoApi.GetInboundEmailEventsByUuidResponse</code></summary>
+<details><summary><code>$client-&gt;inboundParsing-&gt;getInboundEmailEventsByUuid($uuid) -> GetInboundEmailEventsByUuidResponse</code></summary>
 <dl>
 <dd>
 
@@ -8472,11 +9890,10 @@ This endpoint will show the list of all events history for one particular receiv
 <dl>
 <dd>
 
-```typescript
-await client.inboundParsing.getInboundEmailEventsByUuid({
-    uuid: "uuid"
-});
-
+```php
+$client->inboundParsing->getInboundEmailEventsByUuid(
+    'uuid',
+);
 ```
 </dd>
 </dl>
@@ -8491,15 +9908,7 @@ await client.inboundParsing.getInboundEmailEventsByUuid({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetInboundEmailEventsByUuidRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `InboundParsingClient.RequestOptions` 
+**$uuid:** `string` — UUID to fetch events specific to received email
     
 </dd>
 </dl>
@@ -8511,7 +9920,7 @@ await client.inboundParsing.getInboundEmailEventsByUuid({
 </dl>
 </details>
 
-<details><summary><code>client.inboundParsing.<a href="/src/api/resources/inboundParsing/client/Client.ts">getInboundEmailAttachment</a>({ ...params }) -> core.BinaryResponse</code></summary>
+<details><summary><code>$client-&gt;inboundParsing-&gt;getInboundEmailAttachment($downloadToken) -> string</code></summary>
 <dl>
 <dd>
 
@@ -8537,11 +9946,10 @@ This endpoint will retrieve inbound attachment with download token.
 <dl>
 <dd>
 
-```typescript
-await client.inboundParsing.getInboundEmailAttachment({
-    downloadToken: "downloadToken"
-});
-
+```php
+$client->inboundParsing->getInboundEmailAttachment(
+    'downloadToken',
+);
 ```
 </dd>
 </dl>
@@ -8556,15 +9964,7 @@ await client.inboundParsing.getInboundEmailAttachment({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetInboundEmailAttachmentRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `InboundParsingClient.RequestOptions` 
+**$downloadToken:** `string` — Token to fetch a particular attachment
     
 </dd>
 </dl>
@@ -8577,7 +9977,7 @@ await client.inboundParsing.getInboundEmailAttachment({
 </details>
 
 ## Balance
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">getActiveBalancesApi</a>({ ...params }) -> BrevoApi.BalanceLimit</code></summary>
+<details><summary><code>$client-&gt;balance-&gt;getActiveBalancesApi($pid, $request) -> BalanceLimit</code></summary>
 <dl>
 <dd>
 
@@ -8603,13 +10003,14 @@ Returns Active Balances
 <dl>
 <dd>
 
-```typescript
-await client.balance.getActiveBalancesApi({
-    pid: "pid",
-    contact_id: 1,
-    balance_definition_id: "balance_definition_id"
-});
-
+```php
+$client->balance->getActiveBalancesApi(
+    'pid',
+    new GetLoyaltyBalanceProgramsPidActiveBalanceRequest([
+        'contactId' => 1,
+        'balanceDefinitionId' => 'balance_definition_id',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -8624,7 +10025,7 @@ await client.balance.getActiveBalancesApi({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetLoyaltyBalanceProgramsPidActiveBalanceRequest` 
+**$pid:** `string` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -8632,7 +10033,47 @@ await client.balance.getActiveBalancesApi({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**$limit:** `?int` — Limit
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$offset:** `?int` — Offset
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sortField:** `?string` — Sort Field
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort Order
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$contactId:** `int` — Contact ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$balanceDefinitionId:** `string` — Balance Definition ID
     
 </dd>
 </dl>
@@ -8644,7 +10085,7 @@ await client.balance.getActiveBalancesApi({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">getBalanceDefinitionList</a>({ ...params }) -> BrevoApi.GetBalanceDefinitionListResponse</code></summary>
+<details><summary><code>$client-&gt;balance-&gt;getBalanceDefinitionList($pid, $request) -> GetBalanceDefinitionListResponse</code></summary>
 <dl>
 <dd>
 
@@ -8670,11 +10111,11 @@ Returns balance definition page
 <dl>
 <dd>
 
-```typescript
-await client.balance.getBalanceDefinitionList({
-    pid: "pid"
-});
-
+```php
+$client->balance->getBalanceDefinitionList(
+    'pid',
+    new GetBalanceDefinitionListRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -8689,7 +10130,7 @@ await client.balance.getBalanceDefinitionList({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetBalanceDefinitionListRequest` 
+**$pid:** `string` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -8697,7 +10138,39 @@ await client.balance.getBalanceDefinitionList({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**$limit:** `?int` — Limit the number of records returned
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$offset:** `?int` — Offset to paginate records
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sortField:** `?string` — Field to sort by
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort direction
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$version:** `?string` — Version
     
 </dd>
 </dl>
@@ -8709,7 +10182,7 @@ await client.balance.getBalanceDefinitionList({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">createBalanceDefinition</a>({ ...params }) -> BrevoApi.BalanceDefinition</code></summary>
+<details><summary><code>$client-&gt;balance-&gt;createBalanceDefinition($pid, $request) -> BalanceDefinition</code></summary>
 <dl>
 <dd>
 
@@ -8735,13 +10208,14 @@ Creates balance definition and returns information
 <dl>
 <dd>
 
-```typescript
-await client.balance.createBalanceDefinition({
-    pid: "pid",
-    name: "name",
-    unit: "POINTS"
-});
-
+```php
+$client->balance->createBalanceDefinition(
+    'pid',
+    new PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequest([
+        'name' => 'name',
+        'unit' => PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequestUnit::Points->value,
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -8756,7 +10230,7 @@ await client.balance.createBalanceDefinition({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequest` 
+**$pid:** `string` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -8764,7 +10238,127 @@ await client.balance.createBalanceDefinition({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**$balanceAvailabilityDurationModifier:** `?string` — Defines when the balance expires within the selected duration.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$balanceAvailabilityDurationUnit:** `?string` — Unit of time for balance validity.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$balanceAvailabilityDurationValue:** `?int` — Number of time units before the balance expires.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$balanceExpirationDate:** `?DateTime` — Fixed expiration date (`dd/mm` format) as an alternative to duration-based expiry.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$balanceOptionAmountOvertakingStrategy:** `?string` — Defines whether partial credit is allowed when reaching max balance.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$balanceOptionCreditRounding:** `?string` — Defines rounding strategy for credit transactions.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$balanceOptionDebitRounding:** `?string` — Defines rounding strategy for debit transactions.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$description:** `?string` — Short description of the balance definition.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$imageRef:** `?string` — URL of an optional image reference.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$maxAmount:** `?float` — Maximum allowable balance amount.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$maxCreditAmountLimit:** `?float` — Maximum credit allowed per operation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$maxDebitAmountLimit:** `?float` — Maximum debit allowed per operation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$meta:** `?array` — Additional metadata for the balance definition.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$minAmount:** `?float` — Minimum allowable balance amount.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$name:** `string` — Name of the balance definition.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$unit:** `string` — Unit of balance measurement.
     
 </dd>
 </dl>
@@ -8776,7 +10370,7 @@ await client.balance.createBalanceDefinition({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">getBalanceDefinition</a>({ ...params }) -> BrevoApi.BalanceDefinition</code></summary>
+<details><summary><code>$client-&gt;balance-&gt;getBalanceDefinition($pid, $bdid, $request) -> BalanceDefinition</code></summary>
 <dl>
 <dd>
 
@@ -8802,12 +10396,12 @@ Returns balance definition
 <dl>
 <dd>
 
-```typescript
-await client.balance.getBalanceDefinition({
-    pid: "pid",
-    bdid: "bdid"
-});
-
+```php
+$client->balance->getBalanceDefinition(
+    'pid',
+    'bdid',
+    new GetBalanceDefinitionRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -8822,7 +10416,7 @@ await client.balance.getBalanceDefinition({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetBalanceDefinitionRequest` 
+**$pid:** `string` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -8830,7 +10424,15 @@ await client.balance.getBalanceDefinition({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**$bdid:** `string` — Balance Definition Id
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$version:** `?string` — Version
     
 </dd>
 </dl>
@@ -8842,7 +10444,7 @@ await client.balance.getBalanceDefinition({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">updateBalanceDefinition</a>({ ...params }) -> BrevoApi.BalanceDefinition</code></summary>
+<details><summary><code>$client-&gt;balance-&gt;updateBalanceDefinition($pid, $bdid, $request) -> BalanceDefinition</code></summary>
 <dl>
 <dd>
 
@@ -8868,14 +10470,15 @@ Updates Balance definition
 <dl>
 <dd>
 
-```typescript
-await client.balance.updateBalanceDefinition({
-    pid: "pid",
-    bdid: "bdid",
-    name: "name",
-    unit: "POINTS"
-});
-
+```php
+$client->balance->updateBalanceDefinition(
+    'pid',
+    'bdid',
+    new UpdateBalanceDefinitionRequest([
+        'name' => 'name',
+        'unit' => UpdateBalanceDefinitionRequestUnit::Points->value,
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -8890,7 +10493,7 @@ await client.balance.updateBalanceDefinition({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateBalanceDefinitionRequest` 
+**$pid:** `string` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -8898,7 +10501,135 @@ await client.balance.updateBalanceDefinition({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**$bdid:** `string` — Balance Definition Id
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$balanceAvailabilityDurationModifier:** `?string` — Defines when the balance expires within the selected duration.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$balanceAvailabilityDurationUnit:** `?string` — Unit of time for balance validity.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$balanceAvailabilityDurationValue:** `?int` — Number of time units before the balance expires.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$balanceExpirationDate:** `?string` — Expiration date (`dd/mm` format) or empty if not applicable.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$balanceOptionAmountOvertakingStrategy:** `?string` — Defines whether partial credit is allowed when reaching max balance.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$balanceOptionCreditRounding:** `?string` — Rounding strategy for credit transactions.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$balanceOptionDebitRounding:** `?string` — Rounding strategy for debit transactions.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$description:** `?string` — Short description of the balance definition.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$imageRef:** `?string` — URL of an optional image reference.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$maxAmount:** `?float` — Maximum allowable balance amount.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$maxCreditAmountLimit:** `?float` — Maximum credit allowed per operation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$maxDebitAmountLimit:** `?float` — Maximum debit allowed per operation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$meta:** `?array` — Optional metadata for the balance definition.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$minAmount:** `?float` — Minimum allowable balance amount.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$name:** `string` — Name of the balance definition.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$unit:** `string` — Unit of balance measurement.
     
 </dd>
 </dl>
@@ -8910,7 +10641,7 @@ await client.balance.updateBalanceDefinition({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">deleteBalanceDefinition</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;balance-&gt;deleteBalanceDefinition($pid, $bdid)</code></summary>
 <dl>
 <dd>
 
@@ -8936,12 +10667,11 @@ Delete Balance definition
 <dl>
 <dd>
 
-```typescript
-await client.balance.deleteBalanceDefinition({
-    pid: "pid",
-    bdid: "bdid"
-});
-
+```php
+$client->balance->deleteBalanceDefinition(
+    'pid',
+    'bdid',
+);
 ```
 </dd>
 </dl>
@@ -8956,7 +10686,7 @@ await client.balance.deleteBalanceDefinition({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteBalanceDefinitionRequest` 
+**$pid:** `string` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -8964,7 +10694,7 @@ await client.balance.deleteBalanceDefinition({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**$bdid:** `string` — Balance Definition Id
     
 </dd>
 </dl>
@@ -8976,7 +10706,7 @@ await client.balance.deleteBalanceDefinition({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">createBalanceLimit</a>({ ...params }) -> BrevoApi.BalanceLimit</code></summary>
+<details><summary><code>$client-&gt;balance-&gt;createBalanceLimit($pid, $bdid, $request) -> BalanceLimit</code></summary>
 <dl>
 <dd>
 
@@ -9002,17 +10732,18 @@ Creates balance limit and sends the created UUID along with the data
 <dl>
 <dd>
 
-```typescript
-await client.balance.createBalanceLimit({
-    pid: "pid",
-    bdid: "bdid",
-    constraintType: "transaction",
-    durationUnit: "day",
-    durationValue: 1,
-    transactionType: "credit",
-    value: 1
-});
-
+```php
+$client->balance->createBalanceLimit(
+    'pid',
+    'bdid',
+    new CreateBalanceLimitRequest([
+        'constraintType' => CreateBalanceLimitRequestConstraintType::Transaction->value,
+        'durationUnit' => CreateBalanceLimitRequestDurationUnit::Day->value,
+        'durationValue' => 1,
+        'transactionType' => CreateBalanceLimitRequestTransactionType::Credit->value,
+        'value' => 1,
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -9027,7 +10758,7 @@ await client.balance.createBalanceLimit({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateBalanceLimitRequest` 
+**$pid:** `string` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -9035,7 +10766,55 @@ await client.balance.createBalanceLimit({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**$bdid:** `string` — Balance Definition Id
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$constraintType:** `string` — Defines whether the limit applies to transaction count or amount.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$durationUnit:** `string` — Unit of time for which the limit is applicable.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$durationValue:** `int` — Number of time units for the balance limit.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$slidingSchedule:** `?bool` — Determines if the limit resets on a rolling schedule.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$transactionType:** `string` — Specifies whether the limit applies to credit or debit transactions.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$value:** `int` — Maximum allowed value for the specified constraint type.
     
 </dd>
 </dl>
@@ -9047,7 +10826,7 @@ await client.balance.createBalanceLimit({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">getBalanceLimit</a>({ ...params }) -> BrevoApi.BalanceLimit</code></summary>
+<details><summary><code>$client-&gt;balance-&gt;getBalanceLimit($pid, $bdid, $blid, $request) -> BalanceLimit</code></summary>
 <dl>
 <dd>
 
@@ -9073,13 +10852,13 @@ Fetches balance limits and send the created UUID along with the data
 <dl>
 <dd>
 
-```typescript
-await client.balance.getBalanceLimit({
-    pid: "pid",
-    bdid: "bdid",
-    blid: "blid"
-});
-
+```php
+$client->balance->getBalanceLimit(
+    'pid',
+    'bdid',
+    'blid',
+    new GetBalanceLimitRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -9094,7 +10873,7 @@ await client.balance.getBalanceLimit({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetBalanceLimitRequest` 
+**$pid:** `string` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -9102,7 +10881,23 @@ await client.balance.getBalanceLimit({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**$bdid:** `string` — Balance Definition Id
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$blid:** `string` — Balance Limit Id
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$version:** `?string` — Version
     
 </dd>
 </dl>
@@ -9114,7 +10909,7 @@ await client.balance.getBalanceLimit({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">updateBalanceLimit</a>({ ...params }) -> BrevoApi.BalanceLimit</code></summary>
+<details><summary><code>$client-&gt;balance-&gt;updateBalanceLimit($pid, $bdid, $blid, $request) -> BalanceLimit</code></summary>
 <dl>
 <dd>
 
@@ -9140,18 +10935,19 @@ Updates balance limit
 <dl>
 <dd>
 
-```typescript
-await client.balance.updateBalanceLimit({
-    pid: "pid",
-    bdid: "bdid",
-    blid: "blid",
-    constraintType: "transaction",
-    durationUnit: "day",
-    durationValue: 1,
-    transactionType: "credit",
-    value: 1
-});
-
+```php
+$client->balance->updateBalanceLimit(
+    'pid',
+    'bdid',
+    'blid',
+    new UpdateBalanceLimitRequest([
+        'constraintType' => UpdateBalanceLimitRequestConstraintType::Transaction->value,
+        'durationUnit' => UpdateBalanceLimitRequestDurationUnit::Day->value,
+        'durationValue' => 1,
+        'transactionType' => UpdateBalanceLimitRequestTransactionType::Credit->value,
+        'value' => 1,
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -9166,7 +10962,7 @@ await client.balance.updateBalanceLimit({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateBalanceLimitRequest` 
+**$pid:** `string` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -9174,7 +10970,63 @@ await client.balance.updateBalanceLimit({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**$bdid:** `string` — Balance Definition Id
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$blid:** `string` — Balance Limit Id
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$constraintType:** `string` — Defines whether the limit applies to transaction count or amount.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$durationUnit:** `string` — Unit of time for which the limit is applicable.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$durationValue:** `int` — Number of time units for the balance limit.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$slidingSchedule:** `?bool` — Determines if the limit resets on a rolling schedule.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$transactionType:** `string` — Specifies whether the limit applies to credit or debit transactions.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$value:** `int` — Maximum allowed value for the specified constraint type.
     
 </dd>
 </dl>
@@ -9186,7 +11038,7 @@ await client.balance.updateBalanceLimit({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">deleteBalanceLimit</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;balance-&gt;deleteBalanceLimit($pid, $bdid, $blid)</code></summary>
 <dl>
 <dd>
 
@@ -9212,13 +11064,12 @@ Delete balance limit
 <dl>
 <dd>
 
-```typescript
-await client.balance.deleteBalanceLimit({
-    pid: "pid",
-    bdid: "bdid",
-    blid: "blid"
-});
-
+```php
+$client->balance->deleteBalanceLimit(
+    'pid',
+    'bdid',
+    'blid',
+);
 ```
 </dd>
 </dl>
@@ -9233,7 +11084,7 @@ await client.balance.deleteBalanceLimit({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteBalanceLimitRequest` 
+**$pid:** `string` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -9241,7 +11092,15 @@ await client.balance.deleteBalanceLimit({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**$bdid:** `string` — Balance Definition Id
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$blid:** `string` — Balance Limit Id
     
 </dd>
 </dl>
@@ -9253,7 +11112,7 @@ await client.balance.deleteBalanceLimit({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">getContactBalances</a>({ ...params }) -> BrevoApi.GetContactBalancesResponse</code></summary>
+<details><summary><code>$client-&gt;balance-&gt;getContactBalances($pid) -> GetContactBalancesResponse</code></summary>
 <dl>
 <dd>
 
@@ -9279,11 +11138,10 @@ Returns balance list
 <dl>
 <dd>
 
-```typescript
-await client.balance.getContactBalances({
-    pid: "pid"
-});
-
+```php
+$client->balance->getContactBalances(
+    'pid',
+);
 ```
 </dd>
 </dl>
@@ -9298,15 +11156,7 @@ await client.balance.getContactBalances({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetContactBalancesRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BalanceClient.RequestOptions` 
+**$pid:** `string` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -9318,7 +11168,7 @@ await client.balance.getContactBalances({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">createBalanceOrder</a>({ ...params }) -> BrevoApi.CreateBalanceOrderResponse</code></summary>
+<details><summary><code>$client-&gt;balance-&gt;createBalanceOrder($pid, $request) -> CreateBalanceOrderResponse</code></summary>
 <dl>
 <dd>
 
@@ -9344,16 +11194,17 @@ Returns created order
 <dl>
 <dd>
 
-```typescript
-await client.balance.createBalanceOrder({
-    pid: "pid",
-    amount: 1.1,
-    balanceDefinitionId: "balanceDefinitionId",
-    contactId: 1,
-    dueAt: "dueAt",
-    source: "source"
-});
-
+```php
+$client->balance->createBalanceOrder(
+    'pid',
+    new CreateBalanceOrderRequest([
+        'amount' => 1.1,
+        'balanceDefinitionId' => 'balanceDefinitionId',
+        'contactId' => 1,
+        'dueAt' => 'dueAt',
+        'source' => 'source',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -9368,7 +11219,7 @@ await client.balance.createBalanceOrder({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateBalanceOrderRequest` 
+**$pid:** `string` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -9376,7 +11227,55 @@ await client.balance.createBalanceOrder({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**$amount:** `float` — Order amount (must be non-zero).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$balanceDefinitionId:** `string` — Unique identifier (UUID) of the associated balance definition.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$contactId:** `int` — Unique identifier of the contact placing the order (must be ≥ 1).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$dueAt:** `string` — RFC3339 timestamp specifying when the order is due.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$expiresAt:** `?string` — Optional RFC3339 timestamp defining order expiration.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$meta:** `?array` — Optional metadata associated with the order.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$source:** `string` — Specifies the origin of the order (`engine` or `user`).
     
 </dd>
 </dl>
@@ -9388,7 +11287,7 @@ await client.balance.createBalanceOrder({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">getSubscriptionBalances</a>({ ...params }) -> BrevoApi.GetSubscriptionBalancesResponse</code></summary>
+<details><summary><code>$client-&gt;balance-&gt;getSubscriptionBalances($pid, $cid) -> GetSubscriptionBalancesResponse</code></summary>
 <dl>
 <dd>
 
@@ -9414,12 +11313,11 @@ Returns subscription balances
 <dl>
 <dd>
 
-```typescript
-await client.balance.getSubscriptionBalances({
-    pid: "pid",
-    cid: "cid"
-});
-
+```php
+$client->balance->getSubscriptionBalances(
+    'pid',
+    'cid',
+);
 ```
 </dd>
 </dl>
@@ -9434,7 +11332,7 @@ await client.balance.getSubscriptionBalances({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetSubscriptionBalancesRequest` 
+**$pid:** `string` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -9442,7 +11340,7 @@ await client.balance.getSubscriptionBalances({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**$cid:** `string` — Contact Id
     
 </dd>
 </dl>
@@ -9454,7 +11352,7 @@ await client.balance.getSubscriptionBalances({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">createSubscriptionBalances</a>({ ...params }) -> BrevoApi.PostLoyaltyBalanceProgramsPidSubscriptionsCidBalancesResponse</code></summary>
+<details><summary><code>$client-&gt;balance-&gt;createSubscriptionBalances($pid, $cid, $request) -> PostLoyaltyBalanceProgramsPidSubscriptionsCidBalancesResponse</code></summary>
 <dl>
 <dd>
 
@@ -9480,13 +11378,14 @@ Creates a balance for a contact
 <dl>
 <dd>
 
-```typescript
-await client.balance.createSubscriptionBalances({
-    pid: "pid",
-    cid: "cid",
-    balanceDefinitionId: "balanceDefinitionId"
-});
-
+```php
+$client->balance->createSubscriptionBalances(
+    'pid',
+    'cid',
+    new PostLoyaltyBalanceProgramsPidSubscriptionsCidBalancesRequest([
+        'balanceDefinitionId' => 'balanceDefinitionId',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -9501,7 +11400,7 @@ await client.balance.createSubscriptionBalances({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostLoyaltyBalanceProgramsPidSubscriptionsCidBalancesRequest` 
+**$pid:** `string` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -9509,7 +11408,15 @@ await client.balance.createSubscriptionBalances({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**$cid:** `string` — Contact Id
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$balanceDefinitionId:** `string` — Unique identifier (UUID) of the balance definition associated with the new balance.
     
 </dd>
 </dl>
@@ -9521,7 +11428,7 @@ await client.balance.createSubscriptionBalances({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">getTransactionHistoryApi</a>({ ...params }) -> BrevoApi.GetLoyaltyBalanceProgramsPidTransactionHistoryResponse</code></summary>
+<details><summary><code>$client-&gt;balance-&gt;getTransactionHistoryApi($pid, $request) -> GetLoyaltyBalanceProgramsPidTransactionHistoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -9547,13 +11454,14 @@ Returns transaction history
 <dl>
 <dd>
 
-```typescript
-await client.balance.getTransactionHistoryApi({
-    pid: "pid",
-    contact_id: 1,
-    balance_definition_id: "balance_definition_id"
-});
-
+```php
+$client->balance->getTransactionHistoryApi(
+    'pid',
+    new GetLoyaltyBalanceProgramsPidTransactionHistoryRequest([
+        'contactId' => 1,
+        'balanceDefinitionId' => 'balance_definition_id',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -9568,7 +11476,7 @@ await client.balance.getTransactionHistoryApi({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetLoyaltyBalanceProgramsPidTransactionHistoryRequest` 
+**$pid:** `string` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -9576,7 +11484,55 @@ await client.balance.getTransactionHistoryApi({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**$limit:** `?int` — Limit the number of records returned
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$offset:** `?int` — Skip a number of records
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sortField:** `?string` — Field to sort by
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort order, either asc or desc
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$contactId:** `int` — Contact ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$balanceDefinitionId:** `string` — Balance Definition ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$filters:** `?string` — Filters to apply
     
 </dd>
 </dl>
@@ -9588,7 +11544,7 @@ await client.balance.getTransactionHistoryApi({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">beginTransaction</a>({ ...params }) -> BrevoApi.Transaction</code></summary>
+<details><summary><code>$client-&gt;balance-&gt;beginTransaction($pid, $request) -> Transaction</code></summary>
 <dl>
 <dd>
 
@@ -9614,13 +11570,14 @@ Creates new transaction and returns information
 <dl>
 <dd>
 
-```typescript
-await client.balance.beginTransaction({
-    pid: "pid",
-    amount: 1.1,
-    balanceDefinitionId: "balanceDefinitionId"
-});
-
+```php
+$client->balance->beginTransaction(
+    'pid',
+    new BeginTransactionRequest([
+        'amount' => 1.1,
+        'balanceDefinitionId' => 'balanceDefinitionId',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -9635,7 +11592,7 @@ await client.balance.beginTransaction({
 <dl>
 <dd>
 
-**request:** `BrevoApi.BeginTransactionRequest` 
+**$pid:** `string` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -9643,7 +11600,71 @@ await client.balance.beginTransaction({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**$loyaltySubscriptionId:** `?string` — Unique identifier for the loyalty subscription (required unless `contactId` is provided).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$amount:** `float` — Transaction amount (must be provided).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$autoComplete:** `?bool` — Whether the transaction should be automatically completed.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$balanceDefinitionId:** `string` — Unique identifier (UUID) of the associated balance definition.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$balanceExpiryInMinutes:** `?int` — Optional expiry time for the balance in minutes (must be greater than 0 if provided).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$contactId:** `?int` — Unique identifier of the contact involved in the transaction (required unless `LoyaltySubscriptionId` is provided).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$eventTime:** `?string` — Optional timestamp specifying when the transaction occurred.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$meta:** `?array` — Optional metadata associated with the transaction.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$ttl:** `?int` — Optional time-to-live for the transaction (must be greater than 0 if provided).
     
 </dd>
 </dl>
@@ -9655,7 +11676,7 @@ await client.balance.beginTransaction({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">cancelTransaction</a>({ ...params }) -> BrevoApi.Transaction</code></summary>
+<details><summary><code>$client-&gt;balance-&gt;cancelTransaction($pid, $tid) -> Transaction</code></summary>
 <dl>
 <dd>
 
@@ -9681,12 +11702,11 @@ Cancels transaction
 <dl>
 <dd>
 
-```typescript
-await client.balance.cancelTransaction({
-    pid: "pid",
-    tid: "tid"
-});
-
+```php
+$client->balance->cancelTransaction(
+    'pid',
+    'tid',
+);
 ```
 </dd>
 </dl>
@@ -9701,7 +11721,7 @@ await client.balance.cancelTransaction({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CancelTransactionRequest` 
+**$pid:** `string` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -9709,7 +11729,7 @@ await client.balance.cancelTransaction({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**$tid:** `string` — Transaction Id
     
 </dd>
 </dl>
@@ -9721,7 +11741,7 @@ await client.balance.cancelTransaction({
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="/src/api/resources/balance/client/Client.ts">completeTransaction</a>({ ...params }) -> BrevoApi.Transaction</code></summary>
+<details><summary><code>$client-&gt;balance-&gt;completeTransaction($pid, $tid) -> Transaction</code></summary>
 <dl>
 <dd>
 
@@ -9747,12 +11767,11 @@ Completes transaction
 <dl>
 <dd>
 
-```typescript
-await client.balance.completeTransaction({
-    pid: "pid",
-    tid: "tid"
-});
-
+```php
+$client->balance->completeTransaction(
+    'pid',
+    'tid',
+);
 ```
 </dd>
 </dl>
@@ -9767,7 +11786,7 @@ await client.balance.completeTransaction({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CompleteTransactionRequest` 
+**$pid:** `string` — Loyalty Program Id
     
 </dd>
 </dl>
@@ -9775,7 +11794,7 @@ await client.balance.completeTransaction({
 <dl>
 <dd>
 
-**requestOptions:** `BalanceClient.RequestOptions` 
+**$tid:** `string` — Transaction Id
     
 </dd>
 </dl>
@@ -9788,7 +11807,7 @@ await client.balance.completeTransaction({
 </details>
 
 ## Program
-<details><summary><code>client.program.<a href="/src/api/resources/program/client/Client.ts">getLpList</a>({ ...params }) -> BrevoApi.GetLpListResponse</code></summary>
+<details><summary><code>$client-&gt;program-&gt;getLpList($request) -> GetLpListResponse</code></summary>
 <dl>
 <dd>
 
@@ -9814,9 +11833,10 @@ Returns list of loyalty programs
 <dl>
 <dd>
 
-```typescript
-await client.program.getLpList();
-
+```php
+$client->program->getLpList(
+    new GetLpListRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -9831,7 +11851,7 @@ await client.program.getLpList();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetLpListRequest` 
+**$limit:** `?int` — Number of documents per page
     
 </dd>
 </dl>
@@ -9839,7 +11859,23 @@ await client.program.getLpList();
 <dl>
 <dd>
 
-**requestOptions:** `ProgramClient.RequestOptions` 
+**$offset:** `?int` — Index of the first document in the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sortField:** `?string` — Sort documents by field
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort documents by field
     
 </dd>
 </dl>
@@ -9851,7 +11887,7 @@ await client.program.getLpList();
 </dl>
 </details>
 
-<details><summary><code>client.program.<a href="/src/api/resources/program/client/Client.ts">createNewLp</a>({ ...params }) -> BrevoApi.LoyaltyProgram</code></summary>
+<details><summary><code>$client-&gt;program-&gt;createNewLp($request) -> LoyaltyProgram</code></summary>
 <dl>
 <dd>
 
@@ -9877,11 +11913,12 @@ Creates loyalty program
 <dl>
 <dd>
 
-```typescript
-await client.program.createNewLp({
-    name: "name"
-});
-
+```php
+$client->program->createNewLp(
+    new CreateNewLpRequest([
+        'name' => 'name',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -9896,7 +11933,7 @@ await client.program.createNewLp({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateNewLpRequest` 
+**$description:** `?string` — Optional description of the loyalty program (max 256 chars).
     
 </dd>
 </dl>
@@ -9904,7 +11941,23 @@ await client.program.createNewLp({
 <dl>
 <dd>
 
-**requestOptions:** `ProgramClient.RequestOptions` 
+**$documentId:** `?string` — Optional unique document ID.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$meta:** `?array` — Optional metadata related to the loyalty program.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$name:** `string` — Required name of the loyalty program (max 128 chars).
     
 </dd>
 </dl>
@@ -9916,7 +11969,7 @@ await client.program.createNewLp({
 </dl>
 </details>
 
-<details><summary><code>client.program.<a href="/src/api/resources/program/client/Client.ts">getLoyaltyProgramInfo</a>({ ...params }) -> BrevoApi.LoyaltyProgram</code></summary>
+<details><summary><code>$client-&gt;program-&gt;getLoyaltyProgramInfo($pid) -> LoyaltyProgram</code></summary>
 <dl>
 <dd>
 
@@ -9942,11 +11995,10 @@ Returns loyalty program
 <dl>
 <dd>
 
-```typescript
-await client.program.getLoyaltyProgramInfo({
-    pid: "pid"
-});
-
+```php
+$client->program->getLoyaltyProgramInfo(
+    'pid',
+);
 ```
 </dd>
 </dl>
@@ -9961,15 +12013,7 @@ await client.program.getLoyaltyProgramInfo({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetLoyaltyProgramInfoRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ProgramClient.RequestOptions` 
+**$pid:** `string` — Loyalty Program ID. A unique identifier for the loyalty program.
     
 </dd>
 </dl>
@@ -9981,7 +12025,7 @@ await client.program.getLoyaltyProgramInfo({
 </dl>
 </details>
 
-<details><summary><code>client.program.<a href="/src/api/resources/program/client/Client.ts">updateLoyaltyProgram</a>({ ...params }) -> BrevoApi.LoyaltyProgram</code></summary>
+<details><summary><code>$client-&gt;program-&gt;updateLoyaltyProgram($pid, $request) -> LoyaltyProgram</code></summary>
 <dl>
 <dd>
 
@@ -10007,12 +12051,13 @@ Updates loyalty program
 <dl>
 <dd>
 
-```typescript
-await client.program.updateLoyaltyProgram({
-    pid: "pid",
-    name: "name"
-});
-
+```php
+$client->program->updateLoyaltyProgram(
+    'pid',
+    new UpdateLoyaltyProgramRequest([
+        'name' => 'name',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -10027,7 +12072,7 @@ await client.program.updateLoyaltyProgram({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateLoyaltyProgramRequest` 
+**$pid:** `string` — Loyalty Program ID. A unique identifier for the loyalty program.
     
 </dd>
 </dl>
@@ -10035,7 +12080,23 @@ await client.program.updateLoyaltyProgram({
 <dl>
 <dd>
 
-**requestOptions:** `ProgramClient.RequestOptions` 
+**$description:** `?string` — Loyalty Program description
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$meta:** `?array` — Loyalty Program meta data
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$name:** `string` — Loyalty Program name
     
 </dd>
 </dl>
@@ -10047,7 +12108,7 @@ await client.program.updateLoyaltyProgram({
 </dl>
 </details>
 
-<details><summary><code>client.program.<a href="/src/api/resources/program/client/Client.ts">deleteLoyaltyProgram</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;program-&gt;deleteLoyaltyProgram($pid)</code></summary>
 <dl>
 <dd>
 
@@ -10073,11 +12134,10 @@ Deletes Loyalty Program
 <dl>
 <dd>
 
-```typescript
-await client.program.deleteLoyaltyProgram({
-    pid: "pid"
-});
-
+```php
+$client->program->deleteLoyaltyProgram(
+    'pid',
+);
 ```
 </dd>
 </dl>
@@ -10092,15 +12152,7 @@ await client.program.deleteLoyaltyProgram({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteLoyaltyProgramRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ProgramClient.RequestOptions` 
+**$pid:** `string` — Loyalty Program ID. A unique identifier for the loyalty program.
     
 </dd>
 </dl>
@@ -10112,7 +12164,7 @@ await client.program.deleteLoyaltyProgram({
 </dl>
 </details>
 
-<details><summary><code>client.program.<a href="/src/api/resources/program/client/Client.ts">partiallyUpdateLoyaltyProgram</a>({ ...params }) -> BrevoApi.LoyaltyProgram</code></summary>
+<details><summary><code>$client-&gt;program-&gt;partiallyUpdateLoyaltyProgram($pid, $request) -> LoyaltyProgram</code></summary>
 <dl>
 <dd>
 
@@ -10138,11 +12190,11 @@ Partially updates loyalty program
 <dl>
 <dd>
 
-```typescript
-await client.program.partiallyUpdateLoyaltyProgram({
-    pid: "pid"
-});
-
+```php
+$client->program->partiallyUpdateLoyaltyProgram(
+    'pid',
+    new PartiallyUpdateLoyaltyProgramRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -10157,7 +12209,7 @@ await client.program.partiallyUpdateLoyaltyProgram({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PartiallyUpdateLoyaltyProgramRequest` 
+**$pid:** `string` — Loyalty Program ID. A unique identifier for the loyalty program.
     
 </dd>
 </dl>
@@ -10165,7 +12217,23 @@ await client.program.partiallyUpdateLoyaltyProgram({
 <dl>
 <dd>
 
-**requestOptions:** `ProgramClient.RequestOptions` 
+**$description:** `?string` — Loyalty Program description
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$meta:** `?array` — Loyalty Program meta data
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$name:** `?string` — Loyalty Program name
     
 </dd>
 </dl>
@@ -10177,7 +12245,7 @@ await client.program.partiallyUpdateLoyaltyProgram({
 </dl>
 </details>
 
-<details><summary><code>client.program.<a href="/src/api/resources/program/client/Client.ts">getParameterSubscriptionInfo</a>({ ...params }) -> BrevoApi.GetParameterSubscriptionInfoResponse</code></summary>
+<details><summary><code>$client-&gt;program-&gt;getParameterSubscriptionInfo($pid, $request) -> GetParameterSubscriptionInfoResponse</code></summary>
 <dl>
 <dd>
 
@@ -10203,11 +12271,11 @@ Get Information of balances, tiers, rewards and subscription members for a subsc
 <dl>
 <dd>
 
-```typescript
-await client.program.getParameterSubscriptionInfo({
-    pid: "pid"
-});
-
+```php
+$client->program->getParameterSubscriptionInfo(
+    'pid',
+    new GetParameterSubscriptionInfoRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -10222,7 +12290,7 @@ await client.program.getParameterSubscriptionInfo({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetParameterSubscriptionInfoRequest` 
+**$pid:** `string` — Loyalty Program ID. A unique identifier for the loyalty program.
     
 </dd>
 </dl>
@@ -10230,7 +12298,23 @@ await client.program.getParameterSubscriptionInfo({
 <dl>
 <dd>
 
-**requestOptions:** `ProgramClient.RequestOptions` 
+**$contactId:** `?string` — The contact ID to filter by.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$params:** `?string` — A list of filter parameters for querying the subscription info.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$loyaltySubscriptionId:** `?string` — The loyalty subscription ID to filter by.
     
 </dd>
 </dl>
@@ -10242,7 +12326,7 @@ await client.program.getParameterSubscriptionInfo({
 </dl>
 </details>
 
-<details><summary><code>client.program.<a href="/src/api/resources/program/client/Client.ts">publishLoyaltyProgram</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;program-&gt;publishLoyaltyProgram($pid)</code></summary>
 <dl>
 <dd>
 
@@ -10268,11 +12352,10 @@ Publishes loyalty program
 <dl>
 <dd>
 
-```typescript
-await client.program.publishLoyaltyProgram({
-    pid: "pid"
-});
-
+```php
+$client->program->publishLoyaltyProgram(
+    'pid',
+);
 ```
 </dd>
 </dl>
@@ -10287,15 +12370,7 @@ await client.program.publishLoyaltyProgram({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PublishLoyaltyProgramRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ProgramClient.RequestOptions` 
+**$pid:** `string` — Loyalty Program ID. A unique identifier for the loyalty program.
     
 </dd>
 </dl>
@@ -10307,7 +12382,7 @@ await client.program.publishLoyaltyProgram({
 </dl>
 </details>
 
-<details><summary><code>client.program.<a href="/src/api/resources/program/client/Client.ts">subscribeMemberToASubscription</a>({ ...params }) -> BrevoApi.SubscribeMemberToASubscriptionResponse</code></summary>
+<details><summary><code>$client-&gt;program-&gt;subscribeMemberToASubscription($pid, $request) -> SubscribeMemberToASubscriptionResponse</code></summary>
 <dl>
 <dd>
 
@@ -10333,12 +12408,15 @@ Add member to a subscription
 <dl>
 <dd>
 
-```typescript
-await client.program.subscribeMemberToASubscription({
-    pid: "pid",
-    memberContactIds: [1]
-});
-
+```php
+$client->program->subscribeMemberToASubscription(
+    'pid',
+    new SubscribeMemberToASubscriptionRequest([
+        'memberContactIds' => [
+            1,
+        ],
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -10353,7 +12431,7 @@ await client.program.subscribeMemberToASubscription({
 <dl>
 <dd>
 
-**request:** `BrevoApi.SubscribeMemberToASubscriptionRequest` 
+**$pid:** `string` — Loyalty Program ID. A unique identifier for the loyalty program.
     
 </dd>
 </dl>
@@ -10361,7 +12439,23 @@ await client.program.subscribeMemberToASubscription({
 <dl>
 <dd>
 
-**requestOptions:** `ProgramClient.RequestOptions` 
+**$contactId:** `?int` — Required if LoyaltySubscriptionId is not provided, must be greater than 0
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$loyaltySubscriptionId:** `?string` — Required if ContactId is not provided, max length 64
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$memberContactIds:** `array` — Required, each item must be greater than or equal to 1
     
 </dd>
 </dl>
@@ -10373,7 +12467,7 @@ await client.program.subscribeMemberToASubscription({
 </dl>
 </details>
 
-<details><summary><code>client.program.<a href="/src/api/resources/program/client/Client.ts">deleteContactMembers</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;program-&gt;deleteContactMembers($pid, $request)</code></summary>
 <dl>
 <dd>
 
@@ -10399,12 +12493,13 @@ Deletes member from a subscription
 <dl>
 <dd>
 
-```typescript
-await client.program.deleteContactMembers({
-    pid: "pid",
-    memberContactIds: "memberContactIds"
-});
-
+```php
+$client->program->deleteContactMembers(
+    'pid',
+    new DeleteContactMembersRequest([
+        'memberContactIds' => 'memberContactIds',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -10419,7 +12514,7 @@ await client.program.deleteContactMembers({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteContactMembersRequest` 
+**$pid:** `string` — Loyalty Program ID. A unique identifier for the loyalty program.
     
 </dd>
 </dl>
@@ -10427,7 +12522,7 @@ await client.program.deleteContactMembers({
 <dl>
 <dd>
 
-**requestOptions:** `ProgramClient.RequestOptions` 
+**$memberContactIds:** `string` — Comma-separated list of member contact IDs to delete from the subscription.
     
 </dd>
 </dl>
@@ -10439,7 +12534,7 @@ await client.program.deleteContactMembers({
 </dl>
 </details>
 
-<details><summary><code>client.program.<a href="/src/api/resources/program/client/Client.ts">subscribeToLoyaltyProgram</a>({ ...params }) -> BrevoApi.SubscribeToLoyaltyProgramResponse</code></summary>
+<details><summary><code>$client-&gt;program-&gt;subscribeToLoyaltyProgram($pid, $request) -> SubscribeToLoyaltyProgramResponse</code></summary>
 <dl>
 <dd>
 
@@ -10465,12 +12560,13 @@ Subscribes to a loyalty program
 <dl>
 <dd>
 
-```typescript
-await client.program.subscribeToLoyaltyProgram({
-    pid: "pid",
-    contactId: 1
-});
-
+```php
+$client->program->subscribeToLoyaltyProgram(
+    'pid',
+    new SubscribeToLoyaltyProgramRequest([
+        'contactId' => 1,
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -10485,7 +12581,7 @@ await client.program.subscribeToLoyaltyProgram({
 <dl>
 <dd>
 
-**request:** `BrevoApi.SubscribeToLoyaltyProgramRequest` 
+**$pid:** `string` — Loyalty Program ID. A unique identifier for the loyalty program.
     
 </dd>
 </dl>
@@ -10493,7 +12589,23 @@ await client.program.subscribeToLoyaltyProgram({
 <dl>
 <dd>
 
-**requestOptions:** `ProgramClient.RequestOptions` 
+**$contactId:** `int` — Required contact ID; must be greater than 0.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$creationDate:** `?string` — Optional custom date-time format.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$loyaltySubscriptionId:** `?string` — Optional subscription ID (max length 64).
     
 </dd>
 </dl>
@@ -10506,7 +12618,7 @@ await client.program.subscribeToLoyaltyProgram({
 </details>
 
 ## Reward
-<details><summary><code>client.reward.<a href="/src/api/resources/reward/client/Client.ts">getCodeCount</a>({ ...params }) -> BrevoApi.GetCodeCountResponse</code></summary>
+<details><summary><code>$client-&gt;reward-&gt;getCodeCount($pid, $cpid) -> GetCodeCountResponse</code></summary>
 <dl>
 <dd>
 
@@ -10532,12 +12644,11 @@ Get code count
 <dl>
 <dd>
 
-```typescript
-await client.reward.getCodeCount({
-    pid: "pid",
-    cpid: "cpid"
-});
-
+```php
+$client->reward->getCodeCount(
+    'pid',
+    'cpid',
+);
 ```
 </dd>
 </dl>
@@ -10552,7 +12663,7 @@ await client.reward.getCodeCount({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCodeCountRequest` 
+**$pid:** `string` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -10560,7 +12671,7 @@ await client.reward.getCodeCount({
 <dl>
 <dd>
 
-**requestOptions:** `RewardClient.RequestOptions` 
+**$cpid:** `string` — Code Pool ID
     
 </dd>
 </dl>
@@ -10572,7 +12683,7 @@ await client.reward.getCodeCount({
 </dl>
 </details>
 
-<details><summary><code>client.reward.<a href="/src/api/resources/reward/client/Client.ts">getRewardPageApi</a>({ ...params }) -> BrevoApi.GetLoyaltyOfferProgramsPidOffersResponse</code></summary>
+<details><summary><code>$client-&gt;reward-&gt;getRewardPageApi($pid, $request) -> GetLoyaltyOfferProgramsPidOffersResponse</code></summary>
 <dl>
 <dd>
 
@@ -10598,11 +12709,11 @@ Returns a reward page
 <dl>
 <dd>
 
-```typescript
-await client.reward.getRewardPageApi({
-    pid: "pid"
-});
-
+```php
+$client->reward->getRewardPageApi(
+    'pid',
+    new GetLoyaltyOfferProgramsPidOffersRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -10617,7 +12728,7 @@ await client.reward.getRewardPageApi({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetLoyaltyOfferProgramsPidOffersRequest` 
+**$pid:** `string` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -10625,7 +12736,31 @@ await client.reward.getRewardPageApi({
 <dl>
 <dd>
 
-**requestOptions:** `RewardClient.RequestOptions` 
+**$limit:** `?int` — Page size
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$offset:** `?int` — Pagination offset
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$state:** `?string` — State of the reward
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$version:** `?string` — Version
     
 </dd>
 </dl>
@@ -10637,7 +12772,7 @@ await client.reward.getRewardPageApi({
 </dl>
 </details>
 
-<details><summary><code>client.reward.<a href="/src/api/resources/reward/client/Client.ts">createReward</a>({ ...params }) -> BrevoApi.CreateRewardResponse</code></summary>
+<details><summary><code>$client-&gt;reward-&gt;createReward($pid, $request) -> CreateRewardResponse</code></summary>
 <dl>
 <dd>
 
@@ -10663,12 +12798,13 @@ Creates a new reward in the loyalty program.
 <dl>
 <dd>
 
-```typescript
-await client.reward.createReward({
-    pid: "pid",
-    name: "name"
-});
-
+```php
+$client->reward->createReward(
+    'pid',
+    new CreateRewardRequest([
+        'name' => 'name',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -10683,7 +12819,7 @@ await client.reward.createReward({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateRewardRequest` 
+**$pid:** `string` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -10691,7 +12827,31 @@ await client.reward.createReward({
 <dl>
 <dd>
 
-**requestOptions:** `RewardClient.RequestOptions` 
+**$name:** `string` — Internal name of the reward
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$publicDescription:** `?string` — Public facing description of the reward
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$publicImage:** `?string` — URL of the public image for the reward
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$publicName:** `?string` — Public facing name of the reward
     
 </dd>
 </dl>
@@ -10703,7 +12863,7 @@ await client.reward.createReward({
 </dl>
 </details>
 
-<details><summary><code>client.reward.<a href="/src/api/resources/reward/client/Client.ts">createVoucher</a>({ ...params }) -> BrevoApi.CreateVoucherResponse</code></summary>
+<details><summary><code>$client-&gt;reward-&gt;createVoucher($pid, $request) -> CreateVoucherResponse</code></summary>
 <dl>
 <dd>
 
@@ -10729,12 +12889,13 @@ Create a voucher and attribute it to a specific membership.
 <dl>
 <dd>
 
-```typescript
-await client.reward.createVoucher({
-    pid: "pid",
-    rewardId: "rewardId"
-});
-
+```php
+$client->reward->createVoucher(
+    'pid',
+    new CreateVoucherRequest([
+        'rewardId' => 'rewardId',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -10749,7 +12910,7 @@ await client.reward.createVoucher({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateVoucherRequest` 
+**$pid:** `string` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -10757,7 +12918,55 @@ await client.reward.createVoucher({
 <dl>
 <dd>
 
-**requestOptions:** `RewardClient.RequestOptions` 
+**$code:** `?string` — Code generated to attribute reward to a contact
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$contactId:** `?int` — Contact to attribute the reward
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$expirationDate:** `?string` — Reward expiration date
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$loyaltySubscriptionId:** `?string` — One of contactId or loyaltySubscriptionId is required
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$meta:** `?array` — Offer meta information (key/value object)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$rewardId:** `string` — Reward id
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$value:** `?float` — Value of the selected reward config
     
 </dd>
 </dl>
@@ -10769,7 +12978,7 @@ await client.reward.createVoucher({
 </dl>
 </details>
 
-<details><summary><code>client.reward.<a href="/src/api/resources/reward/client/Client.ts">redeemVoucher</a>({ ...params }) -> BrevoApi.Redeem</code></summary>
+<details><summary><code>$client-&gt;reward-&gt;redeemVoucher($pid, $request) -> Redeem</code></summary>
 <dl>
 <dd>
 
@@ -10795,11 +13004,11 @@ Creates a request to redeem a voucher.
 <dl>
 <dd>
 
-```typescript
-await client.reward.redeemVoucher({
-    pid: "pid"
-});
-
+```php
+$client->reward->redeemVoucher(
+    'pid',
+    new RedeemVoucherRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -10814,7 +13023,7 @@ await client.reward.redeemVoucher({
 <dl>
 <dd>
 
-**request:** `BrevoApi.RedeemVoucherRequest` 
+**$pid:** `string` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -10822,7 +13031,63 @@ await client.reward.redeemVoucher({
 <dl>
 <dd>
 
-**requestOptions:** `RewardClient.RequestOptions` 
+**$attributedRewardId:** `?string` — Unique identifier for the attributed reward
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$code:** `?string` — Redemption code for the reward
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$contactId:** `?int` — Unique identifier for the contact
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$loyaltySubscriptionId:** `?string` — Identifier for the loyalty subscription
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$meta:** `?array` — Additional metadata associated with the redeem request
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$order:** `?RedeemVoucherRequestOrder` — Order details for the redemption
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$rewardId:** `?string` — Unique identifier for the reward
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$ttl:** `?int` — Time to live in seconds for the redemption request
     
 </dd>
 </dl>
@@ -10834,7 +13099,7 @@ await client.reward.redeemVoucher({
 </dl>
 </details>
 
-<details><summary><code>client.reward.<a href="/src/api/resources/reward/client/Client.ts">completeRedeemTransaction</a>({ ...params }) -> BrevoApi.Redeem</code></summary>
+<details><summary><code>$client-&gt;reward-&gt;completeRedeemTransaction($pid, $tid) -> Redeem</code></summary>
 <dl>
 <dd>
 
@@ -10860,12 +13125,11 @@ Completes voucher redeem request.
 <dl>
 <dd>
 
-```typescript
-await client.reward.completeRedeemTransaction({
-    pid: "pid",
-    tid: "tid"
-});
-
+```php
+$client->reward->completeRedeemTransaction(
+    'pid',
+    'tid',
+);
 ```
 </dd>
 </dl>
@@ -10880,7 +13144,7 @@ await client.reward.completeRedeemTransaction({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CompleteRedeemTransactionRequest` 
+**$pid:** `string` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -10888,7 +13152,7 @@ await client.reward.completeRedeemTransaction({
 <dl>
 <dd>
 
-**requestOptions:** `RewardClient.RequestOptions` 
+**$tid:** `string` — Redeem transaction ID
     
 </dd>
 </dl>
@@ -10900,7 +13164,7 @@ await client.reward.completeRedeemTransaction({
 </dl>
 </details>
 
-<details><summary><code>client.reward.<a href="/src/api/resources/reward/client/Client.ts">revokeVouchers</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;reward-&gt;revokeVouchers($pid, $request)</code></summary>
 <dl>
 <dd>
 
@@ -10926,11 +13190,11 @@ Revoke attributed vouchers.
 <dl>
 <dd>
 
-```typescript
-await client.reward.revokeVouchers({
-    pid: "pid"
-});
-
+```php
+$client->reward->revokeVouchers(
+    'pid',
+    new RevokeVouchersRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -10945,7 +13209,7 @@ await client.reward.revokeVouchers({
 <dl>
 <dd>
 
-**request:** `BrevoApi.RevokeVouchersRequest` 
+**$pid:** `string` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -10953,7 +13217,7 @@ await client.reward.revokeVouchers({
 <dl>
 <dd>
 
-**requestOptions:** `RewardClient.RequestOptions` 
+**$attributedRewardIds:** `?string` — Reward Attribution IDs (comma seperated)
     
 </dd>
 </dl>
@@ -10965,7 +13229,7 @@ await client.reward.revokeVouchers({
 </dl>
 </details>
 
-<details><summary><code>client.reward.<a href="/src/api/resources/reward/client/Client.ts">validateReward</a>({ ...params }) -> BrevoApi.ValidateRewardResponse</code></summary>
+<details><summary><code>$client-&gt;reward-&gt;validateReward($pid, $request) -> ValidateRewardResponse</code></summary>
 <dl>
 <dd>
 
@@ -10991,11 +13255,11 @@ Validates a reward.
 <dl>
 <dd>
 
-```typescript
-await client.reward.validateReward({
-    pid: "pid"
-});
-
+```php
+$client->reward->validateReward(
+    'pid',
+    new ValidateRewardRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -11010,7 +13274,7 @@ await client.reward.validateReward({
 <dl>
 <dd>
 
-**request:** `BrevoApi.ValidateRewardRequest` 
+**$pid:** `string` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -11018,7 +13282,47 @@ await client.reward.validateReward({
 <dl>
 <dd>
 
-**requestOptions:** `RewardClient.RequestOptions` 
+**$attributedRewardId:** `?string` — Unique identifier for the attributed reward
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$code:** `?string` — Validation code for the reward
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$contactId:** `?int` — Unique identifier for the contact
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$loyaltySubscriptionId:** `?string` — Identifier for the loyalty subscription
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$pointOfSellId:** `?string` — Identifier for the point of sale
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$rewardId:** `?string` — Unique identifier for the reward
     
 </dd>
 </dl>
@@ -11030,7 +13334,7 @@ await client.reward.validateReward({
 </dl>
 </details>
 
-<details><summary><code>client.reward.<a href="/src/api/resources/reward/client/Client.ts">getRewardInformation</a>({ ...params }) -> BrevoApi.GetLoyaltyOfferProgramsPidRewardsRidResponse</code></summary>
+<details><summary><code>$client-&gt;reward-&gt;getRewardInformation($pid, $rid, $request) -> GetLoyaltyOfferProgramsPidRewardsRidResponse</code></summary>
 <dl>
 <dd>
 
@@ -11056,12 +13360,12 @@ Returns reward information.
 <dl>
 <dd>
 
-```typescript
-await client.reward.getRewardInformation({
-    pid: "pid",
-    rid: "rid"
-});
-
+```php
+$client->reward->getRewardInformation(
+    'pid',
+    'rid',
+    new GetLoyaltyOfferProgramsPidRewardsRidRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -11076,7 +13380,7 @@ await client.reward.getRewardInformation({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetLoyaltyOfferProgramsPidRewardsRidRequest` 
+**$pid:** `string` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -11084,7 +13388,15 @@ await client.reward.getRewardInformation({
 <dl>
 <dd>
 
-**requestOptions:** `RewardClient.RequestOptions` 
+**$rid:** `string` — Reward ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$version:** `?string` — Version
     
 </dd>
 </dl>
@@ -11096,7 +13408,7 @@ await client.reward.getRewardInformation({
 </dl>
 </details>
 
-<details><summary><code>client.reward.<a href="/src/api/resources/reward/client/Client.ts">getVoucherForAContact</a>({ ...params }) -> BrevoApi.GetLoyaltyOfferProgramsPidVouchersResponse</code></summary>
+<details><summary><code>$client-&gt;reward-&gt;getVoucherForAContact($pid, $request) -> GetLoyaltyOfferProgramsPidVouchersResponse</code></summary>
 <dl>
 <dd>
 
@@ -11122,12 +13434,13 @@ Get voucher for a contact
 <dl>
 <dd>
 
-```typescript
-await client.reward.getVoucherForAContact({
-    pid: "pid",
-    contactId: 1
-});
-
+```php
+$client->reward->getVoucherForAContact(
+    'pid',
+    new GetLoyaltyOfferProgramsPidVouchersRequest([
+        'contactId' => 1,
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -11142,7 +13455,7 @@ await client.reward.getVoucherForAContact({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetLoyaltyOfferProgramsPidVouchersRequest` 
+**$pid:** `string` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -11150,7 +13463,55 @@ await client.reward.getVoucherForAContact({
 <dl>
 <dd>
 
-**requestOptions:** `RewardClient.RequestOptions` 
+**$limit:** `?int` — Page size
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$offset:** `?int` — Pagination offset
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort order
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sortField:** `?string` — Sort field
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$contactId:** `int` — Contact ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$metadataKeyValue:** `?string` — Metadata value for a Key filter
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$rewardId:** `?string` — Reward ID
     
 </dd>
 </dl>
@@ -11163,7 +13524,7 @@ await client.reward.getVoucherForAContact({
 </details>
 
 ## Tier
-<details><summary><code>client.tier.<a href="/src/api/resources/tier/client/Client.ts">addSubscriptionToTier</a>({ ...params }) -> BrevoApi.AddSubscriptionToTierResponse</code></summary>
+<details><summary><code>$client-&gt;tier-&gt;addSubscriptionToTier($pid, $cid, $tid) -> AddSubscriptionToTierResponse</code></summary>
 <dl>
 <dd>
 
@@ -11189,13 +13550,12 @@ Manually assigns a tier to a specific membership.
 <dl>
 <dd>
 
-```typescript
-await client.tier.addSubscriptionToTier({
-    pid: "pid",
-    cid: "cid",
-    tid: "tid"
-});
-
+```php
+$client->tier->addSubscriptionToTier(
+    'pid',
+    'cid',
+    'tid',
+);
 ```
 </dd>
 </dl>
@@ -11210,7 +13570,7 @@ await client.tier.addSubscriptionToTier({
 <dl>
 <dd>
 
-**request:** `BrevoApi.AddSubscriptionToTierRequest` 
+**$pid:** `string` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -11218,7 +13578,15 @@ await client.tier.addSubscriptionToTier({
 <dl>
 <dd>
 
-**requestOptions:** `TierClient.RequestOptions` 
+**$cid:** `string` — Contact ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$tid:** `string` — Tier ID
     
 </dd>
 </dl>
@@ -11230,7 +13598,7 @@ await client.tier.addSubscriptionToTier({
 </dl>
 </details>
 
-<details><summary><code>client.tier.<a href="/src/api/resources/tier/client/Client.ts">getListOfTierGroups</a>({ ...params }) -> BrevoApi.GetListOfTierGroupsResponse</code></summary>
+<details><summary><code>$client-&gt;tier-&gt;getListOfTierGroups($pid, $request) -> GetListOfTierGroupsResponse</code></summary>
 <dl>
 <dd>
 
@@ -11256,11 +13624,11 @@ Returns the list of tier groups defined within the loyalty program.
 <dl>
 <dd>
 
-```typescript
-await client.tier.getListOfTierGroups({
-    pid: "pid"
-});
-
+```php
+$client->tier->getListOfTierGroups(
+    'pid',
+    new GetListOfTierGroupsRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -11275,7 +13643,7 @@ await client.tier.getListOfTierGroups({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetListOfTierGroupsRequest` 
+**$pid:** `string` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -11283,7 +13651,7 @@ await client.tier.getListOfTierGroups({
 <dl>
 <dd>
 
-**requestOptions:** `TierClient.RequestOptions` 
+**$version:** `?string` — Select 'active' to retrieve list of all tier groups which are live for clients. Select draft to retrieve list of all non deleted tier groups.
     
 </dd>
 </dl>
@@ -11295,7 +13663,7 @@ await client.tier.getListOfTierGroups({
 </dl>
 </details>
 
-<details><summary><code>client.tier.<a href="/src/api/resources/tier/client/Client.ts">createTierGroup</a>({ ...params }) -> BrevoApi.TierGroup</code></summary>
+<details><summary><code>$client-&gt;tier-&gt;createTierGroup($pid, $request) -> TierGroup</code></summary>
 <dl>
 <dd>
 
@@ -11321,12 +13689,13 @@ Creates a new tier group in a loyalty program. *(The changes will take effect wi
 <dl>
 <dd>
 
-```typescript
-await client.tier.createTierGroup({
-    pid: "pid",
-    name: "name"
-});
-
+```php
+$client->tier->createTierGroup(
+    'pid',
+    new CreateTierGroupRequest([
+        'name' => 'name',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -11341,7 +13710,7 @@ await client.tier.createTierGroup({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateTierGroupRequest` 
+**$pid:** `string` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -11349,7 +13718,31 @@ await client.tier.createTierGroup({
 <dl>
 <dd>
 
-**requestOptions:** `TierClient.RequestOptions` 
+**$downgradeStrategy:** `?string` — Select real_time to downgrade tier on real time balance updates. Select membership_anniversary to downgrade tier on subscription anniversary. Select tier_anniversary to downgrade tier on tier anniversary.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$name:** `string` — Name of the tier group
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$tierOrder:** `?array` — Order of the tiers in the group in ascending order
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$upgradeStrategy:** `?string` — Select real_time to upgrade tier on real time balance updates. Select membership_anniversary to upgrade tier on subscription anniversary. Select tier_anniversary to upgrade tier on tier anniversary.
     
 </dd>
 </dl>
@@ -11361,7 +13754,7 @@ await client.tier.createTierGroup({
 </dl>
 </details>
 
-<details><summary><code>client.tier.<a href="/src/api/resources/tier/client/Client.ts">getTierGroup</a>({ ...params }) -> BrevoApi.TierGroup</code></summary>
+<details><summary><code>$client-&gt;tier-&gt;getTierGroup($pid, $gid, $request) -> TierGroup</code></summary>
 <dl>
 <dd>
 
@@ -11387,12 +13780,12 @@ Returns tier group information.
 <dl>
 <dd>
 
-```typescript
-await client.tier.getTierGroup({
-    pid: "pid",
-    gid: "gid"
-});
-
+```php
+$client->tier->getTierGroup(
+    'pid',
+    'gid',
+    new GetTierGroupRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -11407,7 +13800,7 @@ await client.tier.getTierGroup({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetTierGroupRequest` 
+**$pid:** `string` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -11415,7 +13808,15 @@ await client.tier.getTierGroup({
 <dl>
 <dd>
 
-**requestOptions:** `TierClient.RequestOptions` 
+**$gid:** `string` — Tier group ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$version:** `?string` — Select active to retrieve active version of tier group. Select draft to retrieve latest changes in tier group.
     
 </dd>
 </dl>
@@ -11427,7 +13828,7 @@ await client.tier.getTierGroup({
 </dl>
 </details>
 
-<details><summary><code>client.tier.<a href="/src/api/resources/tier/client/Client.ts">updateTierGroup</a>({ ...params }) -> BrevoApi.TierGroup</code></summary>
+<details><summary><code>$client-&gt;tier-&gt;updateTierGroup($pid, $gid, $request) -> TierGroup</code></summary>
 <dl>
 <dd>
 
@@ -11453,16 +13854,19 @@ Updates a tier group from a loyalty program. *(The changes will take effect with
 <dl>
 <dd>
 
-```typescript
-await client.tier.updateTierGroup({
-    pid: "pid",
-    gid: "gid",
-    downgradeStrategy: "real_time",
-    name: "name",
-    tierOrder: ["tierOrder"],
-    upgradeStrategy: "real_time"
-});
-
+```php
+$client->tier->updateTierGroup(
+    'pid',
+    'gid',
+    new UpdateTierGroupRequest([
+        'downgradeStrategy' => UpdateTierGroupRequestDowngradeStrategy::RealTime->value,
+        'name' => 'name',
+        'tierOrder' => [
+            'tierOrder',
+        ],
+        'upgradeStrategy' => UpdateTierGroupRequestUpgradeStrategy::RealTime->value,
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -11477,7 +13881,7 @@ await client.tier.updateTierGroup({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateTierGroupRequest` 
+**$pid:** `string` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -11485,7 +13889,39 @@ await client.tier.updateTierGroup({
 <dl>
 <dd>
 
-**requestOptions:** `TierClient.RequestOptions` 
+**$gid:** `string` — Tier group ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$downgradeStrategy:** `string` — Select real_time to downgrade tier on real time balance updates. Select membership_anniversary to downgrade tier on subscription anniversary. Select tier_anniversary to downgrade tier on tier anniversary.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$name:** `string` — Name of the tier group
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$tierOrder:** `array` — Order of the tiers in the group in ascending order
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$upgradeStrategy:** `string` — Select real_time to upgrade tier on real time balance updates. Select membership_anniversary to upgrade tier on subscription anniversary. Select tier_anniversary to upgrade tier on tier anniversary.
     
 </dd>
 </dl>
@@ -11497,7 +13933,7 @@ await client.tier.updateTierGroup({
 </dl>
 </details>
 
-<details><summary><code>client.tier.<a href="/src/api/resources/tier/client/Client.ts">deleteTierGroup</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;tier-&gt;deleteTierGroup($pid, $gid)</code></summary>
 <dl>
 <dd>
 
@@ -11523,12 +13959,11 @@ Deletes a tier group from a loyalty program. *(The changes will take effect with
 <dl>
 <dd>
 
-```typescript
-await client.tier.deleteTierGroup({
-    pid: "pid",
-    gid: "gid"
-});
-
+```php
+$client->tier->deleteTierGroup(
+    'pid',
+    'gid',
+);
 ```
 </dd>
 </dl>
@@ -11543,7 +13978,7 @@ await client.tier.deleteTierGroup({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteTierGroupRequest` 
+**$pid:** `string` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -11551,7 +13986,7 @@ await client.tier.deleteTierGroup({
 <dl>
 <dd>
 
-**requestOptions:** `TierClient.RequestOptions` 
+**$gid:** `string` — Tier group ID
     
 </dd>
 </dl>
@@ -11563,7 +13998,7 @@ await client.tier.deleteTierGroup({
 </dl>
 </details>
 
-<details><summary><code>client.tier.<a href="/src/api/resources/tier/client/Client.ts">createTierForTierGroup</a>({ ...params }) -> BrevoApi.Tier</code></summary>
+<details><summary><code>$client-&gt;tier-&gt;createTierForTierGroup($pid, $gid, $request) -> Tier</code></summary>
 <dl>
 <dd>
 
@@ -11589,14 +14024,17 @@ Creates a new tier in a loyalty program tier group. *(The changes will take effe
 <dl>
 <dd>
 
-```typescript
-await client.tier.createTierForTierGroup({
-    pid: "pid",
-    gid: "gid",
-    accessConditions: [{}],
-    name: "name"
-});
-
+```php
+$client->tier->createTierForTierGroup(
+    'pid',
+    'gid',
+    new CreateTierForTierGroupRequest([
+        'accessConditions' => [
+            new CreateTierForTierGroupRequestAccessConditionsItem([]),
+        ],
+        'name' => 'name',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -11611,7 +14049,7 @@ await client.tier.createTierForTierGroup({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateTierForTierGroupRequest` 
+**$pid:** `string` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -11619,7 +14057,39 @@ await client.tier.createTierForTierGroup({
 <dl>
 <dd>
 
-**requestOptions:** `TierClient.RequestOptions` 
+**$gid:** `string` — Tier group ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$accessConditions:** `array` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$imageRef:** `?string` — Image of the tier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$name:** `string` — Name of the tier to be created
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$tierRewards:** `?array` 
     
 </dd>
 </dl>
@@ -11631,7 +14101,7 @@ await client.tier.createTierForTierGroup({
 </dl>
 </details>
 
-<details><summary><code>client.tier.<a href="/src/api/resources/tier/client/Client.ts">getLoyaltyProgramTier</a>({ ...params }) -> BrevoApi.GetLoyaltyProgramTierResponse</code></summary>
+<details><summary><code>$client-&gt;tier-&gt;getLoyaltyProgramTier($pid, $request) -> GetLoyaltyProgramTierResponse</code></summary>
 <dl>
 <dd>
 
@@ -11657,11 +14127,11 @@ Returns the list of tiers defined within the loyalty program.
 <dl>
 <dd>
 
-```typescript
-await client.tier.getLoyaltyProgramTier({
-    pid: "pid"
-});
-
+```php
+$client->tier->getLoyaltyProgramTier(
+    'pid',
+    new GetLoyaltyProgramTierRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -11676,7 +14146,7 @@ await client.tier.getLoyaltyProgramTier({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetLoyaltyProgramTierRequest` 
+**$pid:** `string` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -11684,7 +14154,7 @@ await client.tier.getLoyaltyProgramTier({
 <dl>
 <dd>
 
-**requestOptions:** `TierClient.RequestOptions` 
+**$version:** `?string` — Select 'active' to retrieve list of all tiers which are live for clients. Select draft to retrieve list of all non deleted tiers.
     
 </dd>
 </dl>
@@ -11696,7 +14166,7 @@ await client.tier.getLoyaltyProgramTier({
 </dl>
 </details>
 
-<details><summary><code>client.tier.<a href="/src/api/resources/tier/client/Client.ts">updateTier</a>({ ...params }) -> BrevoApi.Tier</code></summary>
+<details><summary><code>$client-&gt;tier-&gt;updateTier($pid, $tid, $request) -> Tier</code></summary>
 <dl>
 <dd>
 
@@ -11722,15 +14192,20 @@ Modifies an existing tier for the specified tier group *(The changes will take e
 <dl>
 <dd>
 
-```typescript
-await client.tier.updateTier({
-    pid: "pid",
-    tid: "tid",
-    accessConditions: [{}],
-    name: "name",
-    tierRewards: [{}]
-});
-
+```php
+$client->tier->updateTier(
+    'pid',
+    'tid',
+    new UpdateTierRequest([
+        'accessConditions' => [
+            new UpdateTierRequestAccessConditionsItem([]),
+        ],
+        'name' => 'name',
+        'tierRewards' => [
+            new UpdateTierRequestTierRewardsItem([]),
+        ],
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -11745,7 +14220,7 @@ await client.tier.updateTier({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateTierRequest` 
+**$pid:** `string` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -11753,7 +14228,39 @@ await client.tier.updateTier({
 <dl>
 <dd>
 
-**requestOptions:** `TierClient.RequestOptions` 
+**$tid:** `string` — Tier ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$accessConditions:** `array` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$imageRef:** `?string` — Image of the tier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$name:** `string` — Name of the tier to be created
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$tierRewards:** `array` 
     
 </dd>
 </dl>
@@ -11765,7 +14272,7 @@ await client.tier.updateTier({
 </dl>
 </details>
 
-<details><summary><code>client.tier.<a href="/src/api/resources/tier/client/Client.ts">deleteTier</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;tier-&gt;deleteTier($pid, $tid)</code></summary>
 <dl>
 <dd>
 
@@ -11791,12 +14298,11 @@ Deletes a tier from a loyalty program tier group. *(The changes will take effect
 <dl>
 <dd>
 
-```typescript
-await client.tier.deleteTier({
-    pid: "pid",
-    tid: "tid"
-});
-
+```php
+$client->tier->deleteTier(
+    'pid',
+    'tid',
+);
 ```
 </dd>
 </dl>
@@ -11811,7 +14317,7 @@ await client.tier.deleteTier({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteTierRequest` 
+**$pid:** `string` — Loyalty Program ID
     
 </dd>
 </dl>
@@ -11819,7 +14325,7 @@ await client.tier.deleteTier({
 <dl>
 <dd>
 
-**requestOptions:** `TierClient.RequestOptions` 
+**$tid:** `string` — Tier ID
     
 </dd>
 </dl>
@@ -11832,7 +14338,7 @@ await client.tier.deleteTier({
 </details>
 
 ## EmailCampaigns
-<details><summary><code>client.emailCampaigns.<a href="/src/api/resources/emailCampaigns/client/Client.ts">getEmailCampaigns</a>({ ...params }) -> BrevoApi.GetEmailCampaignsResponse</code></summary>
+<details><summary><code>$client-&gt;emailCampaigns-&gt;getEmailCampaigns($request) -> GetEmailCampaignsResponse</code></summary>
 <dl>
 <dd>
 
@@ -11862,9 +14368,10 @@ You now need to specify which type of statistics you would like to retrieve. For
 <dl>
 <dd>
 
-```typescript
-await client.emailCampaigns.getEmailCampaigns();
-
+```php
+$client->emailCampaigns->getEmailCampaigns(
+    new GetEmailCampaignsRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -11879,7 +14386,7 @@ await client.emailCampaigns.getEmailCampaigns();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetEmailCampaignsRequest` 
+**$type:** `?string` — Filter on the type of the campaigns
     
 </dd>
 </dl>
@@ -11887,7 +14394,63 @@ await client.emailCampaigns.getEmailCampaigns();
 <dl>
 <dd>
 
-**requestOptions:** `EmailCampaignsClient.RequestOptions` 
+**$status:** `?string` — Filter on the status of the campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$statistics:** `?string` — Filter on type of the statistics required. Example **globalStats** value will only fetch globalStats info of the campaign in returned response.This option only returns data for events occurred in the last 6 months.For older campaigns, it’s advisable to use the **Get Campaign Report** endpoint.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$startDate:** `?string` — **Mandatory if endDate is used**. Starting (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to filter the sent email campaigns. **Prefer to pass your timezone in date-time format for accurate result** ( only available if either 'status' not passed and if passed is set to 'sent' )
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$endDate:** `?string` — **Mandatory if startDate is used**. Ending (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to filter the sent email campaigns. **Prefer to pass your timezone in date-time format for accurate result** ( only available if either 'status' not passed and if passed is set to 'sent' )
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$limit:** `?int` — Number of documents per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$offset:** `?int` — Index of the first document in the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$excludeHtmlContent:** `?bool` — Use this flag to exclude htmlContent from the response body. If set to **true**, htmlContent field will be returned as empty string in the response body
     
 </dd>
 </dl>
@@ -11899,7 +14462,7 @@ await client.emailCampaigns.getEmailCampaigns();
 </dl>
 </details>
 
-<details><summary><code>client.emailCampaigns.<a href="/src/api/resources/emailCampaigns/client/Client.ts">createEmailCampaign</a>({ ...params }) -> BrevoApi.CreateEmailCampaignResponse</code></summary>
+<details><summary><code>$client-&gt;emailCampaigns-&gt;createEmailCampaign($request) -> CreateEmailCampaignResponse</code></summary>
 <dl>
 <dd>
 
@@ -11911,12 +14474,13 @@ await client.emailCampaigns.getEmailCampaigns();
 <dl>
 <dd>
 
-```typescript
-await client.emailCampaigns.createEmailCampaign({
-    name: "Newsletter - May 2017",
-    sender: {}
-});
-
+```php
+$client->emailCampaigns->createEmailCampaign(
+    new CreateEmailCampaignRequest([
+        'name' => 'Newsletter - May 2017',
+        'sender' => new CreateEmailCampaignRequestSender([]),
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -11931,7 +14495,7 @@ await client.emailCampaigns.createEmailCampaign({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateEmailCampaignRequest` 
+**$abTesting:** `?bool` — Status of A/B Test. abTesting = false means it is disabled & abTesting = true means it is enabled. **subjectA, subjectB, splitRule, winnerCriteria & winnerDelay** will be considered when abTesting is set to true. subjectA & subjectB are mandatory together & subject if passed is ignored. **Can be set to true only if sendAtBestTime is false**. You will be able to set up two subject lines for your campaign and send them to a random sample of your total recipients. Half of the test group will receive version A, and the other half will receive version B
     
 </dd>
 </dl>
@@ -11939,7 +14503,247 @@ await client.emailCampaigns.createEmailCampaign({
 <dl>
 <dd>
 
-**requestOptions:** `EmailCampaignsClient.RequestOptions` 
+**$attachmentUrl:** `?string` — Absolute url of the attachment (no local file). Extension allowed: #### xlsx, xls, ods, docx, docm, doc, csv, pdf, txt, gif, jpg, jpeg, png, tif, tiff, rtf, bmp, cgm, css, shtml, html, htm, zip, xml, ppt, pptx, tar, ez, ics, mobi, msg, pub and eps
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$emailExpirationDate:** `?CreateEmailCampaignRequestEmailExpirationDate` — To reduce your carbon footprint, set an expiration date for your email. If supported, it will be automatically deleted from the recipient’s inbox, saving storage space and energy. Learn more about setting an email expiration date. For reference , ``https://help.brevo.com/hc/en-us/articles/4413566705298-Create-an-email-campaign``
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$footer:** `?string` — Footer of the email campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$header:** `?string` — Header of the email campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$htmlContent:** `?string` — Mandatory if htmlUrl and templateId are empty. Body of the message (HTML).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$htmlUrl:** `?string` — **Mandatory if htmlContent and templateId are empty**. Url to the message (HTML). For example: **https://html.domain.com**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$increaseRate:** `?int` — **Mandatory if ipWarmupEnable is set to true**. Set a percentage increase rate for warming up your ip. We recommend you set the increase rate to 30% per day. If you want to send the same number of emails every day, set the daily increase value to 0%.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$initialQuota:** `?int` — **Mandatory if ipWarmupEnable is set to true**. Set an initial quota greater than 1 for warming up your ip. We recommend you set a value of 3000.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$inlineImageActivation:** `?bool` — Use true to embedded the images in your email. Final size of the email should be less than **4MB**. Campaigns with embedded images can _not be sent to more than 5000 contacts_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$ipWarmupEnable:** `?bool` — **Available for dedicated ip clients**. Set this to true if you wish to warm up your ip.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$mirrorActive:** `?bool` — Use true to enable the mirror link
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$name:** `string` — Name of the campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$params:** `?array` — Pass the set of attributes to customize the type classic campaign. For example: **{"FNAME":"Joe", "LNAME":"Doe"}**. Only available if **type** is **classic**. It's considered only if campaign is in _New Template Language format_. The New Template Language is dependent on the values of **subject, htmlContent/htmlUrl, sender.name & toField**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$previewText:** `?string` — Preview text or preheader of the email campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$recipients:** `?CreateEmailCampaignRequestRecipients` — Segment ids and List ids to include/exclude from campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$replyTo:** `?string` — Email on which the campaign recipients will be able to reply to
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$scheduledAt:** `?string` — Sending UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result**. If sendAtBestTime is set to true, your campaign will be sent according to the date passed (ignoring the time part). For example: **2017-06-01T12:30:00+02:00**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sendAtBestTime:** `?bool` — Set this to true if you want to send your campaign at best time.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sender:** `CreateEmailCampaignRequestSender` — Sender details including id or email and name (_optional_). Only one of either Sender's email or Sender's ID shall be passed in one request at a time. For example: **{"name":"xyz", "email":"example@abc.com"}** **{"name":"xyz", "id":123}**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$splitRule:** `?int` — Add the size of your test groups. **Mandatory if abTesting = true & 'recipients' is passed**. We'll send version A and B to a random sample of recipients, and then the winning version to everyone else
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$subject:** `?string` — Subject of the campaign. **Mandatory if abTesting is false**. Ignored if abTesting is true.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$subjectA:** `?string` — Subject A of the campaign. **Mandatory if abTesting = true**. subjectA & subjectB should have unique value
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$subjectB:** `?string` — Subject B of the campaign. **Mandatory if abTesting = true**. subjectA & subjectB should have unique value
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$tag:** `?string` — Tag of the campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$templateId:** `?int` — **Mandatory if htmlContent and htmlUrl are empty**. Id of the transactional email template with status _active_. Used to copy only its content fetched from htmlContent/htmlUrl to an email campaign for RSS feature.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$toField:** `?string` — To personalize the **To** Field. If you want to include the first name and last name of your recipient, add **{FNAME} {LNAME}**. These contact attributes must already exist in your Brevo account. If input parameter **params** used please use **{{contact.FNAME}} {{contact.LNAME}}** for personalization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$unsubscriptionPageId:** `?string` — Enter an unsubscription page id. The page id is a 24 digit alphanumeric id that can be found in the URL when editing the page. If not entered, then the default unsubscription page will be used.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$updateFormId:** `?string` — **Mandatory if templateId is used containing the {{ update_profile }} tag**. Enter an update profile form id. The form id is a 24 digit alphanumeric id that can be found in the URL when editing the form. If not entered, then the default update profile form will be used.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$utmCampaign:** `?string` — Customize the utm_campaign value. If this field is empty, the campaign name will be used. Only alphanumeric characters and spaces are allowed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$winnerCriteria:** `?string` — Choose the metrics that will determinate the winning version. **Mandatory if _splitRule_ >= 1 and < 50**. If splitRule = 50, `winnerCriteria` is ignored if passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$winnerDelay:** `?int` — Choose the duration of the test in hours. Maximum is 7 days, pass 24*7 = 168 hours. The winning version will be sent at the end of the test. **Mandatory if _splitRule_ >= 1 and < 50**. If splitRule = 50, `winnerDelay` is ignored if passed
     
 </dd>
 </dl>
@@ -11951,7 +14755,7 @@ await client.emailCampaigns.createEmailCampaign({
 </dl>
 </details>
 
-<details><summary><code>client.emailCampaigns.<a href="/src/api/resources/emailCampaigns/client/Client.ts">uploadImageToGallery</a>({ ...params }) -> BrevoApi.UploadImageToGalleryResponse</code></summary>
+<details><summary><code>$client-&gt;emailCampaigns-&gt;uploadImageToGallery($request) -> UploadImageToGalleryResponse</code></summary>
 <dl>
 <dd>
 
@@ -11963,11 +14767,12 @@ await client.emailCampaigns.createEmailCampaign({
 <dl>
 <dd>
 
-```typescript
-await client.emailCampaigns.uploadImageToGallery({
-    imageUrl: "https://somedomain.com/image1.jpg"
-});
-
+```php
+$client->emailCampaigns->uploadImageToGallery(
+    new UploadImageToGalleryRequest([
+        'imageUrl' => 'https://somedomain.com/image1.jpg',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -11982,7 +14787,7 @@ await client.emailCampaigns.uploadImageToGallery({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UploadImageToGalleryRequest` 
+**$imageUrl:** `string` — The absolute url of the image (**no local file**). Maximum allowed size for image is **2MB**. Allowed extensions for images are: #### jpeg, jpg, png, bmp, gif.
     
 </dd>
 </dl>
@@ -11990,7 +14795,7 @@ await client.emailCampaigns.uploadImageToGallery({
 <dl>
 <dd>
 
-**requestOptions:** `EmailCampaignsClient.RequestOptions` 
+**$name:** `?string` — Name of the image.
     
 </dd>
 </dl>
@@ -12002,7 +14807,7 @@ await client.emailCampaigns.uploadImageToGallery({
 </dl>
 </details>
 
-<details><summary><code>client.emailCampaigns.<a href="/src/api/resources/emailCampaigns/client/Client.ts">getEmailCampaign</a>({ ...params }) -> BrevoApi.GetEmailCampaignResponse</code></summary>
+<details><summary><code>$client-&gt;emailCampaigns-&gt;getEmailCampaign($campaignId, $request) -> GetEmailCampaignResponse</code></summary>
 <dl>
 <dd>
 
@@ -12014,11 +14819,11 @@ await client.emailCampaigns.uploadImageToGallery({
 <dl>
 <dd>
 
-```typescript
-await client.emailCampaigns.getEmailCampaign({
-    campaignId: 1000000
-});
-
+```php
+$client->emailCampaigns->getEmailCampaign(
+    1000000,
+    new GetEmailCampaignRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -12033,7 +14838,7 @@ await client.emailCampaigns.getEmailCampaign({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetEmailCampaignRequest` 
+**$campaignId:** `int` — Id of the campaign
     
 </dd>
 </dl>
@@ -12041,7 +14846,7 @@ await client.emailCampaigns.getEmailCampaign({
 <dl>
 <dd>
 
-**requestOptions:** `EmailCampaignsClient.RequestOptions` 
+**$statistics:** `?string` — Filter on type of the statistics required. Example **globalStats** value will only fetch globalStats info of the campaign in returned response.
     
 </dd>
 </dl>
@@ -12053,7 +14858,7 @@ await client.emailCampaigns.getEmailCampaign({
 </dl>
 </details>
 
-<details><summary><code>client.emailCampaigns.<a href="/src/api/resources/emailCampaigns/client/Client.ts">updateEmailCampaign</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;emailCampaigns-&gt;updateEmailCampaign($campaignId, $request)</code></summary>
 <dl>
 <dd>
 
@@ -12065,11 +14870,11 @@ await client.emailCampaigns.getEmailCampaign({
 <dl>
 <dd>
 
-```typescript
-await client.emailCampaigns.updateEmailCampaign({
-    campaignId: 1000000
-});
-
+```php
+$client->emailCampaigns->updateEmailCampaign(
+    1000000,
+    new UpdateEmailCampaignRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -12084,7 +14889,7 @@ await client.emailCampaigns.updateEmailCampaign({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateEmailCampaignRequest` 
+**$campaignId:** `int` — Id of the campaign
     
 </dd>
 </dl>
@@ -12092,7 +14897,255 @@ await client.emailCampaigns.updateEmailCampaign({
 <dl>
 <dd>
 
-**requestOptions:** `EmailCampaignsClient.RequestOptions` 
+**$abTesting:** `?bool` — Status of A/B Test. abTesting = false means it is disabled & abTesting = true means it is enabled. **subjectA, subjectB, splitRule, winnerCriteria & winnerDelay** will be considered when abTesting is set to true. subjectA & subjectB are mandatory together & subject if passed is ignored. **Can be set to true only if sendAtBestTime is false**. You will be able to set up two subject lines for your campaign and send them to a random sample of your total recipients. Half of the test group will receive version A, and the other half will receive version B
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$attachmentUrl:** `?string` — Absolute url of the attachment (no local file). Extension allowed: #### xlsx, xls, ods, docx, docm, doc, csv, pdf, txt, gif, jpg, jpeg, png, tif, tiff, rtf, bmp, cgm, css, shtml, html, htm, zip, xml, ppt, pptx, tar, ez, ics, mobi, msg, pub and eps'
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$emailExpirationDate:** `?UpdateEmailCampaignRequestEmailExpirationDate` — To reduce your carbon footprint, set an expiration date for your email. If supported, it will be automatically deleted from the recipient’s inbox, saving storage space and energy.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$footer:** `?string` — Footer of the email campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$header:** `?string` — Header of the email campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$htmlContent:** `?string` — Body of the message (HTML version). If the campaign is designed using Drag & Drop editor via HTML content, then the design page will not have Drag & Drop editor access for that campaign. **REQUIRED if htmlUrl is empty**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$htmlUrl:** `?string` — Url which contents the body of the email message. **REQUIRED if htmlContent is empty**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$increaseRate:** `?int` — Set a percentage increase rate for warming up your ip. We recommend you set the increase rate to 30% per day. If you want to send the same number of emails every day, set the daily increase value to 0%.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$initialQuota:** `?int` — Set an initial quota greater than 1 for warming up your ip. We recommend you set a value of 3000.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$inlineImageActivation:** `?bool` — Status of inline image. inlineImageActivation = false means image can’t be embedded, & inlineImageActivation = true means image can be embedded, in the email. You cannot send a campaign of more than **4MB** with images embedded in the email. Campaigns with the images embedded in the email _must be sent to less than 5000 contacts_.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$ipWarmupEnable:** `?bool` — **Available for dedicated ip clients**. Set this to true if you wish to warm up your ip.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$mirrorActive:** `?bool` — Status of mirror links in campaign. mirrorActive = false means mirror links are deactivated, & mirrorActive = true means mirror links are activated, in the campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$name:** `?string` — Name of the campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$params:** `?array` — Pass the set of attributes to customize the type classic campaign. For example: **{"FNAME":"Joe", "LNAME":"Doe"}**. Only available if **type** is **classic**. It's considered only if campaign is in _New Template Language format_. The New Template Language is dependent on the values of **subject, htmlContent/htmlUrl, sender.name & toField**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$previewText:** `?string` — Preview text or preheader of the email campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$recipients:** `?UpdateEmailCampaignRequestRecipients` — Segment ids and List ids to include/exclude from campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$recurring:** `?bool` — **FOR TRIGGER ONLY !** Type of trigger campaign.recurring = false means contact can receive the same Trigger campaign only once, & recurring = true means contact can receive the same Trigger campaign several times
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$replyTo:** `?string` — Email on which campaign recipients will be able to reply to
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$scheduledAt:** `?string` — UTC date-time on which the campaign has to run (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.** If sendAtBestTime is set to true, your campaign will be sent according to the date passed (ignoring the time part).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sendAtBestTime:** `?bool` — Set this to true if you want to send your campaign at best time. Note:- **if true, warmup ip will be disabled.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sender:** `?UpdateEmailCampaignRequestSender` — Sender details including id or email and name (optional). Only one of either Sender's email or Sender's ID shall be passed in one request at a time. For example: **{"name":"xyz", "email":"example@abc.com"}** **{"name":"xyz", "id":123}**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$splitRule:** `?int` — Add the size of your test groups. **Mandatory if abTesting = true & 'recipients' is passed**. We'll send version A and B to a random sample of recipients, and then the winning version to everyone else
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$subject:** `?string` — Subject of the campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$subjectA:** `?string` — Subject A of the campaign. **Mandatory if abTesting = true**. subjectA & subjectB should have unique value
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$subjectB:** `?string` — Subject B of the campaign. **Mandatory if abTesting = true**. subjectA & subjectB should have unique value
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$tag:** `?string` — Tag of the campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$toField:** `?string` — To personalize the **To** Field. If you want to include the first name and last name of your recipient, add **{FNAME} {LNAME}**. These contact attributes must already exist in your Brevo account. If input parameter **params** used please use **{{contact.FNAME}} {{contact.LNAME}}** for personalization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$unsubscriptionPageId:** `?string` — Enter an unsubscription page id. The page id is a 24 digit alphanumeric id that can be found in the URL when editing the page.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$updateFormId:** `?string` — **Mandatory if templateId is used containing the {{ update_profile }} tag**. Enter an update profile form id. The form id is a 24 digit alphanumeric id that can be found in the URL when editing the form.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$utmCampaign:** `?string` — Customize the utm_campaign value. If this field is empty, the campaign name will be used. Only alphanumeric characters and spaces are allowed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$winnerCriteria:** `?string` — Choose the metrics that will determinate the winning version. **Mandatory if _splitRule_ >= 1 and < 50**. If splitRule = 50, `winnerCriteria` is ignored if passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$winnerDelay:** `?int` — Choose the duration of the test in hours. Maximum is 7 days, pass 24*7 = 168 hours. The winning version will be sent at the end of the test. **Mandatory if _splitRule_ >= 1 and < 50**. If splitRule = 50, `winnerDelay` is ignored if passed
     
 </dd>
 </dl>
@@ -12104,7 +15157,7 @@ await client.emailCampaigns.updateEmailCampaign({
 </dl>
 </details>
 
-<details><summary><code>client.emailCampaigns.<a href="/src/api/resources/emailCampaigns/client/Client.ts">deleteEmailCampaign</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;emailCampaigns-&gt;deleteEmailCampaign($campaignId)</code></summary>
 <dl>
 <dd>
 
@@ -12116,11 +15169,10 @@ await client.emailCampaigns.updateEmailCampaign({
 <dl>
 <dd>
 
-```typescript
-await client.emailCampaigns.deleteEmailCampaign({
-    campaignId: 1000000
-});
-
+```php
+$client->emailCampaigns->deleteEmailCampaign(
+    1000000,
+);
 ```
 </dd>
 </dl>
@@ -12135,15 +15187,7 @@ await client.emailCampaigns.deleteEmailCampaign({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteEmailCampaignRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `EmailCampaignsClient.RequestOptions` 
+**$campaignId:** `int` — id of the campaign
     
 </dd>
 </dl>
@@ -12155,7 +15199,7 @@ await client.emailCampaigns.deleteEmailCampaign({
 </dl>
 </details>
 
-<details><summary><code>client.emailCampaigns.<a href="/src/api/resources/emailCampaigns/client/Client.ts">getAbTestCampaignResult</a>({ ...params }) -> BrevoApi.GetAbTestCampaignResultResponse</code></summary>
+<details><summary><code>$client-&gt;emailCampaigns-&gt;getAbTestCampaignResult($campaignId) -> GetAbTestCampaignResultResponse</code></summary>
 <dl>
 <dd>
 
@@ -12181,11 +15225,10 @@ Obtain winning version of an A/B test email campaign
 <dl>
 <dd>
 
-```typescript
-await client.emailCampaigns.getAbTestCampaignResult({
-    campaignId: 1000000
-});
-
+```php
+$client->emailCampaigns->getAbTestCampaignResult(
+    1000000,
+);
 ```
 </dd>
 </dl>
@@ -12200,15 +15243,7 @@ await client.emailCampaigns.getAbTestCampaignResult({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetAbTestCampaignResultRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `EmailCampaignsClient.RequestOptions` 
+**$campaignId:** `int` — Id of the A/B test campaign
     
 </dd>
 </dl>
@@ -12220,7 +15255,7 @@ await client.emailCampaigns.getAbTestCampaignResult({
 </dl>
 </details>
 
-<details><summary><code>client.emailCampaigns.<a href="/src/api/resources/emailCampaigns/client/Client.ts">emailExportRecipients</a>({ ...params }) -> BrevoApi.EmailExportRecipientsResponse</code></summary>
+<details><summary><code>$client-&gt;emailCampaigns-&gt;emailExportRecipients($campaignId, $request) -> EmailExportRecipientsResponse</code></summary>
 <dl>
 <dd>
 
@@ -12232,12 +15267,13 @@ await client.emailCampaigns.getAbTestCampaignResult({
 <dl>
 <dd>
 
-```typescript
-await client.emailCampaigns.emailExportRecipients({
-    campaignId: 1000000,
-    recipientsType: "all"
-});
-
+```php
+$client->emailCampaigns->emailExportRecipients(
+    1000000,
+    new EmailExportRecipientsRequest([
+        'recipientsType' => EmailExportRecipientsRequestRecipientsType::All->value,
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -12252,7 +15288,7 @@ await client.emailCampaigns.emailExportRecipients({
 <dl>
 <dd>
 
-**request:** `BrevoApi.EmailExportRecipientsRequest` 
+**$campaignId:** `int` — Id of the campaign
     
 </dd>
 </dl>
@@ -12260,7 +15296,15 @@ await client.emailCampaigns.emailExportRecipients({
 <dl>
 <dd>
 
-**requestOptions:** `EmailCampaignsClient.RequestOptions` 
+**$notifyUrl:** `?string` — Webhook called once the export process is finished. For reference, https://help.brevo.com/hc/en-us/articles/360007666479
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$recipientsType:** `string` — Type of recipients to export for a campaign
     
 </dd>
 </dl>
@@ -12272,7 +15316,7 @@ await client.emailCampaigns.emailExportRecipients({
 </dl>
 </details>
 
-<details><summary><code>client.emailCampaigns.<a href="/src/api/resources/emailCampaigns/client/Client.ts">sendEmailCampaignNow</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;emailCampaigns-&gt;sendEmailCampaignNow($campaignId)</code></summary>
 <dl>
 <dd>
 
@@ -12284,11 +15328,10 @@ await client.emailCampaigns.emailExportRecipients({
 <dl>
 <dd>
 
-```typescript
-await client.emailCampaigns.sendEmailCampaignNow({
-    campaignId: 1000000
-});
-
+```php
+$client->emailCampaigns->sendEmailCampaignNow(
+    1000000,
+);
 ```
 </dd>
 </dl>
@@ -12303,15 +15346,7 @@ await client.emailCampaigns.sendEmailCampaignNow({
 <dl>
 <dd>
 
-**request:** `BrevoApi.SendEmailCampaignNowRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `EmailCampaignsClient.RequestOptions` 
+**$campaignId:** `int` — Id of the campaign
     
 </dd>
 </dl>
@@ -12323,7 +15358,7 @@ await client.emailCampaigns.sendEmailCampaignNow({
 </dl>
 </details>
 
-<details><summary><code>client.emailCampaigns.<a href="/src/api/resources/emailCampaigns/client/Client.ts">sendReport</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;emailCampaigns-&gt;sendReport($campaignId, $request)</code></summary>
 <dl>
 <dd>
 
@@ -12349,17 +15384,20 @@ A PDF will be sent to the specified email addresses
 <dl>
 <dd>
 
-```typescript
-await client.emailCampaigns.sendReport({
-    campaignId: 1000000,
-    body: {
-        email: {
-            body: "Please find attached the report of our last email campaign.",
-            to: ["jim.suehan@example.com"]
-        }
-    }
-});
-
+```php
+$client->emailCampaigns->sendReport(
+    1000000,
+    new SendReportRequest([
+        'body' => new SendReport([
+            'email' => new SendReportEmail([
+                'body' => 'Please find attached the report of our last email campaign.',
+                'to' => [
+                    'jim.suehan@example.com',
+                ],
+            ]),
+        ]),
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -12374,7 +15412,7 @@ await client.emailCampaigns.sendReport({
 <dl>
 <dd>
 
-**request:** `BrevoApi.SendReportRequest` 
+**$campaignId:** `int` — Id of the campaign
     
 </dd>
 </dl>
@@ -12382,7 +15420,7 @@ await client.emailCampaigns.sendReport({
 <dl>
 <dd>
 
-**requestOptions:** `EmailCampaignsClient.RequestOptions` 
+**$request:** `SendReport` 
     
 </dd>
 </dl>
@@ -12394,7 +15432,7 @@ await client.emailCampaigns.sendReport({
 </dl>
 </details>
 
-<details><summary><code>client.emailCampaigns.<a href="/src/api/resources/emailCampaigns/client/Client.ts">sendTestEmail</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;emailCampaigns-&gt;sendTestEmail($campaignId, $request)</code></summary>
 <dl>
 <dd>
 
@@ -12406,12 +15444,13 @@ await client.emailCampaigns.sendReport({
 <dl>
 <dd>
 
-```typescript
-await client.emailCampaigns.sendTestEmail({
-    campaignId: 1000000,
-    body: {}
-});
-
+```php
+$client->emailCampaigns->sendTestEmail(
+    1000000,
+    new SendTestEmailRequest([
+        'body' => new SendTestEmail([]),
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -12426,7 +15465,7 @@ await client.emailCampaigns.sendTestEmail({
 <dl>
 <dd>
 
-**request:** `BrevoApi.SendTestEmailRequest` 
+**$campaignId:** `int` — Id of the campaign
     
 </dd>
 </dl>
@@ -12434,7 +15473,7 @@ await client.emailCampaigns.sendTestEmail({
 <dl>
 <dd>
 
-**requestOptions:** `EmailCampaignsClient.RequestOptions` 
+**$request:** `SendTestEmail` 
     
 </dd>
 </dl>
@@ -12446,7 +15485,7 @@ await client.emailCampaigns.sendTestEmail({
 </dl>
 </details>
 
-<details><summary><code>client.emailCampaigns.<a href="/src/api/resources/emailCampaigns/client/Client.ts">getSharedTemplateUrl</a>({ ...params }) -> BrevoApi.GetSharedTemplateUrlResponse</code></summary>
+<details><summary><code>$client-&gt;emailCampaigns-&gt;getSharedTemplateUrl($campaignId) -> GetSharedTemplateUrlResponse</code></summary>
 <dl>
 <dd>
 
@@ -12472,11 +15511,10 @@ Get a unique URL to share & import an email template from one Brevo account to a
 <dl>
 <dd>
 
-```typescript
-await client.emailCampaigns.getSharedTemplateUrl({
-    campaignId: 1000000
-});
-
+```php
+$client->emailCampaigns->getSharedTemplateUrl(
+    1000000,
+);
 ```
 </dd>
 </dl>
@@ -12491,15 +15529,7 @@ await client.emailCampaigns.getSharedTemplateUrl({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetSharedTemplateUrlRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `EmailCampaignsClient.RequestOptions` 
+**$campaignId:** `int` — Id of the campaign or template
     
 </dd>
 </dl>
@@ -12511,7 +15541,7 @@ await client.emailCampaigns.getSharedTemplateUrl({
 </dl>
 </details>
 
-<details><summary><code>client.emailCampaigns.<a href="/src/api/resources/emailCampaigns/client/Client.ts">updateCampaignStatus</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;emailCampaigns-&gt;updateCampaignStatus($campaignId, $request)</code></summary>
 <dl>
 <dd>
 
@@ -12523,12 +15553,13 @@ await client.emailCampaigns.getSharedTemplateUrl({
 <dl>
 <dd>
 
-```typescript
-await client.emailCampaigns.updateCampaignStatus({
-    campaignId: 1000000,
-    body: {}
-});
-
+```php
+$client->emailCampaigns->updateCampaignStatus(
+    1000000,
+    new UpdateCampaignStatusRequest([
+        'body' => new UpdateCampaignStatus([]),
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -12543,7 +15574,7 @@ await client.emailCampaigns.updateCampaignStatus({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateCampaignStatusRequest` 
+**$campaignId:** `int` — Id of the campaign
     
 </dd>
 </dl>
@@ -12551,7 +15582,7 @@ await client.emailCampaigns.updateCampaignStatus({
 <dl>
 <dd>
 
-**requestOptions:** `EmailCampaignsClient.RequestOptions` 
+**$request:** `UpdateCampaignStatus` 
     
 </dd>
 </dl>
@@ -12564,7 +15595,7 @@ await client.emailCampaigns.updateCampaignStatus({
 </details>
 
 ## SmsCampaigns
-<details><summary><code>client.smsCampaigns.<a href="/src/api/resources/smsCampaigns/client/Client.ts">getSmsCampaigns</a>({ ...params }) -> BrevoApi.GetSmsCampaignsResponse</code></summary>
+<details><summary><code>$client-&gt;smsCampaigns-&gt;getSmsCampaigns($request) -> GetSmsCampaignsResponse</code></summary>
 <dl>
 <dd>
 
@@ -12576,9 +15607,10 @@ await client.emailCampaigns.updateCampaignStatus({
 <dl>
 <dd>
 
-```typescript
-await client.smsCampaigns.getSmsCampaigns();
-
+```php
+$client->smsCampaigns->getSmsCampaigns(
+    new GetSmsCampaignsRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -12593,7 +15625,7 @@ await client.smsCampaigns.getSmsCampaigns();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetSmsCampaignsRequest` 
+**$status:** `?string` — Status of campaign.
     
 </dd>
 </dl>
@@ -12601,7 +15633,39 @@ await client.smsCampaigns.getSmsCampaigns();
 <dl>
 <dd>
 
-**requestOptions:** `SmsCampaignsClient.RequestOptions` 
+**$startDate:** `?string` — **Mandatory if endDate is used.** Starting (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to filter the sent sms campaigns. **Prefer to pass your timezone in date-time format for accurate result** ( only available if either 'status' not passed and if passed is set to 'sent' )
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$endDate:** `?string` — **Mandatory if startDate is used.** Ending (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to filter the sent sms campaigns. **Prefer to pass your timezone in date-time format for accurate result** ( only available if either 'status' not passed and if passed is set to 'sent' )
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$limit:** `?int` — Number limitation for the result returned
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$offset:** `?int` — Beginning point in the list to retrieve from.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
     
 </dd>
 </dl>
@@ -12613,7 +15677,7 @@ await client.smsCampaigns.getSmsCampaigns();
 </dl>
 </details>
 
-<details><summary><code>client.smsCampaigns.<a href="/src/api/resources/smsCampaigns/client/Client.ts">createSmsCampaign</a>({ ...params }) -> BrevoApi.CreateSmsCampaignResponse</code></summary>
+<details><summary><code>$client-&gt;smsCampaigns-&gt;createSmsCampaign($request) -> CreateSmsCampaignResponse</code></summary>
 <dl>
 <dd>
 
@@ -12625,13 +15689,14 @@ await client.smsCampaigns.getSmsCampaigns();
 <dl>
 <dd>
 
-```typescript
-await client.smsCampaigns.createSmsCampaign({
-    content: "Get a discount by visiting our NY store and saying : Happy Spring!",
-    name: "Spring Promo Code",
-    sender: "MyShop"
-});
-
+```php
+$client->smsCampaigns->createSmsCampaign(
+    new CreateSmsCampaignRequest([
+        'content' => 'Get a discount by visiting our NY store and saying : Happy Spring!',
+        'name' => 'Spring Promo Code',
+        'sender' => 'MyShop',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -12646,7 +15711,7 @@ await client.smsCampaigns.createSmsCampaign({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateSmsCampaignRequest` 
+**$content:** `string` — Content of the message. The **maximum characters used per SMS is 160**, if used more than that, it will be counted as more than one SMS.
     
 </dd>
 </dl>
@@ -12654,7 +15719,55 @@ await client.smsCampaigns.createSmsCampaign({
 <dl>
 <dd>
 
-**requestOptions:** `SmsCampaignsClient.RequestOptions` 
+**$name:** `string` — Name of the campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$organisationPrefix:** `?string` — A recognizable prefix will ensure your audience knows who you are. Recommended by U.S. carriers. This will be added as your Brand Name before the message content. **Prefer verifying maximum length of 160 characters including this prefix in message content to avoid multiple sending of same sms.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$recipients:** `?CreateSmsCampaignRequestRecipients` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$scheduledAt:** `?string` — UTC date-time on which the campaign has to run (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sender:** `string` — Name of the sender. **The number of characters is limited to 11 for alphanumeric characters and 15 for numeric characters**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$unicodeEnabled:** `?bool` — Format of the message. It indicates whether the content should be treated as unicode or not.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$unsubscribeInstruction:** `?string` — Instructions to unsubscribe from future communications. Recommended by U.S. carriers. Must include **STOP** keyword. This will be added as instructions after the end of message content. **Prefer verifying maximum length of 160 characters including this instructions in message content to avoid multiple sending of same sms.**
     
 </dd>
 </dl>
@@ -12666,7 +15779,7 @@ await client.smsCampaigns.createSmsCampaign({
 </dl>
 </details>
 
-<details><summary><code>client.smsCampaigns.<a href="/src/api/resources/smsCampaigns/client/Client.ts">getSmsCampaign</a>({ ...params }) -> BrevoApi.GetSmsCampaignResponse</code></summary>
+<details><summary><code>$client-&gt;smsCampaigns-&gt;getSmsCampaign($campaignId) -> GetSmsCampaignResponse</code></summary>
 <dl>
 <dd>
 
@@ -12678,11 +15791,10 @@ await client.smsCampaigns.createSmsCampaign({
 <dl>
 <dd>
 
-```typescript
-await client.smsCampaigns.getSmsCampaign({
-    campaignId: 1000000
-});
-
+```php
+$client->smsCampaigns->getSmsCampaign(
+    1000000,
+);
 ```
 </dd>
 </dl>
@@ -12697,15 +15809,7 @@ await client.smsCampaigns.getSmsCampaign({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetSmsCampaignRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `SmsCampaignsClient.RequestOptions` 
+**$campaignId:** `int` — id of the SMS campaign
     
 </dd>
 </dl>
@@ -12717,7 +15821,7 @@ await client.smsCampaigns.getSmsCampaign({
 </dl>
 </details>
 
-<details><summary><code>client.smsCampaigns.<a href="/src/api/resources/smsCampaigns/client/Client.ts">updateSmsCampaign</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;smsCampaigns-&gt;updateSmsCampaign($campaignId, $request)</code></summary>
 <dl>
 <dd>
 
@@ -12729,11 +15833,11 @@ await client.smsCampaigns.getSmsCampaign({
 <dl>
 <dd>
 
-```typescript
-await client.smsCampaigns.updateSmsCampaign({
-    campaignId: 1000000
-});
-
+```php
+$client->smsCampaigns->updateSmsCampaign(
+    1000000,
+    new UpdateSmsCampaignRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -12748,7 +15852,7 @@ await client.smsCampaigns.updateSmsCampaign({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateSmsCampaignRequest` 
+**$campaignId:** `int` — id of the SMS campaign
     
 </dd>
 </dl>
@@ -12756,7 +15860,63 @@ await client.smsCampaigns.updateSmsCampaign({
 <dl>
 <dd>
 
-**requestOptions:** `SmsCampaignsClient.RequestOptions` 
+**$content:** `?string` — Content of the message. The **maximum characters used per SMS is 160**, if used more than that, it will be counted as more than one SMS
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$name:** `?string` — Name of the campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$organisationPrefix:** `?string` — A recognizable prefix will ensure your audience knows who you are. Recommended by U.S. carriers. This will be added as your Brand Name before the message content. **Prefer verifying maximum length of 160 characters including this prefix in message content to avoid multiple sending of same sms.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$recipients:** `?UpdateSmsCampaignRequestRecipients` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$scheduledAt:** `?string` — UTC date-time on which the campaign has to run (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sender:** `?string` — Name of the sender. **The number of characters is limited to 11 for alphanumeric characters and 15 for numeric characters**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$unicodeEnabled:** `?bool` — Format of the message. It indicates whether the content should be treated as unicode or not.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$unsubscribeInstruction:** `?string` — Instructions to unsubscribe from future communications. Recommended by U.S. carriers. Must include **STOP** keyword. This will be added as instructions after the end of message content. **Prefer verifying maximum length of 160 characters including this instructions in message content to avoid multiple sending of same sms.**
     
 </dd>
 </dl>
@@ -12768,7 +15928,7 @@ await client.smsCampaigns.updateSmsCampaign({
 </dl>
 </details>
 
-<details><summary><code>client.smsCampaigns.<a href="/src/api/resources/smsCampaigns/client/Client.ts">deleteSmsCampaign</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;smsCampaigns-&gt;deleteSmsCampaign($campaignId)</code></summary>
 <dl>
 <dd>
 
@@ -12780,11 +15940,10 @@ await client.smsCampaigns.updateSmsCampaign({
 <dl>
 <dd>
 
-```typescript
-await client.smsCampaigns.deleteSmsCampaign({
-    campaignId: 1000000
-});
-
+```php
+$client->smsCampaigns->deleteSmsCampaign(
+    1000000,
+);
 ```
 </dd>
 </dl>
@@ -12799,15 +15958,7 @@ await client.smsCampaigns.deleteSmsCampaign({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteSmsCampaignRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `SmsCampaignsClient.RequestOptions` 
+**$campaignId:** `int` — id of the SMS campaign
     
 </dd>
 </dl>
@@ -12819,7 +15970,7 @@ await client.smsCampaigns.deleteSmsCampaign({
 </dl>
 </details>
 
-<details><summary><code>client.smsCampaigns.<a href="/src/api/resources/smsCampaigns/client/Client.ts">requestSmsRecipientExport</a>({ ...params }) -> BrevoApi.RequestSmsRecipientExportResponse</code></summary>
+<details><summary><code>$client-&gt;smsCampaigns-&gt;requestSmsRecipientExport($campaignId, $request) -> RequestSmsRecipientExportResponse</code></summary>
 <dl>
 <dd>
 
@@ -12845,12 +15996,13 @@ It returns the background process ID which on completion calls the notify URL th
 <dl>
 <dd>
 
-```typescript
-await client.smsCampaigns.requestSmsRecipientExport({
-    campaignId: 1000000,
-    recipientsType: "all"
-});
-
+```php
+$client->smsCampaigns->requestSmsRecipientExport(
+    1000000,
+    new RequestSmsRecipientExportRequest([
+        'recipientsType' => RequestSmsRecipientExportRequestRecipientsType::All->value,
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -12865,7 +16017,7 @@ await client.smsCampaigns.requestSmsRecipientExport({
 <dl>
 <dd>
 
-**request:** `BrevoApi.RequestSmsRecipientExportRequest` 
+**$campaignId:** `int` — id of the campaign
     
 </dd>
 </dl>
@@ -12873,7 +16025,15 @@ await client.smsCampaigns.requestSmsRecipientExport({
 <dl>
 <dd>
 
-**requestOptions:** `SmsCampaignsClient.RequestOptions` 
+**$notifyUrl:** `?string` — URL that will be called once the export process is finished. For reference, https://help.brevo.com/hc/en-us/articles/360007666479
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$recipientsType:** `string` — Filter the recipients based on how they interacted with the campaign
     
 </dd>
 </dl>
@@ -12885,7 +16045,7 @@ await client.smsCampaigns.requestSmsRecipientExport({
 </dl>
 </details>
 
-<details><summary><code>client.smsCampaigns.<a href="/src/api/resources/smsCampaigns/client/Client.ts">sendSmsCampaignNow</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;smsCampaigns-&gt;sendSmsCampaignNow($campaignId)</code></summary>
 <dl>
 <dd>
 
@@ -12897,11 +16057,10 @@ await client.smsCampaigns.requestSmsRecipientExport({
 <dl>
 <dd>
 
-```typescript
-await client.smsCampaigns.sendSmsCampaignNow({
-    campaignId: 1000000
-});
-
+```php
+$client->smsCampaigns->sendSmsCampaignNow(
+    1000000,
+);
 ```
 </dd>
 </dl>
@@ -12916,15 +16075,7 @@ await client.smsCampaigns.sendSmsCampaignNow({
 <dl>
 <dd>
 
-**request:** `BrevoApi.SendSmsCampaignNowRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `SmsCampaignsClient.RequestOptions` 
+**$campaignId:** `int` — id of the campaign
     
 </dd>
 </dl>
@@ -12936,7 +16087,7 @@ await client.smsCampaigns.sendSmsCampaignNow({
 </dl>
 </details>
 
-<details><summary><code>client.smsCampaigns.<a href="/src/api/resources/smsCampaigns/client/Client.ts">sendSmsReport</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;smsCampaigns-&gt;sendSmsReport($campaignId, $request)</code></summary>
 <dl>
 <dd>
 
@@ -12962,17 +16113,20 @@ Send report of Sent and Archived campaign, to the specified email addresses, wit
 <dl>
 <dd>
 
-```typescript
-await client.smsCampaigns.sendSmsReport({
-    campaignId: 1000000,
-    body: {
-        email: {
-            body: "Please find attached the report of our last email campaign.",
-            to: ["jim.suehan@example.com"]
-        }
-    }
-});
-
+```php
+$client->smsCampaigns->sendSmsReport(
+    1000000,
+    new SendSmsReportRequest([
+        'body' => new SendReport([
+            'email' => new SendReportEmail([
+                'body' => 'Please find attached the report of our last email campaign.',
+                'to' => [
+                    'jim.suehan@example.com',
+                ],
+            ]),
+        ]),
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -12987,7 +16141,7 @@ await client.smsCampaigns.sendSmsReport({
 <dl>
 <dd>
 
-**request:** `BrevoApi.SendSmsReportRequest` 
+**$campaignId:** `int` — id of the campaign
     
 </dd>
 </dl>
@@ -12995,7 +16149,7 @@ await client.smsCampaigns.sendSmsReport({
 <dl>
 <dd>
 
-**requestOptions:** `SmsCampaignsClient.RequestOptions` 
+**$request:** `SendReport` 
     
 </dd>
 </dl>
@@ -13007,7 +16161,7 @@ await client.smsCampaigns.sendSmsReport({
 </dl>
 </details>
 
-<details><summary><code>client.smsCampaigns.<a href="/src/api/resources/smsCampaigns/client/Client.ts">sendTestSms</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;smsCampaigns-&gt;sendTestSms($campaignId, $request)</code></summary>
 <dl>
 <dd>
 
@@ -13019,11 +16173,11 @@ await client.smsCampaigns.sendSmsReport({
 <dl>
 <dd>
 
-```typescript
-await client.smsCampaigns.sendTestSms({
-    campaignId: 1000000
-});
-
+```php
+$client->smsCampaigns->sendTestSms(
+    1000000,
+    new SendTestSmsRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -13038,7 +16192,7 @@ await client.smsCampaigns.sendTestSms({
 <dl>
 <dd>
 
-**request:** `BrevoApi.SendTestSmsRequest` 
+**$campaignId:** `int` — Id of the SMS campaign
     
 </dd>
 </dl>
@@ -13046,7 +16200,7 @@ await client.smsCampaigns.sendTestSms({
 <dl>
 <dd>
 
-**requestOptions:** `SmsCampaignsClient.RequestOptions` 
+**$phoneNumber:** `?string` — Mobile number of the recipient with the country code. This number **must belong to one of your contacts in Brevo account and must not be blacklisted**
     
 </dd>
 </dl>
@@ -13058,7 +16212,7 @@ await client.smsCampaigns.sendTestSms({
 </dl>
 </details>
 
-<details><summary><code>client.smsCampaigns.<a href="/src/api/resources/smsCampaigns/client/Client.ts">updateSmsCampaignStatus</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;smsCampaigns-&gt;updateSmsCampaignStatus($campaignId, $request)</code></summary>
 <dl>
 <dd>
 
@@ -13070,12 +16224,13 @@ await client.smsCampaigns.sendTestSms({
 <dl>
 <dd>
 
-```typescript
-await client.smsCampaigns.updateSmsCampaignStatus({
-    campaignId: 1000000,
-    body: {}
-});
-
+```php
+$client->smsCampaigns->updateSmsCampaignStatus(
+    1000000,
+    new UpdateSmsCampaignStatusRequest([
+        'body' => new UpdateCampaignStatus([]),
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -13090,7 +16245,7 @@ await client.smsCampaigns.updateSmsCampaignStatus({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateSmsCampaignStatusRequest` 
+**$campaignId:** `int` — id of the campaign
     
 </dd>
 </dl>
@@ -13098,7 +16253,7 @@ await client.smsCampaigns.updateSmsCampaignStatus({
 <dl>
 <dd>
 
-**requestOptions:** `SmsCampaignsClient.RequestOptions` 
+**$request:** `UpdateCampaignStatus` 
     
 </dd>
 </dl>
@@ -13111,7 +16266,7 @@ await client.smsCampaigns.updateSmsCampaignStatus({
 </details>
 
 ## WhatsAppCampaigns
-<details><summary><code>client.whatsAppCampaigns.<a href="/src/api/resources/whatsAppCampaigns/client/Client.ts">getWhatsAppCampaigns</a>({ ...params }) -> BrevoApi.GetWhatsAppCampaignsResponse</code></summary>
+<details><summary><code>$client-&gt;whatsAppCampaigns-&gt;getWhatsAppCampaigns($request) -> GetWhatsAppCampaignsResponse</code></summary>
 <dl>
 <dd>
 
@@ -13123,9 +16278,10 @@ await client.smsCampaigns.updateSmsCampaignStatus({
 <dl>
 <dd>
 
-```typescript
-await client.whatsAppCampaigns.getWhatsAppCampaigns();
-
+```php
+$client->whatsAppCampaigns->getWhatsAppCampaigns(
+    new GetWhatsAppCampaignsRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -13140,7 +16296,7 @@ await client.whatsAppCampaigns.getWhatsAppCampaigns();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetWhatsAppCampaignsRequest` 
+**$startDate:** `?string` — **Mandatory if endDate is used**. Starting (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to filter the WhatsApp campaigns created. **Prefer to pass your timezone in date-time format for accurate result**
     
 </dd>
 </dl>
@@ -13148,7 +16304,31 @@ await client.whatsAppCampaigns.getWhatsAppCampaigns();
 <dl>
 <dd>
 
-**requestOptions:** `WhatsAppCampaignsClient.RequestOptions` 
+**$endDate:** `?string` — **Mandatory if startDate is used**. Ending (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to filter the WhatsApp campaigns created. **Prefer to pass your timezone in date-time format for accurate result**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$limit:** `?int` — Number of documents per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$offset:** `?int` — Index of the first document in the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort the results in the ascending/descending order of record modification. Default order is **descending** if `sort` is not passed
     
 </dd>
 </dl>
@@ -13160,7 +16340,7 @@ await client.whatsAppCampaigns.getWhatsAppCampaigns();
 </dl>
 </details>
 
-<details><summary><code>client.whatsAppCampaigns.<a href="/src/api/resources/whatsAppCampaigns/client/Client.ts">createWhatsAppCampaign</a>({ ...params }) -> BrevoApi.CreateWhatsAppCampaignResponse</code></summary>
+<details><summary><code>$client-&gt;whatsAppCampaigns-&gt;createWhatsAppCampaign($request) -> CreateWhatsAppCampaignResponse</code></summary>
 <dl>
 <dd>
 
@@ -13198,14 +16378,15 @@ This API requires the List and Segment ids as recipients in Body params. You can
 <dl>
 <dd>
 
-```typescript
-await client.whatsAppCampaigns.createWhatsAppCampaign({
-    name: "Test Campaign",
-    recipients: {},
-    scheduledAt: "2017-06-01T12:30:00+02:00",
-    templateId: 19
-});
-
+```php
+$client->whatsAppCampaigns->createWhatsAppCampaign(
+    new CreateWhatsAppCampaignRequest([
+        'name' => 'Test Campaign',
+        'recipients' => new CreateWhatsAppCampaignRequestRecipients([]),
+        'scheduledAt' => '2017-06-01T12:30:00+02:00',
+        'templateId' => 19,
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -13220,7 +16401,7 @@ await client.whatsAppCampaigns.createWhatsAppCampaign({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateWhatsAppCampaignRequest` 
+**$name:** `string` — Name of the WhatsApp campaign creation
     
 </dd>
 </dl>
@@ -13228,7 +16409,23 @@ await client.whatsAppCampaigns.createWhatsAppCampaign({
 <dl>
 <dd>
 
-**requestOptions:** `WhatsAppCampaignsClient.RequestOptions` 
+**$recipients:** `CreateWhatsAppCampaignRequestRecipients` — Segment ids and List ids to include/exclude from campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$scheduledAt:** `string` — Sending UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.For example: **2017-06-01T12:30:00+02:00**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$templateId:** `int` — Id of the WhatsApp template in **approved** state
     
 </dd>
 </dl>
@@ -13240,7 +16437,7 @@ await client.whatsAppCampaigns.createWhatsAppCampaign({
 </dl>
 </details>
 
-<details><summary><code>client.whatsAppCampaigns.<a href="/src/api/resources/whatsAppCampaigns/client/Client.ts">getWhatsAppConfig</a>() -> BrevoApi.GetWhatsAppConfigResponse</code></summary>
+<details><summary><code>$client-&gt;whatsAppCampaigns-&gt;getWhatsAppConfig() -> GetWhatsAppConfigResponse</code></summary>
 <dl>
 <dd>
 
@@ -13270,25 +16467,9 @@ You can use this API for WhatsApp only if you have setup your WhatsApp account o
 <dl>
 <dd>
 
-```typescript
-await client.whatsAppCampaigns.getWhatsAppConfig();
-
+```php
+$client->whatsAppCampaigns->getWhatsAppConfig();
 ```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `WhatsAppCampaignsClient.RequestOptions` 
-    
 </dd>
 </dl>
 </dd>
@@ -13299,7 +16480,7 @@ await client.whatsAppCampaigns.getWhatsAppConfig();
 </dl>
 </details>
 
-<details><summary><code>client.whatsAppCampaigns.<a href="/src/api/resources/whatsAppCampaigns/client/Client.ts">createWhatsAppTemplate</a>({ ...params }) -> BrevoApi.CreateWhatsAppTemplateResponse</code></summary>
+<details><summary><code>$client-&gt;whatsAppCampaigns-&gt;createWhatsAppTemplate($request) -> CreateWhatsAppTemplateResponse</code></summary>
 <dl>
 <dd>
 
@@ -13329,14 +16510,15 @@ You can use this API for WhatsApp only if you have setup your WhatsApp account o
 <dl>
 <dd>
 
-```typescript
-await client.whatsAppCampaigns.createWhatsAppTemplate({
-    bodyText: "making it look like readable English",
-    category: "MARKETING",
-    language: "en",
-    name: "Test template"
-});
-
+```php
+$client->whatsAppCampaigns->createWhatsAppTemplate(
+    new CreateWhatsAppTemplateRequest([
+        'bodyText' => 'making it look like readable English',
+        'category' => CreateWhatsAppTemplateRequestCategory::Marketing->value,
+        'language' => 'en',
+        'name' => 'Test template',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -13351,7 +16533,7 @@ await client.whatsAppCampaigns.createWhatsAppTemplate({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateWhatsAppTemplateRequest` 
+**$bodyText:** `string` — Body of the template. **Maximum allowed characters are 1024**
     
 </dd>
 </dl>
@@ -13359,7 +16541,50 @@ await client.whatsAppCampaigns.createWhatsAppTemplate({
 <dl>
 <dd>
 
-**requestOptions:** `WhatsAppCampaignsClient.RequestOptions` 
+**$category:** `string` — Category of the template
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$headerText:** `?string` — Text content of the header in the template.  **Maximum allowed characters are 45** **Use this field to add text content in template header and if mediaUrl is empty**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$language:** `string` 
+
+Language of the template. For Example :
+**en** for English
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$mediaUrl:** `?string` — Absolute url of the media file **(no local file)** for the header. **Use this field in you want to add media in Template header and headerText is empty** Allowed extensions for media files are: #### jpeg | png | mp4 | pdf
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$name:** `string` — Name of the template
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$source:** `?string` — source of the template
     
 </dd>
 </dl>
@@ -13371,7 +16596,7 @@ await client.whatsAppCampaigns.createWhatsAppTemplate({
 </dl>
 </details>
 
-<details><summary><code>client.whatsAppCampaigns.<a href="/src/api/resources/whatsAppCampaigns/client/Client.ts">getWhatsAppTemplates</a>({ ...params }) -> BrevoApi.GetWhatsAppTemplatesResponse</code></summary>
+<details><summary><code>$client-&gt;whatsAppCampaigns-&gt;getWhatsAppTemplates($request) -> GetWhatsAppTemplatesResponse</code></summary>
 <dl>
 <dd>
 
@@ -13383,9 +16608,10 @@ await client.whatsAppCampaigns.createWhatsAppTemplate({
 <dl>
 <dd>
 
-```typescript
-await client.whatsAppCampaigns.getWhatsAppTemplates();
-
+```php
+$client->whatsAppCampaigns->getWhatsAppTemplates(
+    new GetWhatsAppTemplatesRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -13400,7 +16626,7 @@ await client.whatsAppCampaigns.getWhatsAppTemplates();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetWhatsAppTemplatesRequest` 
+**$startDate:** `?string` — **Mandatory if endDate is used**. Starting (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to filter the templates created. **Prefer to pass your timezone in date-time format for accurate result**
     
 </dd>
 </dl>
@@ -13408,7 +16634,39 @@ await client.whatsAppCampaigns.getWhatsAppTemplates();
 <dl>
 <dd>
 
-**requestOptions:** `WhatsAppCampaignsClient.RequestOptions` 
+**$endDate:** `?string` — **Mandatory if startDate is used**. Ending (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to filter the templates created. **Prefer to pass your timezone in date-time format for accurate result**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$limit:** `?int` — Number of documents per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$offset:** `?int` — Index of the first document in the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort the results in the ascending/descending order of record modification. Default order is **descending** if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$source:** `?string` — source of the template
     
 </dd>
 </dl>
@@ -13420,7 +16678,7 @@ await client.whatsAppCampaigns.getWhatsAppTemplates();
 </dl>
 </details>
 
-<details><summary><code>client.whatsAppCampaigns.<a href="/src/api/resources/whatsAppCampaigns/client/Client.ts">sendWhatsAppTemplateApproval</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;whatsAppCampaigns-&gt;sendWhatsAppTemplateApproval($templateId)</code></summary>
 <dl>
 <dd>
 
@@ -13450,11 +16708,10 @@ You can use this API for WhatsApp only if you have setup your WhatsApp account o
 <dl>
 <dd>
 
-```typescript
-await client.whatsAppCampaigns.sendWhatsAppTemplateApproval({
-    templateId: 1000000
-});
-
+```php
+$client->whatsAppCampaigns->sendWhatsAppTemplateApproval(
+    1000000,
+);
 ```
 </dd>
 </dl>
@@ -13469,15 +16726,7 @@ await client.whatsAppCampaigns.sendWhatsAppTemplateApproval({
 <dl>
 <dd>
 
-**request:** `BrevoApi.SendWhatsAppTemplateApprovalRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `WhatsAppCampaignsClient.RequestOptions` 
+**$templateId:** `int` — id of the template
     
 </dd>
 </dl>
@@ -13489,7 +16738,7 @@ await client.whatsAppCampaigns.sendWhatsAppTemplateApproval({
 </dl>
 </details>
 
-<details><summary><code>client.whatsAppCampaigns.<a href="/src/api/resources/whatsAppCampaigns/client/Client.ts">getWhatsAppCampaign</a>({ ...params }) -> BrevoApi.GetWhatsAppCampaignResponse</code></summary>
+<details><summary><code>$client-&gt;whatsAppCampaigns-&gt;getWhatsAppCampaign($campaignId) -> GetWhatsAppCampaignResponse</code></summary>
 <dl>
 <dd>
 
@@ -13519,11 +16768,10 @@ You can use this API for WhatsApp only if you have setup your WhatsApp account o
 <dl>
 <dd>
 
-```typescript
-await client.whatsAppCampaigns.getWhatsAppCampaign({
-    campaignId: 1000000
-});
-
+```php
+$client->whatsAppCampaigns->getWhatsAppCampaign(
+    1000000,
+);
 ```
 </dd>
 </dl>
@@ -13538,15 +16786,7 @@ await client.whatsAppCampaigns.getWhatsAppCampaign({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetWhatsAppCampaignRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `WhatsAppCampaignsClient.RequestOptions` 
+**$campaignId:** `int` — Id of the campaign
     
 </dd>
 </dl>
@@ -13558,7 +16798,7 @@ await client.whatsAppCampaigns.getWhatsAppCampaign({
 </dl>
 </details>
 
-<details><summary><code>client.whatsAppCampaigns.<a href="/src/api/resources/whatsAppCampaigns/client/Client.ts">updateWhatsAppCampaign</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;whatsAppCampaigns-&gt;updateWhatsAppCampaign($campaignId, $request)</code></summary>
 <dl>
 <dd>
 
@@ -13596,11 +16836,11 @@ This API requires the List and Segment ids as recipients in Body params. You can
 <dl>
 <dd>
 
-```typescript
-await client.whatsAppCampaigns.updateWhatsAppCampaign({
-    campaignId: 1000000
-});
-
+```php
+$client->whatsAppCampaigns->updateWhatsAppCampaign(
+    1000000,
+    new UpdateWhatsAppCampaignRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -13615,7 +16855,7 @@ await client.whatsAppCampaigns.updateWhatsAppCampaign({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateWhatsAppCampaignRequest` 
+**$campaignId:** `int` — id of the campaign
     
 </dd>
 </dl>
@@ -13623,7 +16863,31 @@ await client.whatsAppCampaigns.updateWhatsAppCampaign({
 <dl>
 <dd>
 
-**requestOptions:** `WhatsAppCampaignsClient.RequestOptions` 
+**$campaignName:** `?string` — Name of the campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$campaignStatus:** `?string` — Status of the campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$recipients:** `?UpdateWhatsAppCampaignRequestRecipients` — Segment ids and List ids to include/exclude from campaign
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$rescheduleFor:** `?string` — Reschedule the sending UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) of campaign. **Prefer to pass your timezone in date-time format for accurate result.For example: **2017-06-01T12:30:00+02:00** Use this field to update the scheduledAt of any existing draft or scheduled WhatsApp campaign.
     
 </dd>
 </dl>
@@ -13635,7 +16899,7 @@ await client.whatsAppCampaigns.updateWhatsAppCampaign({
 </dl>
 </details>
 
-<details><summary><code>client.whatsAppCampaigns.<a href="/src/api/resources/whatsAppCampaigns/client/Client.ts">deleteWhatsAppCampaign</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;whatsAppCampaigns-&gt;deleteWhatsAppCampaign($campaignId)</code></summary>
 <dl>
 <dd>
 
@@ -13647,11 +16911,10 @@ await client.whatsAppCampaigns.updateWhatsAppCampaign({
 <dl>
 <dd>
 
-```typescript
-await client.whatsAppCampaigns.deleteWhatsAppCampaign({
-    campaignId: 1000000
-});
-
+```php
+$client->whatsAppCampaigns->deleteWhatsAppCampaign(
+    1000000,
+);
 ```
 </dd>
 </dl>
@@ -13666,15 +16929,7 @@ await client.whatsAppCampaigns.deleteWhatsAppCampaign({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteWhatsAppCampaignRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `WhatsAppCampaignsClient.RequestOptions` 
+**$campaignId:** `int` — id of the campaign
     
 </dd>
 </dl>
@@ -13687,7 +16942,7 @@ await client.whatsAppCampaigns.deleteWhatsAppCampaign({
 </details>
 
 ## Companies
-<details><summary><code>client.companies.<a href="/src/api/resources/companies/client/Client.ts">getAllCompanies</a>({ ...params }) -> BrevoApi.GetCompaniesResponse</code></summary>
+<details><summary><code>$client-&gt;companies-&gt;getAllCompanies($request) -> GetCompaniesResponse</code></summary>
 <dl>
 <dd>
 
@@ -13699,9 +16954,10 @@ await client.whatsAppCampaigns.deleteWhatsAppCampaign({
 <dl>
 <dd>
 
-```typescript
-await client.companies.getAllCompanies();
-
+```php
+$client->companies->getAllCompanies(
+    new GetCompaniesRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -13716,7 +16972,7 @@ await client.companies.getAllCompanies();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCompaniesRequest` 
+**$filters:** `?string` — Filter by attrbutes. If you have filter for owner on your side please send it as {"attributes.owner":"6299dcf3874a14eacbc65c46"}
     
 </dd>
 </dl>
@@ -13724,7 +16980,63 @@ await client.companies.getAllCompanies();
 <dl>
 <dd>
 
-**requestOptions:** `CompaniesClient.RequestOptions` 
+**$linkedContactsIds:** `?int` — Filter by linked contacts ids
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$linkedDealsIds:** `?string` — Filter by linked Deals ids
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$modifiedSince:** `?string` — Filter (urlencoded) the contacts modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$createdSince:** `?string` — Filter (urlencoded) the contacts created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$page:** `?int` — Index of the first document of the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$limit:** `?int` — Number of documents per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort the results in the ascending/descending order. Default order is **descending** by creation if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sortBy:** `?string` — The field used to sort field names.
     
 </dd>
 </dl>
@@ -13736,7 +17048,7 @@ await client.companies.getAllCompanies();
 </dl>
 </details>
 
-<details><summary><code>client.companies.<a href="/src/api/resources/companies/client/Client.ts">createACompany</a>({ ...params }) -> BrevoApi.PostCompaniesResponse</code></summary>
+<details><summary><code>$client-&gt;companies-&gt;createACompany($request) -> PostCompaniesResponse</code></summary>
 <dl>
 <dd>
 
@@ -13748,11 +17060,12 @@ await client.companies.getAllCompanies();
 <dl>
 <dd>
 
-```typescript
-await client.companies.createACompany({
-    name: "company"
-});
-
+```php
+$client->companies->createACompany(
+    new PostCompaniesRequest([
+        'name' => 'company',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -13767,7 +17080,7 @@ await client.companies.createACompany({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostCompaniesRequest` 
+**$attributes:** `?array` — Attributes for company creation
     
 </dd>
 </dl>
@@ -13775,7 +17088,31 @@ await client.companies.createACompany({
 <dl>
 <dd>
 
-**requestOptions:** `CompaniesClient.RequestOptions` 
+**$countryCode:** `?int` — Country code if phone_number is passed in attributes.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$linkedContactsIds:** `?array` — Contact ids to be linked with company
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$linkedDealsIds:** `?array` — Deal ids to be linked with company
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$name:** `string` — Name of company
     
 </dd>
 </dl>
@@ -13787,7 +17124,7 @@ await client.companies.createACompany({
 </dl>
 </details>
 
-<details><summary><code>client.companies.<a href="/src/api/resources/companies/client/Client.ts">importCompaniesCreationAndUpdation</a>({ ...params }) -> BrevoApi.PostCompaniesImportResponse</code></summary>
+<details><summary><code>$client-&gt;companies-&gt;importCompaniesCreationAndUpdation($request) -> PostCompaniesImportResponse</code></summary>
 <dl>
 <dd>
 
@@ -13813,33 +17150,13 @@ Import companies from a CSV file with mapping options.
 <dl>
 <dd>
 
-```typescript
-await client.companies.importCompaniesCreationAndUpdation({});
-
+```php
+$client->companies->importCompaniesCreationAndUpdation(
+    new PostCompaniesImportRequest([
+        'file' => File::createFromString("example_file", "example_file"),
+    ]),
+);
 ```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `BrevoApi.PostCompaniesImportRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `CompaniesClient.RequestOptions` 
-    
 </dd>
 </dl>
 </dd>
@@ -13850,7 +17167,7 @@ await client.companies.importCompaniesCreationAndUpdation({});
 </dl>
 </details>
 
-<details><summary><code>client.companies.<a href="/src/api/resources/companies/client/Client.ts">linkAndUnlinkCompanyWithContactAndDeal</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;companies-&gt;linkAndUnlinkCompanyWithContactAndDeal($id, $request)</code></summary>
 <dl>
 <dd>
 
@@ -13862,11 +17179,11 @@ await client.companies.importCompaniesCreationAndUpdation({});
 <dl>
 <dd>
 
-```typescript
-await client.companies.linkAndUnlinkCompanyWithContactAndDeal({
-    id: "id"
-});
-
+```php
+$client->companies->linkAndUnlinkCompanyWithContactAndDeal(
+    'id',
+    new PatchCompaniesLinkUnlinkIdRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -13881,7 +17198,7 @@ await client.companies.linkAndUnlinkCompanyWithContactAndDeal({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PatchCompaniesLinkUnlinkIdRequest` 
+**$id:** `string` 
     
 </dd>
 </dl>
@@ -13889,7 +17206,31 @@ await client.companies.linkAndUnlinkCompanyWithContactAndDeal({
 <dl>
 <dd>
 
-**requestOptions:** `CompaniesClient.RequestOptions` 
+**$linkContactIds:** `?array` — Contact ids for contacts to be linked with company
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$linkDealsIds:** `?array` — Deal ids for deals to be linked with company
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$unlinkContactIds:** `?array` — Contact ids for contacts to be unlinked from company
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$unlinkDealsIds:** `?array` — Deal ids for deals to be unlinked from company
     
 </dd>
 </dl>
@@ -13901,7 +17242,7 @@ await client.companies.linkAndUnlinkCompanyWithContactAndDeal({
 </dl>
 </details>
 
-<details><summary><code>client.companies.<a href="/src/api/resources/companies/client/Client.ts">getACompany</a>({ ...params }) -> BrevoApi.Company</code></summary>
+<details><summary><code>$client-&gt;companies-&gt;getACompany($id) -> Company</code></summary>
 <dl>
 <dd>
 
@@ -13913,11 +17254,10 @@ await client.companies.linkAndUnlinkCompanyWithContactAndDeal({
 <dl>
 <dd>
 
-```typescript
-await client.companies.getACompany({
-    id: "id"
-});
-
+```php
+$client->companies->getACompany(
+    'id',
+);
 ```
 </dd>
 </dl>
@@ -13932,15 +17272,7 @@ await client.companies.getACompany({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCompaniesIdRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `CompaniesClient.RequestOptions` 
+**$id:** `string` — Get Company Details
     
 </dd>
 </dl>
@@ -13952,7 +17284,7 @@ await client.companies.getACompany({
 </dl>
 </details>
 
-<details><summary><code>client.companies.<a href="/src/api/resources/companies/client/Client.ts">deleteACompany</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;companies-&gt;deleteACompany($id)</code></summary>
 <dl>
 <dd>
 
@@ -13964,11 +17296,10 @@ await client.companies.getACompany({
 <dl>
 <dd>
 
-```typescript
-await client.companies.deleteACompany({
-    id: "id"
-});
-
+```php
+$client->companies->deleteACompany(
+    'id',
+);
 ```
 </dd>
 </dl>
@@ -13983,15 +17314,7 @@ await client.companies.deleteACompany({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteCompaniesIdRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `CompaniesClient.RequestOptions` 
+**$id:** `string` — Company ID to delete
     
 </dd>
 </dl>
@@ -14003,7 +17326,7 @@ await client.companies.deleteACompany({
 </dl>
 </details>
 
-<details><summary><code>client.companies.<a href="/src/api/resources/companies/client/Client.ts">updateACompany</a>({ ...params }) -> BrevoApi.Company</code></summary>
+<details><summary><code>$client-&gt;companies-&gt;updateACompany($id, $request) -> Company</code></summary>
 <dl>
 <dd>
 
@@ -14015,11 +17338,11 @@ await client.companies.deleteACompany({
 <dl>
 <dd>
 
-```typescript
-await client.companies.updateACompany({
-    id: "id"
-});
-
+```php
+$client->companies->updateACompany(
+    'id',
+    new PatchCompaniesIdRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -14034,7 +17357,7 @@ await client.companies.updateACompany({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PatchCompaniesIdRequest` 
+**$id:** `string` 
     
 </dd>
 </dl>
@@ -14042,7 +17365,39 @@ await client.companies.updateACompany({
 <dl>
 <dd>
 
-**requestOptions:** `CompaniesClient.RequestOptions` 
+**$attributes:** `?array` — Attributes for company update
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$countryCode:** `?int` — Country code if phone_number is passed in attributes.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$linkedContactsIds:** `?array` — Warning - Using PATCH on linkedContactIds replaces the list of linked contacts. Omitted IDs will be removed.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$linkedDealsIds:** `?array` — Warning - Using PATCH on linkedDealsIds replaces the list of linked contacts. Omitted IDs will be removed.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$name:** `?string` — Name of company
     
 </dd>
 </dl>
@@ -14054,7 +17409,7 @@ await client.companies.updateACompany({
 </dl>
 </details>
 
-<details><summary><code>client.companies.<a href="/src/api/resources/companies/client/Client.ts">createACompanyDealAttribute</a>({ ...params }) -> BrevoApi.PostCrmAttributesResponse</code></summary>
+<details><summary><code>$client-&gt;companies-&gt;createACompanyDealAttribute($request) -> PostCrmAttributesResponse</code></summary>
 <dl>
 <dd>
 
@@ -14066,13 +17421,14 @@ await client.companies.updateACompany({
 <dl>
 <dd>
 
-```typescript
-await client.companies.createACompanyDealAttribute({
-    attributeType: "text",
-    label: "Attribute Label",
-    objectType: "companies"
-});
-
+```php
+$client->companies->createACompanyDealAttribute(
+    new PostCrmAttributesRequest([
+        'attributeType' => PostCrmAttributesRequestAttributeType::Text->value,
+        'label' => 'Attribute Label',
+        'objectType' => PostCrmAttributesRequestObjectType::Companies->value,
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -14087,7 +17443,7 @@ await client.companies.createACompanyDealAttribute({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostCrmAttributesRequest` 
+**$attributeType:** `string` — The type of attribute (must be one of the defined enums)
     
 </dd>
 </dl>
@@ -14095,7 +17451,31 @@ await client.companies.createACompanyDealAttribute({
 <dl>
 <dd>
 
-**requestOptions:** `CompaniesClient.RequestOptions` 
+**$description:** `?string` — A description of the attribute
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$label:** `string` — The label for the attribute (max 50 characters, cannot be empty)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$objectType:** `string` — The type of object the attribute belongs to (prefilled with `companies`, mandatory)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$optionsLabels:** `?array` — Options for multi-choice or single-select attributes
     
 </dd>
 </dl>
@@ -14107,7 +17487,7 @@ await client.companies.createACompanyDealAttribute({
 </dl>
 </details>
 
-<details><summary><code>client.companies.<a href="/src/api/resources/companies/client/Client.ts">getCompanyAttributes</a>() -> BrevoApi.GetCrmAttributesCompaniesResponseItem[]</code></summary>
+<details><summary><code>$client-&gt;companies-&gt;getCompanyAttributes() -> array</code></summary>
 <dl>
 <dd>
 
@@ -14119,25 +17499,9 @@ await client.companies.createACompanyDealAttribute({
 <dl>
 <dd>
 
-```typescript
-await client.companies.getCompanyAttributes();
-
+```php
+$client->companies->getCompanyAttributes();
 ```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `CompaniesClient.RequestOptions` 
-    
 </dd>
 </dl>
 </dd>
@@ -14149,7 +17513,7 @@ await client.companies.getCompanyAttributes();
 </details>
 
 ## Deals
-<details><summary><code>client.deals.<a href="/src/api/resources/deals/client/Client.ts">getDealAttributes</a>() -> BrevoApi.GetCrmAttributesDealsResponseItem[]</code></summary>
+<details><summary><code>$client-&gt;deals-&gt;getDealAttributes() -> array</code></summary>
 <dl>
 <dd>
 
@@ -14161,9 +17525,35 @@ await client.companies.getCompanyAttributes();
 <dl>
 <dd>
 
-```typescript
-await client.deals.getDealAttributes();
+```php
+$client->deals->getDealAttributes();
+```
+</dd>
+</dl>
+</dd>
+</dl>
 
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>$client-&gt;deals-&gt;getAllDeals($request) -> GetCrmDealsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```php
+$client->deals->getAllDeals(
+    new GetCrmDealsRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -14178,7 +17568,63 @@ await client.deals.getDealAttributes();
 <dl>
 <dd>
 
-**requestOptions:** `DealsClient.RequestOptions` 
+**$filtersAttributesDealName:** `?string` — Filter by attributes. If you have a filter for the owner on your end, please send it as filters[attributes.deal_owner] and utilize the account email for the filtering.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$filtersLinkedCompaniesIds:** `?string` — Filter by linked companies ids
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$filtersLinkedContactsIds:** `?string` — Filter by linked companies ids
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$modifiedSince:** `?string` — Filter (urlencoded) the contacts modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$createdSince:** `?string` — Filter (urlencoded) the contacts created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$offset:** `?int` — Index of the first document of the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$limit:** `?int` — Number of documents per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort the results in the ascending/descending order. Default order is **descending** by creation if `sort` is not passed
     
 </dd>
 </dl>
@@ -14190,7 +17636,7 @@ await client.deals.getDealAttributes();
 </dl>
 </details>
 
-<details><summary><code>client.deals.<a href="/src/api/resources/deals/client/Client.ts">getAllDeals</a>({ ...params }) -> BrevoApi.GetCrmDealsResponse</code></summary>
+<details><summary><code>$client-&gt;deals-&gt;createADeal($request) -> PostCrmDealsResponse</code></summary>
 <dl>
 <dd>
 
@@ -14202,9 +17648,12 @@ await client.deals.getDealAttributes();
 <dl>
 <dd>
 
-```typescript
-await client.deals.getAllDeals();
-
+```php
+$client->deals->createADeal(
+    new PostCrmDealsRequest([
+        'name' => 'Deal: Connect with company',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -14219,7 +17668,7 @@ await client.deals.getAllDeals();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCrmDealsRequest` 
+**$attributes:** `?array` — Attributes for deal creation To assign owner of a Deal you can send attributes.deal_owner and utilize the account email or ID. If you want to create a deal on a specific pipeline and stage you can use the following attributes `pipeline` and `deal_stage`. Pipeline and deal_stage are ids you can fetch using this endpoint `/crm/pipeline/details/{pipelineID}`
     
 </dd>
 </dl>
@@ -14227,50 +17676,7 @@ await client.deals.getAllDeals();
 <dl>
 <dd>
 
-**requestOptions:** `DealsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.deals.<a href="/src/api/resources/deals/client/Client.ts">createADeal</a>({ ...params }) -> BrevoApi.PostCrmDealsResponse</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.deals.createADeal({
-    name: "Deal: Connect with company"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `BrevoApi.PostCrmDealsRequest` 
+**$linkedCompaniesIds:** `?array` — Company ids to be linked with deal
     
 </dd>
 </dl>
@@ -14278,7 +17684,15 @@ await client.deals.createADeal({
 <dl>
 <dd>
 
-**requestOptions:** `DealsClient.RequestOptions` 
+**$linkedContactsIds:** `?array` — Contact ids to be linked with deal
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$name:** `string` — Name of deal
     
 </dd>
 </dl>
@@ -14290,7 +17704,7 @@ await client.deals.createADeal({
 </dl>
 </details>
 
-<details><summary><code>client.deals.<a href="/src/api/resources/deals/client/Client.ts">importDealsCreationAndUpdation</a>({ ...params }) -> BrevoApi.PostCrmDealsImportResponse</code></summary>
+<details><summary><code>$client-&gt;deals-&gt;importDealsCreationAndUpdation($request) -> PostCrmDealsImportResponse</code></summary>
 <dl>
 <dd>
 
@@ -14316,33 +17730,13 @@ Import deals from a CSV file with mapping options.
 <dl>
 <dd>
 
-```typescript
-await client.deals.importDealsCreationAndUpdation({});
-
+```php
+$client->deals->importDealsCreationAndUpdation(
+    new PostCrmDealsImportRequest([
+        'file' => File::createFromString("example_file", "example_file"),
+    ]),
+);
 ```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `BrevoApi.PostCrmDealsImportRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `DealsClient.RequestOptions` 
-    
 </dd>
 </dl>
 </dd>
@@ -14353,7 +17747,7 @@ await client.deals.importDealsCreationAndUpdation({});
 </dl>
 </details>
 
-<details><summary><code>client.deals.<a href="/src/api/resources/deals/client/Client.ts">linkAndUnlinkADealWithContactsAndCompanies</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;deals-&gt;linkAndUnlinkADealWithContactsAndCompanies($id, $request)</code></summary>
 <dl>
 <dd>
 
@@ -14365,11 +17759,11 @@ await client.deals.importDealsCreationAndUpdation({});
 <dl>
 <dd>
 
-```typescript
-await client.deals.linkAndUnlinkADealWithContactsAndCompanies({
-    id: "id"
-});
-
+```php
+$client->deals->linkAndUnlinkADealWithContactsAndCompanies(
+    'id',
+    new PatchCrmDealsLinkUnlinkIdRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -14384,7 +17778,7 @@ await client.deals.linkAndUnlinkADealWithContactsAndCompanies({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PatchCrmDealsLinkUnlinkIdRequest` 
+**$id:** `string` 
     
 </dd>
 </dl>
@@ -14392,7 +17786,31 @@ await client.deals.linkAndUnlinkADealWithContactsAndCompanies({
 <dl>
 <dd>
 
-**requestOptions:** `DealsClient.RequestOptions` 
+**$linkCompanyIds:** `?array` — Company ids to be linked with deal
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$linkContactIds:** `?array` — Contact ids for contacts to be linked with deal
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$unlinkCompanyIds:** `?array` — Company ids to be unlinked from deal
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$unlinkContactIds:** `?array` — Contact ids for contacts to be unlinked from deal
     
 </dd>
 </dl>
@@ -14404,7 +17822,7 @@ await client.deals.linkAndUnlinkADealWithContactsAndCompanies({
 </dl>
 </details>
 
-<details><summary><code>client.deals.<a href="/src/api/resources/deals/client/Client.ts">getADeal</a>({ ...params }) -> BrevoApi.Deal</code></summary>
+<details><summary><code>$client-&gt;deals-&gt;getADeal($id) -> Deal</code></summary>
 <dl>
 <dd>
 
@@ -14416,11 +17834,10 @@ await client.deals.linkAndUnlinkADealWithContactsAndCompanies({
 <dl>
 <dd>
 
-```typescript
-await client.deals.getADeal({
-    id: "id"
-});
-
+```php
+$client->deals->getADeal(
+    'id',
+);
 ```
 </dd>
 </dl>
@@ -14435,15 +17852,7 @@ await client.deals.getADeal({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCrmDealsIdRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `DealsClient.RequestOptions` 
+**$id:** `string` 
     
 </dd>
 </dl>
@@ -14455,7 +17864,7 @@ await client.deals.getADeal({
 </dl>
 </details>
 
-<details><summary><code>client.deals.<a href="/src/api/resources/deals/client/Client.ts">deleteADeal</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;deals-&gt;deleteADeal($id)</code></summary>
 <dl>
 <dd>
 
@@ -14467,11 +17876,10 @@ await client.deals.getADeal({
 <dl>
 <dd>
 
-```typescript
-await client.deals.deleteADeal({
-    id: "id"
-});
-
+```php
+$client->deals->deleteADeal(
+    'id',
+);
 ```
 </dd>
 </dl>
@@ -14486,15 +17894,7 @@ await client.deals.deleteADeal({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteCrmDealsIdRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `DealsClient.RequestOptions` 
+**$id:** `string` 
     
 </dd>
 </dl>
@@ -14506,7 +17906,7 @@ await client.deals.deleteADeal({
 </dl>
 </details>
 
-<details><summary><code>client.deals.<a href="/src/api/resources/deals/client/Client.ts">updateADeal</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;deals-&gt;updateADeal($id, $request)</code></summary>
 <dl>
 <dd>
 
@@ -14518,11 +17918,11 @@ await client.deals.deleteADeal({
 <dl>
 <dd>
 
-```typescript
-await client.deals.updateADeal({
-    id: "id"
-});
-
+```php
+$client->deals->updateADeal(
+    'id',
+    new PatchCrmDealsIdRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -14537,7 +17937,7 @@ await client.deals.updateADeal({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PatchCrmDealsIdRequest` 
+**$id:** `string` 
     
 </dd>
 </dl>
@@ -14545,7 +17945,31 @@ await client.deals.updateADeal({
 <dl>
 <dd>
 
-**requestOptions:** `DealsClient.RequestOptions` 
+**$attributes:** `?array` — Attributes for deal update To assign owner of a Deal you can send attributes.deal_owner and utilize the account email or ID. If you wish to update the pipeline of a deal you need to provide the `pipeline` and the `deal_stage` Pipeline and deal_stage are ids you can fetch using this endpoint `/crm/pipeline/details/{pipelineID}`
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$linkedCompaniesIds:** `?array` — Warning - Using PATCH on linkedCompaniesIds replaces the list of linked contacts. Omitted IDs will be removed.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$linkedContactsIds:** `?array` — Warning - Using PATCH on linkedContactIds replaces the list of linked contacts. Omitted IDs will be removed.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$name:** `?string` — Name of deal
     
 </dd>
 </dl>
@@ -14557,7 +17981,7 @@ await client.deals.updateADeal({
 </dl>
 </details>
 
-<details><summary><code>client.deals.<a href="/src/api/resources/deals/client/Client.ts">getPipelineStages</a>() -> BrevoApi.Pipeline</code></summary>
+<details><summary><code>$client-&gt;deals-&gt;getPipelineStages() -> Pipeline</code></summary>
 <dl>
 <dd>
 
@@ -14583,25 +18007,9 @@ This endpoint is deprecated. Prefer /crm/pipeline/details/{pipelineID} instead.
 <dl>
 <dd>
 
-```typescript
-await client.deals.getPipelineStages();
-
+```php
+$client->deals->getPipelineStages();
 ```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `DealsClient.RequestOptions` 
-    
 </dd>
 </dl>
 </dd>
@@ -14612,7 +18020,7 @@ await client.deals.getPipelineStages();
 </dl>
 </details>
 
-<details><summary><code>client.deals.<a href="/src/api/resources/deals/client/Client.ts">getAllPipelines</a>() -> BrevoApi.Pipelines</code></summary>
+<details><summary><code>$client-&gt;deals-&gt;getAllPipelines() -> array</code></summary>
 <dl>
 <dd>
 
@@ -14624,25 +18032,9 @@ await client.deals.getPipelineStages();
 <dl>
 <dd>
 
-```typescript
-await client.deals.getAllPipelines();
-
+```php
+$client->deals->getAllPipelines();
 ```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `DealsClient.RequestOptions` 
-    
 </dd>
 </dl>
 </dd>
@@ -14653,7 +18045,7 @@ await client.deals.getAllPipelines();
 </dl>
 </details>
 
-<details><summary><code>client.deals.<a href="/src/api/resources/deals/client/Client.ts">getAPipeline</a>({ ...params }) -> BrevoApi.Pipelines</code></summary>
+<details><summary><code>$client-&gt;deals-&gt;getAPipeline($pipelineId) -> array</code></summary>
 <dl>
 <dd>
 
@@ -14665,11 +18057,10 @@ await client.deals.getAllPipelines();
 <dl>
 <dd>
 
-```typescript
-await client.deals.getAPipeline({
-    pipelineID: "pipelineID"
-});
-
+```php
+$client->deals->getAPipeline(
+    'pipelineID',
+);
 ```
 </dd>
 </dl>
@@ -14684,15 +18075,7 @@ await client.deals.getAPipeline({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCrmPipelineDetailsPipelineIdRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `DealsClient.RequestOptions` 
+**$pipelineId:** `string` 
     
 </dd>
 </dl>
@@ -14705,7 +18088,7 @@ await client.deals.getAPipeline({
 </details>
 
 ## Files
-<details><summary><code>client.files.<a href="/src/api/resources/files/client/Client.ts">getAllFiles</a>({ ...params }) -> BrevoApi.FileData[]</code></summary>
+<details><summary><code>$client-&gt;files-&gt;getAllFiles($request) -> array</code></summary>
 <dl>
 <dd>
 
@@ -14717,9 +18100,10 @@ await client.deals.getAPipeline({
 <dl>
 <dd>
 
-```typescript
-await client.files.getAllFiles();
-
+```php
+$client->files->getAllFiles(
+    new GetCrmFilesRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -14734,7 +18118,7 @@ await client.files.getAllFiles();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCrmFilesRequest` 
+**$entity:** `?string` — Filter by file entity type
     
 </dd>
 </dl>
@@ -14742,7 +18126,47 @@ await client.files.getAllFiles();
 <dl>
 <dd>
 
-**requestOptions:** `FilesClient.RequestOptions` 
+**$entityIds:** `?string` — Filter by file entity IDs
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$dateFrom:** `?int` — dateFrom to date range filter type (timestamp in milliseconds)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$dateTo:** `?int` — dateTo to date range filter type (timestamp in milliseconds)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$offset:** `?int` — Index of the first document of the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$limit:** `?int` — Number of documents per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort the results in the ascending/descending order. Default order is **descending** by creation if `sort` is not passed
     
 </dd>
 </dl>
@@ -14754,7 +18178,7 @@ await client.files.getAllFiles();
 </dl>
 </details>
 
-<details><summary><code>client.files.<a href="/src/api/resources/files/client/Client.ts">uploadAFile</a>({ ...params }) -> BrevoApi.FileData</code></summary>
+<details><summary><code>$client-&gt;files-&gt;uploadAFile($request) -> FileData</code></summary>
 <dl>
 <dd>
 
@@ -14766,11 +18190,39 @@ await client.files.getAllFiles();
 <dl>
 <dd>
 
-```typescript
-await client.files.uploadAFile({
-    file: fs.createReadStream("/path/to/your/file")
-});
+```php
+$client->files->uploadAFile(
+    new PostCrmFilesRequest([
+        'file' => File::createFromString("example_file", "example_file"),
+    ]),
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
 
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>$client-&gt;files-&gt;downloadAFile($id) -> GetCrmFilesIdResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```php
+$client->files->downloadAFile(
+    'id',
+);
 ```
 </dd>
 </dl>
@@ -14785,15 +18237,7 @@ await client.files.uploadAFile({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostCrmFilesRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `FilesClient.RequestOptions` 
+**$id:** `string` — File id to download.
     
 </dd>
 </dl>
@@ -14805,7 +18249,7 @@ await client.files.uploadAFile({
 </dl>
 </details>
 
-<details><summary><code>client.files.<a href="/src/api/resources/files/client/Client.ts">downloadAFile</a>({ ...params }) -> BrevoApi.GetCrmFilesIdResponse</code></summary>
+<details><summary><code>$client-&gt;files-&gt;deleteAFile($id)</code></summary>
 <dl>
 <dd>
 
@@ -14817,11 +18261,10 @@ await client.files.uploadAFile({
 <dl>
 <dd>
 
-```typescript
-await client.files.downloadAFile({
-    id: "id"
-});
-
+```php
+$client->files->deleteAFile(
+    'id',
+);
 ```
 </dd>
 </dl>
@@ -14836,15 +18279,7 @@ await client.files.downloadAFile({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCrmFilesIdRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `FilesClient.RequestOptions` 
+**$id:** `string` — File id to delete.
     
 </dd>
 </dl>
@@ -14856,7 +18291,7 @@ await client.files.downloadAFile({
 </dl>
 </details>
 
-<details><summary><code>client.files.<a href="/src/api/resources/files/client/Client.ts">deleteAFile</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;files-&gt;getFileDetails($id) -> FileData</code></summary>
 <dl>
 <dd>
 
@@ -14868,11 +18303,10 @@ await client.files.downloadAFile({
 <dl>
 <dd>
 
-```typescript
-await client.files.deleteAFile({
-    id: "id"
-});
-
+```php
+$client->files->getFileDetails(
+    'id',
+);
 ```
 </dd>
 </dl>
@@ -14887,66 +18321,7 @@ await client.files.deleteAFile({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteCrmFilesIdRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `FilesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.files.<a href="/src/api/resources/files/client/Client.ts">getFileDetails</a>({ ...params }) -> BrevoApi.FileData</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.files.getFileDetails({
-    id: "id"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `BrevoApi.GetCrmFilesIdDataRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `FilesClient.RequestOptions` 
+**$id:** `string` — File id to get file data.
     
 </dd>
 </dl>
@@ -14959,7 +18334,7 @@ await client.files.getFileDetails({
 </details>
 
 ## Notes
-<details><summary><code>client.notes.<a href="/src/api/resources/notes/client/Client.ts">getAllNotes</a>({ ...params }) -> BrevoApi.Note[]</code></summary>
+<details><summary><code>$client-&gt;notes-&gt;getAllNotes($request) -> array</code></summary>
 <dl>
 <dd>
 
@@ -14971,9 +18346,10 @@ await client.files.getFileDetails({
 <dl>
 <dd>
 
-```typescript
-await client.notes.getAllNotes();
-
+```php
+$client->notes->getAllNotes(
+    new GetCrmNotesRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -14988,7 +18364,7 @@ await client.notes.getAllNotes();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCrmNotesRequest` 
+**$entity:** `?string` — Filter by note entity type
     
 </dd>
 </dl>
@@ -14996,7 +18372,47 @@ await client.notes.getAllNotes();
 <dl>
 <dd>
 
-**requestOptions:** `NotesClient.RequestOptions` 
+**$entityIds:** `?string` — Filter by note entity IDs
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$dateFrom:** `?int` — dateFrom to date range filter type (timestamp in milliseconds)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$dateTo:** `?int` — dateTo to date range filter type (timestamp in milliseconds)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$offset:** `?int` — Index of the first document of the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$limit:** `?int` — Number of documents per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort the results in the ascending/descending order. Default order is **descending** by creation if `sort` is not passed
     
 </dd>
 </dl>
@@ -15008,7 +18424,7 @@ await client.notes.getAllNotes();
 </dl>
 </details>
 
-<details><summary><code>client.notes.<a href="/src/api/resources/notes/client/Client.ts">createANote</a>({ ...params }) -> BrevoApi.PostCrmNotesResponse</code></summary>
+<details><summary><code>$client-&gt;notes-&gt;createANote($request) -> PostCrmNotesResponse</code></summary>
 <dl>
 <dd>
 
@@ -15020,11 +18436,12 @@ await client.notes.getAllNotes();
 <dl>
 <dd>
 
-```typescript
-await client.notes.createANote({
-    text: "In communication with client_dev for resolution of queries."
-});
-
+```php
+$client->notes->createANote(
+    new NoteData([
+        'text' => 'In communication with client_dev for resolution of queries.',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -15039,15 +18456,7 @@ await client.notes.createANote({
 <dl>
 <dd>
 
-**request:** `BrevoApi.NoteData` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `NotesClient.RequestOptions` 
+**$request:** `NoteData` 
     
 </dd>
 </dl>
@@ -15059,7 +18468,7 @@ await client.notes.createANote({
 </dl>
 </details>
 
-<details><summary><code>client.notes.<a href="/src/api/resources/notes/client/Client.ts">getANote</a>({ ...params }) -> BrevoApi.Note</code></summary>
+<details><summary><code>$client-&gt;notes-&gt;getANote($id) -> Note</code></summary>
 <dl>
 <dd>
 
@@ -15071,11 +18480,10 @@ await client.notes.createANote({
 <dl>
 <dd>
 
-```typescript
-await client.notes.getANote({
-    id: "id"
-});
-
+```php
+$client->notes->getANote(
+    'id',
+);
 ```
 </dd>
 </dl>
@@ -15090,15 +18498,7 @@ await client.notes.getANote({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCrmNotesIdRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `NotesClient.RequestOptions` 
+**$id:** `string` — Note ID to get
     
 </dd>
 </dl>
@@ -15110,7 +18510,7 @@ await client.notes.getANote({
 </dl>
 </details>
 
-<details><summary><code>client.notes.<a href="/src/api/resources/notes/client/Client.ts">deleteANote</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;notes-&gt;deleteANote($id)</code></summary>
 <dl>
 <dd>
 
@@ -15122,11 +18522,10 @@ await client.notes.getANote({
 <dl>
 <dd>
 
-```typescript
-await client.notes.deleteANote({
-    id: "id"
-});
-
+```php
+$client->notes->deleteANote(
+    'id',
+);
 ```
 </dd>
 </dl>
@@ -15141,15 +18540,7 @@ await client.notes.deleteANote({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteCrmNotesIdRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `NotesClient.RequestOptions` 
+**$id:** `string` — Note ID to delete
     
 </dd>
 </dl>
@@ -15161,7 +18552,7 @@ await client.notes.deleteANote({
 </dl>
 </details>
 
-<details><summary><code>client.notes.<a href="/src/api/resources/notes/client/Client.ts">updateANote</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;notes-&gt;updateANote($id, $request)</code></summary>
 <dl>
 <dd>
 
@@ -15173,14 +18564,15 @@ await client.notes.deleteANote({
 <dl>
 <dd>
 
-```typescript
-await client.notes.updateANote({
-    id: "id",
-    body: {
-        text: "In communication with client_dev for resolution of queries."
-    }
-});
-
+```php
+$client->notes->updateANote(
+    'id',
+    new PatchCrmNotesIdRequest([
+        'body' => new NoteData([
+            'text' => 'In communication with client_dev for resolution of queries.',
+        ]),
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -15195,7 +18587,7 @@ await client.notes.updateANote({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PatchCrmNotesIdRequest` 
+**$id:** `string` — Note ID to update
     
 </dd>
 </dl>
@@ -15203,7 +18595,7 @@ await client.notes.updateANote({
 <dl>
 <dd>
 
-**requestOptions:** `NotesClient.RequestOptions` 
+**$request:** `NoteData` 
     
 </dd>
 </dl>
@@ -15216,7 +18608,7 @@ await client.notes.updateANote({
 </details>
 
 ## Tasks
-<details><summary><code>client.tasks.<a href="/src/api/resources/tasks/client/Client.ts">getAllTasks</a>({ ...params }) -> BrevoApi.GetCrmTasksResponse</code></summary>
+<details><summary><code>$client-&gt;tasks-&gt;getAllTasks($request) -> GetCrmTasksResponse</code></summary>
 <dl>
 <dd>
 
@@ -15228,11 +18620,12 @@ await client.notes.updateANote({
 <dl>
 <dd>
 
-```typescript
-await client.tasks.getAllTasks({
-    sortBy: "name"
-});
-
+```php
+$client->tasks->getAllTasks(
+    new GetCrmTasksRequest([
+        'sortBy' => 'name',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -15247,7 +18640,7 @@ await client.tasks.getAllTasks({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCrmTasksRequest` 
+**$filterType:** `?string` — Filter by task type (ID)
     
 </dd>
 </dl>
@@ -15255,7 +18648,95 @@ await client.tasks.getAllTasks({
 <dl>
 <dd>
 
-**requestOptions:** `TasksClient.RequestOptions` 
+**$filterStatus:** `?string` — Filter by task status
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$filterDate:** `?string` — Filter by date
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$filterAssignTo:** `?string` — Filter by the "assignTo" ID. You can utilize account emails for the "assignTo" attribute.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$filterContacts:** `?string` — Filter by contact ids
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$filterDeals:** `?string` — Filter by deals ids
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$filterCompanies:** `?string` — Filter by companies ids
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$dateFrom:** `?int` — dateFrom to date range filter type (timestamp in milliseconds)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$dateTo:** `?int` — dateTo to date range filter type (timestamp in milliseconds)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$offset:** `?int` — Index of the first document of the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$limit:** `?int` — Number of documents per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort the results in the ascending/descending order. Default order is **descending** by creation if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sortBy:** `?string` — The field used to sort field names.
     
 </dd>
 </dl>
@@ -15267,7 +18748,7 @@ await client.tasks.getAllTasks({
 </dl>
 </details>
 
-<details><summary><code>client.tasks.<a href="/src/api/resources/tasks/client/Client.ts">createATask</a>({ ...params }) -> BrevoApi.PostCrmTasksResponse</code></summary>
+<details><summary><code>$client-&gt;tasks-&gt;createATask($request) -> PostCrmTasksResponse</code></summary>
 <dl>
 <dd>
 
@@ -15279,13 +18760,14 @@ await client.tasks.getAllTasks({
 <dl>
 <dd>
 
-```typescript
-await client.tasks.createATask({
-    date: "2021-11-01T17:44:54Z",
-    name: "Task: Connect with client_dev",
-    taskTypeId: "61a5cd07ca1347c82306ad09"
-});
-
+```php
+$client->tasks->createATask(
+    new PostCrmTasksRequest([
+        'date' => new DateTime('2021-11-01T17:44:54Z'),
+        'name' => 'Task: Connect with client_dev',
+        'taskTypeId' => '61a5cd07ca1347c82306ad09',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -15300,7 +18782,7 @@ await client.tasks.createATask({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PostCrmTasksRequest` 
+**$assignToId:** `?string` — To assign a task to a user you can use either the account email or ID.
     
 </dd>
 </dl>
@@ -15308,7 +18790,79 @@ await client.tasks.createATask({
 <dl>
 <dd>
 
-**requestOptions:** `TasksClient.RequestOptions` 
+**$companiesIds:** `?array` — Companies ids for companies a task is linked to
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$contactsIds:** `?array` — Contact ids for contacts linked to this task
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$date:** `DateTime` — Task due date and time
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$dealsIds:** `?array` — Deal ids for deals a task is linked to
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$done:** `?bool` — Task marked as done
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$duration:** `?int` — Duration of task in milliseconds [1 minute = 60000 ms]
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$name:** `string` — Name of task
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$notes:** `?string` — Notes added to a task
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$reminder:** `?TaskReminder` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$taskTypeId:** `string` — Id for type of task e.g Call / Email / Meeting etc.
     
 </dd>
 </dl>
@@ -15320,7 +18874,7 @@ await client.tasks.createATask({
 </dl>
 </details>
 
-<details><summary><code>client.tasks.<a href="/src/api/resources/tasks/client/Client.ts">getATask</a>({ ...params }) -> BrevoApi.Task</code></summary>
+<details><summary><code>$client-&gt;tasks-&gt;getATask($id) -> Task</code></summary>
 <dl>
 <dd>
 
@@ -15332,11 +18886,10 @@ await client.tasks.createATask({
 <dl>
 <dd>
 
-```typescript
-await client.tasks.getATask({
-    id: "id"
-});
-
+```php
+$client->tasks->getATask(
+    'id',
+);
 ```
 </dd>
 </dl>
@@ -15351,15 +18904,7 @@ await client.tasks.getATask({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetCrmTasksIdRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `TasksClient.RequestOptions` 
+**$id:** `string` 
     
 </dd>
 </dl>
@@ -15371,7 +18916,7 @@ await client.tasks.getATask({
 </dl>
 </details>
 
-<details><summary><code>client.tasks.<a href="/src/api/resources/tasks/client/Client.ts">deleteATask</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;tasks-&gt;deleteATask($id)</code></summary>
 <dl>
 <dd>
 
@@ -15383,11 +18928,10 @@ await client.tasks.getATask({
 <dl>
 <dd>
 
-```typescript
-await client.tasks.deleteATask({
-    id: "id"
-});
-
+```php
+$client->tasks->deleteATask(
+    'id',
+);
 ```
 </dd>
 </dl>
@@ -15402,15 +18946,7 @@ await client.tasks.deleteATask({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteCrmTasksIdRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `TasksClient.RequestOptions` 
+**$id:** `string` 
     
 </dd>
 </dl>
@@ -15422,7 +18958,7 @@ await client.tasks.deleteATask({
 </dl>
 </details>
 
-<details><summary><code>client.tasks.<a href="/src/api/resources/tasks/client/Client.ts">updateATask</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;tasks-&gt;updateATask($id, $request)</code></summary>
 <dl>
 <dd>
 
@@ -15434,11 +18970,11 @@ await client.tasks.deleteATask({
 <dl>
 <dd>
 
-```typescript
-await client.tasks.updateATask({
-    id: "id"
-});
-
+```php
+$client->tasks->updateATask(
+    'id',
+    new PatchCrmTasksIdRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -15453,7 +18989,7 @@ await client.tasks.updateATask({
 <dl>
 <dd>
 
-**request:** `BrevoApi.PatchCrmTasksIdRequest` 
+**$id:** `string` 
     
 </dd>
 </dl>
@@ -15461,7 +18997,87 @@ await client.tasks.updateATask({
 <dl>
 <dd>
 
-**requestOptions:** `TasksClient.RequestOptions` 
+**$assignToId:** `?string` — To assign a task to a user you can use either the account email or ID.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$companiesIds:** `?array` — Companies ids for companies a task is linked to
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$contactsIds:** `?array` — Contact ids for contacts linked to this task
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$date:** `?DateTime` — Task date/time
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$dealsIds:** `?array` — Deal ids for deals a task is linked to
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$done:** `?bool` — Task marked as done
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$duration:** `?int` — Duration of task in milliseconds [1 minute = 60000 ms]
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$name:** `?string` — Name of task
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$notes:** `?string` — Notes added to a task
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$reminder:** `?TaskReminder` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$taskTypeId:** `?string` — Id for type of task e.g Call / Email / Meeting etc.
     
 </dd>
 </dl>
@@ -15473,7 +19089,7 @@ await client.tasks.updateATask({
 </dl>
 </details>
 
-<details><summary><code>client.tasks.<a href="/src/api/resources/tasks/client/Client.ts">getAllTaskTypes</a>() -> BrevoApi.GetCrmTasktypesResponse</code></summary>
+<details><summary><code>$client-&gt;tasks-&gt;getAllTaskTypes() -> GetCrmTasktypesResponse</code></summary>
 <dl>
 <dd>
 
@@ -15485,25 +19101,9 @@ await client.tasks.updateATask({
 <dl>
 <dd>
 
-```typescript
-await client.tasks.getAllTaskTypes();
-
+```php
+$client->tasks->getAllTaskTypes();
 ```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `TasksClient.RequestOptions` 
-    
 </dd>
 </dl>
 </dd>
@@ -15515,7 +19115,7 @@ await client.tasks.getAllTaskTypes();
 </details>
 
 ## TransactionalWhatsApp
-<details><summary><code>client.transactionalWhatsApp.<a href="/src/api/resources/transactionalWhatsApp/client/Client.ts">sendWhatsappMessage</a>({ ...params }) -> BrevoApi.SendWhatsappMessageResponse</code></summary>
+<details><summary><code>$client-&gt;transactionalWhatsApp-&gt;sendWhatsappMessage($request) -> SendWhatsappMessageResponse</code></summary>
 <dl>
 <dd>
 
@@ -15542,13 +19142,16 @@ This endpoint is used to send a WhatsApp message. <br/>(**The first message you 
 <dl>
 <dd>
 
-```typescript
-await client.transactionalWhatsApp.sendWhatsappMessage({
-    contactNumbers: ["contactNumbers"],
-    senderNumber: "senderNumber",
-    templateId: 123
-});
-
+```php
+$client->transactionalWhatsApp->sendWhatsappMessage(
+    new SendWhatsappMessageRequestParams([
+        'contactNumbers' => [
+            'contactNumbers',
+        ],
+        'senderNumber' => 'senderNumber',
+        'templateId' => 123,
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -15563,15 +19166,7 @@ await client.transactionalWhatsApp.sendWhatsappMessage({
 <dl>
 <dd>
 
-**request:** `BrevoApi.SendWhatsappMessageRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `TransactionalWhatsAppClient.RequestOptions` 
+**$request:** `SendWhatsappMessageRequestParams|SendWhatsappMessageRequestText` 
     
 </dd>
 </dl>
@@ -15583,7 +19178,7 @@ await client.transactionalWhatsApp.sendWhatsappMessage({
 </dl>
 </details>
 
-<details><summary><code>client.transactionalWhatsApp.<a href="/src/api/resources/transactionalWhatsApp/client/Client.ts">getWhatsappEventReport</a>({ ...params }) -> BrevoApi.GetWhatsappEventReportResponse</code></summary>
+<details><summary><code>$client-&gt;transactionalWhatsApp-&gt;getWhatsappEventReport($request) -> GetWhatsappEventReportResponse</code></summary>
 <dl>
 <dd>
 
@@ -15609,9 +19204,10 @@ This endpoint will show the unaggregated statistics for WhatsApp activity (30 da
 <dl>
 <dd>
 
-```typescript
-await client.transactionalWhatsApp.getWhatsappEventReport();
-
+```php
+$client->transactionalWhatsApp->getWhatsappEventReport(
+    new GetWhatsappEventReportRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -15626,7 +19222,7 @@ await client.transactionalWhatsApp.getWhatsappEventReport();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetWhatsappEventReportRequest` 
+**$limit:** `?int` — Number limitation for the result returned
     
 </dd>
 </dl>
@@ -15634,7 +19230,55 @@ await client.transactionalWhatsApp.getWhatsappEventReport();
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalWhatsAppClient.RequestOptions` 
+**$offset:** `?int` — Beginning point in the list to retrieve from
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$startDate:** `?string` — **Mandatory if endDate is used.** Starting date of the report (YYYY-MM-DD). Must be lower than equal to endDate
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$endDate:** `?string` — **Mandatory if startDate is used.** Ending date of the report (YYYY-MM-DD). Must be greater than equal to startDate
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$days:** `?int` — Number of days in the past including today (positive integer). _Not compatible with 'startDate' and 'endDate'_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$contactNumber:** `?string` — Filter results for specific contact (WhatsApp Number with country code. Example, 85264318721)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$event:** `?string` — Filter the report for a specific event type
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
     
 </dd>
 </dl>
@@ -15647,7 +19291,7 @@ await client.transactionalWhatsApp.getWhatsappEventReport();
 </details>
 
 ## TransactionalEmails
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">getTransacBlockedContacts</a>({ ...params }) -> BrevoApi.GetTransacBlockedContactsResponse</code></summary>
+<details><summary><code>$client-&gt;transactionalEmails-&gt;getTransacBlockedContacts($request) -> GetTransacBlockedContactsResponse</code></summary>
 <dl>
 <dd>
 
@@ -15659,9 +19303,10 @@ await client.transactionalWhatsApp.getWhatsappEventReport();
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.getTransacBlockedContacts();
-
+```php
+$client->transactionalEmails->getTransacBlockedContacts(
+    new GetTransacBlockedContactsRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -15676,7 +19321,7 @@ await client.transactionalEmails.getTransacBlockedContacts();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetTransacBlockedContactsRequest` 
+**$startDate:** `?string` — **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) from which you want to fetch the blocked or unsubscribed contacts
     
 </dd>
 </dl>
@@ -15684,7 +19329,39 @@ await client.transactionalEmails.getTransacBlockedContacts();
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**$endDate:** `?string` — **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) till which you want to fetch the blocked or unsubscribed contacts
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$limit:** `?int` — Number of documents returned per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$offset:** `?int` — Index of the first document on the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$senders:** `?string` — Comma separated list of emails of the senders from which contacts are blocked or unsubscribed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
     
 </dd>
 </dl>
@@ -15696,7 +19373,7 @@ await client.transactionalEmails.getTransacBlockedContacts();
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">unblockOrResubscribeATransactionalContact</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;transactionalEmails-&gt;unblockOrResubscribeATransactionalContact($email)</code></summary>
 <dl>
 <dd>
 
@@ -15708,11 +19385,10 @@ await client.transactionalEmails.getTransacBlockedContacts();
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.unblockOrResubscribeATransactionalContact({
-    email: "email"
-});
-
+```php
+$client->transactionalEmails->unblockOrResubscribeATransactionalContact(
+    'email',
+);
 ```
 </dd>
 </dl>
@@ -15727,15 +19403,7 @@ await client.transactionalEmails.unblockOrResubscribeATransactionalContact({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteSmtpBlockedContactsEmailRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**$email:** `string` — contact email (urlencoded) to unblock.
     
 </dd>
 </dl>
@@ -15747,7 +19415,7 @@ await client.transactionalEmails.unblockOrResubscribeATransactionalContact({
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">getBlockedDomains</a>() -> BrevoApi.GetBlockedDomainsResponse</code></summary>
+<details><summary><code>$client-&gt;transactionalEmails-&gt;getBlockedDomains() -> GetBlockedDomainsResponse</code></summary>
 <dl>
 <dd>
 
@@ -15773,25 +19441,9 @@ Get the list of blocked domains
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.getBlockedDomains();
-
+```php
+$client->transactionalEmails->getBlockedDomains();
 ```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
-    
 </dd>
 </dl>
 </dd>
@@ -15802,7 +19454,7 @@ await client.transactionalEmails.getBlockedDomains();
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">blockNewDomain</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;transactionalEmails-&gt;blockNewDomain($request)</code></summary>
 <dl>
 <dd>
 
@@ -15828,11 +19480,12 @@ Blocks a new domain in order to avoid messages being sent to the same
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.blockNewDomain({
-    domain: "example.com"
-});
-
+```php
+$client->transactionalEmails->blockNewDomain(
+    new BlockNewDomainRequest([
+        'domain' => 'example.com',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -15847,15 +19500,7 @@ await client.transactionalEmails.blockNewDomain({
 <dl>
 <dd>
 
-**request:** `BrevoApi.BlockNewDomainRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**$domain:** `string` — name of the domain to be blocked
     
 </dd>
 </dl>
@@ -15867,7 +19512,7 @@ await client.transactionalEmails.blockNewDomain({
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">deleteBlockedDomain</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;transactionalEmails-&gt;deleteBlockedDomain($domain)</code></summary>
 <dl>
 <dd>
 
@@ -15893,11 +19538,10 @@ Unblocks an existing domain from the list of blocked domains
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.deleteBlockedDomain({
-    domain: "domain"
-});
-
+```php
+$client->transactionalEmails->deleteBlockedDomain(
+    'domain',
+);
 ```
 </dd>
 </dl>
@@ -15912,15 +19556,7 @@ await client.transactionalEmails.deleteBlockedDomain({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteBlockedDomainRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**$domain:** `string` — The name of the domain to be deleted
     
 </dd>
 </dl>
@@ -15932,7 +19568,7 @@ await client.transactionalEmails.deleteBlockedDomain({
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">deleteHardbounces</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;transactionalEmails-&gt;deleteHardbounces($request)</code></summary>
 <dl>
 <dd>
 
@@ -15958,9 +19594,10 @@ Delete hardbounces. To use carefully (e.g. in case of temporary ISP failures)
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.deleteHardbounces();
-
+```php
+$client->transactionalEmails->deleteHardbounces(
+    new DeleteHardbouncesRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -15975,7 +19612,7 @@ await client.transactionalEmails.deleteHardbounces();
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteHardbouncesRequest` 
+**$contactEmail:** `?string` — Target a specific email address
     
 </dd>
 </dl>
@@ -15983,7 +19620,15 @@ await client.transactionalEmails.deleteHardbounces();
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**$endDate:** `?string` — Ending date (YYYY-MM-DD) of the time period for deletion. The hardbounces until this date will be deleted. Must be greater than or equal to the startDate
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$startDate:** `?string` — Starting date (YYYY-MM-DD) of the time period for deletion. The hardbounces occurred after this date will be deleted. Must be less than or equal to the endDate
     
 </dd>
 </dl>
@@ -15995,7 +19640,7 @@ await client.transactionalEmails.deleteHardbounces();
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">sendTransacEmail</a>({ ...params }) -> BrevoApi.SendTransacEmailResponse</code></summary>
+<details><summary><code>$client-&gt;transactionalEmails-&gt;sendTransacEmail($request) -> SendTransacEmailResponse</code></summary>
 <dl>
 <dd>
 
@@ -16007,20 +19652,23 @@ await client.transactionalEmails.deleteHardbounces();
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.sendTransacEmail({
-    htmlContent: "<html><head></head><body><p>Hello,</p>This is my first transactional email sent from Brevo.</p></body></html>",
-    sender: {
-        email: "hello@brevo.com",
-        name: "Alex from Brevo"
-    },
-    subject: "Hello from Brevo!",
-    to: [{
-            email: "johndoe@example.com",
-            name: "John Doe"
-        }]
-});
-
+```php
+$client->transactionalEmails->sendTransacEmail(
+    new SendTransacEmailRequest([
+        'htmlContent' => '<html><head></head><body><p>Hello,</p>This is my first transactional email sent from Brevo.</p></body></html>',
+        'sender' => new SendTransacEmailRequestSender([
+            'email' => 'hello@brevo.com',
+            'name' => 'Alex from Brevo',
+        ]),
+        'subject' => 'Hello from Brevo!',
+        'to' => [
+            new SendTransacEmailRequestToItem([
+                'email' => 'johndoe@example.com',
+                'name' => 'John Doe',
+            ]),
+        ],
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -16035,7 +19683,7 @@ await client.transactionalEmails.sendTransacEmail({
 <dl>
 <dd>
 
-**request:** `BrevoApi.SendTransacEmailRequest` 
+**$attachment:** `?array` — Array of attachment objects. Each attachment must include either an absolute URL (no local file paths) or base64-encoded content, along with the attachment filename. The `name` field is required when `content` is provided. Supported file extensions: xlsx, xls, ods, docx, docm, doc, csv, pdf, txt, gif, jpg, jpeg, png, tif, tiff, rtf, bmp, cgm, css, shtml, html, htm, zip, xml, ppt, pptx, tar, ez, ics, mobi, msg, pub, eps, odt, mp3, m4a, m4v, wma, ogg, flac, wav, aif, aifc, aiff, mp4, mov, avi, mkv, mpeg, mpg, wmv, pkpass, xlsm. When `templateId` is specified: if the template uses the New Template Language format, both `url` and `content` attachment types are supported; if the template uses the Old Template Language format, the `attachment` parameter is ignored.
     
 </dd>
 </dl>
@@ -16043,7 +19691,119 @@ await client.transactionalEmails.sendTransacEmail({
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**$batchId:** `?string` — UUIDv4 identifier for the scheduled batch of transactional emails. If omitted, a valid UUIDv4 batch identifier is automatically generated.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$bcc:** `?array` — Array of BCC recipient objects. Each object contains an email address and an optional name.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$cc:** `?array` — Array of CC recipient objects. Each object contains an email address and an optional name.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$headers:** `?array` — Custom email headers (non-standard headers) to include in the email. The `sender.ip` header can be set to specify the IP address used for sending transactional emails (dedicated IP users only). Header names must use Title-Case-Format (words separated by hyphens with the first letter of each word capitalized). Headers not in this format are automatically converted. Standard email headers are not supported. Example: `{"sender.ip":"1.2.3.4", "X-Mailin-custom":"some_custom_value", "Idempotency-Key":"abc-123"}`
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$htmlContent:** `?string` — HTML body content of the email. Required when `templateId` is not provided. Ignored when `templateId` is provided.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$messageVersions:** `?array` — Array of message version objects for sending customized email variants. The `templateId` can be customized per version only if a global `templateId` is provided. The `htmlContent` and `textContent` can be customized per version only if at least one of these is present in the global parameters. Global parameters such as `to` (required), `bcc`, `cc`, `replyTo`, and `subject` can be customized per version. Maximum total recipients per API request is 2000. Maximum recipients per message version is 99. Individual `params` objects must not exceed 100 KB. Cumulative `params` across all versions must not exceed 1000 KB. See https://developers.brevo.com/docs/batch-send-transactional-emails for detailed usage instructions.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$params:** `?array` — Key-value pairs for template variable substitution. Only applicable when the template uses the New Template Language format.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$replyTo:** `?SendTransacEmailRequestReplyTo` — Reply-to email address (required) and optional display name. Recipients will use this address when replying to the email.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$scheduledAt:** `?DateTime` — UTC date-time when the email should be sent (format: YYYY-MM-DDTHH:mm:ss.SSSZ). Include timezone information in the date-time value. Scheduled emails may be delayed by up to 5 minutes.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sender:** `?SendTransacEmailRequestSender` — Sender information. Required when `templateId` is not provided. Specify either an email address (with optional name) or a sender ID. The `name` field is ignored when `id` is provided.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$subject:** `?string` — Email subject line. Required when `templateId` is not provided.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$tags:** `?array` — Array of tags for categorizing and filtering emails
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$templateId:** `?int` — Template identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$textContent:** `?string` — Plain text body content of the email. Ignored when `templateId` is provided.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$to:** `?array` — Array of recipient objects. Each object contains an email address and an optional display name. Required when `messageVersions` is not provided. Ignored when `messageVersions` is provided. Example: `[{"name":"Jimmy", "email":"jimmy@example.com"}, {"name":"Joe", "email":"joe@example.com"}]`
     
 </dd>
 </dl>
@@ -16055,7 +19815,7 @@ await client.transactionalEmails.sendTransacEmail({
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">deleteScheduledEmailById</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;transactionalEmails-&gt;deleteScheduledEmailById($identifier)</code></summary>
 <dl>
 <dd>
 
@@ -16081,11 +19841,10 @@ Delete scheduled batch of emails by batchId or single scheduled email by message
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.deleteScheduledEmailById({
-    identifier: "4320f270-a4e3-4a2e-b591-edfe30a5e627"
-});
-
+```php
+$client->transactionalEmails->deleteScheduledEmailById(
+    '4320f270-a4e3-4a2e-b591-edfe30a5e627',
+);
 ```
 </dd>
 </dl>
@@ -16100,15 +19859,7 @@ await client.transactionalEmails.deleteScheduledEmailById({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteScheduledEmailByIdRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**$identifier:** `string` — The `batchId` of scheduled emails batch (Should be a valid UUIDv4) or the `messageId` of scheduled email.
     
 </dd>
 </dl>
@@ -16120,7 +19871,7 @@ await client.transactionalEmails.deleteScheduledEmailById({
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">getScheduledEmailById</a>({ ...params }) -> BrevoApi.GetScheduledEmailByIdResponse</code></summary>
+<details><summary><code>$client-&gt;transactionalEmails-&gt;getScheduledEmailById($identifier, $request) -> GetScheduledEmailByIdResponseBatches|GetScheduledEmailByIdResponseCreatedAt</code></summary>
 <dl>
 <dd>
 
@@ -16146,13 +19897,14 @@ Fetch scheduled batch of emails by batchId or single scheduled email by messageI
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.getScheduledEmailById({
-    identifier: "4320f270-a4e3-4a2e-b591-edfe30a5e627",
-    startDate: "2022-02-02",
-    endDate: "2022-03-02"
-});
-
+```php
+$client->transactionalEmails->getScheduledEmailById(
+    '4320f270-a4e3-4a2e-b591-edfe30a5e627',
+    new GetScheduledEmailByIdRequest([
+        'startDate' => new DateTime('2022-02-02'),
+        'endDate' => new DateTime('2022-03-02'),
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -16167,7 +19919,7 @@ await client.transactionalEmails.getScheduledEmailById({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetScheduledEmailByIdRequest` 
+**$identifier:** `string` — The `batchId` of scheduled emails batch (Should be a valid UUIDv4) or the `messageId` of scheduled email.
     
 </dd>
 </dl>
@@ -16175,7 +19927,47 @@ await client.transactionalEmails.getScheduledEmailById({
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**$startDate:** `?DateTime` — Mandatory if `endDate` is used. Starting date (YYYY-MM-DD) from which you want to fetch the list. Can be maximum 30 days older tha current date.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$endDate:** `?DateTime` — Mandatory if `startDate` is used. Ending date (YYYY-MM-DD) till which you want to fetch the list. Maximum time period that can be selected is one month.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed. Not valid when identifier is `messageId`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$status:** `?string` — Filter the records by `status` of the scheduled email batch or message. Not valid when identifier is `messageId`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$limit:** `?int` — Number of documents returned per page. Not valid when identifier is `messageId`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$offset:** `?int` — Index of the first document on the page.  Not valid when identifier is `messageId`.
     
 </dd>
 </dl>
@@ -16187,7 +19979,7 @@ await client.transactionalEmails.getScheduledEmailById({
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">getTransacEmailsList</a>({ ...params }) -> BrevoApi.GetTransacEmailsListResponse</code></summary>
+<details><summary><code>$client-&gt;transactionalEmails-&gt;getTransacEmailsList($request) -> GetTransacEmailsListResponse</code></summary>
 <dl>
 <dd>
 
@@ -16213,9 +20005,10 @@ This endpoint will show the list of emails for past 30 days by default. To retri
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.getTransacEmailsList();
-
+```php
+$client->transactionalEmails->getTransacEmailsList(
+    new GetTransacEmailsListRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -16230,7 +20023,7 @@ await client.transactionalEmails.getTransacEmailsList();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetTransacEmailsListRequest` 
+**$email:** `?string` — **Mandatory if templateId and messageId are not passed in query filters.** Email address to which transactional email has been sent.
     
 </dd>
 </dl>
@@ -16238,7 +20031,55 @@ await client.transactionalEmails.getTransacEmailsList();
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**$templateId:** `?int` — **Mandatory if email and messageId are not passed in query filters.** Id of the template that was used to compose transactional email.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$messageId:** `?string` — **Mandatory if templateId and email are not passed in query filters.** Message ID of the transactional email sent.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$startDate:** `?string` — **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) from which you want to fetch the list. **Maximum time period that can be selected is one month**.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$endDate:** `?string` — **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) till which you want to fetch the list. **Maximum time period that can be selected is one month.**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$limit:** `?int` — Number of documents returned per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$offset:** `?int` — Index of the first document in the page
     
 </dd>
 </dl>
@@ -16250,7 +20091,7 @@ await client.transactionalEmails.getTransacEmailsList();
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">getTransacEmailContent</a>({ ...params }) -> BrevoApi.GetTransacEmailContentResponse</code></summary>
+<details><summary><code>$client-&gt;transactionalEmails-&gt;getTransacEmailContent($uuid) -> GetTransacEmailContentResponse</code></summary>
 <dl>
 <dd>
 
@@ -16282,11 +20123,10 @@ The uuid can also be fetched from the transactional logs page in your Brevo acco
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.getTransacEmailContent({
-    uuid: "uuid"
-});
-
+```php
+$client->transactionalEmails->getTransacEmailContent(
+    'uuid',
+);
 ```
 </dd>
 </dl>
@@ -16301,15 +20141,7 @@ await client.transactionalEmails.getTransacEmailContent({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetTransacEmailContentRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**$uuid:** `string` — Unique id of the transactional email that has been sent to a particular contact
     
 </dd>
 </dl>
@@ -16321,7 +20153,7 @@ await client.transactionalEmails.getTransacEmailContent({
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">deleteAnSmtpTransactionalLog</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;transactionalEmails-&gt;deleteAnSmtpTransactionalLog($identifier)</code></summary>
 <dl>
 <dd>
 
@@ -16333,11 +20165,10 @@ await client.transactionalEmails.getTransacEmailContent({
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.deleteAnSmtpTransactionalLog({
-    identifier: "identifier"
-});
-
+```php
+$client->transactionalEmails->deleteAnSmtpTransactionalLog(
+    'identifier',
+);
 ```
 </dd>
 </dl>
@@ -16352,15 +20183,7 @@ await client.transactionalEmails.deleteAnSmtpTransactionalLog({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteSmtpLogIdentifierRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**$identifier:** `string` — MessageId of the transactional log(s) to delete
     
 </dd>
 </dl>
@@ -16372,7 +20195,7 @@ await client.transactionalEmails.deleteAnSmtpTransactionalLog({
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">getAggregatedSmtpReport</a>({ ...params }) -> BrevoApi.GetAggregatedSmtpReportResponse</code></summary>
+<details><summary><code>$client-&gt;transactionalEmails-&gt;getAggregatedSmtpReport($request) -> GetAggregatedSmtpReportResponse</code></summary>
 <dl>
 <dd>
 
@@ -16398,9 +20221,10 @@ This endpoint will show the aggregated stats for past 90 days by default if `sta
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.getAggregatedSmtpReport();
-
+```php
+$client->transactionalEmails->getAggregatedSmtpReport(
+    new GetAggregatedSmtpReportRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -16415,7 +20239,7 @@ await client.transactionalEmails.getAggregatedSmtpReport();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetAggregatedSmtpReportRequest` 
+**$startDate:** `?string` — **Mandatory if endDate is used.** Starting date of the report (YYYY-MM-DD). Must be lower than equal to endDate
     
 </dd>
 </dl>
@@ -16423,7 +20247,23 @@ await client.transactionalEmails.getAggregatedSmtpReport();
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**$endDate:** `?string` — **Mandatory if startDate is used.** Ending date of the report (YYYY-MM-DD). Must be greater than equal to startDate
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$days:** `?int` — Number of days in the past including today (positive integer). _Not compatible with 'startDate' and 'endDate'_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$tag:** `?string` — Tag of the emails
     
 </dd>
 </dl>
@@ -16435,7 +20275,7 @@ await client.transactionalEmails.getAggregatedSmtpReport();
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">getEmailEventReport</a>({ ...params }) -> BrevoApi.GetEmailEventReportResponse</code></summary>
+<details><summary><code>$client-&gt;transactionalEmails-&gt;getEmailEventReport($request) -> GetEmailEventReportResponse</code></summary>
 <dl>
 <dd>
 
@@ -16461,9 +20301,10 @@ This endpoint will show the aggregated stats for past 30 days by default if `sta
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.getEmailEventReport();
-
+```php
+$client->transactionalEmails->getEmailEventReport(
+    new GetEmailEventReportRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -16478,7 +20319,7 @@ await client.transactionalEmails.getEmailEventReport();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetEmailEventReportRequest` 
+**$limit:** `?int` — Number limitation for the result returned
     
 </dd>
 </dl>
@@ -16486,7 +20327,79 @@ await client.transactionalEmails.getEmailEventReport();
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**$offset:** `?int` — Beginning point in the list to retrieve from.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$startDate:** `?string` — **Mandatory if endDate is used.** Starting date of the report (YYYY-MM-DD). Must be lower than equal to endDate
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$endDate:** `?string` — **Mandatory if startDate is used.** Ending date of the report (YYYY-MM-DD). Must be greater than equal to startDate
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$days:** `?int` — Number of days in the past including today (positive integer). _Not compatible with 'startDate' and 'endDate'_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$email:** `?string` — Filter the report for a specific email addresses
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$event:** `?string` — Filter the report for a specific event type
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$tags:** `?string` — Filter the report for tags (serialized and urlencoded array)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$messageId:** `?string` — Filter on a specific message id
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$templateId:** `?int` — Filter on a specific template id
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
     
 </dd>
 </dl>
@@ -16498,7 +20411,7 @@ await client.transactionalEmails.getEmailEventReport();
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">getSmtpReport</a>({ ...params }) -> BrevoApi.GetSmtpReportResponse</code></summary>
+<details><summary><code>$client-&gt;transactionalEmails-&gt;getSmtpReport($request) -> GetSmtpReportResponse</code></summary>
 <dl>
 <dd>
 
@@ -16510,9 +20423,10 @@ await client.transactionalEmails.getEmailEventReport();
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.getSmtpReport();
-
+```php
+$client->transactionalEmails->getSmtpReport(
+    new GetSmtpReportRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -16527,7 +20441,7 @@ await client.transactionalEmails.getSmtpReport();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetSmtpReportRequest` 
+**$limit:** `?int` — Number of documents returned per page
     
 </dd>
 </dl>
@@ -16535,7 +20449,47 @@ await client.transactionalEmails.getSmtpReport();
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**$offset:** `?int` — Index of the first document on the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$startDate:** `?string` — **Mandatory if endDate is used.** Starting date of the report (YYYY-MM-DD)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$endDate:** `?string` — **Mandatory if startDate is used.** Ending date of the report (YYYY-MM-DD)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$days:** `?int` — Number of days in the past including today (positive integer). _Not compatible with 'startDate' and 'endDate'_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$tag:** `?string` — Tag of the emails
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
     
 </dd>
 </dl>
@@ -16547,7 +20501,7 @@ await client.transactionalEmails.getSmtpReport();
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">postPreviewSmtpEmailTemplates</a>({ ...params }) -> BrevoApi.PostPreviewSmtpEmailTemplatesResponse</code></summary>
+<details><summary><code>$client-&gt;transactionalEmails-&gt;postPreviewSmtpEmailTemplates($request) -> PostPreviewSmtpEmailTemplatesResponse</code></summary>
 <dl>
 <dd>
 
@@ -16559,11 +20513,12 @@ await client.transactionalEmails.getSmtpReport();
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.postPreviewSmtpEmailTemplates({
-    "key": "value"
-});
-
+```php
+$client->transactionalEmails->postPreviewSmtpEmailTemplates(
+    [
+        'key' => "value",
+    ],
+);
 ```
 </dd>
 </dl>
@@ -16578,15 +20533,7 @@ await client.transactionalEmails.postPreviewSmtpEmailTemplates({
 <dl>
 <dd>
 
-**request:** `unknown` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**$request:** `mixed` 
     
 </dd>
 </dl>
@@ -16598,7 +20545,7 @@ await client.transactionalEmails.postPreviewSmtpEmailTemplates({
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">getSmtpTemplates</a>({ ...params }) -> BrevoApi.GetSmtpTemplatesResponse</code></summary>
+<details><summary><code>$client-&gt;transactionalEmails-&gt;getSmtpTemplates($request) -> GetSmtpTemplatesResponse</code></summary>
 <dl>
 <dd>
 
@@ -16610,9 +20557,10 @@ await client.transactionalEmails.postPreviewSmtpEmailTemplates({
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.getSmtpTemplates();
-
+```php
+$client->transactionalEmails->getSmtpTemplates(
+    new GetSmtpTemplatesRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -16627,7 +20575,7 @@ await client.transactionalEmails.getSmtpTemplates();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetSmtpTemplatesRequest` 
+**$templateStatus:** `?bool` — Filter on the status of the template. Active = true, inactive = false
     
 </dd>
 </dl>
@@ -16635,7 +20583,23 @@ await client.transactionalEmails.getSmtpTemplates();
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**$limit:** `?int` — Number of documents returned per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$offset:** `?int` — Index of the first document in the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
     
 </dd>
 </dl>
@@ -16647,7 +20611,7 @@ await client.transactionalEmails.getSmtpTemplates();
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">createSmtpTemplate</a>({ ...params }) -> BrevoApi.CreateSmtpTemplateResponse</code></summary>
+<details><summary><code>$client-&gt;transactionalEmails-&gt;createSmtpTemplate($request) -> CreateSmtpTemplateResponse</code></summary>
 <dl>
 <dd>
 
@@ -16659,13 +20623,14 @@ await client.transactionalEmails.getSmtpTemplates();
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.createSmtpTemplate({
-    sender: {},
-    subject: "Thanks for your purchase !",
-    templateName: "Order Confirmation - EN"
-});
-
+```php
+$client->transactionalEmails->createSmtpTemplate(
+    new CreateSmtpTemplateRequest([
+        'sender' => new CreateSmtpTemplateRequestSender([]),
+        'subject' => 'Thanks for your purchase !',
+        'templateName' => 'Order Confirmation - EN',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -16680,7 +20645,7 @@ await client.transactionalEmails.createSmtpTemplate({
 <dl>
 <dd>
 
-**request:** `BrevoApi.CreateSmtpTemplateRequest` 
+**$attachmentUrl:** `?string` — Absolute url of the attachment (**no local file**). Extension allowed: #### xlsx, xls, ods, docx, docm, doc, csv, pdf, txt, gif, jpg, jpeg, png, tif, tiff, rtf, bmp, cgm, css, shtml, html, htm, zip, xml, ppt, pptx, tar, ez, ics, mobi, msg, pub and eps'
     
 </dd>
 </dl>
@@ -16688,7 +20653,71 @@ await client.transactionalEmails.createSmtpTemplate({
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**$htmlContent:** `?string` — Body of the message (HTML version). The field must have more than 10 characters. **REQUIRED if htmlUrl is empty**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$htmlUrl:** `?string` — Url which contents the body of the email message. REQUIRED if htmlContent is empty
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$isActive:** `?bool` — Status of template. isActive = true means template is active and isActive = false means template is inactive
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$replyTo:** `?string` — Email on which campaign recipients will be able to reply to
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sender:** `CreateSmtpTemplateRequestSender` — Sender details including id or email and name (_optional_). Only one of either Sender's email or Sender's ID shall be passed in one request at a time. For example: **{"name":"xyz", "email":"example@abc.com"}** **{"name":"xyz", "id":123}**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$subject:** `string` — Subject of the template
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$tag:** `?string` — Tag of the template
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$templateName:** `string` — Name of the template
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$toField:** `?string` — To personalize the **To** Field. If you want to include the first name and last name of your recipient, add **{FNAME} {LNAME}**. These contact attributes must already exist in your Brevo account. If input parameter **params** used please use **{{contact.FNAME}} {{contact.LNAME}}** for personalization
     
 </dd>
 </dl>
@@ -16700,7 +20729,7 @@ await client.transactionalEmails.createSmtpTemplate({
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">getSmtpTemplate</a>({ ...params }) -> BrevoApi.GetSmtpTemplateOverview</code></summary>
+<details><summary><code>$client-&gt;transactionalEmails-&gt;getSmtpTemplate($templateId) -> GetSmtpTemplateOverview</code></summary>
 <dl>
 <dd>
 
@@ -16712,11 +20741,10 @@ await client.transactionalEmails.createSmtpTemplate({
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.getSmtpTemplate({
-    templateId: 1000000
-});
-
+```php
+$client->transactionalEmails->getSmtpTemplate(
+    1000000,
+);
 ```
 </dd>
 </dl>
@@ -16731,15 +20759,7 @@ await client.transactionalEmails.getSmtpTemplate({
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetSmtpTemplateRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**$templateId:** `int` — id of the template
     
 </dd>
 </dl>
@@ -16751,7 +20771,7 @@ await client.transactionalEmails.getSmtpTemplate({
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">updateSmtpTemplate</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;transactionalEmails-&gt;updateSmtpTemplate($templateId, $request)</code></summary>
 <dl>
 <dd>
 
@@ -16763,11 +20783,11 @@ await client.transactionalEmails.getSmtpTemplate({
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.updateSmtpTemplate({
-    templateId: 1000000
-});
-
+```php
+$client->transactionalEmails->updateSmtpTemplate(
+    1000000,
+    new UpdateSmtpTemplateRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -16782,7 +20802,7 @@ await client.transactionalEmails.updateSmtpTemplate({
 <dl>
 <dd>
 
-**request:** `BrevoApi.UpdateSmtpTemplateRequest` 
+**$templateId:** `int` — id of the template
     
 </dd>
 </dl>
@@ -16790,7 +20810,79 @@ await client.transactionalEmails.updateSmtpTemplate({
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**$attachmentUrl:** `?string` — Absolute url of the attachment (**no local file**). Extensions allowed: #### xlsx, xls, ods, docx, docm, doc, csv, pdf, txt, gif, jpg, jpeg, png, tif, tiff, rtf, bmp, cgm, css, shtml, html, htm, zip, xml, ppt, pptx, tar, ez, ics, mobi, msg, pub and eps
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$htmlContent:** `?string` — **Required if htmlUrl is empty**. If the template is designed using Drag & Drop editor via HTML content, then the design page will not have Drag & Drop editor access for that template. Body of the message (HTML must have more than 10 characters)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$htmlUrl:** `?string` — **Required if htmlContent is empty**. URL to the body of the email (HTML)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$isActive:** `?bool` — Status of the template. isActive = false means template is inactive, isActive = true means template is active
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$replyTo:** `?string` — Email on which campaign recipients will be able to reply to
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sender:** `?UpdateSmtpTemplateRequestSender` — Sender details including id or email and name (_optional_). Only one of either Sender's email or Sender's ID shall be passed in one request at a time. For example: **{"name":"xyz", "email":"example@abc.com"}** **{"name":"xyz", "id":123}**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$subject:** `?string` — Subject of the email
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$tag:** `?string` — Tag of the template
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$templateName:** `?string` — Name of the template
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$toField:** `?string` — To personalize the **To** Field. If you want to include the first name and last name of your recipient, add **{FNAME} {LNAME}**. These contact attributes must already exist in your Brevo account. If input parameter **params** used please use **{{contact.FNAME}} {{contact.LNAME}}** for personalization
     
 </dd>
 </dl>
@@ -16802,7 +20894,7 @@ await client.transactionalEmails.updateSmtpTemplate({
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">deleteSmtpTemplate</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;transactionalEmails-&gt;deleteSmtpTemplate($templateId)</code></summary>
 <dl>
 <dd>
 
@@ -16814,11 +20906,10 @@ await client.transactionalEmails.updateSmtpTemplate({
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.deleteSmtpTemplate({
-    templateId: 1000000
-});
-
+```php
+$client->transactionalEmails->deleteSmtpTemplate(
+    1000000,
+);
 ```
 </dd>
 </dl>
@@ -16833,15 +20924,7 @@ await client.transactionalEmails.deleteSmtpTemplate({
 <dl>
 <dd>
 
-**request:** `BrevoApi.DeleteSmtpTemplateRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**$templateId:** `int` — id of the template
     
 </dd>
 </dl>
@@ -16853,7 +20936,7 @@ await client.transactionalEmails.deleteSmtpTemplate({
 </dl>
 </details>
 
-<details><summary><code>client.transactionalEmails.<a href="/src/api/resources/transactionalEmails/client/Client.ts">sendTestTemplate</a>({ ...params }) -> void</code></summary>
+<details><summary><code>$client-&gt;transactionalEmails-&gt;sendTestTemplate($templateId, $request)</code></summary>
 <dl>
 <dd>
 
@@ -16865,12 +20948,13 @@ await client.transactionalEmails.deleteSmtpTemplate({
 <dl>
 <dd>
 
-```typescript
-await client.transactionalEmails.sendTestTemplate({
-    templateId: 1000000,
-    body: {}
-});
-
+```php
+$client->transactionalEmails->sendTestTemplate(
+    1000000,
+    new SendTestTemplateRequest([
+        'body' => new SendTestEmail([]),
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -16885,7 +20969,7 @@ await client.transactionalEmails.sendTestTemplate({
 <dl>
 <dd>
 
-**request:** `BrevoApi.SendTestTemplateRequest` 
+**$templateId:** `int` — Id of the template
     
 </dd>
 </dl>
@@ -16893,7 +20977,7 @@ await client.transactionalEmails.sendTestTemplate({
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalEmailsClient.RequestOptions` 
+**$request:** `SendTestEmail` 
     
 </dd>
 </dl>
@@ -16906,7 +20990,7 @@ await client.transactionalEmails.sendTestTemplate({
 </details>
 
 ## TransactionalSms
-<details><summary><code>client.transactionalSms.<a href="/src/api/resources/transactionalSms/client/Client.ts">sendAsyncTransactionalSms</a>({ ...params }) -> BrevoApi.SendAsyncTransactionalSmsResponse</code></summary>
+<details><summary><code>$client-&gt;transactionalSms-&gt;sendAsyncTransactionalSms($request) -> SendAsyncTransactionalSmsResponse</code></summary>
 <dl>
 <dd>
 
@@ -16940,12 +21024,13 @@ Transactional SMS can be sent at any time without time restrictions. However, if
 <dl>
 <dd>
 
-```typescript
-await client.transactionalSms.sendAsyncTransactionalSms({
-    recipient: "33689965433",
-    sender: "MyShop"
-});
-
+```php
+$client->transactionalSms->sendAsyncTransactionalSms(
+    new SendTransacSms([
+        'recipient' => '33689965433',
+        'sender' => 'MyShop',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -16960,15 +21045,7 @@ await client.transactionalSms.sendAsyncTransactionalSms({
 <dl>
 <dd>
 
-**request:** `BrevoApi.SendTransacSms` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `TransactionalSmsClient.RequestOptions` 
+**$request:** `SendTransacSms` 
     
 </dd>
 </dl>
@@ -16980,7 +21057,7 @@ await client.transactionalSms.sendAsyncTransactionalSms({
 </dl>
 </details>
 
-<details><summary><code>client.transactionalSms.<a href="/src/api/resources/transactionalSms/client/Client.ts">sendTransacSms</a>({ ...params }) -> BrevoApi.SendTransacSmsResponse</code></summary>
+<details><summary><code>$client-&gt;transactionalSms-&gt;sendTransacSms($request) -> SendTransacSmsResponse</code></summary>
 <dl>
 <dd>
 
@@ -16992,12 +21069,13 @@ await client.transactionalSms.sendAsyncTransactionalSms({
 <dl>
 <dd>
 
-```typescript
-await client.transactionalSms.sendTransacSms({
-    recipient: "33689965433",
-    sender: "MyShop"
-});
-
+```php
+$client->transactionalSms->sendTransacSms(
+    new SendTransacSms([
+        'recipient' => '33689965433',
+        'sender' => 'MyShop',
+    ]),
+);
 ```
 </dd>
 </dl>
@@ -17012,15 +21090,7 @@ await client.transactionalSms.sendTransacSms({
 <dl>
 <dd>
 
-**request:** `BrevoApi.SendTransacSms` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `TransactionalSmsClient.RequestOptions` 
+**$request:** `SendTransacSms` 
     
 </dd>
 </dl>
@@ -17032,7 +21102,7 @@ await client.transactionalSms.sendTransacSms({
 </dl>
 </details>
 
-<details><summary><code>client.transactionalSms.<a href="/src/api/resources/transactionalSms/client/Client.ts">getTransacAggregatedSmsReport</a>({ ...params }) -> BrevoApi.GetTransacAggregatedSmsReportResponse</code></summary>
+<details><summary><code>$client-&gt;transactionalSms-&gt;getTransacAggregatedSmsReport($request) -> GetTransacAggregatedSmsReportResponse</code></summary>
 <dl>
 <dd>
 
@@ -17044,9 +21114,10 @@ await client.transactionalSms.sendTransacSms({
 <dl>
 <dd>
 
-```typescript
-await client.transactionalSms.getTransacAggregatedSmsReport();
-
+```php
+$client->transactionalSms->getTransacAggregatedSmsReport(
+    new GetTransacAggregatedSmsReportRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -17061,7 +21132,7 @@ await client.transactionalSms.getTransacAggregatedSmsReport();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetTransacAggregatedSmsReportRequest` 
+**$startDate:** `?string` — **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) of the report
     
 </dd>
 </dl>
@@ -17069,7 +21140,23 @@ await client.transactionalSms.getTransacAggregatedSmsReport();
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalSmsClient.RequestOptions` 
+**$endDate:** `?string` — **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) of the report
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$days:** `?int` — Number of days in the past including today (positive integer). **Not compatible with startDate and endDate**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$tag:** `?string` — Filter on a tag
     
 </dd>
 </dl>
@@ -17081,7 +21168,7 @@ await client.transactionalSms.getTransacAggregatedSmsReport();
 </dl>
 </details>
 
-<details><summary><code>client.transactionalSms.<a href="/src/api/resources/transactionalSms/client/Client.ts">getSmsEvents</a>({ ...params }) -> BrevoApi.GetSmsEventsResponse</code></summary>
+<details><summary><code>$client-&gt;transactionalSms-&gt;getSmsEvents($request) -> GetSmsEventsResponse</code></summary>
 <dl>
 <dd>
 
@@ -17093,9 +21180,10 @@ await client.transactionalSms.getTransacAggregatedSmsReport();
 <dl>
 <dd>
 
-```typescript
-await client.transactionalSms.getSmsEvents();
-
+```php
+$client->transactionalSms->getSmsEvents(
+    new GetSmsEventsRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -17110,7 +21198,7 @@ await client.transactionalSms.getSmsEvents();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetSmsEventsRequest` 
+**$limit:** `?int` — Number of documents per page
     
 </dd>
 </dl>
@@ -17118,7 +21206,63 @@ await client.transactionalSms.getSmsEvents();
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalSmsClient.RequestOptions` 
+**$startDate:** `?string` — **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) of the report
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$endDate:** `?string` — **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) of the report
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$offset:** `?int` — Index of the first document of the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$days:** `?int` — Number of days in the past including today (positive integer). **Not compatible with 'startDate' and 'endDate'**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$phoneNumber:** `?string` — Filter the report for a specific phone number
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$event:** `?string` — Filter the report for specific events
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$tags:** `?string` — Filter the report for specific tags passed as a serialized urlencoded array
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
     
 </dd>
 </dl>
@@ -17130,7 +21274,7 @@ await client.transactionalSms.getSmsEvents();
 </dl>
 </details>
 
-<details><summary><code>client.transactionalSms.<a href="/src/api/resources/transactionalSms/client/Client.ts">getTransacSmsReport</a>({ ...params }) -> BrevoApi.GetTransacSmsReportResponse</code></summary>
+<details><summary><code>$client-&gt;transactionalSms-&gt;getTransacSmsReport($request) -> GetTransacSmsReportResponse</code></summary>
 <dl>
 <dd>
 
@@ -17142,9 +21286,10 @@ await client.transactionalSms.getSmsEvents();
 <dl>
 <dd>
 
-```typescript
-await client.transactionalSms.getTransacSmsReport();
-
+```php
+$client->transactionalSms->getTransacSmsReport(
+    new GetTransacSmsReportRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -17159,7 +21304,7 @@ await client.transactionalSms.getTransacSmsReport();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetTransacSmsReportRequest` 
+**$startDate:** `?string` — **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) of the report
     
 </dd>
 </dl>
@@ -17167,7 +21312,31 @@ await client.transactionalSms.getTransacSmsReport();
 <dl>
 <dd>
 
-**requestOptions:** `TransactionalSmsClient.RequestOptions` 
+**$endDate:** `?string` — **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) of the report
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$days:** `?int` — Number of days in the past including today (positive integer). **Not compatible with 'startDate' and 'endDate'**
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$tag:** `?string` — Filter on a tag
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
     
 </dd>
 </dl>
@@ -17180,7 +21349,7 @@ await client.transactionalSms.getTransacSmsReport();
 </details>
 
 ## SmsTemplates
-<details><summary><code>client.smsTemplates.<a href="/src/api/resources/smsTemplates/client/Client.ts">getSmsTemplates</a>({ ...params }) -> BrevoApi.GetSmsTemplatesResponse</code></summary>
+<details><summary><code>$client-&gt;smsTemplates-&gt;getSmsTemplates($request) -> GetSmsTemplatesResponse</code></summary>
 <dl>
 <dd>
 
@@ -17192,9 +21361,10 @@ await client.transactionalSms.getTransacSmsReport();
 <dl>
 <dd>
 
-```typescript
-await client.smsTemplates.getSmsTemplates();
-
+```php
+$client->smsTemplates->getSmsTemplates(
+    new GetSmsTemplatesRequest([]),
+);
 ```
 </dd>
 </dl>
@@ -17209,7 +21379,7 @@ await client.smsTemplates.getSmsTemplates();
 <dl>
 <dd>
 
-**request:** `BrevoApi.GetSmsTemplatesRequest` 
+**$limit:** `?int` — Number of documents returned per page
     
 </dd>
 </dl>
@@ -17217,7 +21387,15 @@ await client.smsTemplates.getSmsTemplates();
 <dl>
 <dd>
 
-**requestOptions:** `SmsTemplatesClient.RequestOptions` 
+**$offset:** `?int` — Index of the first document in the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**$sort:** `?string` — Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
     
 </dd>
 </dl>
