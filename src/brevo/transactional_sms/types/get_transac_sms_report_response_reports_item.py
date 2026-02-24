@@ -5,11 +5,12 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 
 
-class GetTransacSmsReportResponseReportsItem(UniversalBaseModel):
+class GetTransacSmsReportResponseReportsItem(UncheckedBaseModel):
     accepted: typing.Optional[int] = pydantic.Field(default=None)
     """
     Number of accepted SMS for the date

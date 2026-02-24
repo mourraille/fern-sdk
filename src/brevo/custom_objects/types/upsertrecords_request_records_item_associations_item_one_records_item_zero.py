@@ -3,13 +3,14 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .upsertrecords_request_records_item_associations_item_one_records_item_zero_identifiers import (
     UpsertrecordsRequestRecordsItemAssociationsItemOneRecordsItemZeroIdentifiers,
 )
 
 
-class UpsertrecordsRequestRecordsItemAssociationsItemOneRecordsItemZero(UniversalBaseModel):
+class UpsertrecordsRequestRecordsItemAssociationsItemOneRecordsItemZero(UncheckedBaseModel):
     identifiers: typing.Optional[UpsertrecordsRequestRecordsItemAssociationsItemOneRecordsItemZeroIdentifiers] = (
         pydantic.Field(default=None)
     )

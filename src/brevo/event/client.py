@@ -72,10 +72,10 @@ class EventClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
         from brevo.event import CreateEventRequestIdentifiers
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.event.create_event(
@@ -155,10 +155,10 @@ class AsyncEventClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
         from brevo.event import CreateEventRequestIdentifiers
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 

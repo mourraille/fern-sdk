@@ -4,12 +4,13 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_corporate_sub_account_response_sub_accounts_item import GetCorporateSubAccountResponseSubAccountsItem
 
 
-class GetCorporateSubAccountResponse(UniversalBaseModel):
+class GetCorporateSubAccountResponse(UncheckedBaseModel):
     count: typing.Optional[int] = pydantic.Field(default=None)
     """
     Total number of subaccounts

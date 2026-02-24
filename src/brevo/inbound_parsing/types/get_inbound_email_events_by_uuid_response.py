@@ -5,15 +5,16 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_inbound_email_events_by_uuid_response_attachments_item import (
     GetInboundEmailEventsByUuidResponseAttachmentsItem,
 )
 from .get_inbound_email_events_by_uuid_response_logs_item import GetInboundEmailEventsByUuidResponseLogsItem
 
 
-class GetInboundEmailEventsByUuidResponse(UniversalBaseModel):
+class GetInboundEmailEventsByUuidResponse(UncheckedBaseModel):
     attachments: typing.Optional[typing.List[GetInboundEmailEventsByUuidResponseAttachmentsItem]] = pydantic.Field(
         default=None
     )

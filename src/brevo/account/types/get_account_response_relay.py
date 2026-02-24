@@ -3,11 +3,12 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_account_response_relay_data import GetAccountResponseRelayData
 
 
-class GetAccountResponseRelay(UniversalBaseModel):
+class GetAccountResponseRelay(UncheckedBaseModel):
     """
     Information about your transactional email account
     """

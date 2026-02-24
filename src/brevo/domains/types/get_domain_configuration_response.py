@@ -3,11 +3,12 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_domain_configuration_response_dns_records import GetDomainConfigurationResponseDnsRecords
 
 
-class GetDomainConfigurationResponse(UniversalBaseModel):
+class GetDomainConfigurationResponse(UncheckedBaseModel):
     domain: str = pydantic.Field()
     """
     Domain name

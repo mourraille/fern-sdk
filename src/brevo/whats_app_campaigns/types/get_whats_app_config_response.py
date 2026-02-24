@@ -4,8 +4,9 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_whats_app_config_response_phone_number_name_status import GetWhatsAppConfigResponsePhoneNumberNameStatus
 from .get_whats_app_config_response_phone_number_quality import GetWhatsAppConfigResponsePhoneNumberQuality
 from .get_whats_app_config_response_whatsapp_business_account_status import (
@@ -13,7 +14,7 @@ from .get_whats_app_config_response_whatsapp_business_account_status import (
 )
 
 
-class GetWhatsAppConfigResponse(UniversalBaseModel):
+class GetWhatsAppConfigResponse(UncheckedBaseModel):
     business_status: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="businessStatus"),

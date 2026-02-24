@@ -4,8 +4,9 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .request_contact_export_request_custom_contact_filter_action_for_contacts import (
     RequestContactExportRequestCustomContactFilterActionForContacts,
 )
@@ -17,7 +18,7 @@ from .request_contact_export_request_custom_contact_filter_action_for_sms_campai
 )
 
 
-class RequestContactExportRequestCustomContactFilter(UniversalBaseModel):
+class RequestContactExportRequestCustomContactFilter(UncheckedBaseModel):
     """
     Set the filter for the contacts to be exported.
     """

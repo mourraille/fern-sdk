@@ -4,12 +4,13 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_whatsapp_event_report_response_events_item_event import GetWhatsappEventReportResponseEventsItemEvent
 
 
-class GetWhatsappEventReportResponseEventsItem(UniversalBaseModel):
+class GetWhatsappEventReportResponseEventsItem(UncheckedBaseModel):
     body: typing.Optional[str] = pydantic.Field(default=None)
     """
     Text of the reply (will be there only in case of `reply` event with text)

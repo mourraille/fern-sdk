@@ -4,13 +4,14 @@ import datetime as dt
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_processes_response_processes_item_info import GetProcessesResponseProcessesItemInfo
 from .get_processes_response_processes_item_name import GetProcessesResponseProcessesItemName
 from .get_processes_response_processes_item_status import GetProcessesResponseProcessesItemStatus
 
 
-class GetProcessesResponseProcessesItem(UniversalBaseModel):
+class GetProcessesResponseProcessesItem(UncheckedBaseModel):
     id: int = pydantic.Field()
     """
     Unique identifier of the process

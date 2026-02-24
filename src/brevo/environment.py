@@ -3,5 +3,5 @@
 import enum
 
 
-class BrevoApiEnvironment(enum.Enum):
+class BrevoEnvironment(enum.Enum):
     DEFAULT = "https://api.brevo.com/v3"

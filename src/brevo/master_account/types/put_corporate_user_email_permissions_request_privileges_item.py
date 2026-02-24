@@ -3,7 +3,8 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .put_corporate_user_email_permissions_request_privileges_item_feature import (
     PutCorporateUserEmailPermissionsRequestPrivilegesItemFeature,
 )
@@ -12,7 +13,7 @@ from .put_corporate_user_email_permissions_request_privileges_item_permissions_i
 )
 
 
-class PutCorporateUserEmailPermissionsRequestPrivilegesItem(UniversalBaseModel):
+class PutCorporateUserEmailPermissionsRequestPrivilegesItem(UncheckedBaseModel):
     """
     Permission on features
     """

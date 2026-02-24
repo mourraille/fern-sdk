@@ -4,14 +4,15 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_transac_emails_list_response_transactional_emails_item import (
     GetTransacEmailsListResponseTransactionalEmailsItem,
 )
 
 
-class GetTransacEmailsListResponse(UniversalBaseModel):
+class GetTransacEmailsListResponse(UncheckedBaseModel):
     count: typing.Optional[int] = pydantic.Field(default=None)
     """
     Total number of transactional emails available on your account according to the passed filter

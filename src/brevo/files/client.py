@@ -76,9 +76,9 @@ class FilesClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.files.get_all_files()
@@ -126,9 +126,9 @@ class FilesClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.files.upload_a_file()
@@ -157,9 +157,9 @@ class FilesClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.files.download_a_file(
@@ -185,9 +185,9 @@ class FilesClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.files.delete_a_file(
@@ -214,9 +214,9 @@ class FilesClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.files.get_file_details(
@@ -290,9 +290,9 @@ class AsyncFilesClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -348,9 +348,9 @@ class AsyncFilesClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -387,9 +387,9 @@ class AsyncFilesClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -423,9 +423,9 @@ class AsyncFilesClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -460,9 +460,9 @@ class AsyncFilesClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 

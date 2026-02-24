@@ -4,8 +4,9 @@ import typing
 
 import pydantic
 import typing_extensions
-from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.serialization import FieldMetadata
+from ..core.unchecked_base_model import UncheckedBaseModel
 from .conversations_message_attachments_item import ConversationsMessageAttachmentsItem
 from .conversations_message_bcc_item import ConversationsMessageBccItem
 from .conversations_message_cc_item import ConversationsMessageCcItem
@@ -17,7 +18,7 @@ from .conversations_message_to_item import ConversationsMessageToItem
 from .conversations_message_type import ConversationsMessageType
 
 
-class ConversationsMessage(UniversalBaseModel):
+class ConversationsMessage(UncheckedBaseModel):
     """
     a Conversations message
     """

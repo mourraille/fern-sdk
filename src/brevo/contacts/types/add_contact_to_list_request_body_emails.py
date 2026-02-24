@@ -3,10 +3,11 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 
 
-class AddContactToListRequestBodyEmails(UniversalBaseModel):
+class AddContactToListRequestBodyEmails(UncheckedBaseModel):
     emails: typing.Optional[typing.List[str]] = pydantic.Field(default=None)
     """
     Emails to add to a list. You can pass a **maximum of 150 emails** for addition in one request. **_If you need to add the emails in bulk, please prefer /contacts/import api._**

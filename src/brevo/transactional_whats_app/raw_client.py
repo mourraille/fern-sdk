@@ -6,9 +6,9 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
+from ..core.unchecked_base_model import construct_type
 from ..errors.bad_request_error import BadRequestError
 from .types.get_whatsapp_event_report_request_event import GetWhatsappEventReportRequestEvent
 from .types.get_whatsapp_event_report_request_sort import GetWhatsappEventReportRequestSort
@@ -59,7 +59,7 @@ class RawTransactionalWhatsAppClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     SendWhatsappMessageResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=SendWhatsappMessageResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -70,7 +70,7 @@ class RawTransactionalWhatsAppClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -150,7 +150,7 @@ class RawTransactionalWhatsAppClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetWhatsappEventReportResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetWhatsappEventReportResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -161,7 +161,7 @@ class RawTransactionalWhatsAppClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -212,7 +212,7 @@ class AsyncRawTransactionalWhatsAppClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     SendWhatsappMessageResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=SendWhatsappMessageResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -223,7 +223,7 @@ class AsyncRawTransactionalWhatsAppClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -303,7 +303,7 @@ class AsyncRawTransactionalWhatsAppClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetWhatsappEventReportResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetWhatsappEventReportResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -314,7 +314,7 @@ class AsyncRawTransactionalWhatsAppClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),

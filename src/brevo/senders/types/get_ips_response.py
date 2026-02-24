@@ -3,11 +3,12 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_ips_response_ips_item import GetIpsResponseIpsItem
 
 
-class GetIpsResponse(UniversalBaseModel):
+class GetIpsResponse(UncheckedBaseModel):
     ips: typing.List[GetIpsResponseIpsItem] = pydantic.Field()
     """
     Dedicated IP(s) available on your account. Returns empty array

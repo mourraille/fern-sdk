@@ -3,11 +3,12 @@
 import typing
 
 import pydantic
-from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
+from ..core.unchecked_base_model import UncheckedBaseModel
 from .update_campaign_status_status import UpdateCampaignStatusStatus
 
 
-class UpdateCampaignStatus(UniversalBaseModel):
+class UpdateCampaignStatus(UncheckedBaseModel):
     """
     Status of the campaign
     """

@@ -4,12 +4,13 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from ...types.ab_test_version_clicks import AbTestVersionClicks
 
 
-class GetAbTestCampaignResultResponseClickedLinks(UniversalBaseModel):
+class GetAbTestCampaignResultResponseClickedLinks(UncheckedBaseModel):
     version_a: typing_extensions.Annotated[
         AbTestVersionClicks, FieldMetadata(alias="Version A"), pydantic.Field(alias="Version A")
     ]

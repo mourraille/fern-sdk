@@ -3,12 +3,13 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_corporate_user_permission_response_feature_access import GetCorporateUserPermissionResponseFeatureAccess
 from .get_corporate_user_permission_response_groups_item import GetCorporateUserPermissionResponseGroupsItem
 
 
-class GetCorporateUserPermissionResponse(UniversalBaseModel):
+class GetCorporateUserPermissionResponse(UncheckedBaseModel):
     """
     Check admin user permissions
     """

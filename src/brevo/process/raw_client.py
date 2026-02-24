@@ -7,8 +7,8 @@ from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
 from ..core.jsonable_encoder import jsonable_encoder
-from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
+from ..core.unchecked_base_model import construct_type
 from ..errors.bad_request_error import BadRequestError
 from ..errors.not_found_error import NotFoundError
 from .types.get_process_response import GetProcessResponse
@@ -88,7 +88,7 @@ class RawProcessClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetProcessesResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetProcessesResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -99,7 +99,7 @@ class RawProcessClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -160,7 +160,7 @@ class RawProcessClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetProcessResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetProcessResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -171,7 +171,7 @@ class RawProcessClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -182,7 +182,7 @@ class RawProcessClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -266,7 +266,7 @@ class AsyncRawProcessClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetProcessesResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetProcessesResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -277,7 +277,7 @@ class AsyncRawProcessClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -338,7 +338,7 @@ class AsyncRawProcessClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetProcessResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetProcessResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -349,7 +349,7 @@ class AsyncRawProcessClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -360,7 +360,7 @@ class AsyncRawProcessClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),

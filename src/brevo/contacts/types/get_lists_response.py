@@ -3,11 +3,12 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_lists_response_lists_item import GetListsResponseListsItem
 
 
-class GetListsResponse(UniversalBaseModel):
+class GetListsResponse(UncheckedBaseModel):
     count: typing.Optional[int] = pydantic.Field(default=None)
     """
     Number of lists in your account

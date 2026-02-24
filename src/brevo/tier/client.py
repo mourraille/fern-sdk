@@ -70,9 +70,9 @@ class TierClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.tier.add_subscription_to_tier(
@@ -112,9 +112,9 @@ class TierClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.tier.get_list_of_tier_groups(
@@ -164,9 +164,9 @@ class TierClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.tier.create_tier_group(
@@ -216,9 +216,9 @@ class TierClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.tier.get_tier_group(
@@ -273,9 +273,9 @@ class TierClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.tier.update_tier_group(
@@ -319,9 +319,9 @@ class TierClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.tier.delete_tier_group(
@@ -374,10 +374,10 @@ class TierClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
         from brevo.tier import CreateTierForTierGroupRequestAccessConditionsItem
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.tier.create_tier_for_tier_group(
@@ -426,9 +426,9 @@ class TierClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.tier.get_loyalty_program_tier(
@@ -480,13 +480,13 @@ class TierClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
         from brevo.tier import (
             UpdateTierRequestAccessConditionsItem,
             UpdateTierRequestTierRewardsItem,
         )
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.tier.update_tier(
@@ -529,9 +529,9 @@ class TierClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.tier.delete_tier(
@@ -587,9 +587,9 @@ class AsyncTierClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -637,9 +637,9 @@ class AsyncTierClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -699,9 +699,9 @@ class AsyncTierClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -759,9 +759,9 @@ class AsyncTierClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -824,9 +824,9 @@ class AsyncTierClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -880,9 +880,9 @@ class AsyncTierClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -943,10 +943,10 @@ class AsyncTierClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
         from brevo.tier import CreateTierForTierGroupRequestAccessConditionsItem
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -1003,9 +1003,9 @@ class AsyncTierClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -1067,13 +1067,13 @@ class AsyncTierClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
         from brevo.tier import (
             UpdateTierRequestAccessConditionsItem,
             UpdateTierRequestTierRewardsItem,
         )
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -1124,9 +1124,9 @@ class AsyncTierClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 

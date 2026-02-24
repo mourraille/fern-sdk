@@ -3,11 +3,12 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_domains_response_domains_item_creator import GetDomainsResponseDomainsItemCreator
 
 
-class GetDomainsResponseDomainsItem(UniversalBaseModel):
+class GetDomainsResponseDomainsItem(UncheckedBaseModel):
     id: str = pydantic.Field()
     """
     Unique identifier of the domain

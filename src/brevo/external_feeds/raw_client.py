@@ -8,9 +8,9 @@ from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
 from ..core.jsonable_encoder import jsonable_encoder
-from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
+from ..core.unchecked_base_model import construct_type
 from ..errors.bad_request_error import BadRequestError
 from ..errors.not_found_error import NotFoundError
 from .types.create_external_feed_request_auth_type import CreateExternalFeedRequestAuthType
@@ -124,7 +124,7 @@ class RawExternalFeedsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetAllExternalFeedsResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetAllExternalFeedsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -135,7 +135,7 @@ class RawExternalFeedsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -146,7 +146,7 @@ class RawExternalFeedsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -257,7 +257,7 @@ class RawExternalFeedsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     CreateExternalFeedResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=CreateExternalFeedResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -268,7 +268,7 @@ class RawExternalFeedsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -328,7 +328,7 @@ class RawExternalFeedsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetExternalFeedByUuidResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetExternalFeedByUuidResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -339,7 +339,7 @@ class RawExternalFeedsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -350,7 +350,7 @@ class RawExternalFeedsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -465,7 +465,7 @@ class RawExternalFeedsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -476,7 +476,7 @@ class RawExternalFeedsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -534,7 +534,7 @@ class RawExternalFeedsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -545,7 +545,7 @@ class RawExternalFeedsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -654,7 +654,7 @@ class AsyncRawExternalFeedsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetAllExternalFeedsResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetAllExternalFeedsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -665,7 +665,7 @@ class AsyncRawExternalFeedsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -676,7 +676,7 @@ class AsyncRawExternalFeedsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -787,7 +787,7 @@ class AsyncRawExternalFeedsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     CreateExternalFeedResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=CreateExternalFeedResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -798,7 +798,7 @@ class AsyncRawExternalFeedsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -858,7 +858,7 @@ class AsyncRawExternalFeedsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetExternalFeedByUuidResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetExternalFeedByUuidResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -869,7 +869,7 @@ class AsyncRawExternalFeedsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -880,7 +880,7 @@ class AsyncRawExternalFeedsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -995,7 +995,7 @@ class AsyncRawExternalFeedsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1006,7 +1006,7 @@ class AsyncRawExternalFeedsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1064,7 +1064,7 @@ class AsyncRawExternalFeedsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1075,7 +1075,7 @@ class AsyncRawExternalFeedsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),

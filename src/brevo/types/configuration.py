@@ -4,11 +4,12 @@ import typing
 
 import pydantic
 import typing_extensions
-from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.serialization import FieldMetadata
+from ..core.unchecked_base_model import UncheckedBaseModel
 
 
-class Configuration(UniversalBaseModel):
+class Configuration(UncheckedBaseModel):
     """
     Optional. Redirect contact to a custom success page once payment is successful. If empty the default Brevo page will be displayed once a payment is validated
     """

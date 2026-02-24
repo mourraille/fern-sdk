@@ -4,12 +4,13 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_loyalty_offer_programs_pid_offers_response_items_item import GetLoyaltyOfferProgramsPidOffersResponseItemsItem
 
 
-class GetLoyaltyOfferProgramsPidOffersResponse(UniversalBaseModel):
+class GetLoyaltyOfferProgramsPidOffersResponse(UncheckedBaseModel):
     items: typing.Optional[typing.List[GetLoyaltyOfferProgramsPidOffersResponseItemsItem]] = pydantic.Field(
         default=None
     )

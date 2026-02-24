@@ -3,11 +3,12 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .create_domain_response_dns_records import CreateDomainResponseDnsRecords
 
 
-class CreateDomainResponse(UniversalBaseModel):
+class CreateDomainResponse(UncheckedBaseModel):
     id: int = pydantic.Field()
     """
     ID of the Domain created

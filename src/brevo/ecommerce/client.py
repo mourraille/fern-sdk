@@ -112,9 +112,9 @@ class EcommerceClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.ecommerce.get_categories()
@@ -174,9 +174,9 @@ class EcommerceClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.ecommerce.create_update_category(
@@ -220,10 +220,10 @@ class EcommerceClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
         from brevo.ecommerce import CreateUpdateBatchCategoryRequestCategoriesItem
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.ecommerce.create_update_batch_category(
@@ -258,9 +258,9 @@ class EcommerceClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.ecommerce.get_category_info(
@@ -285,9 +285,9 @@ class EcommerceClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.ecommerce.activate_the_e_commerce_app()
@@ -339,9 +339,9 @@ class EcommerceClient:
         --------
         import datetime
 
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.ecommerce.get_attribution_metrics_for_one_or_more_brevo_campaigns_or_workflows(
@@ -390,9 +390,9 @@ class EcommerceClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.ecommerce.get_detailed_attribution_metrics_for_a_single_brevo_campaign_or_workflow(
@@ -431,9 +431,9 @@ class EcommerceClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.ecommerce.get_attributed_product_sales_for_a_single_brevo_campaign_or_workflow(
@@ -462,9 +462,9 @@ class EcommerceClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.ecommerce.get_the_iso4217compliant_display_currency_code_for_your_brevo_account()
@@ -493,9 +493,9 @@ class EcommerceClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.ecommerce.set_config_display_currency(
@@ -545,9 +545,9 @@ class EcommerceClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.ecommerce.get_orders()
@@ -624,9 +624,9 @@ class EcommerceClient:
 
         Examples
         --------
-        from brevo import BrevoApi, OrderProductsItem
+        from brevo import Brevo, OrderProductsItem
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.ecommerce.create_order(
@@ -692,9 +692,9 @@ class EcommerceClient:
 
         Examples
         --------
-        from brevo import BrevoApi, Order, OrderProductsItem
+        from brevo import Brevo, Order, OrderProductsItem
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.ecommerce.create_batch_order(
@@ -799,9 +799,9 @@ class EcommerceClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.ecommerce.get_products()
@@ -896,9 +896,9 @@ class EcommerceClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.ecommerce.create_update_product(
@@ -950,10 +950,10 @@ class EcommerceClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
         from brevo.ecommerce import CreateUpdateBatchProductsRequestProductsItem
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.ecommerce.create_update_batch_products(
@@ -989,9 +989,9 @@ class EcommerceClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.ecommerce.get_product_info(
@@ -1025,9 +1025,9 @@ class EcommerceClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.ecommerce.create_product_alert(
@@ -1107,9 +1107,9 @@ class AsyncEcommerceClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -1177,9 +1177,9 @@ class AsyncEcommerceClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -1231,10 +1231,10 @@ class AsyncEcommerceClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
         from brevo.ecommerce import CreateUpdateBatchCategoryRequestCategoriesItem
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -1277,9 +1277,9 @@ class AsyncEcommerceClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -1312,9 +1312,9 @@ class AsyncEcommerceClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -1373,9 +1373,9 @@ class AsyncEcommerceClient:
         import asyncio
         import datetime
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -1432,9 +1432,9 @@ class AsyncEcommerceClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -1481,9 +1481,9 @@ class AsyncEcommerceClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -1520,9 +1520,9 @@ class AsyncEcommerceClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -1559,9 +1559,9 @@ class AsyncEcommerceClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -1619,9 +1619,9 @@ class AsyncEcommerceClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -1706,9 +1706,9 @@ class AsyncEcommerceClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi, OrderProductsItem
+        from brevo import AsyncBrevo, OrderProductsItem
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -1782,9 +1782,9 @@ class AsyncEcommerceClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi, Order, OrderProductsItem
+        from brevo import AsyncBrevo, Order, OrderProductsItem
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -1897,9 +1897,9 @@ class AsyncEcommerceClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -2002,9 +2002,9 @@ class AsyncEcommerceClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -2064,10 +2064,10 @@ class AsyncEcommerceClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
         from brevo.ecommerce import CreateUpdateBatchProductsRequestProductsItem
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -2111,9 +2111,9 @@ class AsyncEcommerceClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -2155,9 +2155,9 @@ class AsyncEcommerceClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 

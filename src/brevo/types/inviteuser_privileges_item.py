@@ -3,12 +3,13 @@
 import typing
 
 import pydantic
-from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
+from ..core.unchecked_base_model import UncheckedBaseModel
 from .inviteuser_privileges_item_feature import InviteuserPrivilegesItemFeature
 from .inviteuser_privileges_item_permissions_item import InviteuserPrivilegesItemPermissionsItem
 
 
-class InviteuserPrivilegesItem(UniversalBaseModel):
+class InviteuserPrivilegesItem(UncheckedBaseModel):
     """
     Privileges given to the user
     """

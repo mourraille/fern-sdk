@@ -65,9 +65,9 @@ class CouponsClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.coupons.get_coupon_collections()
@@ -115,9 +115,9 @@ class CouponsClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.coupons.create_coupon_collection(
@@ -154,9 +154,9 @@ class CouponsClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.coupons.get_coupon_collection(
@@ -204,9 +204,9 @@ class CouponsClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.coupons.update_coupon_collection(
@@ -247,9 +247,9 @@ class CouponsClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.coupons.create_coupons(
@@ -314,9 +314,9 @@ class AsyncCouponsClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -372,9 +372,9 @@ class AsyncCouponsClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -419,9 +419,9 @@ class AsyncCouponsClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -477,9 +477,9 @@ class AsyncCouponsClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -528,9 +528,9 @@ class AsyncCouponsClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 

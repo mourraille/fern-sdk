@@ -4,15 +4,16 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from ...types.whatsapp_camp_stats import WhatsappCampStats
 from .get_whats_app_campaigns_response_campaigns_item_campaign_status import (
     GetWhatsAppCampaignsResponseCampaignsItemCampaignStatus,
 )
 
 
-class GetWhatsAppCampaignsResponseCampaignsItem(UniversalBaseModel):
+class GetWhatsAppCampaignsResponseCampaignsItem(UncheckedBaseModel):
     campaign_name: typing_extensions.Annotated[
         str,
         FieldMetadata(alias="campaignName"),

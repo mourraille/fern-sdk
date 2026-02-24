@@ -3,10 +3,11 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 
 
-class SendTransacEmailRequestSender(UniversalBaseModel):
+class SendTransacEmailRequestSender(UncheckedBaseModel):
     """
     Sender information. Required when `templateId` is not provided. Specify either an email address (with optional name) or a sender ID. The `name` field is ignored when `id` is provided.
     """

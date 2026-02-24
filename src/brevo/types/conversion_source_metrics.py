@@ -4,12 +4,13 @@ import typing
 
 import pydantic
 import typing_extensions
-from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.serialization import FieldMetadata
+from ..core.unchecked_base_model import UncheckedBaseModel
 from .conversion_source_metrics_conversion_source import ConversionSourceMetricsConversionSource
 
 
-class ConversionSourceMetrics(UniversalBaseModel):
+class ConversionSourceMetrics(UncheckedBaseModel):
     average_basket: typing_extensions.Annotated[
         float, FieldMetadata(alias="averageBasket"), pydantic.Field(alias="averageBasket")
     ]

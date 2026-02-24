@@ -3,11 +3,12 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_transac_blocked_contacts_response_contacts_item import GetTransacBlockedContactsResponseContactsItem
 
 
-class GetTransacBlockedContactsResponse(UniversalBaseModel):
+class GetTransacBlockedContactsResponse(UncheckedBaseModel):
     contacts: typing.Optional[typing.List[GetTransacBlockedContactsResponseContactsItem]] = None
     count: typing.Optional[int] = pydantic.Field(default=None)
     """

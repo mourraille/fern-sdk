@@ -3,10 +3,11 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 
 
-class SendTransacEmailRequestMessageVersionsItemReplyTo(UniversalBaseModel):
+class SendTransacEmailRequestMessageVersionsItemReplyTo(UncheckedBaseModel):
     """
     Reply-to email address (required) and optional display name. Recipients will use this address when replying to the email.
     """

@@ -3,11 +3,12 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_whats_app_templates_response_templates_item import GetWhatsAppTemplatesResponseTemplatesItem
 
 
-class GetWhatsAppTemplatesResponse(UniversalBaseModel):
+class GetWhatsAppTemplatesResponse(UncheckedBaseModel):
     count: typing.Optional[int] = pydantic.Field(default=None)
     """
     Number of whatsApp templates retrieved

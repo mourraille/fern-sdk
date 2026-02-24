@@ -104,9 +104,9 @@ class TasksClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.tasks.get_all_tasks(
@@ -194,9 +194,9 @@ class TasksClient:
         --------
         import datetime
 
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.tasks.create_a_task(
@@ -239,9 +239,9 @@ class TasksClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.tasks.get_a_task(
@@ -266,9 +266,9 @@ class TasksClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.tasks.delete_a_task(
@@ -341,9 +341,9 @@ class TasksClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.tasks.update_a_task(
@@ -381,9 +381,9 @@ class TasksClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.tasks.get_all_task_types()
@@ -479,9 +479,9 @@ class AsyncTasksClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -576,9 +576,9 @@ class AsyncTasksClient:
         import asyncio
         import datetime
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -629,9 +629,9 @@ class AsyncTasksClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -664,9 +664,9 @@ class AsyncTasksClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -747,9 +747,9 @@ class AsyncTasksClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -797,9 +797,9 @@ class AsyncTasksClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 

@@ -53,9 +53,9 @@ Retrieves details of your Brevo account.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.account.get_account()
@@ -129,9 +129,9 @@ Note: Requires Enterprise plan for access to organization activity logs.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.account.get_account_activity()
@@ -239,9 +239,9 @@ This endpoint allows to create a group of sub-accounts
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.master_account.create_a_new_group_of_sub_accounts(
@@ -317,9 +317,9 @@ This endpoint allows you to remove a sub-organization from a group.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.master_account.delete_sub_account_from_group(
@@ -397,9 +397,9 @@ the list of sub-organizations and the user associated with the group.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.master_account.get_a_group_details(
@@ -467,9 +467,9 @@ This endpoint allows to update a group of sub-accounts
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.master_account.update_a_group_of_sub_accounts(
@@ -556,9 +556,9 @@ once deleted.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.master_account.delete_a_group(
@@ -626,9 +626,9 @@ This endpoint allows you to list all groups created on your Admin account.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.master_account.get_sub_account_groups()
@@ -688,9 +688,9 @@ offset and limit.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.master_account.get_corporate_invited_users_list()
@@ -782,9 +782,9 @@ account
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.master_account.list_of_all_i_ps()
@@ -842,9 +842,9 @@ This endpoint will provide the details of the master account.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.master_account.get_the_details_of_requested_master_account()
@@ -905,9 +905,9 @@ https://account-app.brevo.com/account/login/corporate/sso/[token], where
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.master_account.generate_sso_token_to_access_admin_account(
@@ -976,9 +976,9 @@ account.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.master_account.get_the_list_of_all_the_sub_accounts_of_the_master_account(
@@ -1055,9 +1055,9 @@ This endpoint will create a new sub-account under a master account
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.master_account.create_a_new_sub_account_under_a_master_account(
@@ -1161,9 +1161,9 @@ This endpoint allows to associate an IP to sub-accounts
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.master_account.associate_an_ip_to_sub_accounts(
@@ -1243,9 +1243,9 @@ This endpoint allows to dissociate an IP from sub-accounts
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.master_account.dissociate_an_ip_to_sub_accounts(
@@ -1325,9 +1325,9 @@ This endpoint will generate an API v3 key for a sub-account
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.master_account.create_an_api_key_for_a_sub_account(
@@ -1407,9 +1407,9 @@ https://account-app.brevo.com/account/login/sub-account/sso/[token], where
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.master_account.generate_sso_token_to_access_sub_account(
@@ -1514,9 +1514,9 @@ This endpoint will provide the details for the specified sub-account company
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.master_account.get_sub_account_details(
@@ -1570,9 +1570,9 @@ client.master_account.get_sub_account_details(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.master_account.delete_a_sub_account(
@@ -1641,9 +1641,9 @@ sub-account
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.master_account.enable_disable_sub_account_application_s(
@@ -1853,13 +1853,13 @@ unlimited mode.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 from brevo.master_account import (
     PutCorporateSubAccountIdPlanRequestCredits,
     PutCorporateSubAccountIdPlanRequestFeatures,
 )
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.master_account.update_sub_account_plan(
@@ -1959,13 +1959,13 @@ unlimited mode.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 from brevo.master_account import (
     PutCorporateSubAccountsPlanRequestCredits,
     PutCorporateSubAccountsPlanRequestFeatures,
 )
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.master_account.update_sub_accounts_plan(
@@ -2086,10 +2086,10 @@ there for the invited admin user.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 from brevo.master_account import InviteAdminUserRequestPrivilegesItem
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.master_account.invite_admin_user(
@@ -2185,9 +2185,9 @@ This endpoint will allow the user to:
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.master_account.resend_cancel_admin_user_invitation(
@@ -2265,9 +2265,9 @@ account
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.master_account.revoke_an_admin_user(
@@ -2335,9 +2335,9 @@ This endpoint will provide the list of admin user permissions
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.master_account.get_corporate_user_permission(
@@ -2406,12 +2406,12 @@ your Admin account
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 from brevo.master_account import (
     PutCorporateUserEmailPermissionsRequestPrivilegesItem,
 )
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.master_account.change_admin_user_permissions(
@@ -2526,9 +2526,9 @@ client.master_account.change_admin_user_permissions(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.user.get_invited_users_list()
@@ -2572,9 +2572,9 @@ client.user.get_invited_users_list()
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.user.put_revoke_user_permission(
@@ -2709,9 +2709,9 @@ accordingly.
 <dd>
 
 ```python
-from brevo import BrevoApi, InviteuserPrivilegesItem
+from brevo import Brevo, InviteuserPrivilegesItem
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.user.inviteuser(
@@ -2783,9 +2783,9 @@ client.user.inviteuser(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.user.putresendcancelinvitation(
@@ -2928,9 +2928,9 @@ Please select the features and permissions accordingly.
 <dd>
 
 ```python
-from brevo import BrevoApi, InviteuserPrivilegesItem
+from brevo import Brevo, InviteuserPrivilegesItem
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.user.edit_user_permission(
@@ -3002,9 +3002,9 @@ client.user.edit_user_permission(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.user.get_user_permission(
@@ -3096,9 +3096,9 @@ Retrieves a list of background processes from your Brevo account with filtering 
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.process.get_processes()
@@ -3205,9 +3205,9 @@ Retrieves detailed information about a specific background process.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.process.get_process(
@@ -3296,9 +3296,9 @@ Retrieves a list of all email senders from your Brevo account with optional filt
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.senders.get_senders()
@@ -3390,9 +3390,9 @@ Creates a new email sender in your Brevo account.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.senders.create_sender(
@@ -3496,9 +3496,9 @@ Key information returned:
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.senders.get_ips()
@@ -3566,10 +3566,10 @@ Key information returned:
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 from brevo.senders import UpdateSenderRequestIpsItem
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.senders.update_sender(
@@ -3686,9 +3686,9 @@ Key information returned:
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.senders.delete_sender(
@@ -3767,9 +3767,9 @@ Key information returned:
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.senders.get_ips_from_sender(
@@ -3847,9 +3847,9 @@ Key information returned:
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.senders.validate_sender_by_otp(
@@ -3941,9 +3941,9 @@ Key information returned:
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.domains.get_domains()
@@ -4013,9 +4013,9 @@ Key information returned:
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.domains.create_domain(
@@ -4094,9 +4094,9 @@ Key information returned:
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.domains.get_domain_configuration(
@@ -4172,9 +4172,9 @@ Key information returned:
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.domains.delete_domain(
@@ -4252,9 +4252,9 @@ Key information returned:
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.domains.authenticate_domain(
@@ -4337,9 +4337,9 @@ Key information returned:
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.webhooks.get_webhooks()
@@ -4424,9 +4424,9 @@ Key information returned:
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.webhooks.create_webhook(
@@ -4593,9 +4593,9 @@ Key information returned:
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.webhooks.export_webhooks_history(
@@ -4763,9 +4763,9 @@ Key information returned:
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.webhooks.get_webhook(
@@ -4843,9 +4843,9 @@ Key information returned:
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.webhooks.update_webhook(
@@ -4987,9 +4987,9 @@ Key information returned:
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.webhooks.delete_webhook(
@@ -5084,9 +5084,9 @@ Retrieves all external feeds from your Brevo account with filtering and paginati
 ```python
 import datetime
 
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.external_feeds.get_all_external_feeds(
@@ -5239,9 +5239,9 @@ Creates a new external feed for dynamic content in email campaigns.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.external_feeds.create_external_feed(
@@ -5398,9 +5398,9 @@ Retrieves details of a specific external feed by its UUID.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.external_feeds.get_external_feed_by_uuid(
@@ -5485,10 +5485,10 @@ Updates configuration of an existing external feed.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 from brevo.external_feeds import UpdateExternalFeedRequestHeadersItem
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.external_feeds.update_external_feed(
@@ -5660,9 +5660,9 @@ Deletes an external feed from your Brevo account.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.external_feeds.delete_external_feed(
@@ -5754,10 +5754,10 @@ This API allows bulk upsert of object records in a single request. Each object r
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 from brevo.custom_objects import UpsertrecordsRequestRecordsItem
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.custom_objects.upsertrecords(
@@ -5840,9 +5840,9 @@ This API retrieves a list of object records along with their associated records 
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.custom_objects.getrecords(
@@ -5946,12 +5946,12 @@ The request is accepted and processed asynchronously.   You can track the status
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 from brevo.custom_objects import (
     BatchDeleteObjectRecordsRequestIdentifiersExtIds,
 )
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.custom_objects.batch_delete_object_records(
@@ -6037,9 +6037,9 @@ Accepted Number Formats
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.contacts.get_contacts()
@@ -6161,9 +6161,9 @@ Creates new contacts on Brevo. Contacts can be created by passing either - <br><
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.contacts.create_contact()
@@ -6271,9 +6271,9 @@ client.contacts.create_contact()
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.contacts.get_attributes()
@@ -6317,9 +6317,9 @@ client.contacts.get_attributes()
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.contacts.create_attribute(
@@ -6422,9 +6422,9 @@ client.contacts.create_attribute(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.contacts.update_attribute(
@@ -6511,9 +6511,9 @@ client.contacts.update_attribute(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.contacts.delete_attribute(
@@ -6576,9 +6576,9 @@ client.contacts.delete_attribute(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.contacts.delete_multi_attribute_options(
@@ -6641,9 +6641,9 @@ client.contacts.delete_multi_attribute_options(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.contacts.update_batch_contacts()
@@ -6711,9 +6711,9 @@ attributes param in this endpoint is an object containing key-value pairs where 
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.contacts.create_doi_contact(
@@ -6824,10 +6824,10 @@ It returns the background process ID which on completion calls the notify URL th
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 from brevo.contacts import RequestContactExportRequestCustomContactFilter
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.contacts.request_contact_export(
@@ -6961,9 +6961,9 @@ The uniqueSubscribers field is deprecated
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.contacts.get_folders()
@@ -7031,9 +7031,9 @@ client.contacts.get_folders()
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.contacts.create_folder()
@@ -7105,9 +7105,9 @@ These are non breaking changes. The default value for the attributes will be 0.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.contacts.get_folder(
@@ -7161,9 +7161,9 @@ client.contacts.get_folder(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.contacts.update_folder(
@@ -7225,9 +7225,9 @@ client.contacts.update_folder(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.contacts.delete_folder(
@@ -7301,9 +7301,9 @@ These are non breaking changes. The default value for the attributes will be 0.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.contacts.get_folder_lists(
@@ -7395,9 +7395,9 @@ It returns the background process ID which on completion calls the notify URL th
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.contacts.import_contacts()
@@ -7549,9 +7549,9 @@ These are non breaking changes. The default value for the attributes will be 0.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.contacts.get_lists()
@@ -7619,9 +7619,9 @@ client.contacts.get_lists()
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.contacts.create_list(
@@ -7684,9 +7684,9 @@ client.contacts.create_list(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.contacts.get_list(
@@ -7756,9 +7756,9 @@ client.contacts.get_list(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.contacts.update_list(
@@ -7828,9 +7828,9 @@ client.contacts.update_list(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.contacts.delete_list(
@@ -7884,9 +7884,9 @@ client.contacts.delete_list(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.contacts.get_contacts_from_list(
@@ -7972,10 +7972,10 @@ client.contacts.get_contacts_from_list(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 from brevo.contacts import AddContactToListRequestBodyEmails
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.contacts.add_contact_to_list(
@@ -8040,10 +8040,10 @@ client.contacts.add_contact_to_list(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 from brevo.contacts import RemoveContactFromListRequestBodyAll
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.contacts.remove_contact_from_list(
@@ -8108,9 +8108,9 @@ client.contacts.remove_contact_from_list(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.contacts.get_segments()
@@ -8200,9 +8200,9 @@ There are 2 ways to get a contact <br><br> Option 1- https://api.brevo.com/v3/co
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.contacts.get_contact_info(
@@ -8294,9 +8294,9 @@ There are 2 ways to update a contact <br><br> Option 1- https://api.brevo.com/v3
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.contacts.update_contact(
@@ -8428,9 +8428,9 @@ There are 2 ways to delete a contact <br><br> Option 1- https://api.brevo.com/v3
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.contacts.delete_contact(
@@ -8492,9 +8492,9 @@ client.contacts.delete_contact(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.contacts.get_contact_stats(
@@ -8579,9 +8579,9 @@ We recommend pinging this endpoint every minute for as long as the agent has to 
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.conversations.sets_agents_status_to_online_for23minutes(
@@ -8661,9 +8661,9 @@ client.conversations.sets_agents_status_to_online_for23minutes(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.conversations.send_a_message_as_an_agent(
@@ -8760,9 +8760,9 @@ client.conversations.send_a_message_as_an_agent(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.conversations.get_a_message(
@@ -8830,9 +8830,9 @@ Only agents’ messages can be edited.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.conversations.update_a_message_sent_by_an_agent(
@@ -8909,9 +8909,9 @@ Only agents’ messages can be deleted.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.conversations.delete_a_message_sent_by_an_agent(
@@ -8979,9 +8979,9 @@ Example of automated messages: order status, announce new features in your web a
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.conversations.send_an_automated_message_to_a_visitor(
@@ -9061,9 +9061,9 @@ client.conversations.send_an_automated_message_to_a_visitor(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.conversations.get_an_automated_message(
@@ -9117,9 +9117,9 @@ client.conversations.get_an_automated_message(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.conversations.update_an_automated_message(
@@ -9182,9 +9182,9 @@ client.conversations.update_an_automated_message(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.conversations.delete_an_automated_message(
@@ -9252,9 +9252,9 @@ Assigns a visitor to a specific agent group or removes them from their current g
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.conversations.set_visitor_group_assignment(
@@ -9309,9 +9309,9 @@ client.conversations.set_visitor_group_assignment(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.ecommerce.get_categories()
@@ -9419,9 +9419,9 @@ client.ecommerce.get_categories()
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.ecommerce.create_update_category(
@@ -9515,10 +9515,10 @@ client.ecommerce.create_update_category(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 from brevo.ecommerce import CreateUpdateBatchCategoryRequestCategoriesItem
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.ecommerce.create_update_batch_category(
@@ -9584,9 +9584,9 @@ client.ecommerce.create_update_batch_category(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.ecommerce.get_category_info(
@@ -9654,9 +9654,9 @@ Getting access to Brevo eCommerce.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.ecommerce.activate_the_e_commerce_app()
@@ -9702,9 +9702,9 @@ client.ecommerce.activate_the_e_commerce_app()
 ```python
 import datetime
 
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.ecommerce.get_attribution_metrics_for_one_or_more_brevo_campaigns_or_workflows(
@@ -9805,9 +9805,9 @@ client.ecommerce.get_attribution_metrics_for_one_or_more_brevo_campaigns_or_work
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.ecommerce.get_detailed_attribution_metrics_for_a_single_brevo_campaign_or_workflow(
@@ -9872,9 +9872,9 @@ client.ecommerce.get_detailed_attribution_metrics_for_a_single_brevo_campaign_or
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.ecommerce.get_attributed_product_sales_for_a_single_brevo_campaign_or_workflow(
@@ -9937,9 +9937,9 @@ client.ecommerce.get_attributed_product_sales_for_a_single_brevo_campaign_or_wor
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.ecommerce.get_the_iso4217compliant_display_currency_code_for_your_brevo_account()
@@ -9983,9 +9983,9 @@ client.ecommerce.get_the_iso4217compliant_display_currency_code_for_your_brevo_a
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.ecommerce.set_config_display_currency(
@@ -10053,9 +10053,9 @@ Get all the orders
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.ecommerce.get_orders()
@@ -10153,9 +10153,9 @@ Manages the transactional status of the order
 <dd>
 
 ```python
-from brevo import BrevoApi, OrderProductsItem
+from brevo import Brevo, OrderProductsItem
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.ecommerce.create_order(
@@ -10314,9 +10314,9 @@ Create multiple orders at one time instead of one order at a time
 <dd>
 
 ```python
-from brevo import BrevoApi, Order, OrderProductsItem
+from brevo import Brevo, Order, OrderProductsItem
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.ecommerce.create_batch_order(
@@ -10401,9 +10401,9 @@ client.ecommerce.create_batch_order(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.ecommerce.get_products()
@@ -10567,9 +10567,9 @@ client.ecommerce.get_products()
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.ecommerce.create_update_product(
@@ -10720,10 +10720,10 @@ client.ecommerce.create_update_product(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 from brevo.ecommerce import CreateUpdateBatchProductsRequestProductsItem
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.ecommerce.create_update_batch_products(
@@ -10790,9 +10790,9 @@ client.ecommerce.create_update_batch_products(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.ecommerce.get_product_info(
@@ -10846,9 +10846,9 @@ client.ecommerce.get_product_info(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.ecommerce.create_product_alert(
@@ -10911,9 +10911,9 @@ client.ecommerce.create_product_alert(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.coupons.get_coupon_collections()
@@ -10989,9 +10989,9 @@ client.coupons.get_coupon_collections()
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.coupons.create_coupon_collection(
@@ -11078,9 +11078,9 @@ client.coupons.create_coupon_collection(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.coupons.get_coupon_collection(
@@ -11134,9 +11134,9 @@ client.coupons.get_coupon_collection(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.coupons.update_coupon_collection(
@@ -11222,9 +11222,9 @@ client.coupons.update_coupon_collection(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.coupons.create_coupons(
@@ -11288,9 +11288,9 @@ client.coupons.create_coupons(
 <dd>
 
 ```python
-from brevo import BrevoApi, Cart
+from brevo import Brevo, Cart
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.payments.create_payment_request(
@@ -11388,9 +11388,9 @@ client.payments.create_payment_request(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.payments.get_payment_request(
@@ -11444,9 +11444,9 @@ client.payments.get_payment_request(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.payments.delete_payment_request(
@@ -11515,10 +11515,10 @@ Create an event to track a contact's interaction.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 from brevo.event import CreateEventRequestIdentifiers
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.event.create_event(
@@ -11628,9 +11628,9 @@ This endpoint will show the list of all the events for the received emails.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.inbound_parsing.get_inbound_email_events()
@@ -11736,9 +11736,9 @@ This endpoint will show the list of all events history for one particular receiv
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.inbound_parsing.get_inbound_email_events_by_uuid(
@@ -11806,9 +11806,9 @@ This endpoint will retrieve inbound attachment with download token.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.inbound_parsing.get_inbound_email_attachment(
@@ -11877,9 +11877,9 @@ Returns Active Balances
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.balance.get_active_balances_api(
@@ -11997,9 +11997,9 @@ Returns balance definition page
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.balance.get_balance_definition_list(
@@ -12107,9 +12107,9 @@ Creates balance definition and returns information
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.balance.create_balance_definition(
@@ -12317,9 +12317,9 @@ Returns balance definition
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.balance.get_balance_definition(
@@ -12404,9 +12404,9 @@ Updates Balance definition
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.balance.update_balance_definition(
@@ -12617,9 +12617,9 @@ Delete Balance definition
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.balance.delete_balance_definition(
@@ -12696,9 +12696,9 @@ Creates balance limit and sends the created UUID along with the data
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.balance.create_balance_limit(
@@ -12828,9 +12828,9 @@ Fetches balance limits and send the created UUID along with the data
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.balance.get_balance_limit(
@@ -12924,9 +12924,9 @@ Updates balance limit
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.balance.update_balance_limit(
@@ -13065,9 +13065,9 @@ Delete balance limit
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.balance.delete_balance_limit(
@@ -13153,9 +13153,9 @@ Returns balance list
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.balance.get_contact_balances(
@@ -13223,9 +13223,9 @@ Returns created order
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.balance.create_balance_order(
@@ -13354,9 +13354,9 @@ Returns subscription balances
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.balance.get_subscription_balances(
@@ -13433,9 +13433,9 @@ Creates a balance for a contact
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.balance.create_subscription_balances(
@@ -13521,9 +13521,9 @@ Returns transaction history
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.balance.get_transaction_history_api(
@@ -13649,9 +13649,9 @@ Creates new transaction and returns information
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.balance.begin_transaction(
@@ -13793,9 +13793,9 @@ Cancels transaction
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.balance.cancel_transaction(
@@ -13872,9 +13872,9 @@ Completes transaction
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.balance.complete_transaction(
@@ -13952,9 +13952,9 @@ Returns list of loyalty programs
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.program.get_lp_list()
@@ -14044,9 +14044,9 @@ Creates loyalty program
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.program.create_new_lp(
@@ -14138,9 +14138,9 @@ Returns loyalty program
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.program.get_loyalty_program_info(
@@ -14208,9 +14208,9 @@ Updates loyalty program
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.program.update_loyalty_program(
@@ -14303,9 +14303,9 @@ Deletes Loyalty Program
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.program.delete_loyalty_program(
@@ -14373,9 +14373,9 @@ Partially updates loyalty program
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.program.partially_update_loyalty_program(
@@ -14467,9 +14467,9 @@ Get Information of balances, tiers, rewards and subscription members for a subsc
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.program.get_parameter_subscription_info(
@@ -14561,9 +14561,9 @@ Publishes loyalty program
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.program.publish_loyalty_program(
@@ -14631,9 +14631,9 @@ Add member to a subscription
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.program.subscribe_member_to_a_subscription(
@@ -14726,9 +14726,9 @@ Deletes member from a subscription
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.program.delete_contact_members(
@@ -14805,9 +14805,9 @@ Subscribes to a loyalty program
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.program.subscribe_to_loyalty_program(
@@ -14901,9 +14901,9 @@ Get code count
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.reward.get_code_count(
@@ -14980,9 +14980,9 @@ Returns a reward page
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.reward.get_reward_page_api(
@@ -15082,9 +15082,9 @@ Creates a new reward in the loyalty program.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.reward.create_reward(
@@ -15185,9 +15185,9 @@ Create a voucher and attribute it to a specific membership.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.reward.create_voucher(
@@ -15312,9 +15312,9 @@ Creates a request to redeem a voucher.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.reward.redeem_voucher(
@@ -15446,9 +15446,9 @@ Completes voucher redeem request.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.reward.complete_redeem_transaction(
@@ -15525,9 +15525,9 @@ Revoke attributed vouchers.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.reward.revoke_vouchers(
@@ -15603,9 +15603,9 @@ Validates a reward.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.reward.validate_reward(
@@ -15721,9 +15721,9 @@ Returns reward information.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.reward.get_reward_information(
@@ -15808,9 +15808,9 @@ Get voucher for a contact
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.reward.get_voucher_for_a_contact(
@@ -15936,9 +15936,9 @@ Manually assigns a tier to a specific membership.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.tier.add_subscription_to_tier(
@@ -16024,9 +16024,9 @@ Returns the list of tier groups defined within the loyalty program.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.tier.get_list_of_tier_groups(
@@ -16102,9 +16102,9 @@ Creates a new tier group in a loyalty program. *(The changes will take effect wi
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.tier.create_tier_group(
@@ -16205,9 +16205,9 @@ Returns tier group information.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.tier.get_tier_group(
@@ -16292,9 +16292,9 @@ Updates a tier group from a loyalty program. *(The changes will take effect with
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.tier.update_tier_group(
@@ -16407,9 +16407,9 @@ Deletes a tier group from a loyalty program. *(The changes will take effect with
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.tier.delete_tier_group(
@@ -16486,10 +16486,10 @@ Creates a new tier in a loyalty program tier group. *(The changes will take effe
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 from brevo.tier import CreateTierForTierGroupRequestAccessConditionsItem
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.tier.create_tier_for_tier_group(
@@ -16600,9 +16600,9 @@ Returns the list of tiers defined within the loyalty program.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.tier.get_loyalty_program_tier(
@@ -16678,13 +16678,13 @@ Modifies an existing tier for the specified tier group *(The changes will take e
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 from brevo.tier import (
     UpdateTierRequestAccessConditionsItem,
     UpdateTierRequestTierRewardsItem,
 )
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.tier.update_tier(
@@ -16796,9 +16796,9 @@ Deletes a tier from a loyalty program tier group. *(The changes will take effect
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.tier.delete_tier(
@@ -16880,9 +16880,9 @@ You now need to specify which type of statistics you would like to retrieve. For
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.email_campaigns.get_email_campaigns()
@@ -16998,10 +16998,10 @@ client.email_campaigns.get_email_campaigns()
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 from brevo.email_campaigns import CreateEmailCampaignRequestSender
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.email_campaigns.create_email_campaign(
@@ -17304,9 +17304,9 @@ client.email_campaigns.create_email_campaign(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.email_campaigns.upload_image_to_gallery(
@@ -17368,9 +17368,9 @@ client.email_campaigns.upload_image_to_gallery(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.email_campaigns.get_email_campaign(
@@ -17432,9 +17432,9 @@ client.email_campaigns.get_email_campaign(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.email_campaigns.update_email_campaign(
@@ -17744,9 +17744,9 @@ client.email_campaigns.update_email_campaign(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.email_campaigns.delete_email_campaign(
@@ -17814,9 +17814,9 @@ Obtain winning version of an A/B test email campaign
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.email_campaigns.get_ab_test_campaign_result(
@@ -17870,9 +17870,9 @@ client.email_campaigns.get_ab_test_campaign_result(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.email_campaigns.email_export_recipients(
@@ -17943,9 +17943,9 @@ client.email_campaigns.email_export_recipients(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.email_campaigns.send_email_campaign_now(
@@ -18013,9 +18013,9 @@ A PDF will be sent to the specified email addresses
 <dd>
 
 ```python
-from brevo import BrevoApi, SendReportEmail
+from brevo import Brevo, SendReportEmail
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.email_campaigns.send_report(
@@ -18089,9 +18089,9 @@ client.email_campaigns.send_report(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.email_campaigns.send_test_email(
@@ -18167,9 +18167,9 @@ Get a unique URL to share & import an email template from one Brevo account to a
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.email_campaigns.get_shared_template_url(
@@ -18223,9 +18223,9 @@ client.email_campaigns.get_shared_template_url(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.email_campaigns.update_campaign_status(
@@ -18288,9 +18288,9 @@ client.email_campaigns.update_campaign_status(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.sms_campaigns.get_sms_campaigns()
@@ -18382,9 +18382,9 @@ client.sms_campaigns.get_sms_campaigns()
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.sms_campaigns.create_sms_campaign(
@@ -18496,9 +18496,9 @@ client.sms_campaigns.create_sms_campaign(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.sms_campaigns.get_sms_campaign(
@@ -18552,9 +18552,9 @@ client.sms_campaigns.get_sms_campaign(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.sms_campaigns.update_sms_campaign(
@@ -18672,9 +18672,9 @@ client.sms_campaigns.update_sms_campaign(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.sms_campaigns.delete_sms_campaign(
@@ -18742,9 +18742,9 @@ It returns the background process ID which on completion calls the notify URL th
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.sms_campaigns.request_sms_recipient_export(
@@ -18815,9 +18815,9 @@ client.sms_campaigns.request_sms_recipient_export(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.sms_campaigns.send_sms_campaign_now(
@@ -18885,9 +18885,9 @@ Send report of Sent and Archived campaign, to the specified email addresses, wit
 <dd>
 
 ```python
-from brevo import BrevoApi, SendReportEmail
+from brevo import Brevo, SendReportEmail
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.sms_campaigns.send_sms_report(
@@ -18961,9 +18961,9 @@ client.sms_campaigns.send_sms_report(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.sms_campaigns.send_test_sms(
@@ -19025,9 +19025,9 @@ client.sms_campaigns.send_test_sms(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.sms_campaigns.update_sms_campaign_status(
@@ -19090,9 +19090,9 @@ client.sms_campaigns.update_sms_campaign_status(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.whats_app_campaigns.get_whats_app_campaigns()
@@ -19202,10 +19202,10 @@ This API requires the List and Segment ids as recipients in Body params. You can
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 from brevo.whats_app_campaigns import CreateWhatsAppCampaignRequestRecipients
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.whats_app_campaigns.create_whats_app_campaign(
@@ -19304,9 +19304,9 @@ You can use this API for WhatsApp only if you have setup your WhatsApp account o
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.whats_app_campaigns.get_whats_app_config()
@@ -19368,9 +19368,9 @@ You can use this API for WhatsApp only if you have setup your WhatsApp account o
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.whats_app_campaigns.create_whats_app_template(
@@ -19478,9 +19478,9 @@ Language of the template. For Example :
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.whats_app_campaigns.get_whats_app_templates()
@@ -19590,9 +19590,9 @@ You can use this API for WhatsApp only if you have setup your WhatsApp account o
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.whats_app_campaigns.send_whats_app_template_approval(
@@ -19664,9 +19664,9 @@ You can use this API for WhatsApp only if you have setup your WhatsApp account o
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.whats_app_campaigns.get_whats_app_campaign(
@@ -19746,9 +19746,9 @@ This API requires the List and Segment ids as recipients in Body params. You can
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.whats_app_campaigns.update_whats_app_campaign(
@@ -19834,9 +19834,9 @@ client.whats_app_campaigns.update_whats_app_campaign(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.whats_app_campaigns.delete_whats_app_campaign(
@@ -19891,9 +19891,9 @@ client.whats_app_campaigns.delete_whats_app_campaign(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.companies.get_all_companies()
@@ -20009,9 +20009,9 @@ client.companies.get_all_companies()
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.companies.create_a_company(
@@ -20111,9 +20111,9 @@ Import companies from a CSV file with mapping options.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.companies.import_companies_creation_and_updation()
@@ -20182,9 +20182,9 @@ The mapping options in JSON format. Here is an example of the JSON structure: ``
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.companies.link_and_unlink_company_with_contact_and_deal(
@@ -20270,9 +20270,9 @@ client.companies.link_and_unlink_company_with_contact_and_deal(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.companies.get_a_company(
@@ -20326,9 +20326,9 @@ client.companies.get_a_company(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.companies.delete_a_company(
@@ -20382,9 +20382,9 @@ client.companies.delete_a_company(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.companies.update_a_company(
@@ -20478,9 +20478,9 @@ client.companies.update_a_company(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.companies.create_a_company_deal_attribute(
@@ -20568,9 +20568,9 @@ client.companies.create_a_company_deal_attribute(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.companies.get_company_attributes()
@@ -20615,9 +20615,9 @@ client.companies.get_company_attributes()
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.deals.get_deal_attributes()
@@ -20661,9 +20661,9 @@ client.deals.get_deal_attributes()
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.deals.get_all_deals()
@@ -20771,9 +20771,9 @@ client.deals.get_all_deals()
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.deals.create_a_deal(
@@ -20865,9 +20865,9 @@ Import deals from a CSV file with mapping options.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.deals.import_deals_creation_and_updation()
@@ -20936,9 +20936,9 @@ The mapping options in JSON format. Here is an example of the JSON structure: ``
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.deals.link_and_unlink_a_deal_with_contacts_and_companies(
@@ -21024,9 +21024,9 @@ client.deals.link_and_unlink_a_deal_with_contacts_and_companies(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.deals.get_a_deal(
@@ -21080,9 +21080,9 @@ client.deals.get_a_deal(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.deals.delete_a_deal(
@@ -21136,9 +21136,9 @@ client.deals.delete_a_deal(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.deals.update_a_deal(
@@ -21238,9 +21238,9 @@ This endpoint is deprecated. Prefer /crm/pipeline/details/{pipelineID} instead.
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.deals.get_pipeline_stages()
@@ -21284,9 +21284,9 @@ client.deals.get_pipeline_stages()
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.deals.get_all_pipelines()
@@ -21330,9 +21330,9 @@ client.deals.get_all_pipelines()
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.deals.get_a_pipeline(
@@ -21387,9 +21387,9 @@ client.deals.get_a_pipeline(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.files.get_all_files()
@@ -21489,9 +21489,9 @@ client.files.get_all_files()
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.files.upload_a_file()
@@ -21569,9 +21569,9 @@ core.File` — See core.File for more documentation
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.files.download_a_file(
@@ -21625,9 +21625,9 @@ client.files.download_a_file(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.files.delete_a_file(
@@ -21681,9 +21681,9 @@ client.files.delete_a_file(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.files.get_file_details(
@@ -21738,9 +21738,9 @@ client.files.get_file_details(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.notes.get_all_notes()
@@ -21840,9 +21840,9 @@ client.notes.get_all_notes()
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.notes.create_a_note(
@@ -21920,9 +21920,9 @@ client.notes.create_a_note(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.notes.get_a_note(
@@ -21976,9 +21976,9 @@ client.notes.get_a_note(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.notes.delete_a_note(
@@ -22032,9 +22032,9 @@ client.notes.delete_a_note(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.notes.update_a_note(
@@ -22122,9 +22122,9 @@ client.notes.update_a_note(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.tasks.get_all_tasks(
@@ -22276,9 +22276,9 @@ client.tasks.get_all_tasks(
 ```python
 import datetime
 
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.tasks.create_a_task(
@@ -22416,9 +22416,9 @@ client.tasks.create_a_task(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.tasks.get_a_task(
@@ -22472,9 +22472,9 @@ client.tasks.get_a_task(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.tasks.delete_a_task(
@@ -22528,9 +22528,9 @@ client.tasks.delete_a_task(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.tasks.update_a_task(
@@ -22672,9 +22672,9 @@ client.tasks.update_a_task(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.tasks.get_all_task_types()
@@ -22734,10 +22734,10 @@ This endpoint is used to send a WhatsApp message. <br/>(**The first message you 
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 from brevo.transactional_whats_app import SendWhatsappMessageRequestParams
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.transactional_whats_app.send_whatsapp_message(
@@ -22809,9 +22809,9 @@ This endpoint will show the unaggregated statistics for WhatsApp activity (30 da
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.transactional_whats_app.get_whatsapp_event_report()
@@ -22920,9 +22920,9 @@ client.transactional_whats_app.get_whatsapp_event_report()
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.transactional_emails.get_transac_blocked_contacts()
@@ -23014,9 +23014,9 @@ client.transactional_emails.get_transac_blocked_contacts()
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.transactional_emails.unblock_or_resubscribe_a_transactional_contact(
@@ -23084,9 +23084,9 @@ Get the list of blocked domains
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.transactional_emails.get_blocked_domains()
@@ -23144,9 +23144,9 @@ Blocks a new domain in order to avoid messages being sent to the same
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.transactional_emails.block_new_domain(
@@ -23214,9 +23214,9 @@ Unblocks an existing domain from the list of blocked domains
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.transactional_emails.delete_blocked_domain(
@@ -23284,9 +23284,9 @@ Delete hardbounces. To use carefully (e.g. in case of temporary ISP failures)
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.transactional_emails.delete_hardbounces()
@@ -23354,13 +23354,13 @@ client.transactional_emails.delete_hardbounces()
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 from brevo.transactional_emails import (
     SendTransacEmailRequestSender,
     SendTransacEmailRequestToItem,
 )
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.transactional_emails.send_transac_email(
@@ -23563,9 +23563,9 @@ Delete scheduled batch of emails by batchId or single scheduled email by message
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.transactional_emails.delete_scheduled_email_by_id(
@@ -23635,9 +23635,9 @@ Fetch scheduled batch of emails by batchId or single scheduled email by messageI
 ```python
 import datetime
 
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.transactional_emails.get_scheduled_email_by_id(
@@ -23759,9 +23759,9 @@ This endpoint will show the list of emails for past 30 days by default. To retri
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.transactional_emails.get_transac_emails_list()
@@ -23889,9 +23889,9 @@ The uuid can also be fetched from the transactional logs page in your Brevo acco
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.transactional_emails.get_transac_email_content(
@@ -23945,9 +23945,9 @@ client.transactional_emails.get_transac_email_content(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.transactional_emails.delete_an_smtp_transactional_log(
@@ -24015,9 +24015,9 @@ This endpoint will show the aggregated stats for past 90 days by default if `sta
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.transactional_emails.get_aggregated_smtp_report()
@@ -24107,9 +24107,9 @@ This endpoint will show the aggregated stats for past 30 days by default if `sta
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.transactional_emails.get_email_event_report()
@@ -24241,9 +24241,9 @@ client.transactional_emails.get_email_event_report()
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.transactional_emails.get_smtp_report()
@@ -24343,9 +24343,9 @@ client.transactional_emails.get_smtp_report()
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.transactional_emails.post_preview_smtp_email_templates(
@@ -24399,9 +24399,9 @@ client.transactional_emails.post_preview_smtp_email_templates(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.transactional_emails.get_smtp_templates()
@@ -24477,10 +24477,10 @@ client.transactional_emails.get_smtp_templates()
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 from brevo.transactional_emails import CreateSmtpTemplateRequestSender
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.transactional_emails.create_smtp_template(
@@ -24608,9 +24608,9 @@ client.transactional_emails.create_smtp_template(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.transactional_emails.get_smtp_template(
@@ -24664,9 +24664,9 @@ client.transactional_emails.get_smtp_template(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.transactional_emails.update_smtp_template(
@@ -24800,9 +24800,9 @@ client.transactional_emails.update_smtp_template(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.transactional_emails.delete_smtp_template(
@@ -24856,9 +24856,9 @@ client.transactional_emails.delete_smtp_template(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.transactional_emails.send_test_template(
@@ -24943,9 +24943,9 @@ Transactional SMS can be sent at any time without time restrictions. However, if
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.transactional_sms.send_async_transactional_sms(
@@ -25048,9 +25048,9 @@ client.transactional_sms.send_async_transactional_sms(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.transactional_sms.send_transac_sms(
@@ -25153,9 +25153,9 @@ client.transactional_sms.send_transac_sms(
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.transactional_sms.get_transac_aggregated_sms_report()
@@ -25231,9 +25231,9 @@ client.transactional_sms.get_transac_aggregated_sms_report()
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.transactional_sms.get_sms_events()
@@ -25349,9 +25349,9 @@ client.transactional_sms.get_sms_events()
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.transactional_sms.get_transac_sms_report()
@@ -25436,9 +25436,9 @@ client.transactional_sms.get_transac_sms_report()
 <dd>
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.sms_templates.get_sms_templates()

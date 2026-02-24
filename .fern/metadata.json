@@ -2,5 +2,21 @@
   "cliVersion": "3.82.0",
   "generatorName": "fernapi/fern-python-sdk",
   "generatorVersion": "4.59.0",
-  "sdkVersion": "0.0.100"
+  "generatorConfig": {
+    "package_name": "brevo",
+    "client_class_name": "Brevo",
+    "enable_wire_tests": true,
+    "additional_init_exports": [
+      {
+        "from": "types",
+        "imports": [
+          "BrevoError"
+        ]
+      }
+    ],
+    "pydantic_config": {
+      "skip_validation": true
+    }
+  },
+  "sdkVersion": "0.0.101"
 }

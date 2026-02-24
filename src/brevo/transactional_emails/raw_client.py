@@ -8,9 +8,9 @@ from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
 from ..core.jsonable_encoder import jsonable_encoder
-from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
+from ..core.unchecked_base_model import construct_type
 from ..errors.bad_request_error import BadRequestError
 from ..errors.not_found_error import NotFoundError
 from ..types.get_smtp_template_overview import GetSmtpTemplateOverview
@@ -109,7 +109,7 @@ class RawTransactionalEmailsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetTransacBlockedContactsResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetTransacBlockedContactsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -120,7 +120,7 @@ class RawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -160,7 +160,7 @@ class RawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -171,7 +171,7 @@ class RawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -207,7 +207,7 @@ class RawTransactionalEmailsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetBlockedDomainsResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetBlockedDomainsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -256,7 +256,7 @@ class RawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -298,7 +298,7 @@ class RawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -309,7 +309,7 @@ class RawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -371,7 +371,7 @@ class RawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -511,7 +511,7 @@ class RawTransactionalEmailsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     SendTransacEmailResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=SendTransacEmailResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -522,7 +522,7 @@ class RawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -564,7 +564,7 @@ class RawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -575,7 +575,7 @@ class RawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -649,7 +649,7 @@ class RawTransactionalEmailsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetScheduledEmailByIdResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetScheduledEmailByIdResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -660,7 +660,7 @@ class RawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -671,7 +671,7 @@ class RawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -751,7 +751,7 @@ class RawTransactionalEmailsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetTransacEmailsListResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetTransacEmailsListResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -762,7 +762,7 @@ class RawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -807,7 +807,7 @@ class RawTransactionalEmailsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetTransacEmailContentResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetTransacEmailContentResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -847,7 +847,7 @@ class RawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -858,7 +858,7 @@ class RawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -918,7 +918,7 @@ class RawTransactionalEmailsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetAggregatedSmtpReportResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetAggregatedSmtpReportResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -929,7 +929,7 @@ class RawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1024,7 +1024,7 @@ class RawTransactionalEmailsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetEmailEventReportResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetEmailEventReportResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1035,7 +1035,7 @@ class RawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1108,7 +1108,7 @@ class RawTransactionalEmailsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetSmtpReportResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetSmtpReportResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1119,7 +1119,7 @@ class RawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1160,7 +1160,7 @@ class RawTransactionalEmailsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     PostPreviewSmtpEmailTemplatesResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=PostPreviewSmtpEmailTemplatesResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1171,7 +1171,7 @@ class RawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1229,7 +1229,7 @@ class RawTransactionalEmailsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetSmtpTemplatesResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetSmtpTemplatesResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1240,7 +1240,7 @@ class RawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1334,7 +1334,7 @@ class RawTransactionalEmailsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     CreateSmtpTemplateResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=CreateSmtpTemplateResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1345,7 +1345,7 @@ class RawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1382,7 +1382,7 @@ class RawTransactionalEmailsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetSmtpTemplateOverview,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetSmtpTemplateOverview,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1393,7 +1393,7 @@ class RawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1404,7 +1404,7 @@ class RawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1505,7 +1505,7 @@ class RawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1516,7 +1516,7 @@ class RawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1556,7 +1556,7 @@ class RawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1567,7 +1567,7 @@ class RawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1621,7 +1621,7 @@ class RawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1632,7 +1632,7 @@ class RawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1705,7 +1705,7 @@ class AsyncRawTransactionalEmailsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetTransacBlockedContactsResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetTransacBlockedContactsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1716,7 +1716,7 @@ class AsyncRawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1756,7 +1756,7 @@ class AsyncRawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1767,7 +1767,7 @@ class AsyncRawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1803,7 +1803,7 @@ class AsyncRawTransactionalEmailsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetBlockedDomainsResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetBlockedDomainsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1852,7 +1852,7 @@ class AsyncRawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1894,7 +1894,7 @@ class AsyncRawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1905,7 +1905,7 @@ class AsyncRawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1967,7 +1967,7 @@ class AsyncRawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2107,7 +2107,7 @@ class AsyncRawTransactionalEmailsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     SendTransacEmailResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=SendTransacEmailResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2118,7 +2118,7 @@ class AsyncRawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2160,7 +2160,7 @@ class AsyncRawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2171,7 +2171,7 @@ class AsyncRawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2245,7 +2245,7 @@ class AsyncRawTransactionalEmailsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetScheduledEmailByIdResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetScheduledEmailByIdResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2256,7 +2256,7 @@ class AsyncRawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2267,7 +2267,7 @@ class AsyncRawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2347,7 +2347,7 @@ class AsyncRawTransactionalEmailsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetTransacEmailsListResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetTransacEmailsListResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2358,7 +2358,7 @@ class AsyncRawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2403,7 +2403,7 @@ class AsyncRawTransactionalEmailsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetTransacEmailContentResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetTransacEmailContentResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2443,7 +2443,7 @@ class AsyncRawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2454,7 +2454,7 @@ class AsyncRawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2514,7 +2514,7 @@ class AsyncRawTransactionalEmailsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetAggregatedSmtpReportResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetAggregatedSmtpReportResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2525,7 +2525,7 @@ class AsyncRawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2620,7 +2620,7 @@ class AsyncRawTransactionalEmailsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetEmailEventReportResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetEmailEventReportResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2631,7 +2631,7 @@ class AsyncRawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2704,7 +2704,7 @@ class AsyncRawTransactionalEmailsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetSmtpReportResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetSmtpReportResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2715,7 +2715,7 @@ class AsyncRawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2756,7 +2756,7 @@ class AsyncRawTransactionalEmailsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     PostPreviewSmtpEmailTemplatesResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=PostPreviewSmtpEmailTemplatesResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2767,7 +2767,7 @@ class AsyncRawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2825,7 +2825,7 @@ class AsyncRawTransactionalEmailsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetSmtpTemplatesResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetSmtpTemplatesResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2836,7 +2836,7 @@ class AsyncRawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2930,7 +2930,7 @@ class AsyncRawTransactionalEmailsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     CreateSmtpTemplateResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=CreateSmtpTemplateResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2941,7 +2941,7 @@ class AsyncRawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2978,7 +2978,7 @@ class AsyncRawTransactionalEmailsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetSmtpTemplateOverview,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetSmtpTemplateOverview,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2989,7 +2989,7 @@ class AsyncRawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3000,7 +3000,7 @@ class AsyncRawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3101,7 +3101,7 @@ class AsyncRawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3112,7 +3112,7 @@ class AsyncRawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3152,7 +3152,7 @@ class AsyncRawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3163,7 +3163,7 @@ class AsyncRawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3217,7 +3217,7 @@ class AsyncRawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3228,7 +3228,7 @@ class AsyncRawTransactionalEmailsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),

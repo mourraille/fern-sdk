@@ -3,11 +3,12 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .create_event_request_object_identifiers import CreateEventRequestObjectIdentifiers
 
 
-class CreateEventRequestObject(UniversalBaseModel):
+class CreateEventRequestObject(UncheckedBaseModel):
     """
     Identifiers of the object record associated with this event. Ignored if the object type or identifier for this record does not exist on the account.
     """

@@ -4,8 +4,9 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_contact_info_response_statistics_clicked_item import GetContactInfoResponseStatisticsClickedItem
 from .get_contact_info_response_statistics_complaints_item import GetContactInfoResponseStatisticsComplaintsItem
 from .get_contact_info_response_statistics_delivered_item import GetContactInfoResponseStatisticsDeliveredItem
@@ -19,7 +20,7 @@ from .get_contact_info_response_statistics_transac_attributes_item import (
 from .get_contact_info_response_statistics_unsubscriptions import GetContactInfoResponseStatisticsUnsubscriptions
 
 
-class GetContactInfoResponseStatistics(UniversalBaseModel):
+class GetContactInfoResponseStatistics(UncheckedBaseModel):
     """
     Campaign statistics of the contact
     """

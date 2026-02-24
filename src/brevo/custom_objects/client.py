@@ -83,10 +83,10 @@ class CustomObjectsClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
         from brevo.custom_objects import UpsertrecordsRequestRecordsItem
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.custom_objects.upsertrecords(
@@ -143,9 +143,9 @@ class CustomObjectsClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.custom_objects.getrecords(
@@ -194,12 +194,12 @@ class CustomObjectsClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
         from brevo.custom_objects import (
             BatchDeleteObjectRecordsRequestIdentifiersExtIds,
         )
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.custom_objects.batch_delete_object_records(
@@ -283,10 +283,10 @@ class AsyncCustomObjectsClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
         from brevo.custom_objects import UpsertrecordsRequestRecordsItem
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -351,9 +351,9 @@ class AsyncCustomObjectsClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -410,12 +410,12 @@ class AsyncCustomObjectsClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
         from brevo.custom_objects import (
             BatchDeleteObjectRecordsRequestIdentifiersExtIds,
         )
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 

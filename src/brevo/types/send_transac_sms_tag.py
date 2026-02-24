@@ -3,11 +3,12 @@
 import typing
 
 import pydantic
-from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
+from ..core.unchecked_base_model import UncheckedBaseModel
 from .send_transac_sms_tag_field import SendTransacSmsTagField
 
 
-class SendTransacSmsTag(UniversalBaseModel):
+class SendTransacSmsTag(UncheckedBaseModel):
     """
     Tag of the message
     """

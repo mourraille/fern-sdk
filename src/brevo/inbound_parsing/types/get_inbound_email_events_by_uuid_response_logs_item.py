@@ -4,11 +4,12 @@ import datetime as dt
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_inbound_email_events_by_uuid_response_logs_item_type import GetInboundEmailEventsByUuidResponseLogsItemType
 
 
-class GetInboundEmailEventsByUuidResponseLogsItem(UniversalBaseModel):
+class GetInboundEmailEventsByUuidResponseLogsItem(UncheckedBaseModel):
     date: typing.Optional[dt.datetime] = pydantic.Field(default=None)
     """
     Date of the event

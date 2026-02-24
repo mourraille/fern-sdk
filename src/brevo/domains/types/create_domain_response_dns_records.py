@@ -3,13 +3,14 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .create_domain_response_dns_records_brevo_code import CreateDomainResponseDnsRecordsBrevoCode
 from .create_domain_response_dns_records_dkim_record import CreateDomainResponseDnsRecordsDkimRecord
 from .create_domain_response_dns_records_dmarc_record import CreateDomainResponseDnsRecordsDmarcRecord
 
 
-class CreateDomainResponseDnsRecords(UniversalBaseModel):
+class CreateDomainResponseDnsRecords(UncheckedBaseModel):
     """
     DNS records required for domain authentication
     """

@@ -15,6 +15,7 @@ if typing.TYPE_CHECKING:
         BalanceDefinition,
         BalanceDefinitionBalanceAvailabilityDurationModifier,
         BalanceLimit,
+        BrevoError,
         Cart,
         Company,
         Configuration,
@@ -223,7 +224,7 @@ if typing.TYPE_CHECKING:
         UpdateBalanceLimitRequestDurationUnit,
         UpdateBalanceLimitRequestTransactionType,
     )
-    from .client import AsyncBrevoApi, BrevoApi
+    from .client import AsyncBrevo, Brevo
     from .companies import (
         GetCompaniesRequestSort,
         GetCompaniesResponse,
@@ -449,7 +450,7 @@ if typing.TYPE_CHECKING:
         UpdateEmailCampaignRequestWinnerCriteria,
         UploadImageToGalleryResponse,
     )
-    from .environment import BrevoApiEnvironment
+    from .environment import BrevoEnvironment
     from .event import (
         CreateEventRequestContactPropertiesValue,
         CreateEventRequestEventPropertiesValue,
@@ -790,7 +791,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "AddContactToListRequestBodyExtIds": ".contacts",
     "AddContactToListRequestBodyIds": ".contacts",
     "AddSubscriptionToTierResponse": ".tier",
-    "AsyncBrevoApi": ".client",
+    "AsyncBrevo": ".client",
     "AuthenticateDomainResponse": ".domains",
     "BadRequestError": ".errors",
     "BadRequestErrorBody": ".types",
@@ -802,8 +803,9 @@ _dynamic_imports: typing.Dict[str, str] = {
     "BatchDeleteObjectRecordsRequestIdentifiersExtIds": ".custom_objects",
     "BatchDeleteObjectRecordsRequestIdentifiersIds": ".custom_objects",
     "BatchDeleteObjectRecordsResponse": ".custom_objects",
-    "BrevoApi": ".client",
-    "BrevoApiEnvironment": ".environment",
+    "Brevo": ".client",
+    "BrevoEnvironment": ".environment",
+    "BrevoError": ".types",
     "Cart": ".types",
     "Company": ".types",
     "Configuration": ".types",
@@ -1535,7 +1537,7 @@ __all__ = [
     "AddContactToListRequestBodyExtIds",
     "AddContactToListRequestBodyIds",
     "AddSubscriptionToTierResponse",
-    "AsyncBrevoApi",
+    "AsyncBrevo",
     "AuthenticateDomainResponse",
     "BadRequestError",
     "BadRequestErrorBody",
@@ -1547,8 +1549,9 @@ __all__ = [
     "BatchDeleteObjectRecordsRequestIdentifiersExtIds",
     "BatchDeleteObjectRecordsRequestIdentifiersIds",
     "BatchDeleteObjectRecordsResponse",
-    "BrevoApi",
-    "BrevoApiEnvironment",
+    "Brevo",
+    "BrevoEnvironment",
+    "BrevoError",
     "Cart",
     "Company",
     "Configuration",

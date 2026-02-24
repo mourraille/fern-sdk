@@ -4,8 +4,9 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from ...types.get_campaign_recipients import GetCampaignRecipients
 from ...types.get_extended_campaign_stats import GetExtendedCampaignStats
 from .get_email_campaigns_response_campaigns_item_sender import GetEmailCampaignsResponseCampaignsItemSender
@@ -13,7 +14,7 @@ from .get_email_campaigns_response_campaigns_item_status import GetEmailCampaign
 from .get_email_campaigns_response_campaigns_item_type import GetEmailCampaignsResponseCampaignsItemType
 
 
-class GetEmailCampaignsResponseCampaignsItem(UniversalBaseModel):
+class GetEmailCampaignsResponseCampaignsItem(UncheckedBaseModel):
     ab_testing: typing_extensions.Annotated[
         typing.Optional[bool],
         FieldMetadata(alias="abTesting"),

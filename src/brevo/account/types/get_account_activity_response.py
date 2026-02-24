@@ -3,11 +3,12 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_account_activity_response_logs_item import GetAccountActivityResponseLogsItem
 
 
-class GetAccountActivityResponse(UniversalBaseModel):
+class GetAccountActivityResponse(UncheckedBaseModel):
     logs: typing.Optional[typing.List[GetAccountActivityResponseLogsItem]] = pydantic.Field(default=None)
     """
     Get user activity logs

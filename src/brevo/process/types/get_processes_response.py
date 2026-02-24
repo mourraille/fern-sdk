@@ -3,11 +3,12 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_processes_response_processes_item import GetProcessesResponseProcessesItem
 
 
-class GetProcessesResponse(UniversalBaseModel):
+class GetProcessesResponse(UncheckedBaseModel):
     count: int = pydantic.Field()
     """
     Total number of processes available on your account

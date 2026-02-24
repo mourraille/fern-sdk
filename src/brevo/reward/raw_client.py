@@ -7,9 +7,9 @@ from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
 from ..core.jsonable_encoder import jsonable_encoder
-from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
+from ..core.unchecked_base_model import construct_type
 from ..errors.bad_request_error import BadRequestError
 from ..errors.expectation_failed_error import ExpectationFailedError
 from ..errors.failed_dependency_error import FailedDependencyError
@@ -77,7 +77,7 @@ class RawRewardClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetCodeCountResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetCodeCountResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -88,7 +88,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -99,7 +99,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -110,7 +110,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -121,7 +121,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -132,7 +132,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -196,7 +196,7 @@ class RawRewardClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetLoyaltyOfferProgramsPidOffersResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetLoyaltyOfferProgramsPidOffersResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -207,7 +207,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -218,7 +218,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -229,7 +229,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -240,7 +240,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -251,7 +251,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -262,7 +262,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -330,7 +330,7 @@ class RawRewardClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     CreateRewardResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=CreateRewardResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -341,7 +341,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -352,7 +352,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -363,7 +363,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -374,7 +374,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -457,7 +457,7 @@ class RawRewardClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     CreateVoucherResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=CreateVoucherResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -468,7 +468,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -479,7 +479,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -490,7 +490,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -501,7 +501,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -512,7 +512,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -523,7 +523,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -613,7 +613,7 @@ class RawRewardClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     Redeem,
-                    parse_obj_as(
+                    construct_type(
                         type_=Redeem,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -624,7 +624,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -635,7 +635,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -646,7 +646,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -657,7 +657,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -668,7 +668,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -679,7 +679,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -690,7 +690,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -701,7 +701,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -743,7 +743,7 @@ class RawRewardClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     Redeem,
-                    parse_obj_as(
+                    construct_type(
                         type_=Redeem,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -754,7 +754,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -765,7 +765,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -776,7 +776,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -787,7 +787,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -798,7 +798,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -809,7 +809,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -820,7 +820,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -831,7 +831,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -883,7 +883,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -894,7 +894,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -972,7 +972,7 @@ class RawRewardClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     ValidateRewardResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=ValidateRewardResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -983,7 +983,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -994,7 +994,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1005,7 +1005,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1016,7 +1016,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1027,7 +1027,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1038,7 +1038,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1091,7 +1091,7 @@ class RawRewardClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetLoyaltyOfferProgramsPidRewardsRidResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetLoyaltyOfferProgramsPidRewardsRidResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1102,7 +1102,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1113,7 +1113,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1124,7 +1124,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1135,7 +1135,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1146,7 +1146,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1157,7 +1157,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1236,7 +1236,7 @@ class RawRewardClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetLoyaltyOfferProgramsPidVouchersResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetLoyaltyOfferProgramsPidVouchersResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1247,7 +1247,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1258,7 +1258,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1269,7 +1269,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1280,7 +1280,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1291,7 +1291,7 @@ class RawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1338,7 +1338,7 @@ class AsyncRawRewardClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetCodeCountResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetCodeCountResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1349,7 +1349,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1360,7 +1360,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1371,7 +1371,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1382,7 +1382,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1393,7 +1393,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1457,7 +1457,7 @@ class AsyncRawRewardClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetLoyaltyOfferProgramsPidOffersResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetLoyaltyOfferProgramsPidOffersResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1468,7 +1468,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1479,7 +1479,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1490,7 +1490,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1501,7 +1501,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1512,7 +1512,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1523,7 +1523,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1591,7 +1591,7 @@ class AsyncRawRewardClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     CreateRewardResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=CreateRewardResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1602,7 +1602,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1613,7 +1613,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1624,7 +1624,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1635,7 +1635,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1718,7 +1718,7 @@ class AsyncRawRewardClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     CreateVoucherResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=CreateVoucherResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1729,7 +1729,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1740,7 +1740,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1751,7 +1751,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1762,7 +1762,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1773,7 +1773,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1784,7 +1784,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1874,7 +1874,7 @@ class AsyncRawRewardClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     Redeem,
-                    parse_obj_as(
+                    construct_type(
                         type_=Redeem,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1885,7 +1885,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1896,7 +1896,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1907,7 +1907,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1918,7 +1918,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1929,7 +1929,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1940,7 +1940,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1951,7 +1951,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1962,7 +1962,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2004,7 +2004,7 @@ class AsyncRawRewardClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     Redeem,
-                    parse_obj_as(
+                    construct_type(
                         type_=Redeem,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2015,7 +2015,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2026,7 +2026,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2037,7 +2037,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2048,7 +2048,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2059,7 +2059,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2070,7 +2070,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2081,7 +2081,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2092,7 +2092,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2144,7 +2144,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2155,7 +2155,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2233,7 +2233,7 @@ class AsyncRawRewardClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     ValidateRewardResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=ValidateRewardResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2244,7 +2244,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2255,7 +2255,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2266,7 +2266,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2277,7 +2277,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2288,7 +2288,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2299,7 +2299,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2352,7 +2352,7 @@ class AsyncRawRewardClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetLoyaltyOfferProgramsPidRewardsRidResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetLoyaltyOfferProgramsPidRewardsRidResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2363,7 +2363,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2374,7 +2374,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2385,7 +2385,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2396,7 +2396,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2407,7 +2407,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2418,7 +2418,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2497,7 +2497,7 @@ class AsyncRawRewardClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetLoyaltyOfferProgramsPidVouchersResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetLoyaltyOfferProgramsPidVouchersResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2508,7 +2508,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2519,7 +2519,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2530,7 +2530,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2541,7 +2541,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2552,7 +2552,7 @@ class AsyncRawRewardClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),

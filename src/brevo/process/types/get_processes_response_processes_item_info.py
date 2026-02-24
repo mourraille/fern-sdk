@@ -4,13 +4,14 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_processes_response_processes_item_info_export import GetProcessesResponseProcessesItemInfoExport
 from .get_processes_response_processes_item_info_import import GetProcessesResponseProcessesItemInfoImport
 
 
-class GetProcessesResponseProcessesItemInfo(UniversalBaseModel):
+class GetProcessesResponseProcessesItemInfo(UncheckedBaseModel):
     """
     Additional process information (for completed processes)
     """

@@ -4,15 +4,16 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_corporate_master_account_response_billing_info_address import (
     GetCorporateMasterAccountResponseBillingInfoAddress,
 )
 from .get_corporate_master_account_response_billing_info_name import GetCorporateMasterAccountResponseBillingInfoName
 
 
-class GetCorporateMasterAccountResponseBillingInfo(UniversalBaseModel):
+class GetCorporateMasterAccountResponseBillingInfo(UncheckedBaseModel):
     """
     Billing details of the master account organization
     """

@@ -4,14 +4,15 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_corporate_group_id_response_group import GetCorporateGroupIdResponseGroup
 from .get_corporate_group_id_response_sub_accounts_item import GetCorporateGroupIdResponseSubAccountsItem
 from .get_corporate_group_id_response_users_item import GetCorporateGroupIdResponseUsersItem
 
 
-class GetCorporateGroupIdResponse(UniversalBaseModel):
+class GetCorporateGroupIdResponse(UncheckedBaseModel):
     group: typing.Optional[GetCorporateGroupIdResponseGroup] = None
     sub_accounts: typing_extensions.Annotated[
         typing.Optional[typing.List[GetCorporateGroupIdResponseSubAccountsItem]],

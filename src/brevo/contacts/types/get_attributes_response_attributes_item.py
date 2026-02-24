@@ -4,14 +4,15 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_attributes_response_attributes_item_category import GetAttributesResponseAttributesItemCategory
 from .get_attributes_response_attributes_item_enumeration_item import GetAttributesResponseAttributesItemEnumerationItem
 from .get_attributes_response_attributes_item_type import GetAttributesResponseAttributesItemType
 
 
-class GetAttributesResponseAttributesItem(UniversalBaseModel):
+class GetAttributesResponseAttributesItem(UncheckedBaseModel):
     calculated_value: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="calculatedValue"),

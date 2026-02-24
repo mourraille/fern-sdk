@@ -5,12 +5,13 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_scheduled_email_by_id_response_created_at_status import GetScheduledEmailByIdResponseCreatedAtStatus
 
 
-class GetScheduledEmailByIdResponseCreatedAt(UniversalBaseModel):
+class GetScheduledEmailByIdResponseCreatedAt(UncheckedBaseModel):
     created_at: typing_extensions.Annotated[
         dt.datetime,
         FieldMetadata(alias="createdAt"),

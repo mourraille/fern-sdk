@@ -6,11 +6,12 @@ import typing
 
 import pydantic
 import typing_extensions
-from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel, update_forward_refs
+from ..core.pydantic_utilities import IS_PYDANTIC_V2, update_forward_refs
 from ..core.serialization import FieldMetadata
+from ..core.unchecked_base_model import UncheckedBaseModel
 
 
-class ValueResponse(UniversalBaseModel):
+class ValueResponse(UncheckedBaseModel):
     array: typing.Optional[typing.List["ValueResponse"]] = pydantic.Field(default=None)
     """
     Array values to define the rule

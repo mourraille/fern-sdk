@@ -3,11 +3,12 @@
 import typing
 
 import pydantic
-from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
+from ..core.unchecked_base_model import UncheckedBaseModel
 from .get_device_browser_stats import GetDeviceBrowserStats
 
 
-class GetExtendedCampaignStatsStatsByDevice(UniversalBaseModel):
+class GetExtendedCampaignStatsStatsByDevice(UncheckedBaseModel):
     desktop: typing.Optional[typing.Dict[str, GetDeviceBrowserStats]] = pydantic.Field(default=None)
     """
     Statistics of the campaign on the basis of desktop devices

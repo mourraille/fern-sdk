@@ -3,12 +3,13 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from ...types.conversion_source_metrics import ConversionSourceMetrics
 from .get_ecommerce_attribution_metrics_response_totals import GetEcommerceAttributionMetricsResponseTotals
 
 
-class GetEcommerceAttributionMetricsResponse(UniversalBaseModel):
+class GetEcommerceAttributionMetricsResponse(UncheckedBaseModel):
     results: typing.List[ConversionSourceMetrics] = pydantic.Field()
     """
     List of conversion attribution metrics

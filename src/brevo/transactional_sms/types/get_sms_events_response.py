@@ -3,11 +3,12 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_sms_events_response_events_item import GetSmsEventsResponseEventsItem
 
 
-class GetSmsEventsResponse(UniversalBaseModel):
+class GetSmsEventsResponse(UncheckedBaseModel):
     events: typing.Optional[typing.List[GetSmsEventsResponseEventsItem]] = None
 
     if IS_PYDANTIC_V2:

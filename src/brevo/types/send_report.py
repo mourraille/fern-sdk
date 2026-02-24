@@ -3,12 +3,13 @@
 import typing
 
 import pydantic
-from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
+from ..core.unchecked_base_model import UncheckedBaseModel
 from .send_report_email import SendReportEmail
 from .send_report_language import SendReportLanguage
 
 
-class SendReport(UniversalBaseModel):
+class SendReport(UncheckedBaseModel):
     email: SendReportEmail = pydantic.Field()
     """
     Custom attributes for the report email.

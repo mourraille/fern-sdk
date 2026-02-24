@@ -3,11 +3,12 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_senders_response_senders_item import GetSendersResponseSendersItem
 
 
-class GetSendersResponse(UniversalBaseModel):
+class GetSendersResponse(UncheckedBaseModel):
     senders: typing.Optional[typing.List[GetSendersResponseSendersItem]] = pydantic.Field(default=None)
     """
     List of the senders available in your account

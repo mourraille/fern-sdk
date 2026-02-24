@@ -4,15 +4,16 @@ import typing
 
 import pydantic
 import typing_extensions
-from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.serialization import FieldMetadata
+from ..core.unchecked_base_model import UncheckedBaseModel
 from .get_campaign_stats import GetCampaignStats
 from .get_device_browser_stats import GetDeviceBrowserStats
 from .get_extended_campaign_stats_links_stats import GetExtendedCampaignStatsLinksStats
 from .get_extended_campaign_stats_stats_by_device import GetExtendedCampaignStatsStatsByDevice
 
 
-class GetExtendedCampaignStats(UniversalBaseModel):
+class GetExtendedCampaignStats(UncheckedBaseModel):
     campaign_stats: typing_extensions.Annotated[
         typing.List[GetCampaignStats],
         FieldMetadata(alias="campaignStats"),

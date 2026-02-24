@@ -4,15 +4,16 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from ...types.cart import Cart
 from ...types.configuration import Configuration
 from ...types.notification import Notification
 from .get_payment_request_response_status import GetPaymentRequestResponseStatus
 
 
-class GetPaymentRequestResponse(UniversalBaseModel):
+class GetPaymentRequestResponse(UncheckedBaseModel):
     cart: Cart
     configuration: typing.Optional[Configuration] = None
     contact_id: typing_extensions.Annotated[

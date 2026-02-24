@@ -4,12 +4,13 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_contact_stats_response_clicked_item_links_item import GetContactStatsResponseClickedItemLinksItem
 
 
-class GetContactStatsResponseClickedItem(UniversalBaseModel):
+class GetContactStatsResponseClickedItem(UncheckedBaseModel):
     campaign_id: typing_extensions.Annotated[
         int,
         FieldMetadata(alias="campaignId"),

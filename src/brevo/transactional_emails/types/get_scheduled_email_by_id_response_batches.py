@@ -3,11 +3,12 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_scheduled_email_by_id_response_batches_batches_item import GetScheduledEmailByIdResponseBatchesBatchesItem
 
 
-class GetScheduledEmailByIdResponseBatches(UniversalBaseModel):
+class GetScheduledEmailByIdResponseBatches(UncheckedBaseModel):
     batches: typing.Optional[typing.List[GetScheduledEmailByIdResponseBatchesBatchesItem]] = None
     count: typing.Optional[int] = pydantic.Field(default=None)
     """

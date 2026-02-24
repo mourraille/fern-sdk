@@ -4,15 +4,16 @@ import typing
 
 import pydantic
 import typing_extensions
-from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.serialization import FieldMetadata
+from ..core.unchecked_base_model import UncheckedBaseModel
 from .order_billing import OrderBilling
 from .order_identifiers import OrderIdentifiers
 from .order_meta_info_value import OrderMetaInfoValue
 from .order_products_item import OrderProductsItem
 
 
-class Order(UniversalBaseModel):
+class Order(UncheckedBaseModel):
     amount: float = pydantic.Field()
     """
     Total amount of the order, including all shipping expenses, tax and the price of items.

@@ -3,11 +3,12 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_invited_users_list_response_users_item_feature_access import GetInvitedUsersListResponseUsersItemFeatureAccess
 
 
-class GetInvitedUsersListResponseUsersItem(UniversalBaseModel):
+class GetInvitedUsersListResponseUsersItem(UncheckedBaseModel):
     email: str = pydantic.Field()
     """
     Email address of the user.

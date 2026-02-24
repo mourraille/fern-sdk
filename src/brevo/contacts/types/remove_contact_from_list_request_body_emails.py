@@ -3,10 +3,11 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 
 
-class RemoveContactFromListRequestBodyEmails(UniversalBaseModel):
+class RemoveContactFromListRequestBodyEmails(UncheckedBaseModel):
     emails: typing.Optional[typing.List[str]] = pydantic.Field(default=None)
     """
     **Required if 'all' is false and 'ids', 'extIds' are empty.** Emails to remove from a list. You can pass a **maximum of 150 emails** for removal in one request.

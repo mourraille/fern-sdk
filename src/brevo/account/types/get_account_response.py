@@ -4,8 +4,9 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_account_response_address import GetAccountResponseAddress
 from .get_account_response_date_time_preferences import GetAccountResponseDateTimePreferences
 from .get_account_response_marketing_automation import GetAccountResponseMarketingAutomation
@@ -14,7 +15,7 @@ from .get_account_response_plan_verticals_item import GetAccountResponsePlanVert
 from .get_account_response_relay import GetAccountResponseRelay
 
 
-class GetAccountResponse(UniversalBaseModel):
+class GetAccountResponse(UncheckedBaseModel):
     organization_id: str = pydantic.Field()
     """
     Unique identifier for the organization

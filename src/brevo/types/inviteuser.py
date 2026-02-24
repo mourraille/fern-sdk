@@ -3,11 +3,12 @@
 import typing
 
 import pydantic
-from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
+from ..core.unchecked_base_model import UncheckedBaseModel
 from .inviteuser_privileges_item import InviteuserPrivilegesItem
 
 
-class Inviteuser(UniversalBaseModel):
+class Inviteuser(UncheckedBaseModel):
     all_features_access: bool = pydantic.Field()
     """
     All access to the features

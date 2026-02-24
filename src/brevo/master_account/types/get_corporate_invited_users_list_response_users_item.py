@@ -3,7 +3,8 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_corporate_invited_users_list_response_users_item_feature_access import (
     GetCorporateInvitedUsersListResponseUsersItemFeatureAccess,
 )
@@ -12,7 +13,7 @@ from .get_corporate_invited_users_list_response_users_item_groups import (
 )
 
 
-class GetCorporateInvitedUsersListResponseUsersItem(UniversalBaseModel):
+class GetCorporateInvitedUsersListResponseUsersItem(UncheckedBaseModel):
     email: str = pydantic.Field()
     """
     Email address of the user.

@@ -3,11 +3,12 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_corporate_invited_users_list_response_users_item import GetCorporateInvitedUsersListResponseUsersItem
 
 
-class GetCorporateInvitedUsersListResponse(UniversalBaseModel):
+class GetCorporateInvitedUsersListResponse(UncheckedBaseModel):
     users: typing.Optional[typing.List[GetCorporateInvitedUsersListResponseUsersItem]] = pydantic.Field(default=None)
     """
     Get invited users list

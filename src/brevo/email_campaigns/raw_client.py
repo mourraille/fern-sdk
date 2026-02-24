@@ -7,9 +7,9 @@ from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
 from ..core.jsonable_encoder import jsonable_encoder
-from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
+from ..core.unchecked_base_model import construct_type
 from ..errors.bad_request_error import BadRequestError
 from ..errors.method_not_allowed_error import MethodNotAllowedError
 from ..errors.not_found_error import NotFoundError
@@ -126,7 +126,7 @@ class RawEmailCampaignsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetEmailCampaignsResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetEmailCampaignsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -137,7 +137,7 @@ class RawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -347,7 +347,7 @@ class RawEmailCampaignsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     CreateEmailCampaignResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=CreateEmailCampaignResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -358,7 +358,7 @@ class RawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -410,7 +410,7 @@ class RawEmailCampaignsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     UploadImageToGalleryResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=UploadImageToGalleryResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -421,7 +421,7 @@ class RawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -468,7 +468,7 @@ class RawEmailCampaignsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetEmailCampaignResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetEmailCampaignResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -479,7 +479,7 @@ class RawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -490,7 +490,7 @@ class RawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -707,7 +707,7 @@ class RawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -718,7 +718,7 @@ class RawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -758,7 +758,7 @@ class RawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -769,7 +769,7 @@ class RawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -808,7 +808,7 @@ class RawEmailCampaignsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetAbTestCampaignResultResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetAbTestCampaignResultResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -819,7 +819,7 @@ class RawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -830,7 +830,7 @@ class RawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -886,7 +886,7 @@ class RawEmailCampaignsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     EmailExportRecipientsResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=EmailExportRecipientsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -897,7 +897,7 @@ class RawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -908,7 +908,7 @@ class RawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -948,7 +948,7 @@ class RawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -959,7 +959,7 @@ class RawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -970,7 +970,7 @@ class RawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1033,7 +1033,7 @@ class RawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1044,7 +1044,7 @@ class RawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1098,7 +1098,7 @@ class RawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1109,7 +1109,7 @@ class RawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1148,7 +1148,7 @@ class RawEmailCampaignsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetSharedTemplateUrlResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetSharedTemplateUrlResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1159,7 +1159,7 @@ class RawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1170,7 +1170,7 @@ class RawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1181,7 +1181,7 @@ class RawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1235,7 +1235,7 @@ class RawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1246,7 +1246,7 @@ class RawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1340,7 +1340,7 @@ class AsyncRawEmailCampaignsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetEmailCampaignsResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetEmailCampaignsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1351,7 +1351,7 @@ class AsyncRawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1561,7 +1561,7 @@ class AsyncRawEmailCampaignsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     CreateEmailCampaignResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=CreateEmailCampaignResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1572,7 +1572,7 @@ class AsyncRawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1624,7 +1624,7 @@ class AsyncRawEmailCampaignsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     UploadImageToGalleryResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=UploadImageToGalleryResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1635,7 +1635,7 @@ class AsyncRawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1682,7 +1682,7 @@ class AsyncRawEmailCampaignsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetEmailCampaignResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetEmailCampaignResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1693,7 +1693,7 @@ class AsyncRawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1704,7 +1704,7 @@ class AsyncRawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1921,7 +1921,7 @@ class AsyncRawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1932,7 +1932,7 @@ class AsyncRawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1972,7 +1972,7 @@ class AsyncRawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1983,7 +1983,7 @@ class AsyncRawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2022,7 +2022,7 @@ class AsyncRawEmailCampaignsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetAbTestCampaignResultResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetAbTestCampaignResultResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2033,7 +2033,7 @@ class AsyncRawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2044,7 +2044,7 @@ class AsyncRawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2100,7 +2100,7 @@ class AsyncRawEmailCampaignsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     EmailExportRecipientsResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=EmailExportRecipientsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2111,7 +2111,7 @@ class AsyncRawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2122,7 +2122,7 @@ class AsyncRawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2162,7 +2162,7 @@ class AsyncRawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2173,7 +2173,7 @@ class AsyncRawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2184,7 +2184,7 @@ class AsyncRawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2247,7 +2247,7 @@ class AsyncRawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2258,7 +2258,7 @@ class AsyncRawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2312,7 +2312,7 @@ class AsyncRawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2323,7 +2323,7 @@ class AsyncRawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2362,7 +2362,7 @@ class AsyncRawEmailCampaignsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetSharedTemplateUrlResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetSharedTemplateUrlResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2373,7 +2373,7 @@ class AsyncRawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2384,7 +2384,7 @@ class AsyncRawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2395,7 +2395,7 @@ class AsyncRawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2449,7 +2449,7 @@ class AsyncRawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2460,7 +2460,7 @@ class AsyncRawEmailCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),

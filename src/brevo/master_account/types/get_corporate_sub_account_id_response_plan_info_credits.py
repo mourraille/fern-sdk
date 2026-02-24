@@ -4,8 +4,9 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_corporate_sub_account_id_response_plan_info_credits_emails import (
     GetCorporateSubAccountIdResponsePlanInfoCreditsEmails,
 )
@@ -23,7 +24,7 @@ from .get_corporate_sub_account_id_response_plan_info_credits_wp_subscribers imp
 )
 
 
-class GetCorporateSubAccountIdResponsePlanInfoCredits(UniversalBaseModel):
+class GetCorporateSubAccountIdResponsePlanInfoCredits(UncheckedBaseModel):
     """
     Credits quota and remaining credits on the sub-account
     """

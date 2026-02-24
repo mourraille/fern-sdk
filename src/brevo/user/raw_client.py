@@ -7,9 +7,9 @@ from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
 from ..core.jsonable_encoder import jsonable_encoder
-from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
+from ..core.unchecked_base_model import construct_type
 from ..errors.bad_request_error import BadRequestError
 from ..errors.forbidden_error import ForbiddenError
 from ..types.inviteuser_privileges_item import InviteuserPrivilegesItem
@@ -52,7 +52,7 @@ class RawUserClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetInvitedUsersListResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetInvitedUsersListResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -63,7 +63,7 @@ class RawUserClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -100,7 +100,7 @@ class RawUserClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     PutRevokeUserPermissionResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=PutRevokeUserPermissionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -111,7 +111,7 @@ class RawUserClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -238,7 +238,7 @@ class RawUserClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     InviteuserResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=InviteuserResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -249,7 +249,7 @@ class RawUserClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -293,7 +293,7 @@ class RawUserClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     PutresendcancelinvitationResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=PutresendcancelinvitationResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -304,7 +304,7 @@ class RawUserClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -430,7 +430,7 @@ class RawUserClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     EditUserPermissionResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=EditUserPermissionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -441,7 +441,7 @@ class RawUserClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -478,7 +478,7 @@ class RawUserClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetUserPermissionResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetUserPermissionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -489,7 +489,7 @@ class RawUserClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -528,7 +528,7 @@ class AsyncRawUserClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetInvitedUsersListResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetInvitedUsersListResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -539,7 +539,7 @@ class AsyncRawUserClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -576,7 +576,7 @@ class AsyncRawUserClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     PutRevokeUserPermissionResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=PutRevokeUserPermissionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -587,7 +587,7 @@ class AsyncRawUserClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -714,7 +714,7 @@ class AsyncRawUserClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     InviteuserResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=InviteuserResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -725,7 +725,7 @@ class AsyncRawUserClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -769,7 +769,7 @@ class AsyncRawUserClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     PutresendcancelinvitationResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=PutresendcancelinvitationResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -780,7 +780,7 @@ class AsyncRawUserClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -906,7 +906,7 @@ class AsyncRawUserClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     EditUserPermissionResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=EditUserPermissionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -917,7 +917,7 @@ class AsyncRawUserClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -954,7 +954,7 @@ class AsyncRawUserClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetUserPermissionResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetUserPermissionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -965,7 +965,7 @@ class AsyncRawUserClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),

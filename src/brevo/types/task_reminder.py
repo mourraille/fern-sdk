@@ -3,12 +3,13 @@
 import typing
 
 import pydantic
-from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
+from ..core.unchecked_base_model import UncheckedBaseModel
 from .task_reminder_types_item import TaskReminderTypesItem
 from .task_reminder_unit import TaskReminderUnit
 
 
-class TaskReminder(UniversalBaseModel):
+class TaskReminder(UncheckedBaseModel):
     """
     Task reminder date/time for a task
     """

@@ -4,14 +4,15 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from ...types.get_campaign_recipients import GetCampaignRecipients
 from ...types.get_sms_campaign_stats import GetSmsCampaignStats
 from .get_sms_campaigns_response_campaigns_item_status import GetSmsCampaignsResponseCampaignsItemStatus
 
 
-class GetSmsCampaignsResponseCampaignsItem(UniversalBaseModel):
+class GetSmsCampaignsResponseCampaignsItem(UncheckedBaseModel):
     content: str = pydantic.Field()
     """
     Content of the SMS Campaign

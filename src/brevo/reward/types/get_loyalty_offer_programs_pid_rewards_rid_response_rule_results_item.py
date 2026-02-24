@@ -5,13 +5,14 @@ from __future__ import annotations
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel, update_forward_refs
+from ...core.pydantic_utilities import IS_PYDANTIC_V2, update_forward_refs
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_loyalty_offer_programs_pid_rewards_rid_response_rule_results_item_parameters_item import (
     GetLoyaltyOfferProgramsPidRewardsRidResponseRuleResultsItemParametersItem,
 )
 
 
-class GetLoyaltyOfferProgramsPidRewardsRidResponseRuleResultsItem(UniversalBaseModel):
+class GetLoyaltyOfferProgramsPidRewardsRidResponseRuleResultsItem(UncheckedBaseModel):
     action: typing.Optional[str] = pydantic.Field(default=None)
     """
     Action for the defined rule

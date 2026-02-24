@@ -3,11 +3,12 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from ...types.get_list import GetList
 
 
-class GetFolderListsResponse(UniversalBaseModel):
+class GetFolderListsResponse(UncheckedBaseModel):
     count: typing.Optional[int] = pydantic.Field(default=None)
     """
     Number of lists in the folder

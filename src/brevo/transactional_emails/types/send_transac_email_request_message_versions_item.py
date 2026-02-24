@@ -4,15 +4,16 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .send_transac_email_request_message_versions_item_bcc_item import SendTransacEmailRequestMessageVersionsItemBccItem
 from .send_transac_email_request_message_versions_item_cc_item import SendTransacEmailRequestMessageVersionsItemCcItem
 from .send_transac_email_request_message_versions_item_reply_to import SendTransacEmailRequestMessageVersionsItemReplyTo
 from .send_transac_email_request_message_versions_item_to_item import SendTransacEmailRequestMessageVersionsItemToItem
 
 
-class SendTransacEmailRequestMessageVersionsItem(UniversalBaseModel):
+class SendTransacEmailRequestMessageVersionsItem(UncheckedBaseModel):
     bcc: typing.Optional[typing.List[SendTransacEmailRequestMessageVersionsItemBccItem]] = pydantic.Field(default=None)
     """
     Array of BCC recipient objects. Each object contains an email address and an optional name.

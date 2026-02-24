@@ -4,13 +4,14 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_corporate_master_account_response_billing_info import GetCorporateMasterAccountResponseBillingInfo
 from .get_corporate_master_account_response_plan_info import GetCorporateMasterAccountResponsePlanInfo
 
 
-class GetCorporateMasterAccountResponse(UniversalBaseModel):
+class GetCorporateMasterAccountResponse(UncheckedBaseModel):
     billing_info: typing_extensions.Annotated[
         typing.Optional[GetCorporateMasterAccountResponseBillingInfo],
         FieldMetadata(alias="billingInfo"),

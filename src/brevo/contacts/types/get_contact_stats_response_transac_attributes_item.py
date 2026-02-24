@@ -5,11 +5,12 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 
 
-class GetContactStatsResponseTransacAttributesItem(UniversalBaseModel):
+class GetContactStatsResponseTransacAttributesItem(UncheckedBaseModel):
     order_date: typing_extensions.Annotated[
         dt.date, FieldMetadata(alias="orderDate"), pydantic.Field(alias="orderDate", description="Date of the order")
     ]

@@ -3,10 +3,11 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 
 
-class CreateContactResponse(UniversalBaseModel):
+class CreateContactResponse(UncheckedBaseModel):
     id: typing.Optional[int] = pydantic.Field(default=None)
     """
     ID of the contact when a new contact is created

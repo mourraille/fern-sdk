@@ -4,13 +4,14 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_corporate_sub_account_id_response_plan_info_credits import GetCorporateSubAccountIdResponsePlanInfoCredits
 from .get_corporate_sub_account_id_response_plan_info_features import GetCorporateSubAccountIdResponsePlanInfoFeatures
 
 
-class GetCorporateSubAccountIdResponsePlanInfo(UniversalBaseModel):
+class GetCorporateSubAccountIdResponsePlanInfo(UncheckedBaseModel):
     """
     Sub-account plan details
     """

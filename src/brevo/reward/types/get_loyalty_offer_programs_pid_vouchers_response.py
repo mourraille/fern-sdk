@@ -4,14 +4,15 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_loyalty_offer_programs_pid_vouchers_response_contact_rewards_item import (
     GetLoyaltyOfferProgramsPidVouchersResponseContactRewardsItem,
 )
 
 
-class GetLoyaltyOfferProgramsPidVouchersResponse(UniversalBaseModel):
+class GetLoyaltyOfferProgramsPidVouchersResponse(UncheckedBaseModel):
     contact_id: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="contactId"),

@@ -7,8 +7,8 @@ from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
 from ..core.jsonable_encoder import jsonable_encoder
-from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
+from ..core.unchecked_base_model import construct_type
 from ..errors.bad_request_error import BadRequestError
 from ..errors.conflict_error import ConflictError
 from ..errors.forbidden_error import ForbiddenError
@@ -81,7 +81,7 @@ class RawProgramClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetLpListResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetLpListResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -92,7 +92,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -103,7 +103,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -114,7 +114,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -125,7 +125,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -136,7 +136,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -147,7 +147,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -211,7 +211,7 @@ class RawProgramClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     LoyaltyProgram,
-                    parse_obj_as(
+                    construct_type(
                         type_=LoyaltyProgram,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -222,7 +222,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -233,7 +233,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -244,7 +244,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -255,7 +255,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -266,7 +266,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -305,7 +305,7 @@ class RawProgramClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     LoyaltyProgram,
-                    parse_obj_as(
+                    construct_type(
                         type_=LoyaltyProgram,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -316,7 +316,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -327,7 +327,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -338,7 +338,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -349,7 +349,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -360,7 +360,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -423,7 +423,7 @@ class RawProgramClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     LoyaltyProgram,
-                    parse_obj_as(
+                    construct_type(
                         type_=LoyaltyProgram,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -434,7 +434,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -445,7 +445,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -456,7 +456,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -467,7 +467,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -478,7 +478,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -489,7 +489,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -531,7 +531,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -542,7 +542,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -553,7 +553,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -564,7 +564,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -575,7 +575,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -638,7 +638,7 @@ class RawProgramClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     LoyaltyProgram,
-                    parse_obj_as(
+                    construct_type(
                         type_=LoyaltyProgram,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -649,7 +649,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -660,7 +660,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -671,7 +671,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -682,7 +682,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -693,7 +693,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -704,7 +704,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -763,7 +763,7 @@ class RawProgramClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetParameterSubscriptionInfoResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetParameterSubscriptionInfoResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -774,7 +774,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -785,7 +785,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -796,7 +796,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -807,7 +807,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -818,7 +818,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -860,7 +860,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -871,7 +871,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -882,7 +882,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -893,7 +893,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -904,7 +904,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -967,7 +967,7 @@ class RawProgramClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     SubscribeMemberToASubscriptionResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=SubscribeMemberToASubscriptionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -978,7 +978,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -989,7 +989,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1000,7 +1000,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1011,7 +1011,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1022,7 +1022,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1033,7 +1033,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1081,7 +1081,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1092,7 +1092,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1103,7 +1103,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1114,7 +1114,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1125,7 +1125,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1136,7 +1136,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1199,7 +1199,7 @@ class RawProgramClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     SubscribeToLoyaltyProgramResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=SubscribeToLoyaltyProgramResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1210,7 +1210,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1221,7 +1221,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1232,7 +1232,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1243,7 +1243,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1254,7 +1254,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1265,7 +1265,7 @@ class RawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1330,7 +1330,7 @@ class AsyncRawProgramClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetLpListResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetLpListResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1341,7 +1341,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1352,7 +1352,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1363,7 +1363,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1374,7 +1374,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1385,7 +1385,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1396,7 +1396,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1460,7 +1460,7 @@ class AsyncRawProgramClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     LoyaltyProgram,
-                    parse_obj_as(
+                    construct_type(
                         type_=LoyaltyProgram,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1471,7 +1471,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1482,7 +1482,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1493,7 +1493,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1504,7 +1504,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1515,7 +1515,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1554,7 +1554,7 @@ class AsyncRawProgramClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     LoyaltyProgram,
-                    parse_obj_as(
+                    construct_type(
                         type_=LoyaltyProgram,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1565,7 +1565,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1576,7 +1576,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1587,7 +1587,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1598,7 +1598,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1609,7 +1609,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1672,7 +1672,7 @@ class AsyncRawProgramClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     LoyaltyProgram,
-                    parse_obj_as(
+                    construct_type(
                         type_=LoyaltyProgram,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1683,7 +1683,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1694,7 +1694,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1705,7 +1705,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1716,7 +1716,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1727,7 +1727,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1738,7 +1738,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1780,7 +1780,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1791,7 +1791,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1802,7 +1802,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1813,7 +1813,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1824,7 +1824,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1887,7 +1887,7 @@ class AsyncRawProgramClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     LoyaltyProgram,
-                    parse_obj_as(
+                    construct_type(
                         type_=LoyaltyProgram,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1898,7 +1898,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1909,7 +1909,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1920,7 +1920,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1931,7 +1931,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1942,7 +1942,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1953,7 +1953,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2012,7 +2012,7 @@ class AsyncRawProgramClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetParameterSubscriptionInfoResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetParameterSubscriptionInfoResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2023,7 +2023,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2034,7 +2034,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2045,7 +2045,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2056,7 +2056,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2067,7 +2067,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2109,7 +2109,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2120,7 +2120,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2131,7 +2131,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2142,7 +2142,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2153,7 +2153,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2216,7 +2216,7 @@ class AsyncRawProgramClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     SubscribeMemberToASubscriptionResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=SubscribeMemberToASubscriptionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2227,7 +2227,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2238,7 +2238,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2249,7 +2249,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2260,7 +2260,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2271,7 +2271,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2282,7 +2282,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2330,7 +2330,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2341,7 +2341,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2352,7 +2352,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2363,7 +2363,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2374,7 +2374,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2385,7 +2385,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2448,7 +2448,7 @@ class AsyncRawProgramClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     SubscribeToLoyaltyProgramResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=SubscribeToLoyaltyProgramResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2459,7 +2459,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2470,7 +2470,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2481,7 +2481,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2492,7 +2492,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2503,7 +2503,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2514,7 +2514,7 @@ class AsyncRawProgramClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),

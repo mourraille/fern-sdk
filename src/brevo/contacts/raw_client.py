@@ -7,9 +7,9 @@ from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
 from ..core.jsonable_encoder import jsonable_encoder
-from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
+from ..core.unchecked_base_model import construct_type
 from ..errors.bad_request_error import BadRequestError
 from ..errors.method_not_allowed_error import MethodNotAllowedError
 from ..errors.not_found_error import NotFoundError
@@ -145,7 +145,7 @@ class RawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetContacts,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetContacts,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -156,7 +156,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -167,7 +167,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -255,7 +255,7 @@ class RawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     CreateContactResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=CreateContactResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -266,7 +266,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -277,7 +277,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ContactErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ContactErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -311,7 +311,7 @@ class RawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetAttributesResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetAttributesResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -393,7 +393,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -465,7 +465,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -476,7 +476,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -523,7 +523,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -534,7 +534,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -581,7 +581,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -592,7 +592,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -646,7 +646,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -729,7 +729,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -817,7 +817,7 @@ class RawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     RequestContactExportResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=RequestContactExportResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -828,7 +828,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -839,7 +839,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -904,7 +904,7 @@ class RawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetFoldersResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetFoldersResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -915,7 +915,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -959,7 +959,7 @@ class RawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     CreateFolderResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=CreateFolderResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -970,7 +970,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1015,7 +1015,7 @@ class RawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetFolder,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetFolder,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1026,7 +1026,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1037,7 +1037,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1091,7 +1091,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1102,7 +1102,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1142,7 +1142,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1153,7 +1153,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1218,7 +1218,7 @@ class RawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetFolderListsResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetFolderListsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1229,7 +1229,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1240,7 +1240,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1343,7 +1343,7 @@ class RawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     ImportContactsResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=ImportContactsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1354,7 +1354,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1415,7 +1415,7 @@ class RawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetListsResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetListsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1426,7 +1426,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1474,7 +1474,7 @@ class RawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     CreateListResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=CreateListResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1485,7 +1485,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1537,7 +1537,7 @@ class RawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetListResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetListResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1548,7 +1548,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1559,7 +1559,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1618,7 +1618,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1629,7 +1629,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1669,7 +1669,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1680,7 +1680,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1742,7 +1742,7 @@ class RawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetContacts,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetContacts,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1753,7 +1753,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1764,7 +1764,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1814,7 +1814,7 @@ class RawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     PostContactInfo,
-                    parse_obj_as(
+                    construct_type(
                         type_=PostContactInfo,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1825,7 +1825,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1836,7 +1836,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1886,7 +1886,7 @@ class RawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     PostContactInfo,
-                    parse_obj_as(
+                    construct_type(
                         type_=PostContactInfo,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1897,7 +1897,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1908,7 +1908,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1961,7 +1961,7 @@ class RawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetSegmentsResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetSegmentsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1972,7 +1972,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2039,7 +2039,7 @@ class RawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetContactInfoResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetContactInfoResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2050,7 +2050,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2061,7 +2061,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2158,7 +2158,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2169,7 +2169,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2180,7 +2180,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ContactErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ContactErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2232,7 +2232,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2243,7 +2243,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2254,7 +2254,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2306,7 +2306,7 @@ class RawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetContactStatsResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetContactStatsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2317,7 +2317,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2328,7 +2328,7 @@ class RawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2419,7 +2419,7 @@ class AsyncRawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetContacts,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetContacts,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2430,7 +2430,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2441,7 +2441,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2529,7 +2529,7 @@ class AsyncRawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     CreateContactResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=CreateContactResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2540,7 +2540,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2551,7 +2551,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ContactErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ContactErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2585,7 +2585,7 @@ class AsyncRawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetAttributesResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetAttributesResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2667,7 +2667,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2739,7 +2739,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2750,7 +2750,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2797,7 +2797,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2808,7 +2808,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2855,7 +2855,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2866,7 +2866,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2920,7 +2920,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3003,7 +3003,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3091,7 +3091,7 @@ class AsyncRawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     RequestContactExportResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=RequestContactExportResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -3102,7 +3102,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3113,7 +3113,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3178,7 +3178,7 @@ class AsyncRawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetFoldersResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetFoldersResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -3189,7 +3189,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3233,7 +3233,7 @@ class AsyncRawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     CreateFolderResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=CreateFolderResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -3244,7 +3244,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3289,7 +3289,7 @@ class AsyncRawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetFolder,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetFolder,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -3300,7 +3300,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3311,7 +3311,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3365,7 +3365,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3376,7 +3376,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3416,7 +3416,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3427,7 +3427,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3492,7 +3492,7 @@ class AsyncRawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetFolderListsResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetFolderListsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -3503,7 +3503,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3514,7 +3514,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3617,7 +3617,7 @@ class AsyncRawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     ImportContactsResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=ImportContactsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -3628,7 +3628,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3689,7 +3689,7 @@ class AsyncRawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetListsResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetListsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -3700,7 +3700,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3748,7 +3748,7 @@ class AsyncRawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     CreateListResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=CreateListResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -3759,7 +3759,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3811,7 +3811,7 @@ class AsyncRawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetListResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetListResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -3822,7 +3822,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3833,7 +3833,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3892,7 +3892,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3903,7 +3903,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3943,7 +3943,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3954,7 +3954,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4016,7 +4016,7 @@ class AsyncRawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetContacts,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetContacts,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -4027,7 +4027,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4038,7 +4038,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4088,7 +4088,7 @@ class AsyncRawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     PostContactInfo,
-                    parse_obj_as(
+                    construct_type(
                         type_=PostContactInfo,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -4099,7 +4099,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4110,7 +4110,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4160,7 +4160,7 @@ class AsyncRawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     PostContactInfo,
-                    parse_obj_as(
+                    construct_type(
                         type_=PostContactInfo,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -4171,7 +4171,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4182,7 +4182,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4235,7 +4235,7 @@ class AsyncRawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetSegmentsResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetSegmentsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -4246,7 +4246,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4313,7 +4313,7 @@ class AsyncRawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetContactInfoResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetContactInfoResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -4324,7 +4324,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4335,7 +4335,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4432,7 +4432,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4443,7 +4443,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4454,7 +4454,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ContactErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ContactErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4506,7 +4506,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4517,7 +4517,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4528,7 +4528,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4580,7 +4580,7 @@ class AsyncRawContactsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetContactStatsResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetContactStatsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -4591,7 +4591,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4602,7 +4602,7 @@ class AsyncRawContactsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),

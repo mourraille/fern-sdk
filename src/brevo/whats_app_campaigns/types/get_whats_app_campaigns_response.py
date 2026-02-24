@@ -3,11 +3,12 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_whats_app_campaigns_response_campaigns_item import GetWhatsAppCampaignsResponseCampaignsItem
 
 
-class GetWhatsAppCampaignsResponse(UniversalBaseModel):
+class GetWhatsAppCampaignsResponse(UncheckedBaseModel):
     campaigns: typing.Optional[typing.List[GetWhatsAppCampaignsResponseCampaignsItem]] = None
     count: typing.Optional[int] = pydantic.Field(default=None)
     """

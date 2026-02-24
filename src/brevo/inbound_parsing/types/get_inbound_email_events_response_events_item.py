@@ -5,11 +5,12 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 
 
-class GetInboundEmailEventsResponseEventsItem(UniversalBaseModel):
+class GetInboundEmailEventsResponseEventsItem(UncheckedBaseModel):
     date: dt.datetime = pydantic.Field()
     """
     Date when email was received on SMTP relay

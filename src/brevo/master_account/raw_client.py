@@ -7,9 +7,9 @@ from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
 from ..core.jsonable_encoder import jsonable_encoder
-from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
+from ..core.unchecked_base_model import construct_type
 from ..errors.bad_request_error import BadRequestError
 from ..errors.forbidden_error import ForbiddenError
 from ..errors.not_found_error import NotFoundError
@@ -92,7 +92,7 @@ class RawMasterAccountClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     PostCorporateGroupResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=PostCorporateGroupResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -103,7 +103,7 @@ class RawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -159,7 +159,7 @@ class RawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -199,7 +199,7 @@ class RawMasterAccountClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetCorporateGroupIdResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetCorporateGroupIdResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -260,7 +260,7 @@ class RawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -303,7 +303,7 @@ class RawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -339,7 +339,7 @@ class RawMasterAccountClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     typing.List[GetSubAccountGroupsResponseItem],
-                    parse_obj_as(
+                    construct_type(
                         type_=typing.List[GetSubAccountGroupsResponseItem],  # type: ignore
                         object_=_response.json(),
                     ),
@@ -399,7 +399,7 @@ class RawMasterAccountClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetCorporateInvitedUsersListResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetCorporateInvitedUsersListResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -436,7 +436,7 @@ class RawMasterAccountClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     typing.List[GetCorporateIpResponseItem],
-                    parse_obj_as(
+                    construct_type(
                         type_=typing.List[GetCorporateIpResponseItem],  # type: ignore
                         object_=_response.json(),
                     ),
@@ -472,7 +472,7 @@ class RawMasterAccountClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetCorporateMasterAccountResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetCorporateMasterAccountResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -483,7 +483,7 @@ class RawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -532,7 +532,7 @@ class RawMasterAccountClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetSsoToken,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetSsoToken,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -543,7 +543,7 @@ class RawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -554,7 +554,7 @@ class RawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -601,7 +601,7 @@ class RawMasterAccountClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetCorporateSubAccountResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetCorporateSubAccountResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -612,7 +612,7 @@ class RawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -681,7 +681,7 @@ class RawMasterAccountClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     PostCorporateSubAccountResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=PostCorporateSubAccountResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -692,7 +692,7 @@ class RawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -743,7 +743,7 @@ class RawMasterAccountClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     typing.Dict[str, typing.Any],
-                    parse_obj_as(
+                    construct_type(
                         type_=typing.Dict[str, typing.Any],  # type: ignore
                         object_=_response.json(),
                     ),
@@ -754,7 +754,7 @@ class RawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -808,7 +808,7 @@ class RawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -858,7 +858,7 @@ class RawMasterAccountClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     PostCorporateSubAccountKeyResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=PostCorporateSubAccountKeyResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -869,7 +869,7 @@ class RawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -945,7 +945,7 @@ class RawMasterAccountClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetSsoToken,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetSsoToken,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -956,7 +956,7 @@ class RawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -967,7 +967,7 @@ class RawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1006,7 +1006,7 @@ class RawMasterAccountClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetCorporateSubAccountIdResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetCorporateSubAccountIdResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1017,7 +1017,7 @@ class RawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1057,7 +1057,7 @@ class RawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1068,7 +1068,7 @@ class RawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1195,7 +1195,7 @@ class RawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1206,7 +1206,7 @@ class RawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1274,7 +1274,7 @@ class RawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1285,7 +1285,7 @@ class RawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1354,7 +1354,7 @@ class RawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1365,7 +1365,7 @@ class RawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1457,7 +1457,7 @@ class RawMasterAccountClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     InviteAdminUserResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=InviteAdminUserResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1468,7 +1468,7 @@ class RawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1516,7 +1516,7 @@ class RawMasterAccountClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     PutCorporateUserInvitationActionEmailResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=PutCorporateUserInvitationActionEmailResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1527,7 +1527,7 @@ class RawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1570,7 +1570,7 @@ class RawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1609,7 +1609,7 @@ class RawMasterAccountClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetCorporateUserPermissionResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetCorporateUserPermissionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1620,7 +1620,7 @@ class RawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1685,7 +1685,7 @@ class RawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1744,7 +1744,7 @@ class AsyncRawMasterAccountClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     PostCorporateGroupResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=PostCorporateGroupResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1755,7 +1755,7 @@ class AsyncRawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1811,7 +1811,7 @@ class AsyncRawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1851,7 +1851,7 @@ class AsyncRawMasterAccountClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetCorporateGroupIdResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetCorporateGroupIdResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1912,7 +1912,7 @@ class AsyncRawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1957,7 +1957,7 @@ class AsyncRawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1993,7 +1993,7 @@ class AsyncRawMasterAccountClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     typing.List[GetSubAccountGroupsResponseItem],
-                    parse_obj_as(
+                    construct_type(
                         type_=typing.List[GetSubAccountGroupsResponseItem],  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2053,7 +2053,7 @@ class AsyncRawMasterAccountClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetCorporateInvitedUsersListResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetCorporateInvitedUsersListResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2090,7 +2090,7 @@ class AsyncRawMasterAccountClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     typing.List[GetCorporateIpResponseItem],
-                    parse_obj_as(
+                    construct_type(
                         type_=typing.List[GetCorporateIpResponseItem],  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2126,7 +2126,7 @@ class AsyncRawMasterAccountClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetCorporateMasterAccountResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetCorporateMasterAccountResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2137,7 +2137,7 @@ class AsyncRawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2186,7 +2186,7 @@ class AsyncRawMasterAccountClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetSsoToken,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetSsoToken,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2197,7 +2197,7 @@ class AsyncRawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2208,7 +2208,7 @@ class AsyncRawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2255,7 +2255,7 @@ class AsyncRawMasterAccountClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetCorporateSubAccountResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetCorporateSubAccountResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2266,7 +2266,7 @@ class AsyncRawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2335,7 +2335,7 @@ class AsyncRawMasterAccountClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     PostCorporateSubAccountResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=PostCorporateSubAccountResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2346,7 +2346,7 @@ class AsyncRawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2397,7 +2397,7 @@ class AsyncRawMasterAccountClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     typing.Dict[str, typing.Any],
-                    parse_obj_as(
+                    construct_type(
                         type_=typing.Dict[str, typing.Any],  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2408,7 +2408,7 @@ class AsyncRawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2462,7 +2462,7 @@ class AsyncRawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2512,7 +2512,7 @@ class AsyncRawMasterAccountClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     PostCorporateSubAccountKeyResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=PostCorporateSubAccountKeyResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2523,7 +2523,7 @@ class AsyncRawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2599,7 +2599,7 @@ class AsyncRawMasterAccountClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetSsoToken,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetSsoToken,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2610,7 +2610,7 @@ class AsyncRawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2621,7 +2621,7 @@ class AsyncRawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2660,7 +2660,7 @@ class AsyncRawMasterAccountClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetCorporateSubAccountIdResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetCorporateSubAccountIdResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2671,7 +2671,7 @@ class AsyncRawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2711,7 +2711,7 @@ class AsyncRawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2722,7 +2722,7 @@ class AsyncRawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2849,7 +2849,7 @@ class AsyncRawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2860,7 +2860,7 @@ class AsyncRawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2928,7 +2928,7 @@ class AsyncRawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2939,7 +2939,7 @@ class AsyncRawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3008,7 +3008,7 @@ class AsyncRawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3019,7 +3019,7 @@ class AsyncRawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3111,7 +3111,7 @@ class AsyncRawMasterAccountClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     InviteAdminUserResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=InviteAdminUserResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -3122,7 +3122,7 @@ class AsyncRawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3170,7 +3170,7 @@ class AsyncRawMasterAccountClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     PutCorporateUserInvitationActionEmailResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=PutCorporateUserInvitationActionEmailResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -3181,7 +3181,7 @@ class AsyncRawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3224,7 +3224,7 @@ class AsyncRawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3263,7 +3263,7 @@ class AsyncRawMasterAccountClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetCorporateUserPermissionResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetCorporateUserPermissionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -3274,7 +3274,7 @@ class AsyncRawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3339,7 +3339,7 @@ class AsyncRawMasterAccountClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),

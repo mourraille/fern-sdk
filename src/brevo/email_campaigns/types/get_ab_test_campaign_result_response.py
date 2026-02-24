@@ -4,15 +4,16 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_ab_test_campaign_result_response_clicked_links import GetAbTestCampaignResultResponseClickedLinks
 from .get_ab_test_campaign_result_response_statistics import GetAbTestCampaignResultResponseStatistics
 from .get_ab_test_campaign_result_response_winning_criteria import GetAbTestCampaignResultResponseWinningCriteria
 from .get_ab_test_campaign_result_response_winning_version import GetAbTestCampaignResultResponseWinningVersion
 
 
-class GetAbTestCampaignResultResponse(UniversalBaseModel):
+class GetAbTestCampaignResultResponse(UncheckedBaseModel):
     click_rate: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="clickRate"),

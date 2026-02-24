@@ -4,8 +4,9 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_contact_info_response_statistics_unsubscriptions_admin_unsubscription_item import (
     GetContactInfoResponseStatisticsUnsubscriptionsAdminUnsubscriptionItem,
 )
@@ -14,7 +15,7 @@ from .get_contact_info_response_statistics_unsubscriptions_user_unsubscription_i
 )
 
 
-class GetContactInfoResponseStatisticsUnsubscriptions(UniversalBaseModel):
+class GetContactInfoResponseStatisticsUnsubscriptions(UncheckedBaseModel):
     """
     Listing of the unsubscription for the contact
     """

@@ -3,10 +3,11 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 
 
-class CreateWhatsAppTemplateResponse(UniversalBaseModel):
+class CreateWhatsAppTemplateResponse(UncheckedBaseModel):
     id: int = pydantic.Field()
     """
     ID of the object created

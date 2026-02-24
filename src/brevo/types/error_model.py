@@ -3,10 +3,11 @@
 import typing
 
 import pydantic
-from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
+from ..core.unchecked_base_model import UncheckedBaseModel
 
 
-class ErrorModel(UniversalBaseModel):
+class ErrorModel(UncheckedBaseModel):
     code: typing.Optional[str] = pydantic.Field(default=None)
     """
     Error code displayed in case of a failure

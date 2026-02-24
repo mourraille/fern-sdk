@@ -7,8 +7,9 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel, update_forward_refs
+from ...core.pydantic_utilities import IS_PYDANTIC_V2, update_forward_refs
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_loyalty_offer_programs_pid_rewards_rid_response_expiration_modifier import (
     GetLoyaltyOfferProgramsPidRewardsRidResponseExpirationModifier,
 )
@@ -27,7 +28,7 @@ from .get_loyalty_offer_programs_pid_rewards_rid_response_reward_configs import 
 from .get_loyalty_offer_programs_pid_rewards_rid_response_rule import GetLoyaltyOfferProgramsPidRewardsRidResponseRule
 
 
-class GetLoyaltyOfferProgramsPidRewardsRidResponse(UniversalBaseModel):
+class GetLoyaltyOfferProgramsPidRewardsRidResponse(UncheckedBaseModel):
     attribution_per_consumer: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="attributionPerConsumer"),

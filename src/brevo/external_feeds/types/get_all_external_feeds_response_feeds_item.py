@@ -5,13 +5,14 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_all_external_feeds_response_feeds_item_auth_type import GetAllExternalFeedsResponseFeedsItemAuthType
 from .get_all_external_feeds_response_feeds_item_headers_item import GetAllExternalFeedsResponseFeedsItemHeadersItem
 
 
-class GetAllExternalFeedsResponseFeedsItem(UniversalBaseModel):
+class GetAllExternalFeedsResponseFeedsItem(UncheckedBaseModel):
     id: str = pydantic.Field()
     """
     Unique identifier of the feed

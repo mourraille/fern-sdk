@@ -4,11 +4,12 @@ import typing
 
 import pydantic
 import typing_extensions
-from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.serialization import FieldMetadata
+from ..core.unchecked_base_model import UncheckedBaseModel
 
 
-class WhatsappCampStats(UniversalBaseModel):
+class WhatsappCampStats(UncheckedBaseModel):
     delivered: int
     not_sent: typing_extensions.Annotated[int, FieldMetadata(alias="notSent"), pydantic.Field(alias="notSent")]
     read: int

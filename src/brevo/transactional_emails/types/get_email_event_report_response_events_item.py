@@ -4,12 +4,13 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_email_event_report_response_events_item_event import GetEmailEventReportResponseEventsItemEvent
 
 
-class GetEmailEventReportResponseEventsItem(UniversalBaseModel):
+class GetEmailEventReportResponseEventsItem(UncheckedBaseModel):
     date: str = pydantic.Field()
     """
     UTC date-time on which the event has been generated

@@ -7,9 +7,9 @@ from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
 from ..core.jsonable_encoder import jsonable_encoder
-from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
+from ..core.unchecked_base_model import construct_type
 from ..errors.bad_request_error import BadRequestError
 from ..errors.not_found_error import NotFoundError
 from .types.create_whats_app_campaign_request_recipients import CreateWhatsAppCampaignRequestRecipients
@@ -87,7 +87,7 @@ class RawWhatsAppCampaignsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetWhatsAppCampaignsResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetWhatsAppCampaignsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -98,7 +98,7 @@ class RawWhatsAppCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -176,7 +176,7 @@ class RawWhatsAppCampaignsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     CreateWhatsAppCampaignResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=CreateWhatsAppCampaignResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -187,7 +187,7 @@ class RawWhatsAppCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -227,7 +227,7 @@ class RawWhatsAppCampaignsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetWhatsAppConfigResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetWhatsAppConfigResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -238,7 +238,7 @@ class RawWhatsAppCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -322,7 +322,7 @@ class RawWhatsAppCampaignsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     CreateWhatsAppTemplateResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=CreateWhatsAppTemplateResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -333,7 +333,7 @@ class RawWhatsAppCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -401,7 +401,7 @@ class RawWhatsAppCampaignsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetWhatsAppTemplatesResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetWhatsAppTemplatesResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -412,7 +412,7 @@ class RawWhatsAppCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -458,7 +458,7 @@ class RawWhatsAppCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -501,7 +501,7 @@ class RawWhatsAppCampaignsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetWhatsAppCampaignResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetWhatsAppCampaignResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -512,7 +512,7 @@ class RawWhatsAppCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -523,7 +523,7 @@ class RawWhatsAppCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -608,7 +608,7 @@ class RawWhatsAppCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -648,7 +648,7 @@ class RawWhatsAppCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -659,7 +659,7 @@ class RawWhatsAppCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -727,7 +727,7 @@ class AsyncRawWhatsAppCampaignsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetWhatsAppCampaignsResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetWhatsAppCampaignsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -738,7 +738,7 @@ class AsyncRawWhatsAppCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -816,7 +816,7 @@ class AsyncRawWhatsAppCampaignsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     CreateWhatsAppCampaignResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=CreateWhatsAppCampaignResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -827,7 +827,7 @@ class AsyncRawWhatsAppCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -867,7 +867,7 @@ class AsyncRawWhatsAppCampaignsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetWhatsAppConfigResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetWhatsAppConfigResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -878,7 +878,7 @@ class AsyncRawWhatsAppCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -962,7 +962,7 @@ class AsyncRawWhatsAppCampaignsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     CreateWhatsAppTemplateResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=CreateWhatsAppTemplateResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -973,7 +973,7 @@ class AsyncRawWhatsAppCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1041,7 +1041,7 @@ class AsyncRawWhatsAppCampaignsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetWhatsAppTemplatesResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetWhatsAppTemplatesResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1052,7 +1052,7 @@ class AsyncRawWhatsAppCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1098,7 +1098,7 @@ class AsyncRawWhatsAppCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1141,7 +1141,7 @@ class AsyncRawWhatsAppCampaignsClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetWhatsAppCampaignResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetWhatsAppCampaignResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1152,7 +1152,7 @@ class AsyncRawWhatsAppCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1163,7 +1163,7 @@ class AsyncRawWhatsAppCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1248,7 +1248,7 @@ class AsyncRawWhatsAppCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1288,7 +1288,7 @@ class AsyncRawWhatsAppCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1299,7 +1299,7 @@ class AsyncRawWhatsAppCampaignsClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),

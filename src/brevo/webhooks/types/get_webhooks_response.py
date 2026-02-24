@@ -3,11 +3,12 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from ...types.get_webhook import GetWebhook
 
 
-class GetWebhooksResponse(UniversalBaseModel):
+class GetWebhooksResponse(UncheckedBaseModel):
     webhooks: typing.List[GetWebhook]
 
     if IS_PYDANTIC_V2:

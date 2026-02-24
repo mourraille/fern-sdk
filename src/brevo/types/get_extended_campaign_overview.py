@@ -4,14 +4,15 @@ import typing
 
 import pydantic
 import typing_extensions
-from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.serialization import FieldMetadata
+from ..core.unchecked_base_model import UncheckedBaseModel
 from .get_extended_campaign_overview_sender import GetExtendedCampaignOverviewSender
 from .get_extended_campaign_overview_status import GetExtendedCampaignOverviewStatus
 from .get_extended_campaign_overview_type import GetExtendedCampaignOverviewType
 
 
-class GetExtendedCampaignOverview(UniversalBaseModel):
+class GetExtendedCampaignOverview(UncheckedBaseModel):
     ab_testing: typing_extensions.Annotated[
         typing.Optional[bool],
         FieldMetadata(alias="abTesting"),

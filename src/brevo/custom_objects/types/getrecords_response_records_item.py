@@ -5,13 +5,14 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .getrecords_response_records_item_associations_item import GetrecordsResponseRecordsItemAssociationsItem
 from .getrecords_response_records_item_identifiers import GetrecordsResponseRecordsItemIdentifiers
 
 
-class GetrecordsResponseRecordsItem(UniversalBaseModel):
+class GetrecordsResponseRecordsItem(UncheckedBaseModel):
     associations: typing.Optional[typing.List[GetrecordsResponseRecordsItemAssociationsItem]] = pydantic.Field(
         default=None
     )

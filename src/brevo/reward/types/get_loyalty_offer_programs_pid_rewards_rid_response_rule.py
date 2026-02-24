@@ -6,8 +6,9 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel, update_forward_refs
+from ...core.pydantic_utilities import IS_PYDANTIC_V2, update_forward_refs
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_loyalty_offer_programs_pid_rewards_rid_response_rule_event import (
     GetLoyaltyOfferProgramsPidRewardsRidResponseRuleEvent,
 )
@@ -16,7 +17,7 @@ from .get_loyalty_offer_programs_pid_rewards_rid_response_rule_results_item impo
 )
 
 
-class GetLoyaltyOfferProgramsPidRewardsRidResponseRule(UniversalBaseModel):
+class GetLoyaltyOfferProgramsPidRewardsRidResponseRule(UncheckedBaseModel):
     condition: typing.Optional["RuleConditionResponse"] = pydantic.Field(default=None)
     """
     Selected rule condition

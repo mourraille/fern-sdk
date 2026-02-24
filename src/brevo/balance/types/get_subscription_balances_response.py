@@ -3,11 +3,12 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_subscription_balances_response_balance_item import GetSubscriptionBalancesResponseBalanceItem
 
 
-class GetSubscriptionBalancesResponse(UniversalBaseModel):
+class GetSubscriptionBalancesResponse(UncheckedBaseModel):
     balance: typing.Optional[typing.List[GetSubscriptionBalancesResponseBalanceItem]] = None
 
     if IS_PYDANTIC_V2:

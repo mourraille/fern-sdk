@@ -4,11 +4,12 @@ import typing
 
 import pydantic
 import typing_extensions
-from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.serialization import FieldMetadata
+from ..core.unchecked_base_model import UncheckedBaseModel
 
 
-class Transaction(UniversalBaseModel):
+class Transaction(UncheckedBaseModel):
     """
     Represents a transaction involving a balance, including status and timestamps.
     """

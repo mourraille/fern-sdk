@@ -4,12 +4,13 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_sms_templates_response_templates_item_compliance import GetSmsTemplatesResponseTemplatesItemCompliance
 
 
-class GetSmsTemplatesResponseTemplatesItem(UniversalBaseModel):
+class GetSmsTemplatesResponseTemplatesItem(UncheckedBaseModel):
     id: typing.Optional[int] = pydantic.Field(default=None)
     """
     ID of the template

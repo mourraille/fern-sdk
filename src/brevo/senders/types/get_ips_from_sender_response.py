@@ -3,11 +3,12 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_ips_from_sender_response_ips_item import GetIpsFromSenderResponseIpsItem
 
 
-class GetIpsFromSenderResponse(UniversalBaseModel):
+class GetIpsFromSenderResponse(UncheckedBaseModel):
     ips: typing.List[GetIpsFromSenderResponseIpsItem] = pydantic.Field()
     """
     Dedicated IP(s) linked to a sender. Returns empty array for standard accounts

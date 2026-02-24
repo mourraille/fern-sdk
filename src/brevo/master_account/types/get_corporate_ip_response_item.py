@@ -3,10 +3,11 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 
 
-class GetCorporateIpResponseItem(UniversalBaseModel):
+class GetCorporateIpResponseItem(UncheckedBaseModel):
     domain: typing.Optional[str] = None
     ip: typing.Optional[str] = None
     transactional: typing.Optional[bool] = None

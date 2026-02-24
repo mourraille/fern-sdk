@@ -3,11 +3,12 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_sms_campaigns_response_campaigns_item import GetSmsCampaignsResponseCampaignsItem
 
 
-class GetSmsCampaignsResponse(UniversalBaseModel):
+class GetSmsCampaignsResponse(UncheckedBaseModel):
     campaigns: typing.Optional[typing.List[GetSmsCampaignsResponseCampaignsItem]] = None
     count: typing.Optional[int] = pydantic.Field(default=None)
     """

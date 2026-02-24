@@ -4,11 +4,12 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 
 
-class GetEcommerceAttributionProductsConversionSourceConversionSourceIdResponseProductsItem(UniversalBaseModel):
+class GetEcommerceAttributionProductsConversionSourceConversionSourceIdResponseProductsItem(UncheckedBaseModel):
     id: str
     image_url: typing_extensions.Annotated[
         typing.Optional[str], FieldMetadata(alias="imageUrl"), pydantic.Field(alias="imageUrl")

@@ -3,12 +3,13 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .upsertrecords_request_records_item_associations_item import UpsertrecordsRequestRecordsItemAssociationsItem
 from .upsertrecords_request_records_item_identifiers import UpsertrecordsRequestRecordsItemIdentifiers
 
 
-class UpsertrecordsRequestRecordsItem(UniversalBaseModel):
+class UpsertrecordsRequestRecordsItem(UncheckedBaseModel):
     associations: typing.Optional[typing.List[UpsertrecordsRequestRecordsItemAssociationsItem]] = None
     attributes: typing.Optional[typing.Dict[str, typing.Any]] = pydantic.Field(default=None)
     """

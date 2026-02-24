@@ -3,13 +3,14 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_ecommerce_attribution_products_conversion_source_conversion_source_id_response_products_item import (
     GetEcommerceAttributionProductsConversionSourceConversionSourceIdResponseProductsItem,
 )
 
 
-class GetEcommerceAttributionProductsConversionSourceConversionSourceIdResponse(UniversalBaseModel):
+class GetEcommerceAttributionProductsConversionSourceConversionSourceIdResponse(UncheckedBaseModel):
     products: typing.List[GetEcommerceAttributionProductsConversionSourceConversionSourceIdResponseProductsItem] = (
         pydantic.Field()
     )

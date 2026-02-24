@@ -4,12 +4,13 @@ import typing
 
 import pydantic
 import typing_extensions
-from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.serialization import FieldMetadata
+from ..core.unchecked_base_model import UncheckedBaseModel
 from .conversations_message_file_image_info import ConversationsMessageFileImageInfo
 
 
-class ConversationsMessageFile(UniversalBaseModel):
+class ConversationsMessageFile(UncheckedBaseModel):
     filename: typing.Optional[str] = pydantic.Field(default=None)
     """
     Name of the file

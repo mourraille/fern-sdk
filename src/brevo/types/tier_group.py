@@ -5,13 +5,14 @@ import typing
 
 import pydantic
 import typing_extensions
-from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.serialization import FieldMetadata
+from ..core.unchecked_base_model import UncheckedBaseModel
 from .tier_group_downgrade_strategy import TierGroupDowngradeStrategy
 from .tier_group_upgrade_strategy import TierGroupUpgradeStrategy
 
 
-class TierGroup(UniversalBaseModel):
+class TierGroup(UncheckedBaseModel):
     created_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="createdAt"),

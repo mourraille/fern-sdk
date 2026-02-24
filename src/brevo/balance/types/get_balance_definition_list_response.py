@@ -3,11 +3,12 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from ...types.balance_definition import BalanceDefinition
 
 
-class GetBalanceDefinitionListResponse(UniversalBaseModel):
+class GetBalanceDefinitionListResponse(UncheckedBaseModel):
     items: typing.Optional[typing.List[BalanceDefinition]] = pydantic.Field(default=None)
     """
     list of balance definitions

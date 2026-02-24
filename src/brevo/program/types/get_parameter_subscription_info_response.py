@@ -3,14 +3,15 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_parameter_subscription_info_response_balance import GetParameterSubscriptionInfoResponseBalance
 from .get_parameter_subscription_info_response_members_item import GetParameterSubscriptionInfoResponseMembersItem
 from .get_parameter_subscription_info_response_reward_item import GetParameterSubscriptionInfoResponseRewardItem
 from .get_parameter_subscription_info_response_tier_item import GetParameterSubscriptionInfoResponseTierItem
 
 
-class GetParameterSubscriptionInfoResponse(UniversalBaseModel):
+class GetParameterSubscriptionInfoResponse(UncheckedBaseModel):
     balance: typing.Optional[GetParameterSubscriptionInfoResponseBalance] = pydantic.Field(default=None)
     """
     Balance details for the subscription.

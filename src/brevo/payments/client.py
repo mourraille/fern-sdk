@@ -69,9 +69,9 @@ class PaymentsClient:
 
         Examples
         --------
-        from brevo import BrevoApi, Cart
+        from brevo import Brevo, Cart
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.payments.create_payment_request(
@@ -112,9 +112,9 @@ class PaymentsClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.payments.get_payment_request(
@@ -140,9 +140,9 @@ class PaymentsClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.payments.delete_payment_request(
@@ -209,9 +209,9 @@ class AsyncPaymentsClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi, Cart
+        from brevo import AsyncBrevo, Cart
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -260,9 +260,9 @@ class AsyncPaymentsClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -296,9 +296,9 @@ class AsyncPaymentsClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 

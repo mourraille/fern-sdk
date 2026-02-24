@@ -8,8 +8,8 @@ from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
 from ..core.jsonable_encoder import jsonable_encoder
-from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
+from ..core.unchecked_base_model import construct_type
 from ..errors.failed_dependency_error import FailedDependencyError
 from ..errors.forbidden_error import ForbiddenError
 from ..errors.internal_server_error import InternalServerError
@@ -153,7 +153,7 @@ class RawBalanceClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     BalanceLimit,
-                    parse_obj_as(
+                    construct_type(
                         type_=BalanceLimit,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -164,7 +164,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -175,7 +175,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -186,7 +186,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -197,7 +197,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -208,7 +208,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -277,7 +277,7 @@ class RawBalanceClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetBalanceDefinitionListResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetBalanceDefinitionListResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -288,7 +288,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -299,7 +299,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -310,7 +310,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -321,7 +321,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -459,7 +459,7 @@ class RawBalanceClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     BalanceDefinition,
-                    parse_obj_as(
+                    construct_type(
                         type_=BalanceDefinition,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -470,7 +470,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -481,7 +481,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -492,7 +492,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -503,7 +503,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -514,7 +514,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -567,7 +567,7 @@ class RawBalanceClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     BalanceDefinition,
-                    parse_obj_as(
+                    construct_type(
                         type_=BalanceDefinition,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -578,7 +578,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -589,7 +589,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -600,7 +600,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -611,7 +611,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -622,7 +622,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -762,7 +762,7 @@ class RawBalanceClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     BalanceDefinition,
-                    parse_obj_as(
+                    construct_type(
                         type_=BalanceDefinition,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -773,7 +773,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -784,7 +784,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -795,7 +795,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -806,7 +806,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -817,7 +817,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -828,7 +828,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -873,7 +873,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -884,7 +884,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -895,7 +895,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -906,7 +906,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -917,7 +917,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -999,7 +999,7 @@ class RawBalanceClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     BalanceLimit,
-                    parse_obj_as(
+                    construct_type(
                         type_=BalanceLimit,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1010,7 +1010,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1021,7 +1021,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1032,7 +1032,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1043,7 +1043,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1054,7 +1054,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1111,7 +1111,7 @@ class RawBalanceClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     BalanceLimit,
-                    parse_obj_as(
+                    construct_type(
                         type_=BalanceLimit,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1122,7 +1122,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1133,7 +1133,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1144,7 +1144,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1155,7 +1155,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1166,7 +1166,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1252,7 +1252,7 @@ class RawBalanceClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     BalanceLimit,
-                    parse_obj_as(
+                    construct_type(
                         type_=BalanceLimit,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1263,7 +1263,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1274,7 +1274,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1285,7 +1285,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1296,7 +1296,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1307,7 +1307,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1355,7 +1355,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1366,7 +1366,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1377,7 +1377,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1388,7 +1388,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1399,7 +1399,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1438,7 +1438,7 @@ class RawBalanceClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetContactBalancesResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetContactBalancesResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1449,7 +1449,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1460,7 +1460,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1471,7 +1471,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1482,7 +1482,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1493,7 +1493,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1576,7 +1576,7 @@ class RawBalanceClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     CreateBalanceOrderResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=CreateBalanceOrderResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1587,7 +1587,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1598,7 +1598,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1609,7 +1609,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1620,7 +1620,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1662,7 +1662,7 @@ class RawBalanceClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetSubscriptionBalancesResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetSubscriptionBalancesResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1673,7 +1673,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1684,7 +1684,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1695,7 +1695,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1706,7 +1706,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1717,7 +1717,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1769,7 +1769,7 @@ class RawBalanceClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     PostLoyaltyBalanceProgramsPidSubscriptionsCidBalancesResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=PostLoyaltyBalanceProgramsPidSubscriptionsCidBalancesResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1780,7 +1780,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1791,7 +1791,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1802,7 +1802,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1813,7 +1813,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1824,7 +1824,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1903,7 +1903,7 @@ class RawBalanceClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetLoyaltyBalanceProgramsPidTransactionHistoryResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetLoyaltyBalanceProgramsPidTransactionHistoryResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -1914,7 +1914,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1925,7 +1925,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1936,7 +1936,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1947,7 +1947,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -1958,7 +1958,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2051,7 +2051,7 @@ class RawBalanceClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     Transaction,
-                    parse_obj_as(
+                    construct_type(
                         type_=Transaction,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2062,7 +2062,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2073,7 +2073,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2084,7 +2084,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2095,7 +2095,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2106,7 +2106,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2148,7 +2148,7 @@ class RawBalanceClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     Transaction,
-                    parse_obj_as(
+                    construct_type(
                         type_=Transaction,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2159,7 +2159,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2170,7 +2170,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2181,7 +2181,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2192,7 +2192,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2203,7 +2203,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2245,7 +2245,7 @@ class RawBalanceClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     Transaction,
-                    parse_obj_as(
+                    construct_type(
                         type_=Transaction,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2256,7 +2256,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2267,7 +2267,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2278,7 +2278,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2289,7 +2289,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2300,7 +2300,7 @@ class RawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2379,7 +2379,7 @@ class AsyncRawBalanceClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     BalanceLimit,
-                    parse_obj_as(
+                    construct_type(
                         type_=BalanceLimit,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2390,7 +2390,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2401,7 +2401,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2412,7 +2412,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2423,7 +2423,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2434,7 +2434,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2503,7 +2503,7 @@ class AsyncRawBalanceClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetBalanceDefinitionListResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetBalanceDefinitionListResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2514,7 +2514,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2525,7 +2525,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2536,7 +2536,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2547,7 +2547,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2685,7 +2685,7 @@ class AsyncRawBalanceClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     BalanceDefinition,
-                    parse_obj_as(
+                    construct_type(
                         type_=BalanceDefinition,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2696,7 +2696,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2707,7 +2707,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2718,7 +2718,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2729,7 +2729,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2740,7 +2740,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2793,7 +2793,7 @@ class AsyncRawBalanceClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     BalanceDefinition,
-                    parse_obj_as(
+                    construct_type(
                         type_=BalanceDefinition,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2804,7 +2804,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2815,7 +2815,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2826,7 +2826,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2837,7 +2837,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2848,7 +2848,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -2988,7 +2988,7 @@ class AsyncRawBalanceClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     BalanceDefinition,
-                    parse_obj_as(
+                    construct_type(
                         type_=BalanceDefinition,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -2999,7 +2999,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3010,7 +3010,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3021,7 +3021,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3032,7 +3032,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3043,7 +3043,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3054,7 +3054,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3099,7 +3099,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3110,7 +3110,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3121,7 +3121,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3132,7 +3132,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3143,7 +3143,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3225,7 +3225,7 @@ class AsyncRawBalanceClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     BalanceLimit,
-                    parse_obj_as(
+                    construct_type(
                         type_=BalanceLimit,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -3236,7 +3236,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3247,7 +3247,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3258,7 +3258,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3269,7 +3269,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3280,7 +3280,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3337,7 +3337,7 @@ class AsyncRawBalanceClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     BalanceLimit,
-                    parse_obj_as(
+                    construct_type(
                         type_=BalanceLimit,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -3348,7 +3348,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3359,7 +3359,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3370,7 +3370,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3381,7 +3381,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3392,7 +3392,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3478,7 +3478,7 @@ class AsyncRawBalanceClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     BalanceLimit,
-                    parse_obj_as(
+                    construct_type(
                         type_=BalanceLimit,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -3489,7 +3489,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3500,7 +3500,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3511,7 +3511,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3522,7 +3522,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3533,7 +3533,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3581,7 +3581,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3592,7 +3592,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3603,7 +3603,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3614,7 +3614,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3625,7 +3625,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3664,7 +3664,7 @@ class AsyncRawBalanceClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetContactBalancesResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetContactBalancesResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -3675,7 +3675,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3686,7 +3686,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3697,7 +3697,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3708,7 +3708,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3719,7 +3719,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3802,7 +3802,7 @@ class AsyncRawBalanceClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     CreateBalanceOrderResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=CreateBalanceOrderResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -3813,7 +3813,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3824,7 +3824,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3835,7 +3835,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3846,7 +3846,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3888,7 +3888,7 @@ class AsyncRawBalanceClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetSubscriptionBalancesResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetSubscriptionBalancesResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -3899,7 +3899,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3910,7 +3910,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3921,7 +3921,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3932,7 +3932,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3943,7 +3943,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -3995,7 +3995,7 @@ class AsyncRawBalanceClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     PostLoyaltyBalanceProgramsPidSubscriptionsCidBalancesResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=PostLoyaltyBalanceProgramsPidSubscriptionsCidBalancesResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -4006,7 +4006,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4017,7 +4017,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4028,7 +4028,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4039,7 +4039,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4050,7 +4050,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4129,7 +4129,7 @@ class AsyncRawBalanceClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetLoyaltyBalanceProgramsPidTransactionHistoryResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetLoyaltyBalanceProgramsPidTransactionHistoryResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -4140,7 +4140,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4151,7 +4151,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4162,7 +4162,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4173,7 +4173,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4184,7 +4184,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4277,7 +4277,7 @@ class AsyncRawBalanceClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     Transaction,
-                    parse_obj_as(
+                    construct_type(
                         type_=Transaction,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -4288,7 +4288,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4299,7 +4299,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4310,7 +4310,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4321,7 +4321,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4332,7 +4332,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4374,7 +4374,7 @@ class AsyncRawBalanceClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     Transaction,
-                    parse_obj_as(
+                    construct_type(
                         type_=Transaction,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -4385,7 +4385,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4396,7 +4396,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4407,7 +4407,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4418,7 +4418,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4429,7 +4429,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4471,7 +4471,7 @@ class AsyncRawBalanceClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     Transaction,
-                    parse_obj_as(
+                    construct_type(
                         type_=Transaction,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -4482,7 +4482,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4493,7 +4493,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4504,7 +4504,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4515,7 +4515,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
-                        parse_obj_as(
+                        construct_type(
                             type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -4526,7 +4526,7 @@ class AsyncRawBalanceClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),

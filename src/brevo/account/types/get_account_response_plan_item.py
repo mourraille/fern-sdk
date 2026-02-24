@@ -4,12 +4,13 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_account_response_plan_item_type import GetAccountResponsePlanItemType
 
 
-class GetAccountResponsePlanItem(UniversalBaseModel):
+class GetAccountResponsePlanItem(UncheckedBaseModel):
     credits: float = pydantic.Field()
     """
     Remaining credits of the user

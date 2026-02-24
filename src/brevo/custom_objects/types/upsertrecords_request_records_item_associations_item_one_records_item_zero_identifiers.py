@@ -3,10 +3,11 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 
 
-class UpsertrecordsRequestRecordsItemAssociationsItemOneRecordsItemZeroIdentifiers(UniversalBaseModel):
+class UpsertrecordsRequestRecordsItemAssociationsItemOneRecordsItemZeroIdentifiers(UncheckedBaseModel):
     """
     Identifiers attached with the associated object record. It can be ext_id or id. NOTE: - Either ext_id or id is required, if both are not provided, then error will be returned. - Both ext_id and id cannot be provided in the same request.
     """

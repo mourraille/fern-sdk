@@ -49,9 +49,9 @@ class UserClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.user.get_invited_users_list()
@@ -78,9 +78,9 @@ class UserClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.user.put_revoke_user_permission(
@@ -188,9 +188,9 @@ class UserClient:
 
         Examples
         --------
-        from brevo import BrevoApi, InviteuserPrivilegesItem
+        from brevo import Brevo, InviteuserPrivilegesItem
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.user.inviteuser(
@@ -230,9 +230,9 @@ class UserClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.user.putresendcancelinvitation(
@@ -340,9 +340,9 @@ class UserClient:
 
         Examples
         --------
-        from brevo import BrevoApi, InviteuserPrivilegesItem
+        from brevo import Brevo, InviteuserPrivilegesItem
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.user.edit_user_permission(
@@ -375,9 +375,9 @@ class UserClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.user.get_user_permission(
@@ -421,9 +421,9 @@ class AsyncUserClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -458,9 +458,9 @@ class AsyncUserClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -576,9 +576,9 @@ class AsyncUserClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi, InviteuserPrivilegesItem
+        from brevo import AsyncBrevo, InviteuserPrivilegesItem
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -626,9 +626,9 @@ class AsyncUserClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -744,9 +744,9 @@ class AsyncUserClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi, InviteuserPrivilegesItem
+        from brevo import AsyncBrevo, InviteuserPrivilegesItem
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -787,9 +787,9 @@ class AsyncUserClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 

@@ -4,13 +4,14 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_corporate_sub_account_id_response_groups_item import GetCorporateSubAccountIdResponseGroupsItem
 from .get_corporate_sub_account_id_response_plan_info import GetCorporateSubAccountIdResponsePlanInfo
 
 
-class GetCorporateSubAccountIdResponse(UniversalBaseModel):
+class GetCorporateSubAccountIdResponse(UncheckedBaseModel):
     company_name: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="companyName"),

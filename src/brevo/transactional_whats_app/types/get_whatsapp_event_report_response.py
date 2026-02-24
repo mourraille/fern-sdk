@@ -3,11 +3,12 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_whatsapp_event_report_response_events_item import GetWhatsappEventReportResponseEventsItem
 
 
-class GetWhatsappEventReportResponse(UniversalBaseModel):
+class GetWhatsappEventReportResponse(UncheckedBaseModel):
     events: typing.Optional[typing.List[GetWhatsappEventReportResponseEventsItem]] = None
 
     if IS_PYDANTIC_V2:

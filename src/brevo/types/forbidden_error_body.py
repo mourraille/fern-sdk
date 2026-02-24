@@ -3,11 +3,12 @@
 import typing
 
 import pydantic
-from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
+from ..core.unchecked_base_model import UncheckedBaseModel
 from .forbidden_error_body_code import ForbiddenErrorBodyCode
 
 
-class ForbiddenErrorBody(UniversalBaseModel):
+class ForbiddenErrorBody(UncheckedBaseModel):
     code: ForbiddenErrorBodyCode = pydantic.Field()
     """
     Error code displayed in case of a failure

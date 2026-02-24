@@ -51,10 +51,10 @@ class TransactionalWhatsAppClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
         from brevo.transactional_whats_app import SendWhatsappMessageRequestParams
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.transactional_whats_app.send_whatsapp_message(
@@ -120,9 +120,9 @@ class TransactionalWhatsAppClient:
 
         Examples
         --------
-        from brevo import BrevoApi
+        from brevo import Brevo
 
-        client = BrevoApi(
+        client = Brevo(
             api_key="YOUR_API_KEY",
         )
         client.transactional_whats_app.get_whatsapp_event_report()
@@ -179,10 +179,10 @@ class AsyncTransactionalWhatsAppClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
         from brevo.transactional_whats_app import SendWhatsappMessageRequestParams
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 
@@ -256,9 +256,9 @@ class AsyncTransactionalWhatsAppClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevoApi
+        from brevo import AsyncBrevo
 
-        client = AsyncBrevoApi(
+        client = AsyncBrevo(
             api_key="YOUR_API_KEY",
         )
 

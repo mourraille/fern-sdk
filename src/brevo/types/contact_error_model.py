@@ -3,11 +3,12 @@
 import typing
 
 import pydantic
-from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
+from ..core.unchecked_base_model import UncheckedBaseModel
 from .contact_error_model_code import ContactErrorModelCode
 
 
-class ContactErrorModel(UniversalBaseModel):
+class ContactErrorModel(UncheckedBaseModel):
     code: ContactErrorModelCode = pydantic.Field()
     """
     Error code displayed in case of a failure

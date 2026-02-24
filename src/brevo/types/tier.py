@@ -5,13 +5,14 @@ import typing
 
 import pydantic
 import typing_extensions
-from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.serialization import FieldMetadata
+from ..core.unchecked_base_model import UncheckedBaseModel
 from .tier_access_conditions_item import TierAccessConditionsItem
 from .tier_tier_rewards_item import TierTierRewardsItem
 
 
-class Tier(UniversalBaseModel):
+class Tier(UncheckedBaseModel):
     access_conditions: typing_extensions.Annotated[
         typing.Optional[typing.List[TierAccessConditionsItem]],
         FieldMetadata(alias="accessConditions"),

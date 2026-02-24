@@ -87,13 +87,13 @@ account = client.account.get_your_account_information_plan_and_credits_details()
 Instantiate and use the client with the following:
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 from brevo.transactional_emails import (
     SendTransacEmailRequestSender,
     SendTransacEmailRequestToItem,
 )
 
-client = BrevoApi(
+client = Brevo(
     api_key="YOUR_API_KEY",
 )
 client.transactional_emails.send_transac_email(
@@ -123,13 +123,13 @@ The SDK also exports an `async` client so that you can make non-blocking calls t
 ```python
 import asyncio
 
-from brevo import AsyncBrevoApi
+from brevo import AsyncBrevo
 from brevo.transactional_emails import (
     SendTransacEmailRequestSender,
     SendTransacEmailRequestToItem,
 )
 
-client = AsyncBrevoApi(
+client = AsyncBrevo(
     api_key="YOUR_API_KEY",
 )
 
@@ -181,9 +181,9 @@ The SDK provides access to raw response data, including headers, through the `.w
 The `.with_raw_response` property returns a "raw" client that can be used to access the `.headers` and `.data` attributes.
 
 ```python
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     ...,
 )
 response = client.transactional_emails.with_raw_response.send_transac_email(...)
@@ -218,9 +218,9 @@ The SDK defaults to a 60 second timeout. You can configure this with a timeout o
 
 ```python
 
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     ...,
     timeout=20.0,
 )
@@ -239,9 +239,9 @@ and transports.
 
 ```python
 import httpx
-from brevo import BrevoApi
+from brevo import Brevo
 
-client = BrevoApi(
+client = Brevo(
     ...,
     httpx_client=httpx.Client(
         proxy="http://my.test.proxy.example.com",

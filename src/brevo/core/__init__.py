@@ -27,6 +27,7 @@ if typing.TYPE_CHECKING:
     from .remove_none_from_dict import remove_none_from_dict
     from .request_options import RequestOptions
     from .serialization import FieldMetadata, convert_and_respect_annotation_metadata
+    from .unchecked_base_model import UncheckedBaseModel, UnionMetadata, construct_type
 _dynamic_imports: typing.Dict[str, str] = {
     "ApiError": ".api_error",
     "AsyncClientWrapper": ".client_wrapper",
@@ -45,8 +46,11 @@ _dynamic_imports: typing.Dict[str, str] = {
     "Logger": ".logging",
     "RequestOptions": ".request_options",
     "SyncClientWrapper": ".client_wrapper",
+    "UncheckedBaseModel": ".unchecked_base_model",
+    "UnionMetadata": ".unchecked_base_model",
     "UniversalBaseModel": ".pydantic_utilities",
     "UniversalRootModel": ".pydantic_utilities",
+    "construct_type": ".unchecked_base_model",
     "convert_and_respect_annotation_metadata": ".serialization",
     "convert_file_dict_to_httpx_tuples": ".file",
     "create_logger": ".logging",
@@ -101,8 +105,11 @@ __all__ = [
     "Logger",
     "RequestOptions",
     "SyncClientWrapper",
+    "UncheckedBaseModel",
+    "UnionMetadata",
     "UniversalBaseModel",
     "UniversalRootModel",
+    "construct_type",
     "convert_and_respect_annotation_metadata",
     "convert_file_dict_to_httpx_tuples",
     "create_logger",

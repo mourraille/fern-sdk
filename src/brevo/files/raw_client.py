@@ -8,8 +8,8 @@ from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
 from ..core.jsonable_encoder import jsonable_encoder
-from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
+from ..core.unchecked_base_model import construct_type
 from ..errors.bad_request_error import BadRequestError
 from ..errors.not_found_error import NotFoundError
 from ..types.file_data import FileData
@@ -87,7 +87,7 @@ class RawFilesClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     typing.List[FileData],
-                    parse_obj_as(
+                    construct_type(
                         type_=typing.List[FileData],  # type: ignore
                         object_=_response.json(),
                     ),
@@ -98,7 +98,7 @@ class RawFilesClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -157,7 +157,7 @@ class RawFilesClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     FileData,
-                    parse_obj_as(
+                    construct_type(
                         type_=FileData,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -168,7 +168,7 @@ class RawFilesClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -205,7 +205,7 @@ class RawFilesClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetCrmFilesIdResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetCrmFilesIdResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -216,7 +216,7 @@ class RawFilesClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -227,7 +227,7 @@ class RawFilesClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -265,7 +265,7 @@ class RawFilesClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -276,7 +276,7 @@ class RawFilesClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -313,7 +313,7 @@ class RawFilesClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     FileData,
-                    parse_obj_as(
+                    construct_type(
                         type_=FileData,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -324,7 +324,7 @@ class RawFilesClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -335,7 +335,7 @@ class RawFilesClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -413,7 +413,7 @@ class AsyncRawFilesClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     typing.List[FileData],
-                    parse_obj_as(
+                    construct_type(
                         type_=typing.List[FileData],  # type: ignore
                         object_=_response.json(),
                     ),
@@ -424,7 +424,7 @@ class AsyncRawFilesClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -483,7 +483,7 @@ class AsyncRawFilesClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     FileData,
-                    parse_obj_as(
+                    construct_type(
                         type_=FileData,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -494,7 +494,7 @@ class AsyncRawFilesClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -531,7 +531,7 @@ class AsyncRawFilesClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     GetCrmFilesIdResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GetCrmFilesIdResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -542,7 +542,7 @@ class AsyncRawFilesClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -553,7 +553,7 @@ class AsyncRawFilesClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -593,7 +593,7 @@ class AsyncRawFilesClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -604,7 +604,7 @@ class AsyncRawFilesClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -641,7 +641,7 @@ class AsyncRawFilesClient:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     FileData,
-                    parse_obj_as(
+                    construct_type(
                         type_=FileData,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -652,7 +652,7 @@ class AsyncRawFilesClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -663,7 +663,7 @@ class AsyncRawFilesClient:
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),

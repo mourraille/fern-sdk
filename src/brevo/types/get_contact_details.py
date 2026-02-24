@@ -4,12 +4,13 @@ import typing
 
 import pydantic
 import typing_extensions
-from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.serialization import FieldMetadata
+from ..core.unchecked_base_model import UncheckedBaseModel
 from .get_contact_details_attributes import GetContactDetailsAttributes
 
 
-class GetContactDetails(UniversalBaseModel):
+class GetContactDetails(UncheckedBaseModel):
     attributes: GetContactDetailsAttributes = pydantic.Field()
     """
     Set of attributes of the contact

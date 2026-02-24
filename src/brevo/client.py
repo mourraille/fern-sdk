@@ -7,7 +7,7 @@ import typing
 import httpx
 from .core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from .core.logging import LogConfig, Logger
-from .environment import BrevoApiEnvironment
+from .environment import BrevoEnvironment
 
 if typing.TYPE_CHECKING:
     from .account.client import AccountClient, AsyncAccountClient
@@ -44,7 +44,7 @@ if typing.TYPE_CHECKING:
     from .whats_app_campaigns.client import AsyncWhatsAppCampaignsClient, WhatsAppCampaignsClient
 
 
-class BrevoApi:
+class Brevo:
     """
     Use this class to access the different functions within the SDK. You can instantiate any number of clients with different configuration that will propagate to these functions.
 
@@ -53,12 +53,12 @@ class BrevoApi:
     base_url : typing.Optional[str]
         The base url to use for requests from the client.
 
-    environment : BrevoApiEnvironment
-        The environment to use for requests from the client. from .environment import BrevoApiEnvironment
+    environment : BrevoEnvironment
+        The environment to use for requests from the client. from .environment import BrevoEnvironment
 
 
 
-        Defaults to BrevoApiEnvironment.DEFAULT
+        Defaults to BrevoEnvironment.DEFAULT
 
 
 
@@ -80,9 +80,9 @@ class BrevoApi:
 
     Examples
     --------
-    from brevo import BrevoApi
+    from brevo import Brevo
 
-    client = BrevoApi(
+    client = Brevo(
         api_key="YOUR_API_KEY",
     )
     """
@@ -91,7 +91,7 @@ class BrevoApi:
         self,
         *,
         base_url: typing.Optional[str] = None,
-        environment: BrevoApiEnvironment = BrevoApiEnvironment.DEFAULT,
+        environment: BrevoEnvironment = BrevoEnvironment.DEFAULT,
         api_key: str,
         headers: typing.Optional[typing.Dict[str, str]] = None,
         timeout: typing.Optional[float] = None,
@@ -404,7 +404,7 @@ class BrevoApi:
         return self._sms_templates
 
 
-class AsyncBrevoApi:
+class AsyncBrevo:
     """
     Use this class to access the different functions within the SDK. You can instantiate any number of clients with different configuration that will propagate to these functions.
 
@@ -413,12 +413,12 @@ class AsyncBrevoApi:
     base_url : typing.Optional[str]
         The base url to use for requests from the client.
 
-    environment : BrevoApiEnvironment
-        The environment to use for requests from the client. from .environment import BrevoApiEnvironment
+    environment : BrevoEnvironment
+        The environment to use for requests from the client. from .environment import BrevoEnvironment
 
 
 
-        Defaults to BrevoApiEnvironment.DEFAULT
+        Defaults to BrevoEnvironment.DEFAULT
 
 
 
@@ -440,9 +440,9 @@ class AsyncBrevoApi:
 
     Examples
     --------
-    from brevo import AsyncBrevoApi
+    from brevo import AsyncBrevo
 
-    client = AsyncBrevoApi(
+    client = AsyncBrevo(
         api_key="YOUR_API_KEY",
     )
     """
@@ -451,7 +451,7 @@ class AsyncBrevoApi:
         self,
         *,
         base_url: typing.Optional[str] = None,
-        environment: BrevoApiEnvironment = BrevoApiEnvironment.DEFAULT,
+        environment: BrevoEnvironment = BrevoEnvironment.DEFAULT,
         api_key: str,
         headers: typing.Optional[typing.Dict[str, str]] = None,
         timeout: typing.Optional[float] = None,
@@ -764,7 +764,7 @@ class AsyncBrevoApi:
         return self._sms_templates
 
 
-def _get_base_url(*, base_url: typing.Optional[str] = None, environment: BrevoApiEnvironment) -> str:
+def _get_base_url(*, base_url: typing.Optional[str] = None, environment: BrevoEnvironment) -> str:
     if base_url is not None:
         return base_url
     elif environment is not None:

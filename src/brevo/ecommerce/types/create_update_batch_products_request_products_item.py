@@ -4,14 +4,15 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .create_update_batch_products_request_products_item_meta_info_value import (
     CreateUpdateBatchProductsRequestProductsItemMetaInfoValue,
 )
 
 
-class CreateUpdateBatchProductsRequestProductsItem(UniversalBaseModel):
+class CreateUpdateBatchProductsRequestProductsItem(UncheckedBaseModel):
     categories: typing.Optional[typing.List[str]] = pydantic.Field(default=None)
     """
     Category ID-s of the product
