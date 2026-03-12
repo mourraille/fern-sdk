@@ -343,7 +343,15 @@
       "name": "Get the list of all the sub-accounts of the master account. - default",
       "request": {
         "urlPathTemplate": "/corporate/subAccount",
-        "method": "GET"
+        "method": "GET",
+        "queryParameters": {
+          "offset": {
+            "equalTo": "1"
+          },
+          "limit": {
+            "equalTo": "1"
+          }
+        }
       },
       "response": {
         "status": 200,
@@ -1558,7 +1566,18 @@
       "name": "Get all external feeds - default",
       "request": {
         "urlPathTemplate": "/feeds",
-        "method": "GET"
+        "method": "GET",
+        "queryParameters": {
+          "search": {
+            "equalTo": "product"
+          },
+          "startDate": {
+            "equalTo": "2024-01-01"
+          },
+          "endDate": {
+            "equalTo": "2024-01-31"
+          }
+        }
       },
       "response": {
         "status": 200,
@@ -1739,6 +1758,14 @@
         "pathParameters": {
           "object_type": {
             "equalTo": "vehicle"
+          }
+        },
+        "queryParameters": {
+          "limit": {
+            "equalTo": "1000000"
+          },
+          "page_num": {
+            "equalTo": "1000000"
           }
         }
       },
@@ -3113,7 +3140,15 @@
       "name": "Get attribution metrics for one or more Brevo campaigns or workflows - default",
       "request": {
         "urlPathTemplate": "/ecommerce/attribution/metrics",
-        "method": "GET"
+        "method": "GET",
+        "queryParameters": {
+          "periodFrom": {
+            "equalTo": "2022-01-02T00:00:00Z"
+          },
+          "periodTo": {
+            "equalTo": "2022-01-03T00:00:00Z"
+          }
+        }
       },
       "response": {
         "status": 200,
@@ -3833,6 +3868,14 @@
           "pid": {
             "equalTo": "pid"
           }
+        },
+        "queryParameters": {
+          "contact_id": {
+            "equalTo": "1"
+          },
+          "balance_definition_id": {
+            "equalTo": "balance_definition_id"
+          }
         }
       },
       "response": {
@@ -4303,6 +4346,14 @@
           "pid": {
             "equalTo": "pid"
           }
+        },
+        "queryParameters": {
+          "contact_id": {
+            "equalTo": "1"
+          },
+          "balance_definition_id": {
+            "equalTo": "balance_definition_id"
+          }
         }
       },
       "response": {
@@ -4703,6 +4754,11 @@
           "pid": {
             "equalTo": "pid"
           }
+        },
+        "queryParameters": {
+          "memberContactIds": {
+            "equalTo": "memberContactIds"
+          }
         }
       },
       "response": {
@@ -5052,6 +5108,11 @@
         "pathParameters": {
           "pid": {
             "equalTo": "pid"
+          }
+        },
+        "queryParameters": {
+          "contactId": {
+            "equalTo": "1"
           }
         }
       },
@@ -7223,7 +7284,12 @@
       "name": "Get all tasks - default",
       "request": {
         "urlPathTemplate": "/crm/tasks",
-        "method": "GET"
+        "method": "GET",
+        "queryParameters": {
+          "sortBy": {
+            "equalTo": "name"
+          }
+        }
       },
       "response": {
         "status": 200,
@@ -7678,6 +7744,14 @@
         "pathParameters": {
           "identifier": {
             "equalTo": "4320f270-a4e3-4a2e-b591-edfe30a5e627"
+          }
+        },
+        "queryParameters": {
+          "startDate": {
+            "equalTo": "2022-02-02"
+          },
+          "endDate": {
+            "equalTo": "2022-03-02"
           }
         }
       },
