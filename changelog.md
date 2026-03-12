@@ -1,3 +1,6 @@
+## 0.1.0 - 2026-03-12
+* The SendTransacSms interface now supports template-based SMS sending with new optional templateId and content fields. Use templateId to send SMS using predefined templates, or content for custom messages.
+
 ## 0.0.96 - 2026-02-24
 * chore: update Fern CLI version to 3.85.3
 * Updated the CLI version in the metadata configuration to leverage the latest Fern CLI improvements and bug fixes. This change ensures the project uses the most recent tooling version for optimal development experience.
