@@ -1,3 +1,6 @@
+## 0.2.0 - 2026-03-24
+* The SDK now validates JSON response bodies and throws descriptive BrevoException errors when empty responses are received from successful API calls, improving error handling and debugging experience across all client methods.
+
 ## 0.1.0 - 2026-03-12
 * The SendTransacSms type now supports templateId and content fields for template-based SMS sending and custom message content. Both fields are optional and provide more flexibility in SMS message composition.
 
