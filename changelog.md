@@ -1,3 +1,9 @@
+## 0.3.0 - 2026-03-24
+* ### Breaking Changes
+**All client method return types** are now nullable, returning null instead of throwing BrevoException when API responses are successful but contain empty JSON bodies. Update your code to handle nullable return values.
+* ### Changed
+**Empty API response handling** now returns null gracefully instead of throwing exceptions when successful HTTP responses contain empty bodies, improving error handling consistency across all SDK methods.
+
 ## 0.2.0 - 2026-03-24
 * The SDK now validates JSON response bodies and throws descriptive BrevoException errors when empty responses are received from successful API calls, improving error handling and debugging experience across all client methods.
 

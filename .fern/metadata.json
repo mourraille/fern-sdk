@@ -1,7 +1,7 @@
 {
   "cliVersion": "4.43.1",
   "generatorName": "fernapi/fern-php-sdk",
-  "generatorVersion": "2.2.2",
+  "generatorVersion": "2.2.3",
   "generatorConfig": {
     "clientName": "Brevo",
     "namespace": "Brevo",
@@ -11,6 +11,6 @@
     "generateClientInterfaces": true,
     "useDefaultRequestParameterValues": true
   },
-  "originGitCommit": "720387a69d3839a431e5b2126daf645a93829f1f",
-  "sdkVersion": "0.2.0"
+  "originGitCommit": "a1f00f0478d403b1ac0d95d521a3b74f13ef739f",
+  "sdkVersion": "0.3.0"
 }
